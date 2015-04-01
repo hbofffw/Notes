@@ -1,0 +1,22 @@
+\contentsline {section}{\numberline {1}Introduction}{2}{section.1}
+\contentsline {subsection}{\numberline {1.1}Distributed source coding}{2}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}Compressive sensing (CS)}{2}{subsection.1.2}
+\contentsline {subsection}{\numberline {1.3}Distributed compressive sensing (DCS)}{2}{subsection.1.3}
+\contentsline {section}{\numberline {2}Compressive Sensing Background}{3}{section.2}
+\contentsline {subsection}{\numberline {2.1}Transform coding}{3}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Incoherent projections}{3}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}Signal recovery via $\ell _0$-norm minimization}{3}{subsection.2.3}
+\contentsline {subsection}{\numberline {2.4}Signal recovery via $\ell _1-norm$ minimization}{4}{subsection.2.4}
+\contentsline {subsection}{\numberline {2.5}Signal recovery via greedy pursuit}{4}{subsection.2.5}
+\contentsline {subsection}{\numberline {2.6}Properties of random measurements}{4}{subsection.2.6}
+\contentsline {section}{\numberline {3}Joint Sparsity Signal Models}{5}{section.3}
+\contentsline {subsection}{\numberline {3.1}Notation}{5}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}General framework for joint sparsity}{5}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Example joint sparsity models}{6}{subsection.3.3}
+\contentsline {subsubsection}{\numberline {3.3.1}JSM-1: Sparse common component + innovations](共性部分和个性部分是可稀疏的)}{7}{subsubsection.3.3.1}
+\contentsline {subsubsection}{\numberline {3.3.2}JSM-2: Common sparse supports}{7}{subsubsection.3.3.2}
+\contentsline {subsubsection}{\numberline {3.3.3}JSM-3: Nonsparse common component + sparse innovations}{7}{subsubsection.3.3.3}
+\contentsline {section}{\numberline {4}Theoretical Bounds on Measurement Rates}{8}{section.4}
+\contentsline {subsection}{\numberline {4.1}Modeling dependencies using bipartite graphs}{8}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Quantifying redundancies}{9}{subsection.4.2}
+\contentsline {section}{参考文献}{9}{section*.2}

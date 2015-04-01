@@ -1,0 +1,8 @@
+\contentsline {section}{\numberline {1}无失真信源编码}{1}{section.1}
+\contentsline {subsection}{\numberline {1.1}单义可译码}{1}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}非延长码}{1}{subsection.1.2}
+\contentsline {subsection}{\numberline {1.3}单义可译定理}{2}{subsection.1.3}
+\contentsline {subsection}{\numberline {1.4}平均码长与码率}{2}{subsection.1.4}
+\contentsline {subsection}{\numberline {1.5}信源扩展与数据压缩}{3}{subsection.1.5}
+\contentsline {subsection}{\numberline {1.6}无失真信源编码定理}{4}{subsection.1.6}
+\contentsline {subsection}{\numberline {1.7}霍夫曼(Huffman)码}{5}{subsection.1.7}
