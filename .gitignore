@@ -215,6 +215,10 @@ pip-log.txt
 .pdf
 .synctex
 .toc
+.synctex.gz
+.log
+.blg
+.fdb_latexmk
 #Translations
 *.mo
 
