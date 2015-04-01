@@ -1,0 +1,12 @@
+\chapter{Atomic Decomposition by Basis Pursuit}
+\label{chapter4}
+
+\section{Abstract}
+The time-frequency and time-scale communities have recently developed a large number of overcomplete waveform dictionaries—stationary wavelets, wavelet packets, cosine packets,
+chirplets, and warplets, to name a few. Decomposition into overcomplete systems is not unique, and several methods for decomposition have been proposed, including the method of frames (MOF), matching pursuit (MP), and, for special dictionaries, the best orthogonalbasis (BOB). Basis pursuit (BP) is a principle for decomposing a signal into an “optimal” superposition of dictionary elements, where optimal means having the smallest l1 norm of coefficients among all such decompositions. We give examples exhibiting several advantages over MOF, MP, and BOB, including better sparsity and superresolution. BP has interesting relations to ideas in areas as diverse as ill-posed problems, abstract harmonic analysis, total variation denoising, and multiscale edge denoising. BP in highly overcomplete dictionaries leads to large-scale optimization problems. With signals of length 8192 and a wavelet packet dictionary, one gets an equivalent linear program of size 8192 by 212,992. Such problems can be attacked successfully only because of recent advances in linear and quadratic programming by interior-point methods. We obtain reasonable success with a primal-dual logarithmic barrier method and conjugategradient solver.
+
+近年来，时-频和时序共性已经发展出了很大数量的过完备波形字典---稳定小波，小波包，余弦小波，线性调频小波，warplets,等等还有许多。分解为超完备系统并不是唯一的方法，还有一些发表的分解方法，包括\emph{method of frames}(MOF), 匹配追踪\emph{Matching pursuit}(MP),以及，对于特定字典的最佳正交基\emph{best orthogonal basis}(BOB).
+
+将信号分解为一个“最优”字典成分叠加的原理是基追踪(basis pursuit(BP))，其中“最优”指的是这些分解部分之间的系数存在最小$\ell^1$泛数。本文举例列出了该方法相比MOF,MP和BOB等方法的一些优势，包括更好的稀疏度和超分辨率。BP与一些领域的思想有着令人瞩目的关联，诸如不适定问题，抽象调和分析，总变差去噪和多尺度边缘去噪。
+
+高度过完备字典中的BP引出了大规模优化问题。   

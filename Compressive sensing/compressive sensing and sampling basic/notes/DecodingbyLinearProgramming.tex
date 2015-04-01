@@ -1,0 +1,223 @@
+\chapter{Decoding by Linear Programming}
+\label{chapter5}
+\section{Abstract}
+本文研究针对真实数据输入/输出的自然错误纠正问题。我们希望从损坏的测量$y=Af+e$中恢复输入向量$f \in \mathbf{R}^n$。这里，A是$m \times n$（编码）矩阵，$e$是一个任意且未知的误差向量。是否有可能从$y$中恢复确切的$f$.
+
+我们证明了在合适情况下的编码矩阵$A$,输入的$f$是$\ell_1$-最小化问题$(\|x\|_{\ell_1}:=\sum_i|x_i|)$的唯一解
+\begin{equation*}
+    \min\limits_{g \in \mathbf{R}^n} \|y-Ag\|_{\ell_1}
+    \label{eqab5}
+\end{equation*}
+假设误差的\text{支持向量}\footnote{原文是``the support of the vector''}不是太大，$\|e\|_{\ell_0}:= |\{i:e_i \neq 0\}| \leq \rho \cdot m$ for some $\rho > 0$。简言之，精确恢复$f$可以看作解决一个简单的凸优化问题（其可被重述为线性规划）。另外，数值实验表明了数据恢复过程的效果非常好；即使在数据的一个重要组成部分被破坏的情况下，$f$仍可以被精确恢复。
+
+本文工作相关于线性方程的极大欠定系统稀疏解的寻找问题。还与从高度不完整测量中恢复数据问题有着密切联系。实际上，本文研究结论是对我们之前工作的改进。最后，基于$\ell_1$被称为一致不确定性\footnote{uniform uncertainty principle}的一个重要性质，将在本文进行详述。
+
+\emph{Index Terms}---\textbf{Basic pursuit, decoding of (random) linear codes, duality in optimization, Gaussian random matrices, $\ell_1$ minimization, linear codes, linear programming, principal angles, restricted orthonormality, singular values of random matrices, sparse solutions to underdetermined systems.}
+
+\section{Introduction}
+\subsection{Decoding of Linear Codes}
+The linear code $a_1, \cdots, a_n \in \mathbf{R}^m$---the columns of the matrix A. There is a clear distinction between the real-valued setting and the finite alphabet one which is more common in the information theory literature.
+
+Given $f \in \mathbf{R}^n$ (the \textbf{'plaintext'}) we can then generate a vector $Af$ in $\mathbf{R}^m$(the \text{``ciphertext''}); if A has \textcolor[rgb]{1,0,0}{full rank}, then one can clearly recover the plaintext $f$ from the ciphertext $Af$. If $A$ has full rank, then the plaintext $f$ can be clearly recovered from the ciphertext $Af$. But with an arbitrary error vector $e \in \mathbf{R}^m$, can one recover $f$ exactly from the given matrix $A$ and $Af+e$?
+
+The accurate decoding is impossible when the size of the support of the error vector is greater or equal to a half of that of the output $Af$. Therefore, a common assumption in the literature is to assume that only a small fraction of the entries are actually damaged 
+\begin{equation}
+    \|e\|_{\ell_0} := |{i : e_i \neq 0}| \leq \rho \cdot m.
+    \label{eq5.1.1}
+\end{equation}
+For which values of $\rho$ can we hope to reconstruct $e$ with practical algorithms? That is, with algorithms whose complexity is at most \textcolor[rgb]{1,0,0}{polynomial} in the length $m$ of th code $A$?\footnote{为什么这里说：码字A的m长，复杂度最多的多项式的算法？}
+
+To reconstruct $f$, \textcolor[rgb]{1,0,0}{note} that it is obviously sufficient to reconstruct the vector $e$ since knowledge of $Af+e$ together with $e$ gives $Af$, and consequently $f$, since $A$ is \textcolor[rgb]{1,0,0}{full rank}. 
+
+Approaches:
+\begin{quote}
+    Construct a matrix which annihilates the $m \times n$ matrix $A$ on the left, such that $FA=0$. This can be done in an obvious fashion by taking a matrix $F$ whose \textcolor[rgb]{1,0,0}{kernel} is the range of $A$ in $\mathbf{R}^m$, which is an $n$-dimensional subspace (e.g., $F$ could be the \textcolor[rgb]{1,0,0}{orthogonal projection onto the cokernel of $A$}). We then apply $F$ to the output $y=Af+e$ and obtain
+    \begin{equation}
+        \tilde{y}=F(Af+e)=Fe
+        \label{eq5.1.2}
+    \end{equation}
+    since $FA=0$.
+
+    Therefore, the decoding problem is reduced to \textcolor[rgb]{1,0,0}{that of reconstructing a \emph{sparse} vector $e$ from the observations $Fe$} (by sparse, we mean that only a fraction of the entries of $e$ are nonzero). Therefore, \emph{the overarching theme is that of the sparse reconstruction problem} \footnote{因此，最重要的主题是稀疏重构问题}.
+\end{quote}
+
+
+\subsection{Sparse Solutions to Underdetermined Systems}
+Finding sparse solutions to underdetermined systems of linear equations is in general \textcolor[rgb]{1,0,0}{NP-hard}\footnote{非确定性多项式（non-deterministic polynomial，缩写NP）}. For example, the sparsest solution is given by
+\begin{equation}
+    (P_0) \qquad \qquad \min\limits{d \in \mathbf{R}^m} \|d\|_{\ell_0} \qquad \text{subject to} \qquad Fd=\tilde{y}(=Fe).
+    \label{eq5.1.3}
+\end{equation}
+Solving this problem essentially requires exhaustive searches over all subjects of columns of $F$, a procedure which clearly is combinatorial in nature and has \emph{exponential complexity}.
+
+Formally, given an integer $p \times m$ matrix $F$ and an integer vector $b$, the problem of deciding whether here is a vector with rational entries such that $Fd=b$, and with fewer than a fixed number of nonzero entries is \textcolor[rgb]{1,0,0}{NP-complete}. In fact, the $\ell_0$-minimization problem contains the subset-sum problem. Assume, for instance, that $m=2k$ and $p=k+1$, and consider the following set of $2k$ vectors in $\mathbf{R}^{k+1}$:
+\[
+    \begin{array}{ccccccccc}
+        &e_1& &e_2& &\cdots& &e_k&\\
+        &e_1+a_1e_{k+1}& &e_2+a_2e_{k+1}& &\cdots& &e_k+a_ke_{k+1}&
+    \end{array}
+\]
+where $e_1,\cdots, e_{k+1}$ are the usual basis vectors and $a_1,\cdots, a_k$ are integers. Now let $\alpha$ be another integer and consider the problem of deciding whether
+\[
+    e_1+\cdots+e_k+\alpha e_{k+1}
+\]
+is a $k$-sparse linear combination of the above $2k$ vectors ($k-1$-sparse is impossible). This is exactly the subset-sum problem, i.e., whether one can write $\alpha$ as a sum of subset of $a_1,\cdots,a_k$. It is well known that this is an \textcolor[rgb]{1,0,0}{NP-complete} problem.
+
+A frequently discussed approach considers a similar (\cref{eq5.1.3}) program in the $\ell_1$-norm which goes by the name of \emph{basis pursuit} \cite{22}
+\begin{equation}
+    (P_1) \qquad \min\limits{x \in \mathbf{R}^m} \|d\|_{\ell_1}, \qquad Fd = \tilde{y}
+    \label{eq5.1.4}
+\end{equation}
+where we recall that $\|d\|_{\ell_q}=\sum_{i=1}^m |d_i|$. \textcolor[rgb]{1,0,0}{The $\ell_1$-norm is convex}. \cref{eq5.1.4} can be recast as a \textcolor[rgb]{1,0,0}{linear program (LP)}.
+
+Motivated by the problem of finding sparse decompositions of special signals in the field of mathematical signal processing and following upon the \emph{ground breaking}\footnote{开创性的} work of \cite{Donoho2001}, a series of beautiful articles \cite{2-33,2-27,2-28,Tropp2004} showed exact equivalence between the two programs (\cref{eq5.1.3}) and (\cref{eq5.1.4}). 
+\begin{quote}
+    In a nutshell, this work shows that for $m/2$ by $m$ matrix $F$ obtained by concatenation of two orthonormal bases, the solution to both \cref{eq5.1.3,eq5.1.4} are \textcolor[rgb]{1,0,0}{unique and identical} provided that in the most favorable case, the vector $e$ has at most $0.914 \sqrt{m/2}$ nonzero entries.
+\end{quote}
+This is of little practical use here since we are interested in procedures that might recover a signal when \textcolor[rgb]{1,0,0}{a constant fraction of the output is unreliable}.
+
+Using very different ideas and together with Romberg \cite{Candes2006}, the authors proved that the equivalence \emph{\textcolor[rgb]{1,0,0}{holds}} with \textcolor[rgb]{1,0,0}{overwhelming probability for various types of random matrices} provided that the number of nonzero entries in the vector $e$ be of the order of $m/\log m$ \cite{2-7,Candes2006a}. In the special case where $F$ is an $m/2$ by $m$ random matrix with independent standard normal entries, \cite{Donoho2006} proved that \textcolor[rgb]{1,0,0}{the number of nonzero entries may be as large as $\rho \cdot m$}, where $\rho > 0$ is some \textcolor[rgb]{1,0,0}{very small and unspecified positive constant} independent of $m$.
+
+\subsection{Innovations}
+This paper introduces the concept of \textcolor[rgb]{1,0,0}{a restrictedly almost orthonormal system}---a collection of vectors which \textcolor[rgb]{1,0,0}{behaves like an almost orthonormal system but only for sparse linear combinations}. Thinking about these vectors as the columns of the matrix $F$, the authors showed that this condition allows for the exact reconstruction of sparse linear combination of these vectors. The results are significantly different than those mentioned above as they are \textcolor[rgb]{1,0,0}{deterministic and do not involve any kind of randomization}, although \emph{they can be specialized to random matrices}.
+\begin{quote}
+    For instance, A Gaussian matrix with independent entries sampled from the standard normal distribution is \textcolor[rgb]{1,0,0}{restrictedly almost orthonormal with overwhelming probability}, and that \textcolor[rgb]{1,0,0}{minimizing the $\ell_1$-norm recovers sparse decompositions} with a number of \textbf{nonzero entries of size $\rho_0 \cdot m$}; the \emph{numerical values for $\rho_0$} should be given.
+\end{quote}
+
+The connection with sparse solutions to underdetermined systems of linear equations is presented. The more direct approach: 
+\begin{center}
+    \textcolor[rgb]{1,0,0}{to recover $f$ from corrupted data $y=Af+e$, solving the following $\ell_1$-minimization problem} is considered:
+\end{center}
+\begin{equation}
+    (P_1') \qquad \min\limits_{g \in \mathbf{R^n}} \|y-Ag\|_{\ell_1}.
+    \label{eq5.1.5}
+\end{equation}
+Now $f$ is the \textcolor[rgb]{1,0,0}{unique solution of $(P_1')$} if and only if \textcolor[rgb]{1,0,0}{$e$ is the unique solution of $(P_1)$}. In other words, $(P_1)$\cref{eq5.1.4} and $(P_1')$\cref{eq5.1.5} are equivalent programs. Since $y=Af+e$, $g$ can be decomposed as $g=f+h$ so that
+\begin{equation*}
+    (P_1') \quad \Leftrightarrow \quad \min\limits_{h \in \mathbf{R}^m} \|x\|_{\ell_1}.
+\end{equation*}
+On the other hand, the constraint $Fx=Fe$ means that $x=e-Ah$ for some $h \in \mathbf{R}^m$
+
+\begin{eqnarray*}
+    (P_1) \quad & \Leftrightarrow & \quad \min\limits_{h \in \mathbf{R}^m} \|x\|_{\ell_1}, \qquad x=e-Ah \\
+    & \Leftrightarrow & \quad \min\limits_{h \in \mathbf{R}^m} \|e-Ah\|_{\ell_1}
+\end{eqnarray*}
+which proves the claim.
+
+The program ($P_1'$)\cref{eq5.1.5} may also be re-expressed as an LP. Indeed, the $\ell_1$-minimization problem is equivalent to 
+\begin{equation}
+    \min 1^Tt, \qquad -t \leq y-Ag \leq t
+    \label{eq5.1.6}
+\end{equation}
+where the optimization variables are $t \in R^m$ and $g \in \mathbf{R}^n$ (as is standard, the generalized vector inequality $x \leq y$ means that $x_i \leq y_i$ for all $i$). \textcolor[rgb]{1,0,0}{As a result, $(P_1')$ is and LP with inequality constraints and can be solved efficiently using standard optimization algorithms}\cite{Boyd2004}.
+
+\subsection{Restricted isometries (\cref{s2.3.2,s1.3.1})}
+\label{s5.2.4}
+Here denote by $(v_j)_{j \in J} \in R^p$ the columns of the matrix $F$ and by $H$ the linear subspace spanned by these vectors. For any $T \subseteq J$, $F_T$ is considered as ateh submatrix with column indices $j \in T$ so that
+\begin{equation*}
+    F_T c = \sum\limits_{j \in T} c_j v_j \in H.
+\end{equation*}
+To introduce the notion of \emph{almost orthonormal system}, we first observe that \emph{if the columns of $F$ are sufficiently ``degenerate''}, the recovery problem \textcolor[rgb]{1,0,0}{cannot be solved}. In particular, if there exists a nontrivial sparse linear combination $\sum_{j \in T}c_jv_j=0$ of the $v_j$ which sums to zero, and $T = T_1 \cup T_2$ is any prtition of $T$ into two disjoint sets, then the vector $y$
+\begin{equation*}
+    y := \sum\limits{j \in T_1}c_j v_j = \sum\limits{j \in T_2}(-c_j)v_j
+\end{equation*}
+has two distinct sparse representations.
+On the other hand, linear dependencies $\sum_{j \in J}c_j v_j = 0$ which involve a large number of nonzero coefficients $c_j$, as \emph{opposed to a sparse set of coefficients}, \textbf{do not} present an obvious obstruction to sparse recovery. \emph{At the other extreme}, if the $(v_j)_{j \in J}$ are an orthonormal system, then the recovery problem is easily solved by setting
+\[c_j = \left< f,v_j \right>.\]
+
+The main result of this paper is that if a ``restricted orthonormality hypothesis'' is imposed, which is far weaker than assuming orthonormality, then $(P_1)$\cref{eq5.1.4} solves the recovery problem, even if the $(v_j)_{j \in J}$ are highly linearly dependent (for instance, it is possible for $m := |J|$ to be much larger than the dimension of the span of the $v_j$'s). The following definition introduced make this quantitative
+
+\begin{definition}[\textbf{\textcolor[rgb]{1,0,0}{Restricted Isometry Constants}}]
+    \label{def5.1.1}
+    Let $F$ be the matrix with the finite collection of vectors $(v_j)_{j \in J}\in \mathbf{R}^p$ as columns. For every integer $1 \leq S \leq |J|$, we define the \textbf{\textcolor[rgb]{1,0,0}{$S$-restricted isometry constants $\delta_S$ to be the smallest quantity}} such that $F_T$ obeys
+    \begin{equation}
+        (1- \delta_S)\|c\|^2 \leq \|F_T c\|^2 \leq (1+\delta_S)\|c\|^2 
+        \label{eq5.1.7}
+    \end{equation}
+    for all subsets $T \subset J$ of cardinality at most $S$, and all real coefficients $(c_j)_{j \in T}$. Similarly, we define the $S,S'$-restricted orthogonality constraints $\theta_{S,S'}$ for $S+S' \leq |J|$ to be the smallest quantity such that
+    \begin{equation}
+        |\left< F_T c, F_{T'} c' \right>| \leq \theta_{S,S'} \cdot \|c\| \|c'\|
+        \label{eq5.1.8}
+    \end{equation}
+    holds for all disjoint sets $T,T' \subseteq J$ of cardinality $|T| \leq S$ and $|T'| \leq S'$.
+\end{definition}
+
+\begin{quote}
+    \label{define:delta}
+
+    \textbf{\textcolor[rgb]{1,0,0}{$\delta$ is also described in \cref{s2.3.2}.}}
+
+    The number $\delta_S$ and $\theta_{S,S'}$ measure \textbf{\textcolor[rgb]{1,0,0}{how close the vectors $v_j$ are to behaving like an orthonormal system}}, but only when restricting attention to sparse linear combinations involving no more than $S$ vectors.
+
+    $\delta_S$ and $\theta_{S,S'}$测量了向量$v_j$表现为一个标准正交系统的近似程度，但仅关注在包含不超过S个向量的稀疏线性组合情况中。
+
+    These numbers are clearly nondecreasing in $S,S'$. For $S=1$, the value $\delta_1$ only conveys magnitude information about the vectors $v_j$; 
+    这两个数值在$S,S'$中显然是非减的。对于$S=1$，$\delta_1$仅表达向量$v_j$的大小；
+    indeed $\delta_1$ is the best constant such that
+    \begin{equation}
+        1-\delta_1 \leq \|v_j\|^2 \leq 1+\delta_1, \qquad \mbox{for all $j \in J$}.
+        \label{eq5.1.9}
+    \end{equation}
+\end{quote}
+$\delta_1 = 0$ if and only if all of the $v_j's$ have unit length. Higher $\delta_S$ control the orthogonality numbers $\theta_{S,S'}$.
+
+\begin{lemma}
+    We have $\theta_{S,S'} \leq \delta_{S+S'} \leq \theta_{S,S'}+\max(\delta_S,\delta_{S'})$ for all $S,S'$.
+    \label{lm5.1.1}
+\end{lemma}
+
+To see the relevance of the $\delta_S$ to the sparse recovery problem, consider the following simple observation.
+\begin{lemma}
+    Suppose that $S \geq 1$ is such that $\delta_{2S} < 1$, and let $T \subset T$ be such that $|T| \leq S$. Let $f:=Fc$ where $c$ is an arbitrary vector supported on $T$. Then $c$
+    \begin{equation*}
+        (P_0) \qquad \min \|d\|_{\ell_0}, \qquad Fd=f
+    \end{equation*}
+    so that $c$ can be reconstructed from knowledge of the vector $f$ (and the $v_j's$).
+    \label{lm5.1.2}
+\end{lemma}
+\begin{proof}
+    There is a unique $c$ with $\|c\|_{\ell_0} \leq S$ and obeying $f = \sum_{j}c_j v_j$. Suppose $f$ had two distinct sparse representations $f = Fc = Fc'$ where $c$ and $c'$ were supported on sets obeying $|T|,|T'|\leq S$. Then
+    \begin{equation*}
+        F(c-c')=0.
+    \end{equation*}
+\end{proof}
+By construction $c-c'$ is supported on $T \cup T'$ of size less or equal to $2S$. Taking norms of both sides and applying \cref{eq5.1.7} and the hypothesis $\delta_{2S}<1$ we conclude that $\|c-c'\|^2=0$, contradicting the hypothesis that the two representations were distinct.
+
+\subsection{Main Results}
+
+Previous lemma is an \textcolor[rgb]{1,0,0}{abstract existence argument} which shows what might theoretically be possible, but \textcolor[rgb]{1,0,0}{does not supply any efficient algorithm} to recover $T$ and $c_j$ from $f$ and $(v_j)_{j \in J}$ other than by brute-force search---as discussed earlier. The main theorem shows that, by imposing slightly stronger conditions on $\delta_{2S}$, the $\ell_1$-minimization program ($P_1$) recovers $f$ exactly.
+
+\begin{theorem}
+    Suppose that $S \geq 1$ is such that 
+    \begin{equation}
+        \delta_S+ \theta_{S,S'}+ \theta_{S,2S} <1
+        \label{eq5.1.10}
+    \end{equation}
+    and let $c$ be a real vector supported on a set $T \subset J$ obeying $|T| \leq S$. Put $f:=Fc$. Then $c$ is the unique minimizer to 
+    \begin{equation*}
+        (P_1) \qquad \min\|d\|_{\ell_1}, \qquad Fd=f.
+    \end{equation*}
+    \label{th5.1.3}
+\end{theorem}
+\cref{lm5.1.1} implies $\delta_{2S}<1$, and is in turn implied by $\delta_S+\delta_{2S}+\delta_{3S}<1$. Thus, the condition \cref{eq5.1.10} is roughly ``three times as strict'' as the condition required for \cref{lm5.1.2}.
+
+\cref{th5.1.3} is inspired by \cite{2-7}, see also \cite{Candes2006,Candes2006a}, but the results in this paper are \emph{\textcolor[rgb]{1,0,0}{deterministic}}, and thus do not have \emph{\textbf{\textcolor[rgb]{1,0,0}{a nonzero probability of failure}}}, provided of course on can ensure that the system $(v_j)_{j \in J}$ verifies the condition \cref{eq5.1.10}. By virtue of the previous discussion, we have the companion result.
+\begin{theorem}
+    Suppose $F$ is such that $FA=0$ and let $S \geq 1$ be a number obeying the hypothesis of \cref{th5.1.3}. Set $y=Af+e$, where $e$ is a real vector supported on a set of size at most $S$. Then $f$ is the unique minimizer to 
+    \begin{equation*}
+        (P_1') \qquad \min\limits_{g \in \mathbf{R}^n} \|y-Ag\|_{\ell_1}.
+    \end{equation*}
+    \label{th5.1.4}
+\end{theorem}
+
+\begin{center}
+    \fbox{test hello $\alpha$}
+\end{center}
+
+
+
+
+
+
+
+

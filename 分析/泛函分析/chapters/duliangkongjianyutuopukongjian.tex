@@ -1,0 +1,309 @@
+\chapter{度量空间与拓扑空间}
+\section{度量空间的概念}
+\subsection{定义与基本例子}
+\begin{definition}
+	\label{duliangkongjian}
+	由元素（点）的某集（空间）X及距离$\rho$组成的偶$(X,\rho)$叫做度量空间，其中距离是由X中任何x与y确定的单值非负实函数$\rho(x,y)$，它满足以下三条公理：
+	\begin{enumerate}[1)]
+		\item $\rho(x,y)=0$当且仅当$x=y$，
+		\item $\rho(x,y)=\rho(y,x)$ （对称公理）
+		\item $\rho(x,z)\leqslant\rho(x,y)+\rho(y,z)$ （三角形公理）
+	\end{enumerate}
+	通常我们把度量空间$(X,\rho)$用一个字母来表示：
+	\[R=(X,\rho)\].
+\end{definition}
+\begin{itemize}
+	\item \textbf{1、孤立点空间:}
+	\begin{equation*}
+	\rho(x,y)=
+	\begin{cases}
+	0, &\mbox{当$x=y$时,}\\
+	1, &\mbox{当$x\neq y$时.}
+	\end{cases}
+	\end{equation*}
+	\item \textbf{2、度量空间$\mathbf{R}^1$:}
+	\begin{equation*}
+	\rho(x,y)=|x-y|
+	\end{equation*}
+	\item \textbf{3、$n$维算数欧几里得(Euclid)空间$\mathbf{R}^n$:}
+	\begin{equation}
+	\label{eq2.1}
+	\rho(x,y)=\sqrt{\sum\limits_{k=1}^{n}(y_k-x_k)^2}
+	\end{equation}
+	\item \textbf{4、度量空间$\mathbf{R}^n_1$:}
+	\begin{equation}
+	\label{eq2.5}
+	\rho_1(x,y)=\sum\limits_{k=1}^{n}|x_k-y_k|
+	\end{equation}
+	\item \textbf{5、度量空间$\mathbf{R}^n_{\infty}$:}
+	\begin{equation}
+	\label{eq2.6}
+	\rho_{\infty}(x,y) = \max\limits_{1 \leqslant k \leqslant n}|y_k-x_k|
+	\end{equation}
+	后面三个例子表明，对于度量空间本身以及对于它的点集具有不同的记号确实也很重要，因为同样的一组点可以有不同的度量。
+	\item \textbf{6、定义在闭区间$[a,b]$上的一切连续实函数的集$C[a,b]$也形成度量空间：}
+	\begin{equation}
+	\label{eq2.7}
+	\rho(f,g)=\max\limits_{a \leqslant t \leqslant b}|g(t)-f(t)|
+	\end{equation}
+	此空间在分析学中起着极重要的作用。也记为: $C[a,b]$; $C[0,1]$简记为C。
+	\item \textbf{7、用$l_2$表示这样的度量空间，其中的点为满足下述条件}
+	\[
+	\sum\limits_{k=1}^{\infty}x_2^k < \infty
+	\]
+	\textbf{的一切可能的实数序列$x=(x_1,x_2,\cdots,x_n,\cdots)$}，而距离公式
+	\begin{equation}
+	\label{2.8}
+	\rho(x,y)=\sqrt{\sum\limits_{k=1}^{\infty}(y_k-x_k)^2}
+	\end{equation}
+	定义。从基本不等式$(x_k \pm y_k)^2 \leqslant 2(x_k^2+y_k^2)$推得，对一切$x,y \in l_2$，函数$\rho(x,y)$都有意义，即如果
+	\[
+	\sum\limits_{k=1}^{\infty}x_k^2 < \infty \qquad \text{与} \qquad \sum\limits_{k=1}^{\infty}y_k^2 < \infty,
+	\]
+	则级数$\sum\limits_{k=1}^{\infty}(y_k-x_k)^2$收敛。
+	\item \textbf{8、考察闭区间$[a,b]$上的一切连续函数的集，而距离则按}
+	\begin{equation}
+	\label{eq2.8}
+	\rho(x,y)=\left(\int_a^b(x(t)-y(t))^2dt\right)^{1/2}
+	\end{equation}
+	这样的度量空间记为$C_2[a,b]$，并称它为\textcolor[rgb]{1,0,0}{\emph{具有平方度量的连续函数空间}}。
+	\item \textbf{9、考察一切有界实数序列$x=(x_1,x_2,\cdots,x_n,\cdots)$的集，我们得到}
+	\begin{equation}
+	\label{eq2.11}
+	\rho(x,y)=\sup\limits_k|y_k-x_k|.
+	\end{equation}
+	记它为$m$。
+	\item \textbf{10、距离为}
+	\begin{equation}
+	\label{eq2.12}
+	\rho_p(x,y)=\left(\sum\limits_{k=1}^{n}|y_k-x_k|^p\right)^{1/p}
+	\end{equation}
+	（其中$p \geqslant 1$是任意固定的数）\textbf{的$n$个实数有序组构成的集是一度量空间，可记为$\mathbf{R}_p^n$。}公理3)可由\cref{eq2.13}证明。
+	\item \textbf{11、这里再指出度量空间一个有趣的例子。这个空间的元素满足条件}
+	\[
+	\sum\limits_{k=1}^{\infty}|x_k|^p < \infty
+	\]
+	（其中$p \geqslant 1$是某一个固定的数）的一切可能的实数序列$x=(x_1,x_2,\cdots,x_n,\cdots)$，而距由
+	\begin{equation}
+	\label{eq2.18}
+	\rho(x,y)=\left(\sum\limits_{k=1}^{\infty}|y_k-x_k|^p\right)^{1/p}
+	\end{equation}
+	定义。记这个度量空间为$l_p$。
+\end{itemize}
+\begin{quote}
+\begin{itemize}
+	\item \textbf{三角形公理具有形式：}
+	\begin{equation}
+	\label{eq2.9}
+	\sqrt{\sum\limits_{k=1}^{\infty}(z_k-x_k)^2} \leqslant \sqrt{\sum\limits_{k=1}^{\infty}(z_k-y_k)^2} + \sqrt{\sum\limits_{k=1}^{\infty}(y_k-x_k)^2}
+	\end{equation}
+	\item \textbf{闵科夫斯基(Miknowski)不等式:}
+	\begin{equation}
+	\label{eq2.13}
+	\left(\sum\limits_{k=1}^{n}|a_k+b+k|^p\right)^{1/p} \leqslant \left(\sum\limits_{k=1}^{n}|a_k|^p\right)^{1/p} + \left(\sum\limits_{k=1}^{n}|b_k|^p\right)^{1/p}
+	\end{equation}
+	当$p<1$时，该不等式不成立。即如果想研究$p<1$时的空间$\mathbf{R}^n_p$，那么在这样的空间中三角形公理不成立。
+	\item \textbf{赫尔德(H\"older)不等式}
+	\begin{equation}
+	\label{eq2.14}
+	\sum\limits_{k=1}^{n}|a_k b_k| \leqslant \left(\sum\limits_{k=1}^{n}|a_k|^p\right)^{1/p} \left(\sum\limits_{k=1}^{n}|b_k|^q\right)^{1/q}
+	\end{equation}
+	其中$p>1$及$q>1$具有关系
+	\begin{equation}
+	\label{eq2.15}
+	\dfrac{1}{p} + \dfrac{1}{q} = 1 \qquad \mbox{即} \qquad q = \dfrac{p}{p-1}.
+	\end{equation}
+\end{itemize}
+	这里指出，不等式\cref{eq2.14}是齐次的。意味着，如果对于任意两个向量$a=(a_1,\cdots,a_n)$与$b=(b_1,\cdots,b_n)$不等式\cref{eq2.14}成立，那么不等式\cref{eq2.14}对于向量$\lambda a$与$\mu b$(其中$\lambda$与$\mu$是任意数)也成立。
+\end{quote}
+\subsection{度量空间的连续映射、等距}
+连续性（略）
+
+如果映射$f$是一对一且是双方连续的（$f$与$f^{-1}$都是连续映射），则$f$称为\textcolor[rgb]{1,0,0}{\emph{同胚映射}}或\textcolor[rgb]{1,0,0}{\emph{同胚}}，而在期间可以建立同胚的空间$X$与$Y$本身称为\textcolor[rgb]{1,0,0}{\emph{相互同胚}}的。例：整个数轴$(-\infty,\infty)$与开区间，例如与开区间$(-1,1)$相互同胚可由
+\[
+y=\dfrac{2}{\pi}\arctan x
+\]
+建立。
+
+\subsubsection{等距映射}
+\textcolor[rgb]{1,0,0}{\emph{所谓的等距映射是同胚的重要特殊情形}}。如果对于任意$x_1,x_2 \in \mathbf{R}$，
+\[
+\rho(x_1,x_2) = rho'(f(x_1),f(x_2)),
+\]
+则称度量空间$R=(X,\rho)$与$R'=(Y,\rho')$之间的双射$f$为\textcolor[rgb]{1,0,0}{等距映射}。在其间可以建立等距对应的空间$R$与$R'$叫做等距的。
+
+空间$R$与$R'$等距意味着他们的元素之间的度量关系是一样的；所不同的可能只是他们的元素的特性，从度量空间观点来看这是非本质的。可以将彼此等距的空间简单地看成同一空间。
+\section{收敛性、开集与闭集}
+\subsection{极限点.闭包}
+设$R$是一个度量空间。把满足条件
+\begin{equation*}
+\rho(x,x_0)<r
+\end{equation*}
+的点$x \in R$的全体$B(x_0,r)$称为\emph{\textcolor[rgb]{1,0,0}{开球}}，其中点$x_0$称为该球的中心，而数$r$称为球的\emph{\textcolor[rgb]{1,0,0}{半径}}。
+
+满足
+\[
+\rho(x,x_0) \leqslant r
+\]
+的点$x \in R$的全体$B[x_0,r]$称为\emph{\textcolor[rgb]{1,0,0}{闭球}}。
+
+把$x_0$为中心，$\varepsilon$为半径的开又叫做点$x_0$的$\varepsilon$ - 邻域，并记作$O_{\varepsilon}(x_0)$。
+
+如果集$M \subset R$完全包含在某一球中，则称集$M$是有界的。
+
+\textbf{如果点$x \in R$的任何邻域至少包含集$M \subset R$中的一个点，则称此点为\emph{\textcolor[rgb]{1,0,0}{$M$的接触点}}}。集$M$的一切接触点的总体记作$[M]$并称为该集的\emph{\textcolor[rgb]{1,0,0}{闭包}}。于是，可以对度量空间的集定义闭包的运算，亦即从集$M$变到其闭包$[M]$的运算。
+\begin{theorem}
+	\label{th2.2.1}
+	闭包运算具有下列性质：
+	\begin{enumerate}[1)]
+		\item $M \subset [M]$,
+		\item $[[M]]=[M]$,
+		\item 如果$M_1 \subset M_2$，那么$[M_1] \subset [M_2]$，
+		\item $[M_1 \cup M_2]$，那么$[M_1] \subset [M_2]$.
+	\end{enumerate}
+\end{theorem}
+
+\subsection{收敛性}
+设$x_1,x_2,\cdots$是度量空间$R$中的点列.如果点$x$的每一个邻域$O_{\varepsilon}(x)$包含从某一项开始的一切点$x_n$，即如果对于任一$\varepsilon>0$，可以找到这样的数$N_{\varepsilon}$，使得当$n>N_{\varepsilon}$时$O_{\varepsilon}(x)$包含所有的点$x_n$，则称这个序列收敛于点$x$。点$x$称为序列$\{x_n\}$的极限。
+\begin{quote}
+	或者，如果
+	\[
+	\lim\limits_{n\rightarrow\infty}\rho(x,x_n)=0
+	\]
+	则序列$\{x_n\}$收敛于$x$。
+\end{quote}
+
+从极限定义直接推出：
+\begin{enumerate}[1)]
+	\item 任一序列不可能有两个相异的极限；
+	\item 如果序列$\{x_n\}$收敛于点$x$，那么它的任一子序列也收敛于同一个点。
+\end{enumerate}
+
+\begin{theorem}
+	\label{th2.2.2}
+	点$x$是集$M$的接触点的充要条件为$M$中存在收敛于$x$的点列$\{x_n\}$。
+\end{theorem}
+
+\subsection{稠密子集}
+设A与B是度量空间R中两个集合，如果[A]$\supset$B，则称集A在B中\textcolor[rgb]{1,0,0}{稠密}。特别，如果集A的闭包[A]与全空间R重合，则称集A（在空间R中）\textcolor[rgb]{1,0,0}{处处稠密}。例如，有理数集在数轴上处处稠密。如果集A在任一球中不稠密，即如果在任一球B$\subset$R中包含有另一个与A无任一公共点的球B$'$，则称集A\textcolor[rgb]{1,0,0}{无处稠密}。
+
+具有可数处处稠密的空间称为\textcolor[rgb]{1,0,0}{可分空间}。
+
+\subsection{开集与闭集}
+设M是度量空间R中的集合。如果M与其闭包重合：[M]=M，则称M为\textcolor[rgb]{1,0,0}{闭集}。换句话说，集称为闭的，就是说它包含了自己的一切\textcolor[rgb]{1,0,0}{极限点}。根据\cref{th2.2.1}可知任何集M的闭包是闭集；还推出，[M]是包含M的最小闭集。
+\begin{theorem}
+	\label{th2.2.3}
+	任意多个闭集的交与任意有限多个闭集的和仍是闭集。
+\end{theorem}
+
+\begin{theorem}
+	\label{th2.2.4}
+	集M是开的充要条件为它的余集$R\backslash M$关于全空间R是闭的。
+\end{theorem}
+
+\begin{theorem}
+	\label{th2.2.3'}
+	任意（有限或无限）多个开集的和与任意有限个开集的交仍是开集。
+\end{theorem}
+
+
+
+
+
+
+
+
+
+
+\section{完备度量空间}
+\subsection{完备度量空间的定义和例子}
+\begin{definition}
+	\label{def2.1}
+	如果空间R中任一基本序列都收敛，则这个空间称为完备的。
+\end{definition}
+
+\subsection{球套定理}
+\begin{theorem}
+	\label{th2.3.1}
+	度量空间R是完备的充要条件为R中半径趋于零的一个包含另一个的闭球的任一序列有非空的交。
+\end{theorem}
+
+\subsection{贝尔（Baire）定理}
+\begin{theorem}
+	\label{th2.3.2}
+	完备度量空间R不能表为可数个无处稠密集的并的形式。
+\end{theorem}
+其在完备度量空间理论中起着\textcolor[rgb]{1,0,0}{基本的作用}。
+
+\subsection{空间的完备化}
+如果空间R不完备，那么总可以用某种（而且实质上是唯一的）方法把R包含在一个完备化空间内。
+\begin{definition}
+	\label{def2.2}
+	设R是度量空间，R*是完备度量空间。如果
+	\begin{enumerate}[1)]
+		\item R是空间R*的子空间，
+		\item R在R*中处处稠密，即[R]=R*（此处[R]自然表示空间R在R*中的闭包），
+	\end{enumerate}
+	则R*称为R的完备化。
+\end{definition}
+\begin{theorem}
+	\label{th2.3.3}
+	任一度量空间R都有完备化，并且，这个完备化如对那种能使R中的不动点保持等距的映射不加区别是唯一的。
+\end{theorem}
+
+\section{压缩映射原理及应用}
+\subsection{压缩映射原理}
+对于某些类型方程（例如，微分方程）解的存在性与唯一性有关的一系列问题，可以叙述为关于相应的度量空间到其本身的某一映射的不动点的存在性与唯一性的问题。在判别这种类型的映射下的不动点的存在性与唯一性的各种准则当中，最简单的同时也是最重要的是所谓压缩映射原理。
+
+设R是度量空间，A为空间R到其本身的映射。如果存在$\alpha<1$，使得对于任意两点$x,y\in R$满足不等式
+\begin{equation}
+\label{eq2.4.1}
+\rho(Ax,Ay) \leqslant \alpha\rho(x,y),
+\end{equation}
+则称A为压缩映射或简称压缩。任何压缩映射是连续的。事实上，如果$x_n\rightarrow x$，那么根据\cref{eq2.4.1}有$Ax_n\rightarrow Ax$。
+
+如果$Ax=x$，则点x称为映射A的\textcolor[rgb]{1,0,0}{不动点}。换言之，不动点是这个方程$Ax=x$的解。
+
+\begin{theorem}[压缩映射原理]
+	\label{th2.4.1}
+	在完备度量空间定义的任一压缩映射\textcolor[rgb]{1,0,0}{有且仅有一个不动点}。
+\end{theorem}
+\subsection{压缩映射原理最简单的一些应用}
+略
+\subsection{微分方程的存在性与唯一性定理}
+略
+\subsection{压缩映射原理应用于积分方程}
+
+\section{拓扑空间*}
+\subsection{拓扑空间的定义与例子}
+度量空间的基本概念都是基于邻域概念的，或实质上是基于开集概念来引进的。邻域、开集的概念同样地也是在所考察的空间中借助于给定的度量来定义的。我们也可以从另一种方法入手，不利用给定集R的度量而直接借助于公理R中定义开集族。该方法保证了更多的运算自由，从而使我们得到拓扑空间。
+\begin{definition}
+	\label{def2.5.1}
+	设C(某一个集)是“空间承载子”，$\tau$是X的子集G所成的任一集族。如果$\tau$满足下列两条公理：
+	\begin{enumerate}
+		\item 集X本身与空集$\emptyset$皆属于$\tau$,
+		\item $\tau$中任意多个（有限个或无限个）集的和$\bigcup\limits_{\alpha} G_{\alpha}$及任意有限个集的交$\bigcap\limits_{k=1}^nG_k$都属于$\tau$
+	\end{enumerate}
+\end{definition}
+
+集X与在其中给定的拓扑$\tau$，即偶$(X,\tau)$称为\textcolor[rgb]{1,0,0}{拓扑空间}。\textcolor[rgb]{1,0,0}{凡属于集族$\tau$的集皆称为开集}。
+
+如同度量空间是点集---\textcolor[rgb]{1,0,0}{“承载子”}和在此点集引入度量的总体一样，拓扑空间是点集和在此点集引入拓扑的全体。因此，给定拓扑空间就意味着给出了某集X并在其中给出了拓扑$\tau$，亦即表明X中的那些子集都被认为是开的。
+
+显然，对同一集X可以引进不同的拓扑，从而把它变为不同的拓扑空间。把所有相同的拓扑空间$(X,\tau)$用同一个字母$T$表示。拓扑空间的元素称为点。
+
+开集$G$的余集$T\backslash G$称为拓扑空间$T$的闭集。利用\emph{对偶原理(第一章第一节)}，从公理$1^\circ$与$2^\circ$可推出相应的两条性质:
+\begin{enumerate}
+    \item 空集$\emptyset$与全空间$T$是闭的。
+    \item 任意多个（有限个或无限个）闭集的交与任意有限个闭集的和也是闭的。
+\end{enumerate}
+\begin{quote}
+    把包含点$x \in T$的任一开集$G \subset T$称为点$x$的\textcolor[rgb]{1,0,0}{邻域}；如果点$x \in T$的任一邻域都至少包含$M \subset T$中的一点，则点$x$称为集$M$的\textcolor[rgb]{1,0,0}{接触点}；如果点$x$的任一邻域都至少包含$M$中异于$x$的一点，则称$x$为集$M$的\textcolor[rgb]{1,0,0}{极限点}；集$M$的一切接触点的全体称为集$M$的\textcolor[rgb]{1,0,0}{闭包并记作$[M]$}。$M$为闭集的充要条件为$[M]=M$。与度量空间的情形一样，$[M]$是包含$M$的最小闭集。
+\end{quote}
+\subsection{拓扑的比较}
+
+
+
+
+
+

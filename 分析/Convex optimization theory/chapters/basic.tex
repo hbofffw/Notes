@@ -1,0 +1,30 @@
+\chapter{Basic Concepts of Convex}
+\label{chapter:basic}
+ Each closed convex set can be described in terms of the hyperplanes that support the set, each point on the boundary of a convex set can be approached through the relative interior of the set, and each halfline belonging to a closed convex set still belongs to the set when translated to start at any point in the set. Despite their favorable structure, convex sets and their analysis are not free of anomalies and exceptional behavior, which cause serious difficulties in theory and applications. For example, contrary to affine and compact sets, some basic operations such as linear transformation and vector sum may not preserve the closedness of closed convex sets.
+
+\section{Convex Sets And Functions}
+\label{sec:convexsetsandfunctions}
+\begin{definition}
+    \label{def:1.1.1}
+    A subset C of $\mathcal{R}^n$ is called convex if 
+    \begin{equation*}
+        \alpha x+(1-\alpha)y \in C, \qquad \forall x, y \in C, \forall \alpha \in [0,1].
+    \end{equation*}
+\end{definition}
+
+\begin{proposition}\textrm{}
+    \begin{enumerate}[(a)]
+        \item The intersection $\cap_{i \in I}C_i$ of any collection \{$C_i | i \in I$\} of convex sets is convex.
+        \item The vector sum $C_1+C_2$ of two convex sets $C_1$ and $C_2$ is convex.
+        \item The set $\lambda C$ is convex for any convex set $C$ and scalar $\lambda$. Furthermore, if $C$ is a convex set and $\lambda_1,\lambda_2$ are positive scalars,
+            \begin{equation*}
+                (\lambda_1+\lambda_2)C = \lambda_1C+\lambda_2C.
+            \end{equation*}
+        \item The closure and the interior of a convex set are convex.
+        \item The image and the inverse image of a convex set under an affine function are convex.
+    \end{enumerate}
+\end{proposition}
+
+
+
+

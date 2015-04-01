@@ -1,0 +1,87 @@
+%-*- coding: UTF-8 -*-
+% gougu.tex
+% 勾股定理
+%9 essential packages everyone should use
+\RequirePackage[l2tabu, orthodox]{nag}
+\documentclass[oneside]{book}
+
+\title{\heiti 泛函分析学习笔记}
+\author{\kaishu 黄冬勃}
+\date{\today}
+%9 essential packages everyone should use
+\usepackage{geometry}
+\usepackage[UTF8]{ctex}
+\geometry{a4paper,centering,scale=0.8}
+\usepackage[format=hang,font=small,textfont=it]{caption}
+\usepackage{float}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{pgfplots}
+\usepackage[nottoc]{tocbibind}
+\usepackage{cite}
+\usepackage{cancel}
+%9 essential packages everyone should use
+\usepackage{microtype}
+\usepackage{siunitx}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{cleveref}
+%
+\usepackage{enumerate}
+\usepackage{xy}
+
+
+\usepackage{cancel}
+
+\bibliographystyle{plain}
+%\usepackage{hyperref}
+\theoremstyle{plain} 
+\newtheorem{theorem}{定理}[section]
+\newtheorem{lemma}{引理}[section]
+\newtheorem{proposition}{命题}[section]
+\newtheorem{corollary}{推论}[section]
+%\newtheorem{remark}{Remark}[subsection][section]
+
+\theoremstyle{definition}
+\newtheorem{definition}{定义}[section]
+\newtheorem{conjecture}{Conjecture}[section]
+\newtheorem{example}{Example}[section]
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\newtheorem{note}{Note}
+
+%\newtheorem{thm}{定理}
+%\newcommand\degree{^\circ}
+
+\newenvironment{myquote}
+  {\begin{quote}\kaishu\zihao{-5}}
+  {\end{quote}}
+
+%公式序号与章节关联
+\renewcommand{\theequation}{\arabic{chapter}.\arabic{equation}}
+\makeatletter\@addtoreset{equation}{section}\makeatother
+
+\newcommand{\upcite}[1]{\textsuperscript{\textsuperscript{\cite{#1}}}}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\include{chapters/jilunchubu}
+\include{chapters/duliangkongjianyutuopukongjian}
+\include{chapters/euclideanandhilbertspace}
+
+
+
+
+
+
+
+\bibliography{functionalAnalysis}
+\end{document}

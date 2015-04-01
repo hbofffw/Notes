@@ -1,0 +1,149 @@
+\chapter{``Compressive Sampling'' Notes}
+\section{Introduction}
+Nyquist/Shannon sampling theory:
+\begin{quote}
+	the number of samples needed to reconstruct a signal without error is dictated by tis bandwidth -- the length of the shortest interval which contains the support of the specturm of the signal under study.
+\end{quote}
+An enchanting aspect of compressive sampling it that it has significant interactions and bearings on some fields in the applied sciences and engineering such as statistics, information theory, coding theory, theoretical computer science, and others as well. 
+\begin{itemize}
+	\item Sparsity leads to efficient estimations; \emph{for example}, the quality of estimation by thresholding or shrinkage algorithms depends on the sparsity of the signal we wish to estimate.
+	\item Sparsity leads to efficient compression; \emph{for example}, the precision of a transform coder depends on the sparsity of the signal we wish to encode\cite{2-24}.
+	\item Sparsity leads to dimensionality reduction and efficient modeling.
+\end{itemize}
+The \emph{sparsity \emph{has bearings on}\footnote{与……有关；对……有影响} the data acquisition process itself, and leads to efficient data acquisition protocols}.
+
+compressive sampling suggests ways to economically translate analog data into already compressed digital form \cite{3,2-7}. 
+
+\section{Undersampled Measurements}
+Consider the general problem of reconstructing a vector $x \in \mathbb{R}^N$ from linear measurements $y$ about $x$ of the form (same as \cref{eq1})
+\begin{equation}
+\label{eq2.1}
+y_k=\left<x,\varphi_k\right>, k=1,2,\cdots,K, \qquad or \qquad y=\Phi x
+\end{equation}
+That is, information about the unknown signal can be acquired by sensing $x$ against $K$ vectors $\varphi_k \in \mathbb{R}^N$. 
+\subsection{A nonlinear sampling theorem}
+Suppose here that one collects an incomplete set of frequency samples of a discrete signal $x$ of length $N$. (To ease the exposition, we consider a model problem in one dimension. The theory extends easily to higher dimensions. For instance, we could be equally interested in the reconstruction of 2- or 3-dimensional objects from undersampled Fourier data.) The goal is to reconstruct the full signal $f$ given only $K$ samples in the Fourier domain
+\begin{equation}
+\label{eq2.2.2}
+y_k=\dfrac{1}{\sqrt{N}}\sum\limits_{t=0}^{N-1}x_te^{-i2\pi\omega_kt/N},
+\end{equation}
+where the `visible' frequencies $\omega_k$ are a subset $\Omega$ (of size $K$) of the set of all frequencies $\{0,\cdots,N-1\}$. In the language of the general problem \cref{eq2.1}, the sensing matrix $\Phi$ is obtained by sampling $K$ rows of the $N$ by $N$ discrete Fourier transform matrix.
+
+A vector is $S$-sparse if its support $\{i\ :\ x_i\neq 0\}$ is of cardinality less or equal to $S$. Then \cite{Candes2006} showed that one could almost always recover the signal $x$ exactly by solving the convex program\footnote{($P_1$ can even be recast as a linear program\cite{2-3,22})} ($\|\tilde{x}\|_{\ell_1}:=\sum_{i=1}^{N}|\tilde{x}_i|$)
+\begin{equation}
+\label{eq2.2.3}
+(P_1) \qquad\qquad \min_{\tilde{x} \in \mathbb{R}^N}\| \tilde{x} \|_{\ell_1} \qquad \mbox{subject to} \qquad \Phi \tilde{x}=y.
+\end{equation}
+
+\begin{theorem}[\cite{Candes2006}]
+	\label{th2.2.1}
+	Assume that x is S-sparse and that we are given K Fourier coefficients with frequencies selected uniformly at random. Suppose that the  number of observations obeys	
+	\begin{equation}
+	\label{eq2.2.4}
+	K \geq C \cdot S \cdot \log N.
+	\end{equation}
+	Then minimizing $\ell_1$ reconstructs x exactly with overwhelming probability. In details, if the constant C is of the form $22(\delta+1)$ in \cref{eq2.2.4}, then the probability of success exceeds $1-O(N^{-\delta})$.
+\end{theorem}
+\begin{itemize}
+	\item The first conclusion is that one suffers no information loss by measuring just about any set of $K$ frequency coefficients. 
+	\item The second is that the signal $x$ can be exactly recovered by minimizing a convex functional which does not assume any knowledge about the number of \emph{nonzero coordinates of $x$}, \emph{their locations}, and \emph{their amplitudes} which we assume are all completely unknown a priori.  
+\end{itemize}
+The\textcolor[rgb]{1,0,0}{ minimum number of samples needed for exact reconstruction} by any method, no matter how intractable, \textcolor[rgb]{1,0,0}{must be about $S\log N$}. \emph{\textbf{Hence,}} the theorem \cref{th2.2.1} is tight and $\ell_1$-minimization succeeds nearly as soon as there is any hope to succeed by any algorithm.
+
+By reversing the roles of time and frequency in the above example, we can recast \cref{th2.2.1} as a new nonlinear sampling theorem. Thus, a nonlinear analog to Nyquist/Shannon: a signal can be reconstructed with \emph{arbitrary and unknown} frequency support of size $B$ from about $B\log N$ \emph{arbitrarily chosen} samples in the time domain.
+
+Finally, Fourier sampling theorem would be considered as a special instance of much more general statements. \emph{As a matter of fact}\footnote{事实上}, the results extend to a variety of other setups and higher dimensions. For instance, \cite{Candes2006} shows \textcolor[rgb]{1,0,0}{how one can reconstruct a piecewise constant (on or two-dimensional) object from incomplete frequency samples provided that the number of jumps (discontinuities) obeys the condition above by minimizing other convex functionals such as the total variation}.
+\subsection{Background}
+\begin{itemize}
+	\item Santosa and Symes \cite{Santosa1986} had suggested the minimization of $\ell_1$-norms to recover sparse spike trains, see also \cite{14,2-22} for early results.
+	\item In the last four years or so, a series of papers \cite{Donoho2001,2-27,2-28,2-29,2-33,2-30}  explained why $\ell_1$ could recover sparse signals in some special setups. 
+	\item Important connections with the literature of theoretical computer science are pointed out. Inspired by \cite{2-37}, Gilbert and her colleagues have shown that one could recover an S-sparse signal with probability exceeding $1-\delta$ from $S \cdot poly(\log N,\log \delta)$ frequency samples placed on special \emph{equispaced}\footnote{平均间隔；均布} grids \cite{13}. The algorithms they use are not based on optimization but rather on ideas from the theory of computer science such as \emph{isolation} and \emph{group testing}.
+	\item Other points of connection include situations in which the set of spikes are spread out in a somewhat even manner in the time domain \cite{2-22,12}.
+\end{itemize}
+\subsection{Undersampling Structured Signals}
+The previous example showed that the structural content of the signal allows a drastic “undersampling” of the Fourier transform while still retaining enough information for exact recovery. \textbf{\emph{Questions:}} to what extent can one recover a compressible signal from just a few measurements? What are good sensing mechanisms? Does \textcolor[rgb]{1,0,0}{\emph{all this extend to object that are perhaps not sparse but well-approximated by sparse signals}}? In the remainder of this paper, some answers to these fundamental questions are provided.
+\section{The Mathematics Of Compressive Sampling}
+\subsection{Sparsity And Incoherence}
+As \cref{eq2} described, in practical instances, the vector $x$ may be the coefficients of a signal $f \in \mathbb{R}^N$ in an orthonormal basis $\Psi$. For example, on might choose to expand the signal as a superposition of spikes (the canonical basis of $\mathbb{R}^N$), sinusoids, $B$-splines, wavelets, and so on. It is \emph{\textcolor[rgb]{1,0,0}{not}} important to restrict to orthogonal expansions as the theory and practice of compressive sampling accommodates other types of expansions. For example, $x$ might be the coefficients of a digital image in a tight-frame of curvelets \cite{2-5}. To keep on using convenient matrix notations, one can write the decomposition \cref{eq2} as 
+\[x=\Psi f\],
+where $\Psi$ is the $N$ by $N$ matrix with the waveforms $\psi_i$ as rows or equivalently,
+\[f=\Phi^* x\].
+
+A signal $f$ is sparse in the $\Psi$-domain if the coefficient sequence is supported on a small set and compressible if the sequence is concentrated near a small set. Suppose we have available undersampled data about $f$ of the same form as before
+\[y=\Phi f.\]
+Expressed in a different way, we collect partial information about $x$ via $y=\Phi'x$ where $\Phi'=\Phi\Psi^{*}$. In this setup, one would recover $f$ by finding - among all coefficient sequences consistent with the data - the decomposition with minimum $\ell_1$-norm
+\[
+\min\|\tilde{x}\|_{\ell_1} \qquad \text{such that} \qquad \Phi' \tilde{x}=y.
+\]
+Of course, this is the same problem as \cref{eq2.2.3}, which justifies the abstract and general treatment. 
+
+The key concept underlying the theory of compressive sampling is a kind of \emph{\textcolor[rgb]{1,0,0}{\textbf{uncertainty relation}}}.
+
+\subsection{Recovery of Sparse Signals (\cref{s1.3.1,s5.2.4})}
+\label{s2.3.2}
+
+\begin{quote}
+    \textcolor[rgb]{1,0,0}{About $\delta$ is in \cref{define:delta}}.
+\end{quote}
+
+The notion of \emph{\textcolor[rgb]{1,0,0}{uniform uncertainty principle}} (UUP)\label{UUP}\footnote{一致不确定原则} was introduced in \cite{2-7} and refined in \cite{15}.
+\begin{quote}
+    UUP essentially states that $K \times N$ sensing matrix $\Phi$ obeys a ``\emph{\textbf{\textcolor[rgb]{1,0,0}{restricted isometry hypothesis}}}''\footnote{限制等距假设}. 
+
+	Let $\Phi_T， T \subset \{1,\cdots,N\}$ be the $K \times \left|T\right|$ submatrix obtained by extracting the columns of $\Phi$ corresponding to the indices in $T$; then \cite{15} defines the $S$-restricted isometry constant $\delta_S$ of $\Phi$ which is the smallest quantity such that
+	\begin{equation}
+	\label{2.3.2}
+	(1-\delta_S)\|c\|_{\ell_2}^2 \leq \|\Phi_Tc\|_{\ell_2}^2 \leq (1+\delta_S)\|c\|_{\ell_2}^2
+	\end{equation}\cref{eq8}
+	for all subsets $T$ with $\left| T \right| \leq S$ and coefficient sequences $(c_j)_{j \in T}$.
+\end{quote}
+This property essentially requires that \emph{\textcolor[rgb]{1,0,0}{every set of columns with cardinality less than S approximately behaves like an orthonormal system}}.
+
+ If the columns of the sensing matrix $\Phi$ are \emph{approximately orthogonal}, then \emph{the exact recovery phenomenon occurs}.
+ \begin{theorem}\cite{15}
+ 	\label{th2.3.1}
+ 	Assume that x is S-sparse and suppose that $\delta_{2S}+\delta_{3S}<1$ or, better, $\delta_{2S}+\theta_{S,2S}<1$. Then the solution $x^*$ to \cref{eq2.2.3}\footnote{similar to \cref{eq9}} is exact, $x^*=x$.
+ \end{theorem}
+ 
+ In short, if the UUP holds at about the level S, the minimum $\ell_1$-norm reconstruction is provably exact. The first thing one should notice when comparing this result with the Fourier sampling theorem is that it is deterministic in the sense that it \textcolor[rgb]{1,0,0}{\emph{does not involve any probabilities}}. It is also universal in that \emph{all} sufficiently sparse vectors are exactly reconstructed from $\Phi x$.
+ 
+ In \cref{th2.3.1}, the version $\delta_{2S}+\theta_{S,2S}<1$ is better, which is established in \cite{19}. The number $\theta_{S,S'}$ for $S+S'\leq N$ is called the \textcolor[rgb]{1,0,0}{\emph{$S,S'$-restricted orthogonality constants}}\footnote{限制正交常量？} and is the smallest quantity such that
+\begin{equation}
+\label{eq2.3.3}
+\left| \left\langle \Phi_Tc,\Phi_{T'}c' \right\rangle \right| \leq \theta_{S,S'} \cdot \|c\|_{\ell_2}\|c'\|_{\ell_2}
+\end{equation}
+holds for all \emph{disjoint} sets $T,T'\subseteq \{1,\cdots,N\}$ of cardinality $|T| \leq S$ and $|T'| \leq S'$. Thus $\theta_{S，S'}$ is the cosine of the smallest angle between the two subspaces spanned by the columns in $T$ and $T'$. Small values of restricted orthogonality constants indicate that disjoint subsets of covariates span nearly orthogonal subspaces. The condition $\delta_{2S}+\theta_{S,2S}<1$ is better than $\delta_{2S}+\delta_{3S}<1$ since it is not hard to see that $\delta_{S+S'}-\delta_{S'} \leq \theta_{S,S'} \leq \delta_{S+S'}$ for $S'\geq S$ [Lemma 1.1 in \cite{15}]
+
+Suppose that $\delta_{2S}=1$ which may indicate that there is a matrix $\Phi_{T_1\cup T_2}$ with $2S$ columns $(|T_1|=S,|T_2|=S)$ that is \emph{rank-deficient}\footnote{秩亏（降秩）}. If this is the case, then there is a pair $(x_1, x_2)$ of nonvanishing vectors with $x_1$ supported on $T_1$ and $x_2$ supported on $T_2$ obeying
+\[
+\Phi(x_1-x_2)=0 \qquad \Leftrightarrow \qquad \Phi x_1 = \Phi x_2.
+\]
+
+\subsection{Recovery of Compressible Signals}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+

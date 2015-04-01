@@ -1,0 +1,32 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+A nonlinear sampling theorem	.\compressive-sampling.tex	/^\\subsection{A nonlinear sampling theorem}$/;"	b
+Abstract	.\AtomicDecompositionbyBasis.tex	/^\\section{Abstract}$/;"	s
+Abstract	.\DecodingbyLinearProgramming.tex	/^\\section{Abstract}$/;"	s
+Atomic Decomposition by Basis Pursuit	.\AtomicDecompositionbyBasis.tex	/^\\chapter{Atomic Decomposition by Basis Pursuit}$/;"	c
+Compressed Sensing Notes	.\compressed-sensing.tex	/^\\chapter{``Compressed Sensing'' Notes}$/;"	c
+Compressive Sampling Notes	.\compressive-sampling.tex	/^\\chapter{``Compressive Sampling'' Notes}$/;"	c
+Decoding by Linear Programming	.\DecodingbyLinearProgramming.tex	/^\\chapter{Decoding by Linear Programming}$/;"	c
+Decoding of Linear Codes	.\DecodingbyLinearProgramming.tex	/^\\subsection{Decoding of Linear Codes}$/;"	b
+General Signal Recovery From Undersampled Data	.\an-introduction-to-compressive-sampling.tex	/^\\subsection{General Signal Recovery From Undersampled Data}$/;"	b
+Incoherence and The Sensing of Sparse Signals	.\an-introduction-to-compressive-sampling.tex	/^\\section{Incoherence and The Sensing of Sparse Signals}$/;"	s
+Incoherent Sampling	.\an-introduction-to-compressive-sampling.tex	/^\\subsection{Incoherent Sampling}$/;"	b
+Innovations	.\DecodingbyLinearProgramming.tex	/^\\subsection{Innovations}$/;"	b
+Introduction	.\DecodingbyLinearProgramming.tex	/^\\section{Introduction}$/;"	s
+Introduction	.\compressive-sampling.tex	/^\\section{Introduction}$/;"	s
+Recovery of Sparse Signals	.\compressive-sampling.tex	/^\\subsection{Recovery of Sparse Signals}$/;"	b
+Restricted Isometries	.\an-introduction-to-compressive-sampling.tex	/^\\subsection{Restricted Isometries}$/;"	b
+Robust Compressive Sampling	.\an-introduction-to-compressive-sampling.tex	/^\\section{Robust Compressive Sampling}$/;"	s
+Robust Signal Recovery From Noisy Data	.\an-introduction-to-compressive-sampling.tex	/^\\subsection{Robust Signal Recovery From Noisy Data}$/;"	b
+Sparse Solutions to Underdetermined Systems	.\DecodingbyLinearProgramming.tex	/^\\subsection{Sparse Solutions to Underdetermined Systems}$/;"	b
+Sparsity	.\an-introduction-to-compressive-sampling.tex	/^\\subsection{Sparsity}$/;"	b
+Stable Signal Recovery from Incomplete and Incaccurate measurements	.\StableSignalRecoveryfromIncompleteandIncaccuratemeasurements.tex	/^\\chapter{Stable Signal Recovery from Incomplete and Incaccurate measurements}$/;"	c
+Study on An Introduction To Compressive Sampling cite Candes2008	.\an-introduction-to-compressive-sampling.tex	/^\\chapter{Study on ``An Introduction To Compressive Sampling''\\cite{Candes2008}}$/;"	c
+The Sensing Problem	.\an-introduction-to-compressive-sampling.tex	/^\\section{The Sensing Problem}$/;"	s
+Undersampled Measurements	.\compressive-sampling.tex	/^\\section{Undersampled Measurements}$/;"	s
+Undersampling and Sparse Signal Recovery	.\an-introduction-to-compressive-sampling.tex	/^\\subsection{Undersampling and Sparse Signal Recovery}$/;"	b
+abstract	.\compressed-sensing.tex	/^\\section{abstract}$/;"	s
