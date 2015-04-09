@@ -1,2 +1,25 @@
 \chapter{Math basic: John-Lindenstrauss lemma}
 The \textbf{\textcolor[rgb]{1,0,0}{Johnson-Lindenstrauss lemma}} concerns low-distortion embeddings of points from high-dimensional into low-dimensional into low-dimensional \emph{Euclidean space}. The lemma states that a small set of points in a high-dimensional space can be embedded into a space of much lower dimension in such a way that distances between the points are nearly preserved. The map used for the embedding is at least Lipschitz, and can even be taken to be an orthogonal projection.
+
+The lemma is tight up to a factor $\log (1/\epsilon)$, i.e. there exists a set of points of size $m$ that needs dimension 
+\begin{equation*}
+    \Omega \left(\dfrac{\log (m)}{\epsilon^2 \log (1/\epsilon)}\right)
+\end{equation*}
+in order to \textcolor[rgb]{1,0,0}{preserve the distances between all pair of points}.
+
+\section{Lemma}
+\begin{definition}
+    Given $0<\epsilon<1$, a set $X$ of $m$ points in $\mathbf{R}^N$, and a number $n>8\ln(m)/\epsilon^2$, there is a linear map $f:\mathbf{R}^N \rightarrow \mathbf{R}^n$ such that
+    \begin{equation*}
+        (1-\epsilon)\|u-v\|^2 \leq \|f(u)-f(v)\|^2 \leq (1+\epsilon)\|u-v\|^2
+    \end{equation*}
+    for all $u,v \in X$.
+\end{definition}
+
+\begin{quote}
+    In discrete CS problem, we have
+    \begin{equation*}
+        y = \Phi x,
+    \end{equation*}
+    where $\Phi$ is an $n \times N$ matrix and $y \in \mathbf{R}^n$. The matrix $\Phi$ maps $\mathbf{R}^N$, where $N$ is generally large, into $\mathbf{R}^n$, where $n$ is typically much smaller than $N$.\cref{simpleproof}
+\end{quote}<++>

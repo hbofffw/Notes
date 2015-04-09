@@ -1,5 +1,20 @@
 \chapter{``Compressed Sensing'' Notes}
+\label{chapter2}
 \section{abstract}
-	假设x是$\mathbf{R}^m$（一个数字图像或者信号）中的一个位置向量；我们计划测量x中的n个线性方程，然后重构它。如果x可被一个已知的变换编码进行压缩，并且可以通过本文定义的非线性过程进行重构，测量数量n可以远小于其实际大小m。这样，相比常用的采样方法，确定的含有m像素的自然图像，仅需要$n=O(m^{1/4}\log^{2/5}(m))$非自适应非像素采样就可以进行可靠恢复。
+Suppose is an unknown vector in $\mathbf{R}^2$ (a digital image or signal); we plan to measure $n$ general linear functionals of $x$ and then reconstruct. If $x$ is known to be compressible by transform coding with a known transform, and we reconstruct via the nonlinear procedure defined here, the number of measurements $n$ can be dramatically smaller than the size $m$. Thus, certain natural classes of images with $m$ pixels need only $n = O(m^{1/4}\log^{5/2}(m))$ nonadaptive nonpixel samples for faithful recovery, as opposed to the usual $m$ pixel samples.
+
+More specifically, suppose $x$ has a sparse representation in some orthonormal basis (e.g., wavelet, Fourier) or tight frame (e.g., curvelet, Gabor)—so the coefficients belong to an $\ell_p$ ball for $0<p \leq 1$. The $N$ most important coefficients in that expansion allow reconstruction with $\ell_2$ error $O(N^{1/2-1/p})$. It is possible to design \textcolor[rgb]{1,0,0}{$n=O(N\log(m))$ nonadaptive measurements} allowing reconstruction with accuracy comparable to that attainable with direct knowledge of the $N$ most important coefficients. Moreover, a good approximation to those $N$ important coefficients is extracted from the $n$ measurements by solving a linear program—Basis Pursuit in signal processing. The nonadaptive measurements have the character of “random” linear combinations of basis/frame elements. Our results use the notions of optimal recovery, of $n$-widths, and information-based complexity. We estimate the Gel'fand $n$-widths of $\ell_p$ balls in high-dimensional Euclidean space in the case $0<p \leq 1$, and give a criterion identifying near-optimal subspaces for Gel'fand $n$-widths. We show that “most” subspaces are near-optimal, and show that convex optimization (Basis Pursuit) is a near-optimal way to extract information derived from these near-optimal subspaces.
+
+    假设x是$\mathbf{R}^m$（一个数字图像或者信号）中的一个位置向量；我们计划测量x中的n个线性方程，然后重构它。如果x可被一个已知的变换编码进行压缩，并且可以通过本文定义的非线性过程进行重构，测量数量n可以远小于其实际大小m。这样，相比常用的采样方法，确定的含有m像素的自然图像，仅需要$n=O(m^{1/4}\log^{2/5}(m))$非自适应非像素采样就可以进行可靠恢复。
 	
-	更明确的，假设x在一些正交基(例如，小波，傅里叶)和紧框架\footnote{tight frame}(curvelet, Garbor)存在一个稀疏表示---所以系数属于一个$\ell_p$球，$0<p\leq 1$。该扩展中，最重要的N个系数，在$\ell_2$
+    更明确的，假设x在一些正交基(例如，小波，傅里叶)和紧框架\footnote{tight frame}(curvelet, Garbor)存在一个稀疏表示---所以系数属于一个$\ell_p$球，$0<p\leq 1$。该扩展中，最重要的N个系数在$\ell_2$错误满足$O(N^{1/2-1/p})$时可以重构。
+
+\section{Introduction}
+\subsection{Transform Compression Background}
+Transform coefficients $\theta_i = \left<x,\psi_i\right>$, a vector $x$ is the object of interest $x \in \mathbf{R}^m$; ($\psi_i: i=1, \cdots, m$) is an orthonormal basis for $\mathbf{R}^m$. There are assumed sparse in the sense that, for some $0<p<2$ and for some $R>0$
+\begin{equation}
+    \|\theta\|_p \equiv \(\sum\limits_i|\theta_i|^p\)^{1/p} \leq R.
+    \label{eq2.1.1}
+\end{equation}
+
+
