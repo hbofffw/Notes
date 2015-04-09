@@ -1,5 +1,5 @@
 \chapter{``Compressed Sensing'' Notes}
-\label{chapter2}
+\label{chapter3}
 \section{abstract}
 Suppose is an unknown vector in $\mathbf{R}^2$ (a digital image or signal); we plan to measure $n$ general linear functionals of $x$ and then reconstruct. If $x$ is known to be compressible by transform coding with a known transform, and we reconstruct via the nonlinear procedure defined here, the number of measurements $n$ can be dramatically smaller than the size $m$. Thus, certain natural classes of images with $m$ pixels need only $n = O(m^{1/4}\log^{5/2}(m))$ nonadaptive nonpixel samples for faithful recovery, as opposed to the usual $m$ pixel samples.
 
@@ -11,10 +11,18 @@ More specifically, suppose $x$ has a sparse representation in some orthonormal b
 
 \section{Introduction}
 \subsection{Transform Compression Background}
-Transform coefficients $\theta_i = \left<x,\psi_i\right>$, a vector $x$ is the object of interest $x \in \mathbf{R}^m$; ($\psi_i: i=1, \cdots, m$) is an orthonormal basis for $\mathbf{R}^m$. There are assumed sparse in the sense that, for some $0<p<2$ and for some $R>0$
+\textcolor[rgb]{1,0,0}{Transform coefficients} $\theta_i = \left<x,\psi_i\right>$, a vector $x$ is the object of interest $x \in \mathbf{R}^m$; ($\psi_i: i=1, \cdots, m$) is an orthonormal basis for $\mathbf{R}^m$. There are assumed sparse in the sense that, for some $0<p<2$ and for some $R>0$
 \begin{equation}
-    \|\theta\|_p \equiv \(\sum\limits_i|\theta_i|^p\)^{1/p} \leq R.
-    \label{eq2.1.1}
+    \|\theta\|_p \equiv \left(\sum\limits_i|\theta_i|^p\right)^{1/p} \leq R.
+    \label{eq3.1.1}
 \end{equation}
 
+The key implication of $\ell_p$ constraint is sparsity of the transform coefficients. Indeed, we have trivially that, if $\theta_N$ denotes the vector $\theta$ with everything except the $N$ largest coefficients set to $0$
+\begin{equation}
+    \|\theta - \theta_N \|_2 \leq \zeta_{2,p} \cdot (N+1)^{1/2-1/p}
+    \label{eq3.1.2}
+\end{equation}
+for $N = 0,1,2,\cdots$, with a constant $\zeta_{2,p}$ depending only on $p \in (0,2)$. Thus, for example, to approximate $\theta$ with error $\epsilon$, we need to keep only the $N \asymp \epsilon^{(p-2)/2p}$ biggest terms in $\theta$. 
+
+\subsection{Optimal Recovery/Information-Based Complexity Background}
 
