@@ -1,9 +1,9 @@
-\chapter{``Compressed Sensing'' Notes}
+capter{``Compressed Sensing'' Notes}
 \label{chapter3}
 \section{abstract}
 Suppose is an unknown vector in $\mathbf{R}^2$ (a digital image or signal); we plan to measure $n$ general linear functionals of $x$ and then reconstruct. If $x$ is known to be compressible by transform coding with a known transform, and we reconstruct via the nonlinear procedure defined here, the number of measurements $n$ can be dramatically smaller than the size $m$. Thus, certain natural classes of images with $m$ pixels need only $n = O(m^{1/4}\log^{5/2}(m))$ nonadaptive nonpixel samples for faithful recovery, as opposed to the usual $m$ pixel samples.
 
-More specifically, suppose $x$ has a sparse representation in some orthonormal basis (e.g., wavelet, Fourier) or tight frame (e.g., curvelet, Gabor)—so the coefficients belong to an $\ell_p$ ball for $0<p \leq 1$. The $N$ most important coefficients in that expansion allow reconstruction with $\ell_2$ error $O(N^{1/2-1/p})$. It is possible to design \textcolor[rgb]{1,0,0}{$n=O(N\log(m))$ nonadaptive measurements} allowing reconstruction with accuracy comparable to that attainable with direct knowledge of the $N$ most important coefficients. Moreover, a good approximation to those $N$ important coefficients is extracted from the $n$ measurements by solving a linear program—Basis Pursuit in signal processing. The nonadaptive measurements have the character of “random” linear combinations of basis/frame elements. Our results use the notions of optimal recovery, of $n$-widths, and information-based complexity. We estimate the Gel'fand $n$-widths of $\ell_p$ balls in high-dimensional Euclidean space in the case $0<p \leq 1$, and give a criterion identifying near-optimal subspaces for Gel'fand $n$-widths. We show that “most” subspaces are near-optimal, and show that convex optimization (Basis Pursuit) is a near-optimal way to extract information derived from these near-optimal subspaces.
+More specifically, suppose $x$ has a sparse representation in some orthonormal basis (e.g., wavelet, Fourier) or tight frame (e.g., curvelet, Gabor)—so the coefficients belong to an $\ell_p$ ball for $0<p \leq 1$. The $N$ most important coefficients in that expansion allow reconstruction with $\ell_2$ error $O(N^{1/2-1/p})$. It is ossible to design \textcolor[rgb]{1,0,0}{$n=O(N\log(m))$ nonadaptive measurements} allowing reconstruction with accuracy comparable to that attainable with direct knowledge of the $N$ most important coefficients. Moreover, a good approximation to those $N$ important coefficients is extracted from the $n$ measurements by solving a linear program—Basis Pursuit in signal processing. The nonadaptive measurements have the character of “random” linear combinations of basis/frame elements. Our results use the notions of optimal recovery, of $n$-widths, and information-based complexity. We estimate the Gel'fand $n$-widths of $\ell_p$ balls in high-dimensional Euclidean space in the case $0<p \leq 1$, and give a criterion identifying near-optimal subspaces for Gel'fand $n$-widths. We show that “most” subspaces are near-optimal, and show that convex optimization (Basis Pursuit) is a near-optimal way to extract information derived from these near-optimal subspaces.
 
     假设x是$\mathbf{R}^m$（一个数字图像或者信号）中的一个位置向量；我们计划测量x中的n个线性方程，然后重构它。如果x可被一个已知的变换编码进行压缩，并且可以通过本文定义的非线性过程进行重构，测量数量n可以远小于其实际大小m。这样，相比常用的采样方法，确定的含有m像素的自然图像，仅需要$n=O(m^{1/4}\log^{2/5}(m))$非自适应非像素采样就可以进行可靠恢复。
 	
@@ -25,4 +25,30 @@ The key implication of $\ell_p$ constraint is sparsity of the transform coeffici
 for $N = 0,1,2,\cdots$, with a constant $\zeta_{2,p}$ depending only on $p \in (0,2)$. Thus, for example, to approximate $\theta$ with error $\epsilon$, we need to keep only the $N \asymp \epsilon^{(p-2)/2p}$ biggest terms in $\theta$. 
 
 \subsection{Optimal Recovery/Information-Based Complexity Background}
+Designing an information operator $I_n:X \longmapsto \mathbf{R}^n$ which samples $n$ pieces of information about $x$, as well as an algorithm $A_n:\mathbf{R}^n \longmapsto \mathbf{R}^m$ which offers an approximate reconstruction of $x$, are of interest. The \emph{\textcolor[rgb]{1,0,0}{information operator}} takes the form  
+\begin{equation*}
+    I_n(x) = \left(\left<\xi_1,x\right>,\cdots,\left<\xi_n,x\right>\right)
+\end{equation*}
+where the $\xi_i$ are \emph{\textcolor[rgb]{1,0,0}{sampling kernels}}, not \emph{\textcolor[rgb]{0,0,1}{necessarily}} sampling pixels or other simple features of the signal; they are nonadaptive, i.e., fixed independently of $x$. The algorithm $A_n$ is an unspecified, possibly nonlinear reconstruction operator. 
+
+The minimax $\ell_2$ error is considered as a standard of 
+\begin{equation*}
+    E_n(X) = \inf\limits_{A_n,I_n} \sup\limits_{x \in X} \|x-A_n(I_n(x))\|_2.
+\end{equation*}
+So here, all possible methods of nonadaptive linear sampling are allowed, and all possible methods of reconstruction are allowed. 
+
+In this application, the class $X$ of objects of interest is the set of object $x = \sum_i\theta_i\psi_i$ where $\theta = \theta(x)$ obeys \cref{eq3.1.1} for a given $p$ and $R$. Denote then
+\begin{equation*}
+    X_{p,m}(R) = \{x:\|\theta(x)\|_p \leq R\} 
+\end{equation*}
+The goal is to evaluate $E_n(X_{p,m}(R))$ and to have practical schemes which come close to attaining it.
+\subsection{Four Surprises}
+\begin{theorem}
+    Let $(n, m_n)$ be a sequence of problem sizes with $n<m_n, n \rightarrow \infty$, and $m_n \sim An^{\gamma}, \gamma > 1, A>0$. Then for $0<p\leq 1$ there is $C_p = C_p(A,\gamma)>0$ so that
+    \begin{equation}
+        E_n(X_{p,m}(R)) \leq C_p \cdot R \cdot (n/\log (m_n))^{1/2-1/p}
+        \label{eq3.1.3}.
+    \end{equation}
+    \label{th3.1.1}
+\end{theorem}
 
