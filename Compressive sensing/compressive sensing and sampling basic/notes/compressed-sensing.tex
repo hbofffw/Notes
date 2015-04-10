@@ -1,4 +1,4 @@
-capter{``Compressed Sensing'' Notes}
+\chapter{``Compressed Sensing'' Notes}
 \label{chapter3}
 \section{abstract}
 Suppose is an unknown vector in $\mathbf{R}^2$ (a digital image or signal); we plan to measure $n$ general linear functionals of $x$ and then reconstruct. If $x$ is known to be compressible by transform coding with a known transform, and we reconstruct via the nonlinear procedure defined here, the number of measurements $n$ can be dramatically smaller than the size $m$. Thus, certain natural classes of images with $m$ pixels need only $n = O(m^{1/4}\log^{5/2}(m))$ nonadaptive nonpixel samples for faithful recovery, as opposed to the usual $m$ pixel samples.
@@ -17,7 +17,7 @@ More specifically, suppose $x$ has a sparse representation in some orthonormal b
     \label{eq3.1.1}
 \end{equation}
 
-The key implication of $\ell_p$ constraint is sparsity of the transform coefficients. Indeed, we have trivially that, if $\theta_N$ denotes the vector $\theta$ with everything except the $N$ largest coefficients set to $0$
+The key implication of $\ell_p$ constraint is sparsity of the transform coefficients. Indeed, wehave trivially that, if $\theta_N$ denotes the vector $\theta$ with everything except the $N$ largest coefficients set to $0$
 \begin{equation}
     \|\theta - \theta_N \|_2 \leq \zeta_{2,p} \cdot (N+1)^{1/2-1/p}
     \label{eq3.1.2}
@@ -42,6 +42,8 @@ In this application, the class $X$ of objects of interest is the set of object $
     X_{p,m}(R) = \{x:\|\theta(x)\|_p \leq R\} 
 \end{equation*}
 The goal is to evaluate $E_n(X_{p,m}(R))$ and to have practical schemes which come close to attaining it.
+
+
 \subsection{Four Surprises}
 \begin{theorem}
     Let $(n, m_n)$ be a sequence of problem sizes with $n<m_n, n \rightarrow \infty$, and $m_n \sim An^{\gamma}, \gamma > 1, A>0$. Then for $0<p\leq 1$ there is $C_p = C_p(A,\gamma)>0$ so that
@@ -49,6 +51,26 @@ The goal is to evaluate $E_n(X_{p,m}(R))$ and to have practical schemes which co
         E_n(X_{p,m}(R)) \leq C_p \cdot R \cdot (n/\log (m_n))^{1/2-1/p}
         \label{eq3.1.3}.
     \end{equation}
-    \label{th3.1.1}
+    \label{th3.1}
 \end{theorem}
 
+\begin{enumerate}
+    \item First, compare \cref{eq3.1.2} with \cref{eq3.1.3}. Under the calibration $n = N\log(m_n)$, the forms are similar. In words: the quality of approximation to $x$ which could be gotten by using the $n \approx N \log(m)$ pieces of \emph{\textcolor[rgb]{1,0,0}{nonadaptive}} information provided by $I_n$. The surprise is that we could not know in advance which transform coefficients are likely to be the important ones in this approximation, yet the optimal information operator $I_n$ is nonadaptive, depending at most on the class $X_{p,m}(R)$ and not on the specific object. In some sense this nonadaptive information is just as powerful as knowing the $N$ best transform coefficients.
+    \item The information operator is measuring very complex ``holographic'' functionals which in some sense mix together all the coefficients in a big soup. (\emph{\textcolor[rgb]{1,0,0}{Holographic}} is a process where a three-dimensional (3-D) image generates by interferometry \footnote{干扰法} a two-dimensional (2-D) transform. Each value in the 2-D transform domain is influenced by each part of the whole 3-D object. \emph{\textbf{\textcolor[rgb]{1,0,0}{The 3-D object can later be reconstructed by interferometry from all or even a part of the 2-D transform domain. We perceive an analogy here, in which an object is transformed to a compressed domain, and each compressed domain component is a combination of all parts of the original object.}}})
+    \item  If the class of information operators is enlarged to allow adaptive ones, e.g., operators in which certain measurements are made in response to earlier measurements, we could scarcely do better. Define the minimax error under adaptive information $E_n^{Adapt}$ allowing adaptive operators 
+        \begin{equation*}
+            I_n^A = (\left<\xi_1,x\right>,\left<\xi_{2,x},x\right>,\cdots,\left<\xi_{n,x},x\right>)
+        \end{equation*}
+        where, for $i\geq 2$, each kernel $\xi_{j,x}$ is allowed to depend on the information $\left<\xi_{j,x},x\right>$ gathered at previous stages $1 \leq j < i$. Formally setting
+        \begin{equation*}
+            E_n^{Adapt}(X) = \inf\limits_{A_n,I_n^A} \sup\limits_{x \in X} \|x-A_n \left(I_n^A(x)\right)\|_2.
+        \end{equation*}
+        \begin{theorem}
+            For $0<p\leq 1$, there is $C_p > 0$ so that for $R > 0$
+            \begin{equation*}
+                E_n(X_{p,m}(R)) \leq 2^{1/p} \cdot E_n^{Adapt}(X_{p,m}(R)).
+            \end{equation*}
+            \label{th3.2}
+        \end{theorem}
+    \item In the already-interesting case $p=1$, \cref{th3.1,th3.2} are easily derivable from known results in OR/IBC and approximation theory! 
+\end{enumerate}<++>
