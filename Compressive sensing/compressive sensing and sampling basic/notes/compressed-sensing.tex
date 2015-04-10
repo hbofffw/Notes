@@ -75,8 +75,17 @@ The goal is to evaluate $E_n(X_{p,m}(R))$ and to have practical schemes which co
     \item In the already-interesting case $p=1$, \cref{th3.1,th3.2} are easily derivable from known results in OR/IBC and approximation theory! But the derivations are indirect; so although they have what seem to the author as fairly important implications, very little seems known at present about good nonadaptive information operators or about concrete algorithms matched to them. 
 \end{enumerate}
 
-The goal in this paper is 
+The goal in this paper is to give direct arguments which cover the case $0<p \leq 1$ of highly compressible objects, to give direct information about near-optimal information operators and about concrete, computationally tractable algorithms for using this near-optimal information. 
 
 \subsection{Geometry and Widths}
 \label{n-widths}
+The phenomenon described in \cref{th3.1} concerns the geometry of \textcolor[rgb]{1,0,0}{high-dimensional convex and nonconvex ``balls''}. To see the connection, note that the class $X_{p,n}(R)$ is the image, under orthogonal transformation, of an $\ell_p$ ball. If $p=1$ this is convex and symmetric about the origin, as well as being orthosymmetric\footnote{正对称的} with respect to the axes provided by the wavelet basis; if $p>1$, this is again symmetric about the origin and orthosymmetric, while \textcolor[rgb]{0,0,1}{not being convex, but still star-shped}.
 
+\begin{definition}
+    \label{def3.1.1}
+    The \textbf{Gel'fand} \emph{n-}\textbf{width} of $X$ with respect to the $\ell_2^m$ norm is defined as 
+    \begin{equation*}
+        d^n(X;\ell_2) = \inf\limits_{V_n}\sup\left\{\|x\|_2: x \in V_n^{\bot} \cap X\right\}
+    \end{equation*}
+    where the infimum is over $n-$dimensional linear subspaces of $\mathbf{R}^m$, and $V_n^{\bot}$ denotes the orthocomplement\footnote{正交补，正补余} of $V_n$ with respect to the standard Euclidean inner product.
+\end{definition}
