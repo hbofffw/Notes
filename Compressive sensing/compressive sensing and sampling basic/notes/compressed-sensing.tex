@@ -89,3 +89,31 @@ The phenomenon described in \cref{th3.1} concerns the geometry of \textcolor[rgb
     \end{equation*}
     where the infimum is over $n-$dimensional linear subspaces of $\mathbf{R}^m$, and $V_n^{\bot}$ denotes the orthocomplement\footnote{正交补，正补余} of $V_n$ with respect to the standard Euclidean inner product.
 \end{definition}
+
+\begin{theorem}
+    For $0<p \leq 1$ and $R>0$
+    \begin{eqnarray}
+        d^n(X_{p,m}(R))&&\leq E_n(X_{p,m}(R)) \\
+        \label{eq3.1.4}
+        &&\leq 2^{1/p-1} \cdot d^n(X_{p,m}(R)).
+        \label{eq3.1.5}
+    \end{eqnarray}
+    \label{th3,3}
+\end{theorem}
+
+The Gel'fand $n$-widths either exactly or nearly equal the value of optimal information. We will typically only be interested in \emph{near-optimal} performance, i.e., in obtaining $E_n$ to within constant factors.
+
+\emph{\textcolor[rgb]{1,0,0}{It is relatively rare to see the Gel'fand $n$-widths studied directly; more commonly, one sees results about the Kolmogorov $n$-widths.}}
+
+\begin{definition}
+    \label{def3.1.2}
+    Let $X \subset \mathbf{R}^m$ be a bounded set. The \textbf{Kolmogorov $n$-widths} of $X$ with respect the $\ell_2$ norm is defined as 
+    \begin{equation*}
+        d_n(X;\ell_2) = \inf\limits_{V_m}\sup\limits_{x \in X}\inf\limits_{y \in V_m} \|x-y\|_2
+    \end{equation*}
+    where the infimum is over $n$-dimensional linear subspaces of $\mathbf{R}^m$.
+\end{definition}
+
+\emph{\textbf{\textcolor[rgb]{1,0,0}{In words, $d_n$ measures the quality of approximation of $X$ possible by $n$-dimensional subspaces $V_n$.}}}
+
+In the case $p=1$, there is an important duality relationship between Kolmogorov widths and Gel'fand widths which allows us to infer properties of $d^n$ from published results on $d_n$. 
