@@ -1,0 +1,46 @@
+\chapter{The restricted isometry property and its implications for compressed sensing}
+\begin{equation}
+    y=\Phi x
+    \label{eq3.1}
+\end{equation}
+
+
+The solusion $x*$ to 
+\begin{equation}
+    \min\limits_{\tilde{x} \in \mathbb{R}^n} \|\tilde{x}\|_{\ell_1} \qquad \text{subject to} \qquad \Phi \tilde{x}=y
+    \label{eq3.2}
+\end{equation}
+recovers $x$ exactly provided that
+\begin{enumerate}[1)]
+    \item $x$ is sufficiently sparse and
+    \item the matrix $\Phi$ obeys a condition known as the \emph{restricted isometry property}. 
+\end{enumerate}
+
+
+\begin{definition}
+    \label{def3.1.1}
+    For each integer $s=1,2,\dots$, define the isometry constant $\delta_s$ of a matrix $\Phi$ as the smallest number such that 
+    \begin{equation}
+        (1-\delta_s)\|x\|^2_{\ell_2} \leqslant \|\Phi x\|^2_{\ell_2} \leqslant (1+\delta_s)\|x\|^2_{\ell_2}
+        \label{eq3.3}
+    \end{equation}
+    holds for all $s$-sparse vectors. A vector is said to be $s$-sparse if it has at most $s$ nonzero entries.
+\end{definition}
+
+By comparing the reconstruction $x^*$ with the \emph{best sparse approximation} one could obtain if one knew exactly the locations and amplitudes of the $s$-largest entries of $x$; here and below, we denote this approximation by $x_s$, i.e. the vector x with all but the $s$-largest entries set to zero.
+
+\begin{theorem}[Noiseless recovery]
+    Assume that $\delta_{2s} < \sqrt{2}-1$. Then the solusion x* to \cref{eq3.2} obeys
+    \begin{equation}
+        \|x^*-x\|_{\ell_1} \leqslant C_0 \|x-x_s\|_{\ell_1}
+        \label{eq3.4}
+    \end{equation}
+    and
+    \begin{equation}
+        \|x^*-x\|_{\ell_2} \leqslant C_0 s^{-1/2}\|x-x_s\|_{\ell_1}
+        \label{eq3.5}
+    \end{equation}
+    for some constant $C_0$ given explicitly below. In particular, if $x$ is $s$-sparse, the recovery is exact.
+    \label{th3.1.2}
+\end{theorem}
+
