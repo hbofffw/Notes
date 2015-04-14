@@ -1,0 +1,50 @@
+\chapter{Restricted isometry constants and restricted orthogonality constants}
+\section{Definitions and Basic Properties}
+Unlike the \emph{\textcolor[rgb]{1,0,0}{coherence, which only takes paires of columns of a matrix into account}}, the restricted isometry constant of \emph{\textcolor[rgb]{1,0,0}{order $s$ involves all $s$-tuples of columns and is therefore more suited to assess the quality of the matrix}}.
+
+\begin{definition}
+    \label{def2.1.1}
+    The $s$th \emph{restricted isometry constant} $\delta_s = \delta_s(\mathbf{A})$ of a matrix $\mathbf{A} \in \mathbb{C^{m \times N}}$ is the smallest $\delta \geq 0$ such that
+    \begin{equation}
+        (1-\delta)\|x\|^2_2 \leq \|\mathbf{A}x\|_2^2 \leq (1+\delta)\|x\|^2_2
+        \label{eq2.1.1}
+    \end{equation}
+    for all $s$-sparse vectors $x \in \mathbb{C}^N$. Equivalently, it is given by
+    \begin{equation}
+        \delta_s = \max\limits_{S \subset [N], card(S) \leq s} \|\mathbf{A}^*_S \mathbf{A}_S - \mathbf{Id}\|_{2 \rightarrow 2}.
+        \label{eq2.1.2}
+    \end{equation}
+\end{definition}
+
+We say that $\mathbf{A}$ satisfies the \emph{restricted isometry property} if \emph{\textcolor[rgb]{1,0,0}{$\delta_s$ is small for reasonably large $s$---the meaning of small $\delta_s$ and large $s$ will be made precise later}}.
+
+Indeed, \cref{eq2.1.2} syas that each column submatrix $\mathbf{A}_S, S \subset [N]$ with $card(S) \leq s$, has all its singular values in the interval $[1-\delta_s,1+\delta_s]$ and is therefore injective when $\delta_s < 1$.
+
+\begin{quote}
+    To prove \cref{eq2.1.2} and for the equivalence of \cref{eq2.1.1} and \cref{eq2.1.2} in the complex setting, we start by noticing that \cref{eq2.1.1} is equivalent to 
+    \begin{equation*}
+        \left|\|\mathbf{A}_S x\|_2^2 - \|x\|_2^2\right| \leq \delta \|x\|_2^2 \quad \text{for all } S \subset [N], card(S) \leq s, \text{and all } x \in \mathbb{C}^S.
+    \end{equation*}
+    One then observes that, for $x \in \mathbb{C}^S$,
+    \begin{equation*}
+        \|\mathbf{A}_S x\|_2^2 - \|x\|_2^2 = \left<\mathbf{A}_S x, \mathbf{A}_S x\right> - \left<x, x\right> = \left<\left(\mathbf{A}_S^* \mathbf{A}_S - \mathbf{Id}\right)x, x\right>.
+    \end{equation*}
+    Since the matrix $\mathbf{A}_S^* \mathbf{A}_S - \mathbf{Id}$ is \textbf{\textcolor[rgb]{1,0,0}{Hermitian}}, we have
+    \begin{equation*}
+        \max\limits_{x \in \mathbb{C}^S \backslash \{0\}} \dfrac{\left<(\mathbf{A}_S^* \mathbf{A}_S - \mathbf{Id})x,x\right>}{\|x\|_2^2} = \|\mathbf{A}_S^* \mathbf{A}_S - \mathbf{Id}\|_{2 \rightarrow 2},
+    \end{equation*}
+    so that \cref{eq2.1.1} is equivalent to 
+    \begin{equation*}
+        \max\limits_{S \subset [N], card(S) \leq s} \|\mathbf{A}_S^* \mathbf{A}_S - \mathbf{Id}\|_{2 \rightarrow 2} \leq \delta.
+    \end{equation*}
+    This proves the identity \cref{eq2.1.2}, as $\delta_s$ is the smallest such $\delta$.
+\end{quote}
+
+\begin{proposition}
+    \label{pr2.2}
+    If the matrix $A$ has $\ell_2$-normalized columns $a_1,\dots,a_N,i.e.,\|a_j\|_2=1$ for all $j \in [N]$, then
+    \begin{equation*}
+        \delta_1=0, \qquad \delta_2=\mu, \qquad \delta_s \leq \mu_1(s-1) \leq (s-1)\mu, \quad s \geq 2.
+    
+    \end{equation*}<++>
+\end{proposition}<++>
