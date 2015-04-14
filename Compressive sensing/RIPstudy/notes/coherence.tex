@@ -14,5 +14,54 @@ Next the more general concept of $\ell_1$-coherence function is introduced, whic
 
 \begin{definition}
     \label{def1.2}
-    Let $\mathbf{A} \in \mathbb{C}^{m \times N}$ be a matrix
-\end{definition}<++>
+    Let $\mathbf{A} \in \mathbb{C}^{m \times N}$ be a matrix with $\ell_2$-normalized columns $a_1,\dots,a_N$. The $\ell_1$-\emph{coherence function} $\mu_1$ of the matrix $\mathbf{A}$ is defined for $s \in [N-1]$ by
+    \begin{equation*}
+        \mu_1(s) := \max\limits_{i \in [N]} \max\left\{\sum\limits_{j \in S}\left|\left<a_i,a_j\right>\right|, S \subset [N], card(S) = s, i \notin S \right\}. 
+    \end{equation*}
+\end{definition}
+
+It is straightforward to observe that, for $1 \leq s \leq N-1$,
+\begin{equation}
+    \mu \leq \mu_1(s) \leq s\mu,
+    \label{eq1.2}
+\end{equation}
+and more generally that, for $1 \leq s, t \leq N-1$ with $s+t \leq N-1$,
+\begin{equation}
+    \max \{\mu_1(s), \mu_1(t)\} \leq \mu_1(s+t) \leq \mu_1(s) + \mu_1(t).
+    \label{eq1.3}
+\end{equation}
+
+The coherence, more generally the $\ell_1$-coherence function, is invariant under multiplication on the left by a \emph{\textcolor[rgb]{1,0,0}{unitary matrix $\mathbf{U}$}}, for the columns of $\mathbf{UA}$ are the \emph{\textcolor[rgb]{1,0,0}{$\ell_2$-normalized vectorrs $\mathbf{U}a_1,\dots,\mathbf{U}a_N$}} and they satisfy $\left<\mathbf{U}a_i,\mathbf{U}a_j\right> = \left<a_i,a_j\right>$. Moreover, because of the \emph{Cauchy-Schwarz} inequality $\left|\left<a_i,a_j\right>\right| \leq \|a_i\|_2\|a_j\|_2$, it is clear that the coherence of a matrix is bounded above by one, i.e.,
+\[\mu \leq 1\].
+
+We observe that $\mu = 0$ if and only if the columns of $\mathbf{A}$ from an orthonormal system. In particular, in the case of a square matrix, we have $\mu= 0$ if and only if $\mathbf{A}$ is a \emph{\textcolor[rgb]{1,0,0}{unitary matrix}}. But from the \emph{compressive sensing} point of view, we only consider matrices $\mathbf{A} \in \mathbb{C}^{m \times N}$ with $m < N$. $\mathbf{A}_S$ denotes the matrix formed by the columns of $\mathbf{A} \in \mathbb{C}^{m \times N}$ indexed by \emph{a subset $S$ of $[N]$}. 
+
+\begin{theorem}
+    Let $\mathbf{A} \in \mathbb{C}^{m \times N}$ be a matrix with $\ell_2$-normalized columns and let $s \in [N]$. For all $s$-sparse vectors $x \in \mathbb{C}^{N}$,
+    \[(1-\mu_1(s-1))\|x\|_2^2 \leq \|\mathbf{A}x\|_2^2 \leq (1+\mu_1(s-1))\|x\|_2^2,\footnote{It looks like RIP}\]
+    or equivalently, for each set $S \subset [N]$ with card$(S) \leq s$, the eigenvalues of the matrix $\mathbf{A}_S^*\mathbf{A}_S$ lie in the interval $[1-\mu_1(s-1), 1+\mu_1(s-1)]$. In particular, if $\mu_1(s-1) < 1$, then $\mathbf{A}_S^*\mathbf{A}_S$ is invertible.
+    \label{th1.3}
+\end{theorem}
+
+\begin{proof}
+    For a set $S \subset [N]$ with $card(S) \leq s$, since the matrix $\mathbf{A}_{S}^*\mathbf{A}_S$ is positive semidefinite, it has an orthonormal basis of eigenvectors associated with real, positive eigenvaludes. The minimal eigenvalue is denoted by $\lambda_{min}$ and the maximal eigenvalue by $\lambda_{max}$. Then, since $\mathbf{A}x = \mathbf{A}_Sx_S$ for any $x \in \mathbb{C}^N$ supported on $S$, it is easy to see that the maximum of 
+    \[\|\mathbf{A}x\|_2^2 = \left<\mathbf{A}_Sx_S, \mathbf{A}_S x_S\right> = \left<\mathbf{A}_s^*\mathbf{A}_S x_S, x_S\right>\]
+    over the set $\{x \in \mathbb{C}^N, supp x \subset S, \|x\|_2 = 1\}$ is $\lambda_{max}$ and that its minimum is $\lambda_{min}$. Due to the normalizations $\|a_j\|_2=1 $ for all $j \in [N]$, the diagonal entries of $\mathbf{A}_S^* \mathbf{A}_S$ all equal one. By \emph{Gershgorin's disk theorem \cref{tha.11}}, the eigenvalues of $\mathbf{A}_S^* \mathbf{A}_S$ are contained in the union of the disks centered at $1$ with radii
+    \[r_j := \sum\limits_{\ell_S,\ell \neq j}\left|(\mathbf{A}_S^*\mathbf{A}_S)_{j,\ell}\right| = \sum\limits_{\ell \in S,\ell \neq j} \left|\left<a_{\ell},a_j\right>\right| \leq \mu_1(s-1), \qquad j\in S.\]
+    \emph{\textcolor[rgb]{1,0,0}{Since these eigenvalues are real, they must lie in $\left[1- \mu_1(s-1), 1+\mu_1(s-1)\right]$, as anounced.}}
+
+    \begin{theorem}
+        Let $\lambda$ be an eigenvalue of a square matrix $\mathbf{A} \in \mathbb{C}^{n \times n}$. There exists an index $j \in [n]$ such that 
+        \[|\lambda - A_{j,j}| \leq \sum\limits_{\ell \in [n] \backslash \{j\}} |A_{j,\ell}|.\]
+    \label{tha.11}
+    \end{theorem}
+\end{proof}
+\begin{corollary}
+    \label{cr1.4}
+    Given a matrix $\mathbf{A} \in \mathbb{C}^{m \times N}$ with $\ell_2$-normalized columns and an integer $s \geq 1$, if 
+    \[\mu_1(s)+\mu_1(s-1) < 1,\]
+    then, for each set $S \subset [N]$ with card$(S) \leq 2s$, the matrix $\mathbf{A}_S^*\mathbf{A}_S$ is invertible and the matrix $\mathbf{A}_S$ injective. In particular, the conclusion hollds if 
+    \[\mu < \dfrac{1}{2s-1}.\]
+\end{corollary}
+
+
