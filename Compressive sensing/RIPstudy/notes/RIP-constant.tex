@@ -45,6 +45,88 @@ Indeed, \cref{eq2.1.2} syas that each column submatrix $\mathbf{A}_S, S \subset 
     If the matrix $A$ has $\ell_2$-normalized columns $a_1,\dots,a_N,i.e.,\|a_j\|_2=1$ for all $j \in [N]$, then
     \begin{equation*}
         \delta_1=0, \qquad \delta_2=\mu, \qquad \delta_s \leq \mu_1(s-1) \leq (s-1)\mu, \quad s \geq 2.
-    
-    \end{equation*}<++>
+    \end{equation*}
+\end{proposition}
+
+\begin{proof}
+    The $\ell_2$-normalization of the columns means that $\|\mathbf{A}e_j\|_2^2 = \|e_j\|_2^2$ for all $j \in [N]$, that is to say $\delta_1 = 0$. Next, with $a_1,\dots,a_N$ denoting the columns of the matrix $\mathbf{A}$, we have
+    \begin{equation*}
+        \delta_2 = \max\limits_{1 \leq i \neq j \leq N} \|\mathbf{A}_{i,j}^*\mathbf{A}_{i,j} - \mathbf{Id}\|_{2 \rightarrow 2}, \qquad \mathbf{A}_{i,j}^*\mathbf{A}_{i,j} = 
+        \left[
+            \begin{array}{cc}
+                1 & \left<a_j,a_i\right> \\
+                \left<a_i,a_j\right> &1
+            \end{array}
+        \right].
+    \end{equation*}
+    The eigenvalues of the matrix $\mathbf{A}_{i,j}^*\mathbf{A}_{i,j} - \mathbf{Id}$ are $\left|\left<a_i,a_j\right>\right|$ and $-\left|\left<a_i,a_j\right>\right|$, so its operator norm is $\left|\left<a_i,a_j\right>\right|$. Taking the maximum over $1 \leq i \neq i \leq N$ yields the equality $\delta_2 = \mu$. The inequality $\delta_s \leq \mu_1(s-1) \leq (s-1)\mu$ folows from \cref{th1.3}.
+\end{proof}
+
+In view of the existence of $m \times m^2$ matrices with coherence $\mu$ equal to $1/\sqrt{m}$ (see \cref{coherence}), this already shows the existence of $m \times m^2$ matrices with restricted isometry constant $\delta_s < 1$ for $s \leq \sqrt{m}$. We will establish that, given $\delta < 1$, there exist $m \times N$ matrices with restricted isometry constant $\delta_s \leq \delta$ for $s \leq cm/\ln(eN/m)$, where $c$ is a constant depending only on $\delta$. \emph{\textcolor[rgb]{1,0,0}{Matrices with a small restricted isometry constant of this optimal order are informally said to satisfy the \textbf{restricted isometry property} and \textbf{uniform uncertainty principle}}}.
+
+A simple but essential observation will be made, which \emph{\textcolor[rgb]{1,0,0}{motivates the related notion of restricted orthogonality constant}}.
+\begin{proposition}
+    \label{pr2.3}
+    Let $\mathbf{u},\mathbf{v} \in \mathbb{C}^N$ be vectors with $\|\mathbf{u}\|_0 \leq s$ and $\|\mathbf{v}\|_0 \leq t$. If $supp(\mathbf{u}) \cap supp(\mathbf{v}) = \cancel{0}$, then
+    \begin{equation}
+        \label{eq2.3}
+        \left|\left<\mathbf{Au}, \mathbf{Av}\right>\right| \leq \delta_{s+t} \|\mathbf{u}\|_2\|\mathbf{v}\|_2.
+    \end{equation}
+\end{proposition}
+
+\begin{definition}
+    \label{def2.4}
+    The $(s,t)$-restricted orthogonality constant $\theta_{s,t} = \theta_{s,t}(\mathbf{A})$ of a matrix $\mathbf{A} \in \mathbb{C}^{m \times N}$ is the smallest $\theta \geq 0$ such that
+    \begin{equation}
+        \label{eq2.4}
+        \left|\left<\mathbf{Au}, \mathbf{Av}\right>\right| \leq \theta \|\mathbf{u}\|_2 \|\mathbf{v}\|_2
+    \end{equation}
+    for all disjointly supported $s$-sparse and $t$-sparse vectors $\mathbf{u,v} \in \mathbb{C}^N$. Equivalently, it is given by 
+    \begin{equation}
+        \label{eq2.5}
+        \theta_{s,t} = \max\left\{\|\mathbf{a}_T^*\mathbf{A}_s\|_{2 \rightarrow 2}, S \cap T = \cancel{0}, card(S) \leq s, card(T) \leq t\right\}.
+    \end{equation}
+\end{definition}
+
+\begin{proposition}
+    \label{pr2.5}
+    Restricted isometry constants and restricted orthogonality constants are related by
+    \begin{equation*}
+        \theta_{s,t} \leq \delta_{s+t} \leq \dfrac{1}{s+t}(s\delta_s + t\delta_t +2 \sqrt{st}\theta_{s,t}).
+    \end{equation*}
+    The special case $t=s$ gives the inequalities
+    \begin{equation*}
+        \theta_{s,s} \leq \delta_{2s} \qquad and \qquad \delta_{2s} \leq \delta_s + \theta_{s,s}.
+    \end{equation*}
+\end{proposition}
+
+Restricted isometry constants and restricted orthogonality constants of high order can be controlled by those of lower order.
+\begin{proposition}
+    \label{pr1.6}
+    For integers $r,s,t \geq 1$ with $t \geq s$,
+    \begin{eqnarray*}
+        \theta_{t,r} &\leq& \sqrt{\dfrac{t}{s}}\theta_{s,r}, \\
+    \theta_t &\leq& \dfrac{t-d}{s}\delta_{2s} + \dfrac{d}{s} \delta_s \qquad d:= \text{gcd}(s,t).
+    \end{eqnarray*}
+    The special case $t= cs$ gives 
+    \[
+        \delta_{cs} \leq c \delta_{2s}.
+    \]
 \end{proposition}<++>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

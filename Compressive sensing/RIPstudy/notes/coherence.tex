@@ -1,4 +1,5 @@
 \chapter{Coherence}
+\label{coherence}
 \section{Definitions and Basic Properties}
 
 \begin{definition}
@@ -31,7 +32,7 @@ and more generally that, for $1 \leq s, t \leq N-1$ with $s+t \leq N-1$,
     \label{eq1.3}
 \end{equation}
 
-The coherence, more generally the $\ell_1$-coherence function, is invariant under multiplication on the left by a \emph{\textcolor[rgb]{1,0,0}{unitary matrix $\mathbf{U}$}}, for the columns of $\mathbf{UA}$ are the \emph{\textcolor[rgb]{1,0,0}{$\ell_2$-normalized vectorrs $\mathbf{U}a_1,\dots,\mathbf{U}a_N$}} and they satisfy $\left<\mathbf{U}a_i,\mathbf{U}a_j\right> = \left<a_i,a_j\right>$. Moreover, because of the \emph{Cauchy-Schwarz} inequality $\left|\left<a_i,a_j\right>\right| \leq \|a_i\|_2\|a_j\|_2$, it is clear that the coherence of a matrix is bounded above by one, i.e.,
+The coherence, more generally the $\ell_1$-coherence function, is invariant under multiplication on the left by a \emph{\textcolor[rgb]{1,0,0}{unitary matrix $\mathbf{U}$}}, for the columns of $\mathbf{UA}$ are the \emph{\textcolor[rgb]{1,0,0}{$\ell_2$-normalized vectors $\mathbf{U}a_1,\dots,\mathbf{U}a_N$}} and they satisfy $\left<\mathbf{U}a_i,\mathbf{U}a_j\right> = \left<a_i,a_j\right>$. Moreover, because of the \emph{Cauchy-Schwarz} inequality $\left|\left<a_i,a_j\right>\right| \leq \|a_i\|_2\|a_j\|_2$, it is clear that the coherence of a matrix is bounded above by one, i.e.,
 \[\mu \leq 1\].
 
 We observe that $\mu = 0$ if and only if the columns of $\mathbf{A}$ from an orthonormal system. In particular, in the case of a square matrix, we have $\mu= 0$ if and only if $\mathbf{A}$ is a \emph{\textcolor[rgb]{1,0,0}{unitary matrix}}. But from the \emph{compressive sensing} point of view, we only consider matrices $\mathbf{A} \in \mathbb{C}^{m \times N}$ with $m < N$. $\mathbf{A}_S$ denotes the matrix formed by the columns of $\mathbf{A} \in \mathbb{C}^{m \times N}$ indexed by \emph{a subset $S$ of $[N]$}. 
@@ -44,11 +45,11 @@ We observe that $\mu = 0$ if and only if the columns of $\mathbf{A}$ from an ort
 \end{theorem}
 
 \begin{proof}
-    For a set $S \subset [N]$ with $card(S) \leq s$, since the matrix $\mathbf{A}_{S}^*\mathbf{A}_S$ is positive semidefinite, it has an orthonormal basis of eigenvectors associated with real, positive eigenvaludes. The minimal eigenvalue is denoted by $\lambda_{min}$ and the maximal eigenvalue by $\lambda_{max}$. Then, since $\mathbf{A}x = \mathbf{A}_Sx_S$ for any $x \in \mathbb{C}^N$ supported on $S$, it is easy to see that the maximum of 
+    For a set $S \subset [N]$ with $card(S) \leq s$, since the matrix $\mathbf{A}_{S}^*\mathbf{A}_S$ is positive semidefinite, it has an orthonormal basis of eigenvectors associated with real, positive eigenvalues. The minimal eigenvalue is denoted by $\lambda_{min}$ and the maximal eigenvalue by $\lambda_{max}$. Then, since $\mathbf{A}x = \mathbf{A}_Sx_S$ for any $x \in \mathbb{C}^N$ supported on $S$, it is easy to see that the maximum of 
     \[\|\mathbf{A}x\|_2^2 = \left<\mathbf{A}_Sx_S, \mathbf{A}_S x_S\right> = \left<\mathbf{A}_s^*\mathbf{A}_S x_S, x_S\right>\]
     over the set $\{x \in \mathbb{C}^N, supp x \subset S, \|x\|_2 = 1\}$ is $\lambda_{max}$ and that its minimum is $\lambda_{min}$. Due to the normalizations $\|a_j\|_2=1 $ for all $j \in [N]$, the diagonal entries of $\mathbf{A}_S^* \mathbf{A}_S$ all equal one. By \emph{Gershgorin's disk theorem \cref{tha.11}}, the eigenvalues of $\mathbf{A}_S^* \mathbf{A}_S$ are contained in the union of the disks centered at $1$ with radii
     \[r_j := \sum\limits_{\ell_S,\ell \neq j}\left|(\mathbf{A}_S^*\mathbf{A}_S)_{j,\ell}\right| = \sum\limits_{\ell \in S,\ell \neq j} \left|\left<a_{\ell},a_j\right>\right| \leq \mu_1(s-1), \qquad j\in S.\]
-    \emph{\textcolor[rgb]{1,0,0}{Since these eigenvalues are real, they must lie in $\left[1- \mu_1(s-1), 1+\mu_1(s-1)\right]$, as anounced.}}
+    \emph{\textcolor[rgb]{1,0,0}{Since these eigenvalues are real, they must lie in $\left[1- \mu_1(s-1), 1+\mu_1(s-1)\right]$, as announced.}}
 
     \begin{theorem}
         Let $\lambda$ be an eigenvalue of a square matrix $\mathbf{A} \in \mathbb{C}^{n \times n}$. There exists an index $j \in [n]$ such that 
@@ -60,8 +61,41 @@ We observe that $\mu = 0$ if and only if the columns of $\mathbf{A}$ from an ort
     \label{cr1.4}
     Given a matrix $\mathbf{A} \in \mathbb{C}^{m \times N}$ with $\ell_2$-normalized columns and an integer $s \geq 1$, if 
     \[\mu_1(s)+\mu_1(s-1) < 1,\]
-    then, for each set $S \subset [N]$ with card$(S) \leq 2s$, the matrix $\mathbf{A}_S^*\mathbf{A}_S$ is invertible and the matrix $\mathbf{A}_S$ injective. In particular, the conclusion hollds if 
+    then, for each set $S \subset [N]$ with card$(S) \leq 2s$, the matrix $\mathbf{A}_S^*\mathbf{A}_S$ is invertible and the matrix $\mathbf{A}_S$ injective. In particular, the conclusion holds if 
     \[\mu < \dfrac{1}{2s-1}.\]
 \end{corollary}
+
+\section{Matrices with Small Coherence}
+The lower bounds is given for the coherence and for the $\ell_1$-coherence function of a matrix $\mathbf{A} \in \mathbb{C}^{m \times N}$ with $m < M$. An example of a matrix is given with an almost minimal coherence. The analysis is carried out for matrices $\mathbf{A} \in \mathbb{K}^{m \times N}$, where the field $\mathbb{K}$ can either be $\mathbb{R}$ or $\mathbb{C}$, because the matrices \emph{\textcolor[rgb]{1,0,0}{achieving the lower bounds have different features in the real and complex settings}}. In both cases, however, \emph{their columns are equiangular \textcolor[rgb]{1,0,0}{tight frames}, which are defined below}.
+\begin{definition}
+    \label{def1.5}
+    A system of $\ell_2$-normalized vectors $(a_1,\dots,a_N)$ in $\mathbb{K}^m$ is called \textcolor[rgb]{1,0,0}{equiangular} if there is a constant $c \geq 0$ such that
+    \begin{equation*}
+        \left|\left<a_i,a_j\right>\right| = c \qquad \text{for all }i, j \in [N], i \neq j.
+    \end{equation*}
+\end{definition}
+
+Tight frames can be defined by several conditions.
+
+\begin{definition}
+    \label{def1.6}
+    A system of vectors $(a_1,\dots,a_N)$ in $\mathbb{K}^m$ is called a \textcolor[rgb]{1,0,0}{tight frame} if there exists a constant $\lambda > 0$ such that one of the following equivalent conditions holds:
+    \begin{enumerate} [(a)]
+        \item $\|x\|_2^2 = \lambda \sum\limits_{j = 1}^N\left|\left<x, a_j\right>\right|^2$ for all $x\in \mathbb{K}^m$,
+        \item $x = \lambda \sum\limits_{j=1}^N\left<x,a_j\right>a_j$ for all $x \in \mathbb{K}^m$,
+        \item $\mathbf{AA}^* = \dfrac{1}{\lambda}\mathbf{Id}_m$, where $\mathbf{A}$ is the matrix with columns $a_1,\dots,a_N$.
+    \end{enumerate}
+\end{definition}
+
+A system of $\ell_2$-normalized vectors is called an \emph{\textbf{\textcolor[rgb]{1,0,0}{equiangular tight frame}}} if it is both an equiangular system and a tight frame. Such systems are the ones achieving the lower bound given below and known as the \emph{\textcolor[rgb]{1,0,0}{Welch bound}}.
+\begin{theorem}
+    \label{th1.7}
+    The coherence of a matrix $\mathbf{A}\ in \mathbb{K}^{m \times N}$ with $\ell_2$-normalized columns satisfies
+    \begin{equation}
+        \label{eq1.4}
+        \mu \geq \sqrt{\dfrac{N-m}{m(N-1)}}.
+    \end{equation}
+    Equality holds if and only if the columns $a_1,\dots,a_N$ of the matrix $\mathbf{A}$ form an equiangular tight frame.
+\end{theorem}
 
 
