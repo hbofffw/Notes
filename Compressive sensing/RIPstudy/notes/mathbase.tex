@@ -11,3 +11,20 @@
     \item Nonnegative matrices: $a_{ij}\geq 0, i,j=1,\dots,n$ (similar definition for nonpositive, positive, and negative matrices).
     \item Unitary matrices: $Q^H Q = I$.
 \end{enumerate}
+
+\section{Moore-Penrose pseudoinverse}
+\lable{moore-penrose}
+\subsection{Notation}
+\begin{enumerate}[$\bullet$]
+    \item $K$ will denote one of the fields of real or complex numbers, denoted $\mathbb{R},\mathbb{C}$, respectively. The vector space of $m\times n$ matrices over $K$ is denoted by $M(m,n;K)$.
+    \item For $A \in M(m,n;K)$, $A^T$ and $A^*$ denote the transpose and Hermitian transpose (also called conjugate transpose) respectively. If $K = \mathbb{R}$, then $A^* = A^T$.
+    \item For $A \in M(m,n;K)$, then im$(A)$ denotes the range of $A$ (the space spanned by the column vectors of $A$) and ker$(A)$ \textcolor[rgb]{1,0,0}{denotes the kernel (null space)} of $A$.
+    \item Finally, for any positive integer $n, I_n \in M(n,n;K)$ denotes the $n \times n$ identity matrix.
+\end{enumerate}
+
+\subsection{Definition}
+
+For $A \in M(m,n;K)$, a pseudoinverse of $A$ is defined as a matrix $A^{+} \in M(n,m;K)$ satisfying all of the folloing four criteria:
+\begin{enumerate}
+    \item $AA^+A = A$ ($AA^+$ need not be the general identity matrix, but it maps all column vectors of $A$ to themselves);
+\end{enumerate}<++>

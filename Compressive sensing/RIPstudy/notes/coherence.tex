@@ -212,4 +212,32 @@ The case of equality in \cref{lm1.9} implies that $\left|\left<a_{i^*}, a_j\righ
         N &\leq m^2     &when\ \mathbb{K} = \mathbb{C}.
     \end{align*}
     If equality is achieved, then the system $(a_1,\dots,a_N)$ is also tight frame.
-\end{theorem}<++>
+\end{theorem}
+
+\begin{theorem}
+    \label{1.12}
+    For $m \geq 3$, if there is an equiangular system of $m(m+1)/2$ vectors in $\mathbb{R}^m$, then $m+2$ is necessarily the square of an odd integer.
+\end{theorem}
+
+\begin{proposition}
+    \label{pr1.13}
+    For each prime number $m \geq 5$, there is an explicit $m \times m^2$ complex matrix with coherence $\mu = 1/\sqrt{m}$.
+\end{proposition}
+
+\subsection{Analysis of Orthogonal Matching Pursuit}
+\begin{theorem}
+    \label{th1.14}
+    Let $\mathbf{A} \in \mathbb{C}^{m \times N}$ be a matrix with $\ell_2$-normalized columns. If 
+    \begin{equation}
+        \mu_1(s) + \mu_1(s-1) < 1
+        \label{eq1.11}
+    \end{equation}
+    then every s-sparse vector $x \in \mathbb{C}^N$ is exactly recoved from the measurement vector $y = \mathbf{A}x$ after at most s iterations of orthogonal matching pursuit.
+\end{theorem}
+
+\subsection{Analysis of Basis Pursuit}
+As a matter of fact, any condition guaranteeing the success of the recovery of all vecotrs supported on a set $S$ via card$(S)$ iterations of orthogonal matching pursuit also guarantees the success of the recovery of all vectors supported on $S$ via basis pursuit. Indeed, given $\mathbf{v} \in ker\ \mathbf{A} \backslash \{0\}$, we have $\mathbf{A}_S\mathbf{v}_S = -\mathbf{A}_{\overline{S}} \mathbf{v}_{\overline{S}}$, and 
+\[
+    \|\mathbf{v}\|_1 = \|\mathbf{A}_S^{\dagger} \mathbf{A}_S \mathbf{v}_S\|_1 = \|\mathbf{A}_S^{\dagger}\mathbf{A}_{\overline{S}}\mathbf{v}_{\overline{S}}\|_1 \leq \|\mathbf{A}_S^{\dagger} \mathbf{A}_{\overline{S}}\|_{1 \rightarrow 1}\|\mathbf{v}_{\overline{S}}\|_1 < \|\mathbf{v}_{\overline{S}}\|_1
+\]
+
