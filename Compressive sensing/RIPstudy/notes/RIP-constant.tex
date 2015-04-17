@@ -102,7 +102,7 @@ A simple but essential observation will be made, which \emph{\textcolor[rgb]{1,0
 
 Restricted isometry constants and restricted orthogonality constants of high order can be controlled by those of lower order.
 \begin{proposition}
-    \label{pr1.6}
+    \label{pr2.6}
     For integers $r,s,t \geq 1$ with $t \geq s$,
     \begin{eqnarray*}
         \theta_{t,r} &\leq& \sqrt{\dfrac{t}{s}}\theta_{s,r}, \\
@@ -120,14 +120,92 @@ Restricted isometry constants and restricted orthogonality constants of high ord
 \end{remark}
 
 \begin{theorem}
-    \label{th1.8}
+    \label{th2.8}
     For $\mathbf{A} \in \mathbb{C}^{m \times N}$ and $2 \leq s \leq N$, one has
     \begin{equation}
         m \geq c \dfrac{s}{\delta_s^2},
-        \label{eq1.9}
+        \label{eq2.9}
     \end{equation}
-    provided $N \geq C$
-\end{theorem}<++>
+    provided $N \geq Cm$ and $\delta_s \leq \delta_*$, where the constants $c, C$ and $\delta_*$ depend only on each other. For instance, the choices $c = 1/162, C = 30,$ and $\delta_* = 2/3$ are valid.
+\end{theorem}
+
+\begin{proof}
+    We set $t := \,s/2\! \geq 1$, and decompose the matrix $\mathbf{A}$ in blocks of size $m \times t$---except possibly the last one which may have less columns---as
+    \[
+        \mathbf{A} = \left[ \mathbf{A}_1 | \mathbf{A}_2 | \dots| \mathbf{A}_n \right], N \leq nt.
+    \]
+
+    From \cref{eq2.2} and \cref{eq2.5}, we recall that, for all $i,j \in [n], i \neq i$
+    \[
+        \|\mathbf{A}_i^*\mathbf{A}_i - \mathbf{Id}\|_{2 \rightarrow 2} \leq \delta_t \leq \delta_s, \qquad \|\mathbf{A}_i^*\mathbf{A}_j\|_{2 \rightarrow 2} \leq \theta_{t,t} \leq \delta_{2t} \leq \delta_s,
+    \]
+    so that the eigenvalues of $\mathbf{A}_i^*\mathbf{A}_i$ and the singular values of $\mathbf{A}_i^*\mathbf{A}_j$ satisfy
+    \[
+        1 - \delta_s \leq \lambda_k(\mathbf{A}_i^*\mathbf{A}_i) \leq 1 + \delta_s, \qquad \sigma_k(\mathbf{A}_i^*) \leq \delta_s
+    \]
+    Let us introduce the matrices 
+    \[
+        \mathbf{H} := \mathbf{AA}^* \in \mathbb{C}^{m \times m}, \qquad \mathbf{G} := \mathbf{A}^*\mathbf{A} = [\mathbf{A}_i^* \mathbf{A}_i]_{1 \leq i, j\leq n} \in \mathbb{C}^{N \times N}.
+    \]
+    On the one hand, we have the lower bound
+    \begin{equation}
+        tr(\mathbf{H}) = tr(\mathbf{G}) = \sum\limits_{i = 1}^n tr(\mathbf{A}_i^* \mathbf{A}_i) = \sum\limits_{i=1}^n \sum\limits_{k=1}^t \lambda_k(\mathbf{A}_i^*\mathbf{A}_i) \geq nt (1- \delta_s).
+        \label{eq2.10}
+    \end{equation}
+    On the other hand, writing $\left<\mathbf{M}_1,\mathbf{M}_2\right>_F = tr(\mathbf{M}_2^* \mathbf{M}_1)$ for the Frobenius inner product of two matrices $\mathbf{M}_1$ and $\mathbf{M}_2$, we have
+    \[
+        tr(\mathbf{H})^2 = \left<\mathbf{Id}_m, \mathbf{H}\right>_F^2 \leq \|\mathbf{Id}_m\|_F^2 \|\mathbf{H}\|_F^2 = m tr(\mathbf{H}^*\mathbf{H}).
+    \]
+    Then, by cyclicity of the trace,
+    \begin{eqnarray}
+        tr(\mathbf{H}^*\mathbf{H}) &=& tr(\mathbf{AA}^*\mathbf{AA}^*) = tr(\mathbf{A}^*\mathbf{AA}^*\mathbf{A}) = tr(\mathbf{GG}^*) \notag \\
+        &=& \sum\limits_{i=1}^n tr(\sum\limits_{j=1}^* \mathbf{A}_i^* \mathbf{A}_j \mathbf{A}_j^* \mathbf{A}_i) \notag \\
+    &=& \sum\limits_{1 \leq i \neq j \leq n} \sum\limits_{k=1}^t \sigma_k(\mathbf{A}_i^* \mathbf{A}_j)^2 + \sum\limits_{i=1}^n \sum\limits_{k=1} ^t \lambda_k (\mathbf{A}_i^* \mathbf{A}_i)^2 \notag \\
+        &\leq& n (n-1) t \delta_s^2 + nt(1+\delta_s)^2. \notag 
+    \end{eqnarray}
+    The upper bound is derived
+    \begin{equation}
+        tr(\mathbf{H})^2 \leq m n t \left( (n-1)\delta_s^2 + (1+ \delta_s)^2 \right).
+        \label{eq2.11}
+    \end{equation}
+    Combining the bounds \cref{eq2.10} and \cref{eq2.11} yields
+    \[
+        m \geq \dfrac{nt(1- \delta_s)^2}{(n-1)\delta_s^2 + (1+\delta_s)^2}.
+    \]
+    If $(n-1)\delta_s^2 < (1 + \delta_s)^2/5$, we would obtain, using $\delta \leq 2/3$,
+    \[
+        m > \dfrac{nt(1-\delta_s)^2}{6(1 + \delta_2)^2/5} \geq \dfrac{5(1-\delta_s)^2}{6(1+ \delta_s)^2} N \geq \dfrac{1}{30}N,
+    \]
+    which contradicts the assumption. We therefore have $(n-1)\delta_s^2 \geq (1+\delta_s)^2 /5$, which yields, using $\delta_s \leq 2/3$ again and $s \leq 3t$,
+    \[
+        m \geq \dfrac{nt(1-\delta-s)^2}{6(n-1)\delta_s^2} \geq \dfrac{1}{54} \dfrac{t}{\delta_s^2} \geq \dfrac{1}{162} \dfrac{s}{\delta_s^2}.
+    \]
+    This is the desired result.
+\end{proof}
+
+Let us compare the previous lower bound on restricted isometry constants, namely
+\begin{equation}
+    \delta_s \geq \sqrt{cs/m},
+    \label{eq2.12}
+\end{equation}
+with upper bounds available so far. Precisely, choosing a matrix $\mathbf{A} \in \mathbb{C}^{m \times n}$ with a coherence of optimal order $\mu \leq c/\sqrt{m}$, \cref{pr2.2} implies that
+\begin{equation}
+    \delta_s \leq (s-1)\mu \leq cs/\sqrt{m}.
+    \label{eq2.13}
+\end{equation}
+There's a significant gap between \cref{eq2.12} and \cref{eq2.13}. In particular, \cref{eq2.13} with the quadratic scaling
+\begin{equation}
+    m \geq c's^2
+    \label{eq2.14}
+\end{equation}
+allows $\delta_s$ to be small, while this requires under \cref{eq2.12} that $m \geq c's$. However, whether such a condition can be sufficient is unknown at this point. Certain matrices $\mathbf{A} \in \mathbb{R}^{m \times N}$ satisfy $\delta_s \leq \delta$ with high probability for some $\delta > 0$ provided
+\begin{equation}
+    m \geq C \delta^{-2} s \ln(eN/s).
+    \label{eq2.15}
+\end{equation}
+
+$\delta_s \leq \delta$ requires $m \geq C_{\delta}s\ln(eN/s)$. Therefore, the lower bound $m \geq c'$ is optimal up to logarighmic factors, and \cref{eq2.9} is optimal regarding the scailing $C_{\delta} = C \delta^{-2}$.
+
 
 
 
