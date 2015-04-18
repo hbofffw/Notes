@@ -128,21 +128,205 @@ Restricted isometry constants and restricted orthogonality constants of high ord
     provided $N \geq Cm$ and $\delta_s \leq \delta_*$, where the constants $c,C$ and $\delta_*$ depend only on each other. For instance, the choices $c = 1/162, C=30$ and $\delta_* = 2/3$ are valid.
 \end{theorem}
 
-We first notice that the statement cannot hold for $s=1$, as $\delta_1 = 0$ if all the columns of $\mathbf{A}$ have $\ell_2$-norm equal to 1. Let us set $t := \,s/2\! \geq 1$, and let us decompose the matrix $\mathbf{A}$ in blocks of size $m \times t$---except possibly the last one which may have less columns---as
-\[
-    \mathbf{A} = \left[ \mathbf{A}_1 | \mathbf{A}_2 | \dots | \mathbf{A}_N \right], \quad N \leq nt.
-\]
+\begin{proof}
+    We set $t := \,s/2\! \geq 1$, and decompose the matrix $\mathbf{A}$ in blocks of size $m \times t$---except possibly the last one which may have less columns---as
+    \[
+        \mathbf{A} = \left[ \mathbf{A}_1 | \mathbf{A}_2 | \dots| \mathbf{A}_n \right], N \leq nt.
+    \]
 
-From \cref{eq2.2} and \cref{eq2.5}, we recall that, for all $i,j \in [n], i \neq j$,
-\[
-    \|\mathbf{A}^*_i \mathbf{A}_i - \mathbf{Id}\|_{2 \rightarrow 2} \leq \delta_t \leq \delta_s, \qquad \|\mathbf{A}_i^*\mathbf{A}_j\|_{2 \rightarrow 2} \leq \theta_{t,t} \leq \delta_{2t} \leq \delta_s,
-\]<++>
+    From \cref{eq2.2} and \cref{eq2.5}, we recall that, for all $i,j \in [n], i \neq i$
+    \[
+        \|\mathbf{A}_i^*\mathbf{A}_i - \mathbf{Id}\|_{2 \rightarrow 2} \leq \delta_t \leq \delta_s, \qquad \|\mathbf{A}_i^*\mathbf{A}_j\|_{2 \rightarrow 2} \leq \theta_{t,t} \leq \delta_{2t} \leq \delta_s,
+    \]
+    so that the eigenvalues of $\mathbf{A}_i^*\mathbf{A}_i$ and the singular values of $\mathbf{A}_i^*\mathbf{A}_j$ satisfy
+    \[
+        1 - \delta_s \leq \lambda_k(\mathbf{A}_i^*\mathbf{A}_i) \leq 1 + \delta_s, \qquad \sigma_k(\mathbf{A}_i^*) \leq \delta_s
+    \]
+    Let us introduce the matrices 
+    \[
+        \mathbf{H} := \mathbf{AA}^* \in \mathbb{C}^{m \times m}, \qquad \mathbf{G} := \mathbf{A}^*\mathbf{A} = [\mathbf{A}_i^* \mathbf{A}_i]_{1 \leq i, j\leq n} \in \mathbb{C}^{N \times N}.
+    \]
+    On the one hand, we have the lower bound
+    \begin{equation}
+        tr(\mathbf{H}) = tr(\mathbf{G}) = \sum\limits_{i = 1}^n tr(\mathbf{A}_i^* \mathbf{A}_i) = \sum\limits_{i=1}^n \sum\limits_{k=1}^t \lambda_k(\mathbf{A}_i^*\mathbf{A}_i) \geq nt (1- \delta_s).
+        \label{eq2.10}
+    \end{equation}
+    On the other hand, writing $\left<\mathbf{M}_1,\mathbf{M}_2\right>_F = tr(\mathbf{M}_2^* \mathbf{M}_1)$ for the Frobenius inner product of two matrices $\mathbf{M}_1$ and $\mathbf{M}_2$, we have
+    \[
+        tr(\mathbf{H})^2 = \left<\mathbf{Id}_m, \mathbf{H}\right>_F^2 \leq \|\mathbf{Id}_m\|_F^2 \|\mathbf{H}\|_F^2 = m tr(\mathbf{H}^*\mathbf{H}).
+    \]
+    Then, by cyclicity of the trace,
+    \begin{eqnarray}
+        tr(\mathbf{H}^*\mathbf{H}) &=& tr(\mathbf{AA}^*\mathbf{AA}^*) = tr(\mathbf{A}^*\mathbf{AA}^*\mathbf{A}) = tr(\mathbf{GG}^*) \notag \\
+        &=& \sum\limits_{i=1}^n tr(\sum\limits_{j=1}^* \mathbf{A}_i^* \mathbf{A}_j \mathbf{A}_j^* \mathbf{A}_i) \notag \\
+    &=& \sum\limits_{1 \leq i \neq j \leq n} \sum\limits_{k=1}^t \sigma_k(\mathbf{A}_i^* \mathbf{A}_j)^2 + \sum\limits_{i=1}^n \sum\limits_{k=1} ^t \lambda_k (\mathbf{A}_i^* \mathbf{A}_i)^2 \notag \\
+        &\leq& n (n-1) t \delta_s^2 + nt(1+\delta_s)^2. \notag 
+    \end{eqnarray}
+    The upper bound is derived
+    \begin{equation}
+        tr(\mathbf{H})^2 \leq m n t \left( (n-1)\delta_s^2 + (1+ \delta_s)^2 \right).
+        \label{eq2.11}
+    \end{equation}
+    Combining the bounds \cref{eq2.10} and \cref{eq2.11} yields
+    \[
+        m \geq \dfrac{nt(1- \delta_s)^2}{(n-1)\delta_s^2 + (1+\delta_s)^2}.
+    \]
+    If $(n-1)\delta_s^2 < (1 + \delta_s)^2/5$, we would obtain, using $\delta \leq 2/3$,
+    \[
+        m > \dfrac{nt(1-\delta_s)^2}{6(1 + \delta_2)^2/5} \geq \dfrac{5(1-\delta_s)^2}{6(1+ \delta_s)^2} N \geq \dfrac{1}{30}N,
+    \]
+    which contradicts the assumption. We therefore have $(n-1)\delta_s^2 \geq (1+\delta_s)^2 /5$, which yields, using $\delta_s \leq 2/3$ again and $s \leq 3t$,
+    \[
+        m \geq \dfrac{nt(1-\delta-s)^2}{6(n-1)\delta_s^2} \geq \dfrac{1}{54} \dfrac{t}{\delta_s^2} \geq \dfrac{1}{162} \dfrac{s}{\delta_s^2}.
+    \]
+    This is the desired result.
+\end{proof}
+
+Let us compare the previous lower bound on restricted isometry constants, namely
+\begin{equation}
+    \delta_s \geq \sqrt{cs/m},
+    \label{eq2.12}
+\end{equation}
+with upper bounds available so far. Precisely, choosing a matrix $\mathbf{A} \in \mathbb{C}^{m \times n}$ with a coherence of optimal order $\mu \leq c/\sqrt{m}$, \cref{pr2.2} implies that
+\begin{equation}
+    \delta_s \leq (s-1)\mu \leq cs/\sqrt{m}.
+    \label{eq2.13}
+\end{equation}
+There's a significant gap between \cref{eq2.12} and \cref{eq2.13}. In particular, \cref{eq2.13} with the quadratic scaling
+\begin{equation}
+    m \geq c's^2
+    \label{eq2.14}
+\end{equation}
+allows $\delta_s$ to be small, while this requires under \cref{eq2.12} that $m \geq c's$. However, whether such a condition can be sufficient is unknown at this point. Certain matrices $\mathbf{A} \in \mathbb{R}^{m \times N}$ satisfy $\delta_s \leq \delta$ with high probability for some $\delta > 0$ provided
+\begin{equation}
+    m \geq C \delta^{-2} s \ln(eN/s).
+    \label{eq2.15}
+\end{equation}
+
+$\delta_s \leq \delta$ requires $m \geq C_{\delta}s\ln(eN/s)$. Therefore, the lower bound $m \geq c'$ is optimal up to logarighmic factors, and \cref{eq2.9} is optimal regarding the scailing $C_{\delta} = C \delta^{-2}$.
+
+\textbf{Difficulty of Deterministic Constructions of matrices with RIP}. As mensioned, random matrices will be used to obatin the restricted isometry property $\delta_s \leq \delta$ (abbreviated RIP) in the optimal regime \cref{eq2.15} for the number $m$ of mearsurements in terms of the sparsity $s$ and the vector length $N$. Finding deterministic matrices satisfying $\delta_s \leq \delta$ in this regime is a major open problem. Essentially all available estimations of $\delta_s$ for deterministic matrices combine a coherence estimation and \cref{pr2.2} in one form or another. This leads to bounds of the type \cref{eq2.13} and in turn to the quadratic bottleneck \cref{eq2.14}. Thus, \textcolor[rgb]{1,0,0}{the lower bound of \cref{th1.7} in principle prevents such a proof technique to generate improved results}. \emph{\textcolor[rgb]{1,0,0}{The intrinsic difficulty in bounding the restricted isometry constants of explicit matrices $\mathbf{A}$ lies in the basic tool for estimating the eigenvalues of $\mathbf{A}_S^*\mathbf{A}_S-\mathbf{Id}$, namely, Gershgorin's disk theorem \cref{tha.11}}}. Assuming $\ell_2$-normalization of the columns of $\mathbf{A}$ and taking the supremum over all $S \subset [N]$ with card$(S) = s$ leads then to the $\ell_1$-coherence function $\mu_1(s-1)$---this is how we showed the bound $\delta_s \leq \mu_1(s-1)$ of \cref{pr2.2}; see also \cref{th1.3}.
+
+\section{Analysis of Basis Pursuit}
+
+\begin{theorem}
+    \label{th2.9}
+    Suppose that the $2s$th restricted isometry constant of the matrix $\mathbf{A} \in \mathbb{C}^{m \times N}$ satisfies 
+    \begin{equation}
+        \delta_{2s} < \frac{1}{3}. 
+        \label{eq2.16}
+    \end{equation}
+    Then every $s$-sparse vector $x \in \mathbb{C}^{N}$ is the unique solution of 
+    \[
+        \min\limits_{z \in \mathbb{C}^N} \|z\|_1 \qquad \text{subject to } \mathbf{Az} = \mathbf{Ax}.
+    \]
+\end{theorem}
+
+\begin{lemma}
+    \label{lm2.10}
+    Given $q > p >0$, if $\mathbf{u} \in \mathbb{C}^t$ satisfy
+    \begin{equation}
+        \max\limits_{i \in [s]} \left|u_i\right| \leq \min\limits_{j \in [t]} \left|v_j\right|,
+        \label{eq2.17}
+    \end{equation}
+    then 
+    \[
+        \|\mathbf{u}\|_q \leq \frac{s^{1/q}}{t^{1/p}} \|\mathbf{v}\|_p.
+    \]
+    The special case $p=1, q=2$, and $t=s$ gives 
+    \[
+        \|\mathbf{u}\|_2 \leq \frac{1}{\sqrt{s}} \|\mathbf{v}\|_1.
+    \]
+\end{lemma}
+
+\begin{proof}
+    For the first statement, we only need to notice that
+    \[
+        \frac{\|\mathbf{u}\|_q}{s^{1/q}} = \left[ \frac{1}{s}\sum\limits_{i=1}^s \left|u_i\right|^q \right]^{1/q} \leq \max\limits_{i \in [s]}\left|u_i\right|,
+    \]
+    \[
+        \frac{\|\mathbf{v}\|_p}{t^{1/p}} = \left[ \frac{1}{t} \sum\limits_{j=1}^t \left|v_j\right|^p \right]^{1/p} \geq \min\limits_{j \in [t]} \left|v_{j}\right|,
+    \]
+    and to use \cref{eq2.17}. The second statement is an immediate consequence.
+\end{proof}
 
 
 
+\begin{proof} {(\cref{th2.9})}
+    According to \cref{th-1.5}, it is enough to establish the null space property of order $s$ in the form
+    \[
+        \|\mathbf{v}_S\|_1 < \frac{1}{2}\|\mathbf{v}\|_1 \quad \text{for all } \mathbf{v} \in ker\ \mathbf{A} \backslash \{0\} \text{ and all } S\subset [N] \text{ with card}(S)=s.
+    \]
+    This will follow from the stronger statement
+    \[
+        \|\mathbf{v}_S\|_s \leq \frac{\rho}{2 \sqrt{s}}\|\mathbf{v}\|_1 \quad \text{for all } \mathbf{v} \in ker\ \mathbf{A} \text{ and all } S\subset [N] \text{ with card}(S)=s.
+    \]
+    where
+    \[
+        \rho := \frac{2 \delta_{2s}}{1- \delta_{2s}}
+    \]
+    satisfies $\rho<1$ whenever $\delta_{2s} < 1/3$. Given $\mathbf{v} \in ker\mathbf{A}$, we notice that it is enough to consider an index set $S =: S_0$ of $s$ large absolute entries of the vector $\mathbf{v}$. We partition the complement $\overline{S_0}$ of $S_0$ in $[N]$ as $\overline{S_0} = S_1 \cup S_2 \cup \dots,$ where
+    \begin{center}
+        $S_1$ : index set of $s$ largest absolute entries of $\mathbf{v}$ in $\overline{S_0}$,\\
+        $S_0$ : index set of $s$ largest absolute entries of $\mathbf{v}$ in $\overline{S_0 \cup S_1}$,
+    \end{center}
+    etc. In view of $\mathbf{v} \in ker\mathbf{A}$, we have $\mathbf{A}(\mathbf{v}_{S_0}) = \mathbf{A}(-\mathbf{v}_{S_1}-\mathbf{v}_{S_2}-\dots)$, so that 
+    \begin{eqnarray}
+        \|\mathbf{v}_{S_0}\|_2^2 &\leq& \frac{1}{1-\delta_{2s}} \|\mathbf{A}(\mathbf{v}_{S_0})\|_2^2 = \frac{1}{1-\delta_{2s}}\left<\mathbf{A}(-\mathbf{v}_{S_1}), \mathbf{A}(-\mathbf{v}_{S_0}), \mathbf{A}(-\mathbf{v}_{S_1}) + \mathbf{A}(-\mathbf{v}_{S_2})+\dots\right> \notag \\
+        &=& \frac{1}{1-\delta_{2s}} \sum\limits_{k \geq 1}\left<\mathbf{A}(\mathbf{v}_{S_0}), \mathbf{A}(-\mathbf{v}_{S_k})\right>.
+        \label{eq2.18}
+    \end{eqnarray}
+    According to \cref{pr2.3}, we also have
+    \begin{equation}
+        \left<\mathbf{A}(\mathbf{v}_{S_0}), \mathbf{A}(-\mathbf{v}_{S_k})\right> \leq \delta_{2s} \|\mathbf{v}_{S_0}\|_2 \|\mathbf{v}_{S_k}\|_2
+        \label{eq2.19}
+    \end{equation}
+    Substituting \cref{eq2.19} into \cref{eq2.18} and dividing by $\|\mathbf{v}_{S_0}\|_2 > 0$, we obtain
+    \[
+        \|\mathbf{v}_{S_0}\|_2 \leq \frac{\delta_{2s}}{1-\delta_{2s}} \sum\limits_{k \geq 1} \|\mathbf{v}_{S_k}\|_2 = \frac{\rho}{2} \sum\limits_{k \geq 1} \|\mathbf{v}_{S_k}\|_2.
+    \]
+    For $k \geq 1$, tht $s$ absolute entries of $\mathbf{v}_{S_k}$ do not exceed the $s$ absolute entries of $\mathbf{v}_{S_{k-1}}$, so that \cref{lm2.10} yields
+    \[
+        \|\mathbf{v}_{S_k}\|_2 \leq \frac{1}{\sqrt{s}} \|\mathbf{v}_{S_{k-1}}\|_1.
+    \]
+    We then derive
+    \[
+        \|\mathbf{v}_{S_0}\|_2 \leq \frac{\rho}{2 \sqrt{s}} \sum\limits_{k \geq 1} \|\mathbf{v}_{S_{k-1}}\|_1 \leq \frac{\rho}{2 \sqrt{s}} \|\mathbf{v}\|_1.
+    \]
+    This is the desired inequality.
+\end{proof}
 
+\begin{mdframed}
+    \begin{theorem}
+        \label{th-1.5}
+        Given a matrix $\mathbf{A} \in \mathbb{K}^{m \times N}$, every $s$-sparse vector $x \in \mathbb{K}^N$ is the unique solution of 
+        \[
+            \min\limits_{z \in \mathbb{C}^N} \|z\|_1 \qquad \text{subject to } \mathbf{A}z = y.
+        \]
+        with $y = \mathbf{A}x$ if and only if $\mathbf{A}$ satisfies the null space property of order s.
+    \end{theorem}
+\end{mdframed}
 
-
+\begin{theorem}
+    \label{th2.12}
+    Suppose that the $2s$th restricted isometry constant of the matrix $\mathbf{A} \in \mathbb{C}^{m \times N}$ satisfies
+    \begin{equation}
+        \delta_{2s} < \frac{4}{\sprt{41}} \approx 0.6246.
+        \label{eq2.20}
+    \end{equation}
+    Then, for any $x \in \mathbb{C}^N$ and $y \in \mathbb{C}^m$ with $\|\mathbf{A}x - y\|_2 \leq \eta$, a solution $x^#$ of 
+    \[
+        \min\limits_{z \in \mathbb{C}^N} \|z\|_1 \qquad \text{subject to } \|\mathbf{A}z - y\|_2 \leq \eta
+    \]
+    approximates the vector $x$ with errors
+    \[
+        \|x - x^#\|_1 \leq C \sigma_s(x)_1 + D \sqrt{s} \eta,
+    \]
+    \[
+        \|x-x^#\|_2 \leq \frac{C}{\sqrt{s}} \sigma_s(x)_1 + D \eta,
+    \]
+    where the constants $C ,D > 0$ depend only on $\delta_{2s}$.
+\end{theorem}<++>
 
 
 
