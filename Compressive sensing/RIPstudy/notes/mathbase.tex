@@ -13,7 +13,7 @@
 \end{enumerate}
 
 \section{Moore-Penrose pseudoinverse}
-\lable{moore-penrose}
+\label{moore-penrose}
 \subsection{Notation}
 \begin{enumerate}[$\bullet$]
     \item $K$ will denote one of the fields of real or complex numbers, denoted $\mathbb{R},\mathbb{C}$, respectively. The vector space of $m\times n$ matrices over $K$ is denoted by $M(m,n;K)$.
@@ -24,7 +24,86 @@
 
 \subsection{Definition}
 
-For $A \in M(m,n;K)$, a pseudoinverse of $A$ is defined as a matrix $A^{+} \in M(n,m;K)$ satisfying all of the folloing four criteria:
+For $A \in M(m,n;K)$, a pseudoinverse of $A$ is defined as a matrix $A^{+} \in M(n,m;K)$ satisfying all of the following four criteria:
 \begin{enumerate}
     \item $AA^+A = A$ ($AA^+$ need not be the general identity matrix, but it maps all column vectors of $A$ to themselves);
-\end{enumerate}<++>
+    \item $A^+AA^+ = A^+$ ($A^+$ is a weak inverse for the multiplicative semigroup);
+    \item $(AA^+)^* = AA^+$ ($AA^+$ is Hermitian); and 
+    \item $(A^+A)^* = A^+A$ ($A^+A$ is also Hermitian).
+\end{enumerate}
+
+Matrix $A^+$ exists for any matrix $A$, but when the latter has full rank, $A^+$ can be expressed as a \textcolor[rgb]{1,0,0}{simple algebra formula}.
+
+In particular, when $A$ has \emph{full column rank} (and thus matrix $A^*A$ is invertible), $A^+$ can be computed as:
+\begin{equation}
+    A^+ = (A^*A)^{-1} A^*.
+    \label{eq0.2.1}
+\end{equation}
+This particular pseudoinverse constitutes a \emph{\textcolor[rgb]{1,0,0}{left inverse}}, since, in this case, $A^+A = I$.
+
+When $A$ has \emph{full row rank} (matrix $AA^*$ is invertible), $A^+$ can be computed as:
+\begin{equation}
+    A^+ = A^*(AA^*)^{-1}.
+    \label{eq0.2.2}
+\end{equation}
+This is a \emph{\textcolor[rgb]{1,0,0}{right inverse}}, as $AA^+=I$.
+
+\subsection{Properties}
+
+\begin{enumerate}[$\bullet$]
+    \item If $A$ has real entries, then so does $A^+$.
+    \item If $A$ is invertible, its pseudoinverse is its inverse. That is: $A^+ = A^{-1}$.
+    \item The pseudoinverse of a zero matrix is its transpose.
+    \item The pseudoinverse of the pseudoinverse is the original matrix: $(A^+)^+ = A$.
+    \item Pseudoinverse commutes with transposition, conjugation, and taking the conjugate transpose:
+        \begin{equation}
+            (A^T)^+ = (A^+)^T, \overline{A}^+ = \overline{A^+}, (A^*)^+ = (A^+)^*.
+            \label{eq0.2.3}
+        \end{equation}
+    \item The pseudoinverse of a scalar multiple of $A$ is the reciprocal multiple of $A^+$:
+        \begin{equation}
+            (\alpha A)^+ = \alpha^{-1} A^+ for \alpha \neq 0.
+            \label{eq0.2.4}
+        \end{equation}
+\end{enumerate}
+
+\subsubsection{Identities}
+\begin{eqnarray}
+    A^{+} &=& A^{+} \quad A^{+*} \quad A^{*} \notag \\
+    A^{+} &=& A^{*} \quad A^{+*} \quad A^{+} \notag\\
+    A^{} &=& A^{+*} \quad A^{*} \quad A^{} \notag\\
+    A^{} &=& A^{} \quad A^{*} \quad A^{+*} \notag\\
+    A^{*} &=& A^{*} \quad A^{} \quad A^{+} \notag\\
+    A^{*} &=& A^{+} \quad A^{} \quad A^{*} 
+    \label{eq0.2.5}
+\end{eqnarray}
+
+
+\subsection{Reduction to Hermitian case}
+The computation of the pseudoinverse is reducible to its construction in the Hermitian case. This is possible through the equivalences:
+\begin{itemize}
+    \item $A^+ = (A^*A)^+A^*$
+    \item $A^+ = A^*(AA^*)^+$
+\end{itemize}
+as $A^*A$ and $AA^*$ are obviously Hermitian.
+
+\subsection{Products}
+
+If $A \in M(m,n;K)$, $B \in M(n,p;K)$ and either, 
+\begin{itemize}
+    \item $A$ has orthonormal columns (i.e. $A^*A = I_n$) or, 
+    \item $B$ has orthonormal rows (i.e. $BB^* = I_n$) or,
+    \item $A$ has all columns linearly independent (full column rank) and $B$ has all rows linearly independent (full row rank) or,
+    \item $B = A^*$ (i.e. $B$ is the conjugate transpose of $A$),
+\end{itemize}
+then $(AB)^+ = B^+A^+$.
+
+The last property yields the equivalences:
+
+\begin{eqnarray}
+    \begin{gathered}
+        (AA^*)^+ = A^{+*}A^+  \notag\\
+        (A^*A)^+ = A^+ A^{+*}
+    \end{gathered}
+    \label{eq0.2.6}
+\end{eqnarray}

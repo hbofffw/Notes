@@ -112,7 +112,31 @@ Restricted isometry constants and restricted orthogonality constants of high ord
     \[
         \delta_{cs} \leq c \delta_{2s}.
     \]
-\end{proposition}<++>
+\end{proposition}
+\begin{remark}
+    \label{rmk2.7}
+    There are other relations enabling to control constants of higher order by constants of lower order
+\end{remark}
+
+\begin{theorem}
+    \label{th2.8}
+    For $\mathbf{A} \in \mathbb{C}^{m \times N}$ and $1 \leq s \leq N$, one has 
+    \begin{equation}
+        m \geq c \dfrac{s}{\delta_s^2}
+        \label{eq2.9}
+    \end{equation}
+    provided $N \geq Cm$ and $\delta_s \leq \delta_*$, where the constants $c,C$ and $\delta_*$ depend only on each other. For instance, the choices $c = 1/162, C=30$ and $\delta_* = 2/3$ are valid.
+\end{theorem}
+
+We first notice that the statement cannot hold for $s=1$, as $\delta_1 = 0$ if all the columns of $\mathbf{A}$ have $\ell_2$-norm equal to 1. Let us set $t := \,s/2\! \geq 1$, and let us decompose the matrix $\mathbf{A}$ in blocks of size $m \times t$---except possibly the last one which may have less columns---as
+\[
+    \mathbf{A} = \left[ \mathbf{A}_1 | \mathbf{A}_2 | \dots | \mathbf{A}_N \right], \quad N \leq nt.
+\]
+
+From \cref{eq2.2} and \cref{eq2.5}, we recall that, for all $i,j \in [n], i \neq j$,
+\[
+    \|\mathbf{A}^*_i \mathbf{A}_i - \mathbf{Id}\|_{2 \rightarrow 2} \leq \delta_t \leq \delta_s, \qquad \|\mathbf{A}_i^*\mathbf{A}_j\|_{2 \rightarrow 2} \leq \theta_{t,t} \leq \delta_{2t} \leq \delta_s,
+\]<++>
 
 
 

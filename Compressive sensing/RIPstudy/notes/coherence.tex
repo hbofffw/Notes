@@ -236,8 +236,47 @@ The case of equality in \cref{lm1.9} implies that $\left|\left<a_{i^*}, a_j\righ
 \end{theorem}
 
 \subsection{Analysis of Basis Pursuit}
-As a matter of fact, any condition guaranteeing the success of the recovery of all vecotrs supported on a set $S$ via card$(S)$ iterations of orthogonal matching pursuit also guarantees the success of the recovery of all vectors supported on $S$ via basis pursuit. Indeed, given $\mathbf{v} \in ker\ \mathbf{A} \backslash \{0\}$, we have $\mathbf{A}_S\mathbf{v}_S = -\mathbf{A}_{\overline{S}} \mathbf{v}_{\overline{S}}$, and 
+As a matter of fact, any condition guaranteeing the success of the recovery of all vecotrs supported on a set $S$ via card$(S)$ iterations of orthogonal matching pursuit also guarantees the success of the recovery of all vectors supported on $S$ via basis pursuit. Indeed, given $\mathbf{v} \in ker\ \mathbf{A} \backslash \{0\}$, we have $\mathbf{A}_S\mathbf{v}_S = -\mathbf{A}_{\overline{S}} \mathbf{v}_{\overline{S}}$, and \cref{moore-penrose} 
 \[
     \|\mathbf{v}\|_1 = \|\mathbf{A}_S^{\dagger} \mathbf{A}_S \mathbf{v}_S\|_1 = \|\mathbf{A}_S^{\dagger}\mathbf{A}_{\overline{S}}\mathbf{v}_{\overline{S}}\|_1 \leq \|\mathbf{A}_S^{\dagger} \mathbf{A}_{\overline{S}}\|_{1 \rightarrow 1}\|\mathbf{v}_{\overline{S}}\|_1 < \|\mathbf{v}_{\overline{S}}\|_1
 \]
+
+\begin{theorem}
+    \label{th1.15}
+    Let $\mathbf{A} \in \mathbb{C}^{m \times N}$ be a matrix with $\ell_2$-normalized columns. If 
+    \begin{equation}
+        \mu_1(s) + \mu_1(s-1) < 1,
+        \label{eq1.13}
+    \end{equation}
+    then every s-sparse vector $x \in \mathbb{C}^N$ is exactly recovered from the measurement vecotr $y = \mathbf{A}x$ via basis pursuit.
+\end{theorem}
+
+\subsection{Analysis of Thresholding Algorithms}
+
+\begin{theorem}
+    \label{th1.16}
+    Let $\mathbf{A} \in \mathbb{C}^{m \times N}$ be a matrix with $\ell_2$-normalized columns and let $x \in \mathbb{C}^N$ be a vector supported on a set $S$ of size s. If 
+    \begin{equation}
+        \mu_{1}(s) + \mu_1(s-1) < \dfrac{\min_{i\in S}|x_i|}{\max_{i \in S}|x_i|},
+        \label{eq1.16}
+    \end{equation}
+    then the vecotr $x \in \mathbb{C}^N$ is exactly recovered from the measurement vecotr $y = \mathbf{A}x$ via basic thresholding.
+\end{theorem}
+
+\begin{theorem}
+    \label{th1.17}
+    Let $\mathbf{A} \in \mathbb{C}^{m \times N}$ be a matrix with $\ell_2$-normalized columns. If 
+    \[
+        2\mu_1(s) + \mu_1(s-1) < 1,
+    \]
+    then every s-sparse vector $x \in \mathbb{C}^N$ is exactly recoved from the measurement vecotr $y = \mathbf{A}x$ after at most s iterations of hard thresholding prusuit.
+\end{theorem}
+\begin{note}
+    The conclusion of \cref{th1.17} can be achieved under the sufficient condition $\mu < 1/(3s-1)$. Similarly, the conclusion of \cref{th1.15} can be achieved under the sufficient condition $\mu < 1/(2s-1)$. 
+
+    \cref{th1.14} and \cref{th1.15} in their present form were established by Tropp. What we call $\ell_1$-coherence function here is called \emph{\textcolor[rgb]{1,0,0}{cumulative coherence function}} there. This concept also appears under the name \emph{\textcolor[rgb]{1,0,0}{Babel function}}. A straightforward extension to any $p>0$ would be the $\ell_p$-coherence function of a matrix $\mathbf{A}$ with $\ell_2$-normalized columns $a_1,\dots,a_N$ defined by
+    \[
+        \mu_p(s) := \max\limits_{i \in [N]} \max \left\{ \left( \sum\limits_{j \in S}\left|\left<a_i, a_j\right>\right|^p \right)^{1/p}, S \subseteq [N], card(S) = s, i \notin S \right\}.
+    \]
+\end{note}
 
