@@ -15,16 +15,199 @@
 \section{Moore-Penrose pseudoinverse}
 \label{moore-penrose}
 \subsection{Notation}
-\begin{enumerate}[$\bullet$]
+\begin{itemize}
     \item $K$ will denote one of the fields of real or complex numbers, denoted $\mathbb{R},\mathbb{C}$, respectively. The vector space of $m\times n$ matrices over $K$ is denoted by $M(m,n;K)$.
     \item For $A \in M(m,n;K)$, $A^T$ and $A^*$ denote the transpose and Hermitian transpose (also called conjugate transpose) respectively. If $K = \mathbb{R}$, then $A^* = A^T$.
     \item For $A \in M(m,n;K)$, then im$(A)$ denotes the range of $A$ (the space spanned by the column vectors of $A$) and ker$(A)$ \textcolor[rgb]{1,0,0}{denotes the kernel (null space)} of $A$.
     \item Finally, for any positive integer $n, I_n \in M(n,n;K)$ denotes the $n \times n$ identity matrix.
-\end{enumerate}
+\end{itemize}
 
 \subsection{Definition}
 
-For $A \in M(m,n;K)$, a pseudoinverse of $A$ is defined as a matrix $A^{+} \in M(n,m;K)$ satisfying all of the folloing four criteria:
+For $A \in M(m,n;K)$, a pseudoinverse of $A$ is defined as a matrix $A^{+} \in M(n,m;K)$ satisfying all of the following four criteria:
 \begin{enumerate}
     \item $AA^+A = A$ ($AA^+$ need not be the general identity matrix, but it maps all column vectors of $A$ to themselves);
-\end{enumerate}<++>
+    \item $A^+AA^+ = A^+$ ($A^+$ is a weak inverse for the multiplicative semigroup);
+    \item $(AA^+)^* = AA^+$ ($AA^+$ is Hermitian); and 
+    \item $(A^+A)^* = A^+A$ ($A^+A$ is also Hermitian).
+\end{enumerate}
+
+Matrix $A^+$ exists for any matrix $A$, but when the latter has full rank, $A^+$ can be expressed as a \textcolor[rgb]{1,0,0}{simple algebra formula}.
+
+In particular, when $A$ has \emph{full column rank} (and thus matrix $A^*A$ is invertible), $A^+$ can be computed as:
+\begin{equation}
+    A^+ = (A^*A)^{-1} A^*.
+    \label{eq0.2.1}
+\end{equation}
+This particular pseudoinverse constitutes a \emph{\textcolor[rgb]{1,0,0}{left inverse}}, since, in this case, $A^+A = I$.
+
+When $A$ has \emph{full row rank} (matrix $AA^*$ is invertible), $A^+$ can be computed as:
+\begin{equation}
+    A^+ = A^*(AA^*)^{-1}.
+    \label{eq0.2.2}
+\end{equation}
+This is a \emph{\textcolor[rgb]{1,0,0}{right inverse}}, as $AA^+=I$.
+
+\subsection{Properties}
+
+\begin{itemize}
+    \item If $A$ has real entries, then so does $A^+$.
+    \item If $A$ is invertible, its pseudoinverse is its inverse. That is: $A^+ = A^{-1}$.
+    \item The pseudoinverse of a zero matrix is its transpose.
+    \item The pseudoinverse of the pseudoinverse is the original matrix: $(A^+)^+ = A$.
+    \item Pseudoinverse commutes with transposition, conjugation, and taking the conjugate transpose:
+        \begin{equation}
+            (A^T)^+ = (A^+)^T, \overline{A}^+ = \overline{A^+}, (A^*)^+ = (A^+)^*.
+            \label{eq0.2.3}
+        \end{equation}
+    \item The pseudoinverse of a scalar multiple of $A$ is the reciprocal multiple of $A^+$:
+        \begin{equation}
+            (\alpha A)^+ = \alpha^{-1} A^+ for \alpha \neq 0.
+            \label{eq0.2.4}
+        \end{equation}
+\end{itemize}
+
+\subsubsection{Identities}
+\begin{eqnarray}
+    A^{+} &=& A^{+} \quad A^{+*} \quad A^{*} \notag \\
+    A^{+} &=& A^{*} \quad A^{+*} \quad A^{+} \notag\\
+    A^{} &=& A^{+*} \quad A^{*} \quad A^{} \notag\\
+    A^{} &=& A^{} \quad A^{*} \quad A^{+*} \notag\\
+    A^{*} &=& A^{*} \quad A^{} \quad A^{+} \notag\\
+    A^{*} &=& A^{+} \quad A^{} \quad A^{*} 
+    \label{eq0.2.5}
+\end{eqnarray}
+
+
+\subsection{Reduction to Hermitian case}
+The computation of the pseudoinverse is reducible to its construction in the Hermitian case. This is possible through the equivalences:
+\begin{itemize}
+    \item $A^+ = (A^*A)^+A^*$
+    \item $A^+ = A^*(AA^*)^+$
+\end{itemize}
+as $A^*A$ and $AA^*$ are obviously Hermitian.
+
+\subsection{Products}
+
+If $A \in M(m,n;K)$, $B \in M(n,p;K)$ and either, 
+\begin{itemize}
+    \item $A$ has orthonormal columns (i.e. $A^*A = I_n$) or, 
+    \item $B$ has orthonormal rows (i.e. $BB^* = I_n$) or,
+    \item $A$ has all columns linearly independent (full column rank) and $B$ has all rows linearly independent (full row rank) or,
+    \item $B = A^*$ (i.e. $B$ is the conjugate transpose of $A$),
+\end{itemize}
+then $(AB)^+ = B^+A^+$.
+
+The last property yields the equivalences:
+
+\begin{eqnarray}
+    \begin{gathered}
+        (AA^*)^+ = A^{+*}A^+  \notag\\
+        (A^*A)^+ = A^+ A^{+*}
+    \end{gathered}
+    \label{eq0.2.6}
+\end{eqnarray}
+
+\section{Basic Algorithms}
+
+The algorithms are divided into three categories: \emph{\textcolor[rgb]{1,0,0}{optimization methods, greedy methods, and thresholding-based methods}}. 
+
+\subsection{Optimization Methods}
+
+An \emph{\textcolor[rgb]{1,0,0}{optimization problem}} is a problem of the type
+
+\[
+    \mathop{\text{minimize}}\limits_{x \in \mathbb{R}^N} F_0(x) \quad \text{ subject to } F_i(x) \leq b_i,\ i \in [n],
+\]
+where the function $F_0 : \mathbb{R}^N \rightarrow \mathbb{R}$ is called an \emph{\textcolor[rgb]{1,0,0}{objective function}} and the functions $F_1,\dots,F_n : \mathbb{R}^N \rightarrow \mathbb{R}$ are called \emph{\textcolor[rgb]{1,0,0}{constrained functions}}. This general framework also encompasses equality constraints of the type $G_i(x) = c_i$. Since the equality $G_i(x) = c_i$ is equivalent to the inequalities $G_i(x) \leq c_i$ and $-G_i(x) \leq -c_i$. If $F_0, F_1, \dots, F_n$ are all convex functions, then the problem is called a \emph{\textcolor[rgb]{1,0,0}{convex optimization problem}}. If $F_0, F_1, \dots, F_n$ are all linear functions, then the problem is called a \emph{\textcolor[rgb]{1,0,0}{linear program}}. The sparse recovery problem is in fact an optimization problem, since it translates into
+\begin{equation}
+    \mathop{\mathrm{minimize}}\|z\|_0 \quad \text{subject to } \mathbf{A}z = y. \tag{$P_0$}
+    \label{eq0.p0}
+\end{equation}
+This is a nonconvex problem and NP-hard in general. However, keeping in mind that $\|z\|_q^q$ opproaches $\|z\|_0$ as $q>0$ tends to zero, we can approximate \cref{eq0.p0} by the problem
+\begin{equation}
+    \mathop{\mathrm{minimize}}\|z\|_q \quad \text{subject to } \mathbf{A}z = y. \tag{$P_q$}
+    \label{eq0.pq}
+\end{equation}
+
+and \emph{\textcolor[rgb]{1,0,0}{basis pursuit or $\ell_1$-minimization}}:
+\begin{equation}
+    \mathop{\mathrm{minimize}} \|z\|_1 \quad \text{subject to } \mathbf{A}z = y. \tag{$P_1$}
+    \label{eq0.p1}
+\end{equation}
+
+\begin{theorem}
+    \label{th0.3.1}
+    Let $\mathbf{A} \in \mathbb{R}^{m \times N}$ be a measurement matrix with columns $a_1, \dots, a_N$. Assuming the uniqueness of a minimizer $x^{\sharp}$ of 
+    \[
+        \mathop{\mathrm{minimize}}\limits_{z \in \mathbb{R}^N} \|z\|_1 \quad \text{subject to } \mathbf{A}z = y,
+    \]
+    the system $\{a_j, j\in \mathop{\mathrm{supp}}(x^{\sharp})\}$ is linearly independent, and in particular 
+    \[
+        \|x^{\sharp}\|_0 = \mathop{\mathrm{card}}(\mathop{\mathrm{supp}}(x^{\sharp})) \leq m.
+    \]
+\end{theorem}
+
+A general $\ell_1$-minimization taking measurement error into account:
+\begin{equation}
+    \mathop{\mathrm{minimize}}\|z\|_1 \quad \text{subject to } \|\mathbf{A}z-y\|_2 \leq \eta \tag{$P_{1,\eta}$}
+    \label{eq0.p1n}
+\end{equation}
+Given a vector $z \in \mathbb{C}^N$, we introduce its real and imaginary parts $\mathbf{u,v} \in \mathbb{R}^N$ and a vector $\mathbf{c} \in \mathbb{R}^N$ such that $c_j \geq \left|z_j\right| = \sqrt{u_j^2 + v_j^2}$ for all $j \in [N]$. The problem \cref{eq0.p1n} is then equivalent to the following problem with optimization variables $\mathbf{c,u,v} \in \mathbb{R}^N$:
+\begin{equation}
+    \mathop{\mathrm{minimize}}\limits_{\mathbf{c,u,v} \in \mathbb{R}^N} \sum\limits_{j=1}^N c_j \quad \text{subject to } \left\|\left[ 
+        \begin{array}{cc}
+            Re(\mathbf{A}) & -Im(\mathbf{A}) \\
+            Im(\mathbf{A}) & Re(\mathbf{A})
+        \end{array}
+        \right]
+        \left[ 
+         \begin{array}{c}
+            \mathbf{u}\\
+            \mathbf{v}
+        \end{array}
+    \right]\right\|_2 \leq \eta, \tag{$P_{1,\eta}'$}
+    \label{eq0.p1n'}
+\end{equation}
+\[
+    \begin{array}{c}
+        \sqrt{u_1^2 + v_1^2} \leq c_1, \\
+        \vdots \\
+        \sqrt{u_N^2 + v_N^2} \leq c_N.
+    \end{array}
+\]
+This is an instance of a \emph{\textcolor[rgb]{1,0,0}{second-order cone problem}};
+
+\begin{mdframed}
+    \label{bpd}
+    \begin{equation}
+        x^{\sharp} = \mathop{\mathrm{argmin}} \|z\|_1 \qquad \text{subject to } \|\mathbf{A}z - y\|_2 \leq \eta. \tag{$BP_{\eta}$}
+        Output: \text{the vector } x^{\sharp}.
+        \label{eq0.bpn}
+    \end{equation}
+    The solution $x^{\sharp}$ of 
+    \begin{equation}
+        \mathop{\mathrm{minimize}}\limits_{z \in \mathbb{C}^{N}}\|z\|_1 \qquad \text{subject to }\|\mathbf{A}z - y\|_2 \leq \eta
+        \label{eq0.3.1}
+    \end{equation}
+    for some parameter $\lambda \geq 0$,
+    \begin{equation}
+        \mathop{\mathrm{minimize}}\limits_{z \in \mathbb{C}^N} \lambda\|z\|_1 + \|\mathbf{A}z - y\|_2^2.
+        \label{eq0.3.2}
+    \end{equation}
+    The solution of \cref{eq0.3.1} is also related to the output of the \emph{LASSO}, shich consists in solving, for some parameter $\tau \geq 0$,
+    \begin{equation}
+        \mathop{\mathrm{minimize}}\limits_{z \in \mathbb{C}^N} \|\mathbf{A}z - y\|_2 \qquad \text{subject to }\|z\|_1 \leq \tau.
+        \label{eq0.3.3}
+    \end{equation}
+    Precisely, some links between the three approaches are given below.
+\end{mdframed}
+
+\begin{proposition}
+    \label{pr0.3.2}
+    \begin{enumerate}[(a)]
+        \item If $x$ is a minimizer of the basis pursuit denoising \cref{eq0.3.2} with $\lambda > 0$, then there exists $\eta = \eta_x \geq 0$ such that $x$ is a minimizer of ther quadratically constrained basis pursuit \cref{eq0.3.1}.
+        \item If $x$ is unique minimizer of the quadratically constrained basis pursuit \cref{eq0.3.1} with $\eta \geq 0$, then there exists $\tau = \tau_x \geq 0$ such that $x$ is a unique minimizer of the LASSO \cref{eq0.3.3}.
+        \item If $x$ is a minimizer of the LASSO \cref{eq0.3.3} with $\tau \geq 0$, then there exists $\lambda = \lambda_x \geq 0$ such that $x$ is a minimizer of the basis pursuit denoising \cref{eq0.3.2}.
+    \end{enumerate}
+\end{proposition}
