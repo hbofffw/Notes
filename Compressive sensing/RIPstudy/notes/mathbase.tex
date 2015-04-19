@@ -211,3 +211,50 @@ This is an instance of a \emph{\textcolor[rgb]{1,0,0}{second-order cone problem}
         \item If $x$ is a minimizer of the LASSO \cref{eq0.3.3} with $\tau \geq 0$, then there exists $\lambda = \lambda_x \geq 0$ such that $x$ is a minimizer of the basis pursuit denoising \cref{eq0.3.2}.
     \end{enumerate}
 \end{proposition}
+
+Another type of $\ell_1$-minimization problem is the \emph{\textcolor[rgb]{1,0,0}{Dantzig selector}},
+\begin{equation}
+    \mathop{\mathrm{minimize}}\limits_{z \in \mathbb{C}^N} \|z\|_1 \qquad \text{subject to } \|\mathbf{A}^*(\mathbf{A}z - y)\|_{\infty} \leq \tau.
+    \label{eq0.3.4}
+\end{equation}
+This is again a convex optimization problem. The intuition for the constraints is that the residual $r = \mathbf{A}z -y $ should have small correlation with all columns $a_j$ of the matrix $\mathbf{A}$---indeed, $\|\mathbf{A}^*(\mathbf{A}z -y)\|_{\infty} = \max_{j \in [N]} \left|\left<r, a_j\right>\right|$.  
+
+\subsection{Greedy Methods}
+
+\begin{mdframed}
+    \label{OMP}
+    \begin{center}
+        \textbf{Orthogonal matching pursuit (OMP)}
+    \end{center}
+    \emph{Input:} measurement matrix $\mathbf{A}$, measurement vector $y$.
+
+    \emph{Initialization: } $S^0 = \cancel{0}, x^0 = 0$. 
+    
+    \emph{Iteration:} repeat until a stopping criterion is met at $n = \bar{n}$:
+    \begin{equation}
+        S^{n+1} = S^n \cup \{j_{n+1}\}, j_{n+1} := \mathop{\mathrm{argmax}}\limits_{j \in [N]} \left\{ \left|(\mathbf{A}^*(y-\mathbf{A}x^n))_j\right| \right\}, \tag{$OMP_1$}
+        \label{eqOMP1}
+    \end{equation}
+    \begin{equation}
+        x^{n+1} = \mathop{\mathrm{argmin}}\limits_{z \in \mathbb{C}^N} \left\{ \|y - \mathbf{A}z\|_2,\mathop{\mathrm{supp}}(z) \subset S^{n+1} \right\}. \tag{$OMP_2$}
+        \label{OMP2}
+    \end{equation}
+
+    \emph{Output:} the $\bar{n}$-sparse vector $x^{\sharp} = x^{\bar{n}}$.
+\end{mdframed}
+
+The projection step \cref{OMP2} is the most costly part of the orthogonal matching pursuit algorithm, which can be accelerated by using the $QR$-decomposition of $\mathbf{A}_{S_n}$. 
+
+The choice of the index $j_{n+1}$ is dictated by a greedy strategy where one aims to reduce the $\ell_2$-norm of the residual $y - \mathbf{A}x^n$ as much as possible at each iteration. 
+
+\begin{lemma}
+    \label{lm0.3.3}
+    Let $\mathbf{A} \in \mathbb{C}^{m \times N}$ be a matrix with $\ell_2$-normalized columns. Given $S \subset [N]$, $v$ supported on $S$, and $j \in [N]$, if 
+    \[
+        w := \mathop{\mathrm{argmin}}\limits_{z \in \mathbb{C}^N} \left\{ \|y-\mathbf{A}z\|_2. \mathop{\mathrm{supp}}(z) \subset S \cup \{j\} \right\},
+    \]
+    then
+    \[
+        \|y - \mathbf{A}w\|_2^2 \leq \|y-\mathbf{A}v\|_2^2- \left|(\mathbf{A}^*(y - \mathbf{A}v))_j\right|^2.
+    \]
+\end{lemma}
