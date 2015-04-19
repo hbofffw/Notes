@@ -102,7 +102,7 @@ A simple but essential observation will be made, which \emph{\textcolor[rgb]{1,0
 
 Restricted isometry constants and restricted orthogonality constants of high order can be controlled by those of lower order.
 \begin{proposition}
-    \label{pr1.6}
+    \label{pr2.6}
     For integers $r,s,t \geq 1$ with $t \geq s$,
     \begin{eqnarray*}
         \theta_{t,r} &\leq& \sqrt{\dfrac{t}{s}}\theta_{s,r}, \\
@@ -311,22 +311,37 @@ $\delta_s \leq \delta$ requires $m \geq C_{\delta}s\ln(eN/s)$. Therefore, the lo
     \label{th2.12}
     Suppose that the $2s$th restricted isometry constant of the matrix $\mathbf{A} \in \mathbb{C}^{m \times N}$ satisfies
     \begin{equation}
-        \delta_{2s} < \frac{4}{\sprt{41}} \approx 0.6246.
+        \delta_{2s} < \frac{4}{\sqrt{41}} \approx 0.6246.
         \label{eq2.20}
     \end{equation}
-    Then, for any $x \in \mathbb{C}^N$ and $y \in \mathbb{C}^m$ with $\|\mathbf{A}x - y\|_2 \leq \eta$, a solution $x^#$ of 
+    Then, for any $x \in \mathbb{C}^N$ and $y \in \mathbb{C}^m$ with $\|\mathbf{A}x - y\|_2 \leq \eta$, a solution $x^{\sharp}$ of 
     \[
         \min\limits_{z \in \mathbb{C}^N} \|z\|_1 \qquad \text{subject to } \|\mathbf{A}z - y\|_2 \leq \eta
     \]
     approximates the vector $x$ with errors
     \[
-        \|x - x^#\|_1 \leq C \sigma_s(x)_1 + D \sqrt{s} \eta,
+        \|x - x^{\sharp}\|_1 \leq C \sigma_s(x)_1 + D \sqrt{s} \eta,
     \]
     \[
-        \|x-x^#\|_2 \leq \frac{C}{\sqrt{s}} \sigma_s(x)_1 + D \eta,
+        \|x-x^{\sharp}\|_2 \leq \frac{C}{\sqrt{s}} \sigma_s(x)_1 + D \eta,
     \]
     where the constants $C ,D > 0$ depend only on $\delta_{2s}$.
-\end{theorem}<++>
+\end{theorem}
+\begin{theorem}
+    \label{th2.13}
+    If the $2s$th restricted isometry constant of $\mathbf{A} \in \mathbb{C}^{m\times N}$ obeys \cref{eq2.20}, then the matrix $\mathbf{A}$ satisfies the $\ell_2$-robust null space property of order $s$ with constants $0<p<1$ and $\tau > 0$ depending only on $\delta_{2s}$. 
+\end{theorem}
+
+\begin{lemma}
+    \label{lm2.14}
+    For $a_1 \geq a_2 \geq \dots \geq a_s \geq 0$.
+    \[
+        \sqrt{a_1^2 + \dots +a_s^2} \leq \frac{a_1 + \dots + a_s}{\sqrt{s}} + \frac{\sqrt{s}}{4}a_s \leq 1.
+    \]
+\end{lemma}
+
+
+
 
 
 

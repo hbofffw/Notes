@@ -107,3 +107,154 @@ The last property yields the equivalences:
     \end{gathered}
     \label{eq0.2.6}
 \end{eqnarray}
+
+\section{Basic Algorithms}
+
+The algorithms are divided into three categories: \emph{\textcolor[rgb]{1,0,0}{optimization methods, greedy methods, and thresholding-based methods}}. 
+
+\subsection{Optimization Methods}
+
+An \emph{\textcolor[rgb]{1,0,0}{optimization problem}} is a problem of the type
+
+\[
+    \mathop{\text{minimize}}\limits_{x \in \mathbb{R}^N} F_0(x) \quad \text{ subject to } F_i(x) \leq b_i,\ i \in [n],
+\]
+where the function $F_0 : \mathbb{R}^N \rightarrow \mathbb{R}$ is called an \emph{\textcolor[rgb]{1,0,0}{objective function}} and the functions $F_1,\dots,F_n : \mathbb{R}^N \rightarrow \mathbb{R}$ are called \emph{\textcolor[rgb]{1,0,0}{constrained functions}}. This general framework also encompasses equality constraints of the type $G_i(x) = c_i$. Since the equality $G_i(x) = c_i$ is equivalent to the inequalities $G_i(x) \leq c_i$ and $-G_i(x) \leq -c_i$. If $F_0, F_1, \dots, F_n$ are all convex functions, then the problem is called a \emph{\textcolor[rgb]{1,0,0}{convex optimization problem}}. If $F_0, F_1, \dots, F_n$ are all linear functions, then the problem is called a \emph{\textcolor[rgb]{1,0,0}{linear program}}. The sparse recovery problem is in fact an optimization problem, since it translates into
+\begin{equation}
+    \mathop{\mathrm{minimize}}\|z\|_0 \quad \text{subject to } \mathbf{A}z = y. \tag{$P_0$}
+    \label{eq0.p0}
+\end{equation}
+This is a nonconvex problem and NP-hard in general. However, keeping in mind that $\|z\|_q^q$ opproaches $\|z\|_0$ as $q>0$ tends to zero, we can approximate \cref{eq0.p0} by the problem
+\begin{equation}
+    \mathop{\mathrm{minimize}}\|z\|_q \quad \text{subject to } \mathbf{A}z = y. \tag{$P_q$}
+    \label{eq0.pq}
+\end{equation}
+
+and \emph{\textcolor[rgb]{1,0,0}{basis pursuit or $\ell_1$-minimization}}:
+\begin{equation}
+    \mathop{\mathrm{minimize}} \|z\|_1 \quad \text{subject to } \mathbf{A}z = y. \tag{$P_1$}
+    \label{eq0.p1}
+\end{equation}
+
+\begin{theorem}
+    \label{th0.3.1}
+    Let $\mathbf{A} \in \mathbb{R}^{m \times N}$ be a measurement matrix with columns $a_1, \dots, a_N$. Assuming the uniqueness of a minimizer $x^{\sharp}$ of 
+    \[
+        \mathop{\mathrm{minimize}}\limits_{z \in \mathbb{R}^N} \|z\|_1 \quad \text{subject to } \mathbf{A}z = y,
+    \]
+    the system $\{a_j, j\in \mathop{\mathrm{supp}}(x^{\sharp})\}$ is linearly independent, and in particular 
+    \[
+        \|x^{\sharp}\|_0 = \mathop{\mathrm{card}}(\mathop{\mathrm{supp}}(x^{\sharp})) \leq m.
+    \]
+\end{theorem}
+
+A general $\ell_1$-minimization taking measurement error into account:
+\begin{equation}
+    \mathop{\mathrm{minimize}}\|z\|_1 \quad \text{subject to } \|\mathbf{A}z-y\|_2 \leq \eta \tag{$P_{1,\eta}$}
+    \label{eq0.p1n}
+\end{equation}
+Given a vector $z \in \mathbb{C}^N$, we introduce its real and imaginary parts $\mathbf{u,v} \in \mathbb{R}^N$ and a vector $\mathbf{c} \in \mathbb{R}^N$ such that $c_j \geq \left|z_j\right| = \sqrt{u_j^2 + v_j^2}$ for all $j \in [N]$. The problem \cref{eq0.p1n} is then equivalent to the following problem with optimization variables $\mathbf{c,u,v} \in \mathbb{R}^N$:
+\begin{equation}
+    \mathop{\mathrm{minimize}}\limits_{\mathbf{c,u,v} \in \mathbb{R}^N} \sum\limits_{j=1}^N c_j \quad \text{subject to } \left\|\left[ 
+        \begin{array}{cc}
+            Re(\mathbf{A}) & -Im(\mathbf{A}) \\
+            Im(\mathbf{A}) & Re(\mathbf{A})
+        \end{array}
+        \right]
+        \left[ 
+         \begin{array}{c}
+            \mathbf{u}\\
+            \mathbf{v}
+        \end{array}
+    \right]\right\|_2 \leq \eta, \tag{$P_{1,\eta}'$}
+    \label{eq0.p1n'}
+\end{equation}
+\[
+    \begin{array}{c}
+        \sqrt{u_1^2 + v_1^2} \leq c_1, \\
+        \vdots \\
+        \sqrt{u_N^2 + v_N^2} \leq c_N.
+    \end{array}
+\]
+This is an instance of a \emph{\textcolor[rgb]{1,0,0}{second-order cone problem}};
+
+\begin{mdframed}
+    \label{bpd}
+    \begin{equation}
+        x^{\sharp} = \mathop{\mathrm{argmin}} \|z\|_1 \qquad \text{subject to } \|\mathbf{A}z - y\|_2 \leq \eta. \tag{$BP_{\eta}$}
+        Output: \text{the vector } x^{\sharp}.
+        \label{eq0.bpn}
+    \end{equation}
+    The solution $x^{\sharp}$ of 
+    \begin{equation}
+        \mathop{\mathrm{minimize}}\limits_{z \in \mathbb{C}^{N}}\|z\|_1 \qquad \text{subject to }\|\mathbf{A}z - y\|_2 \leq \eta
+        \label{eq0.3.1}
+    \end{equation}
+    for some parameter $\lambda \geq 0$,
+    \begin{equation}
+        \mathop{\mathrm{minimize}}\limits_{z \in \mathbb{C}^N} \lambda\|z\|_1 + \|\mathbf{A}z - y\|_2^2.
+        \label{eq0.3.2}
+    \end{equation}
+    The solution of \cref{eq0.3.1} is also related to the output of the \emph{LASSO}, shich consists in solving, for some parameter $\tau \geq 0$,
+    \begin{equation}
+        \mathop{\mathrm{minimize}}\limits_{z \in \mathbb{C}^N} \|\mathbf{A}z - y\|_2 \qquad \text{subject to }\|z\|_1 \leq \tau.
+        \label{eq0.3.3}
+    \end{equation}
+    Precisely, some links between the three approaches are given below.
+\end{mdframed}
+
+\begin{proposition}
+    \label{pr0.3.2}
+    \begin{enumerate}[(a)]
+        \item If $x$ is a minimizer of the basis pursuit denoising \cref{eq0.3.2} with $\lambda > 0$, then there exists $\eta = \eta_x \geq 0$ such that $x$ is a minimizer of ther quadratically constrained basis pursuit \cref{eq0.3.1}.
+        \item If $x$ is unique minimizer of the quadratically constrained basis pursuit \cref{eq0.3.1} with $\eta \geq 0$, then there exists $\tau = \tau_x \geq 0$ such that $x$ is a unique minimizer of the LASSO \cref{eq0.3.3}.
+        \item If $x$ is a minimizer of the LASSO \cref{eq0.3.3} with $\tau \geq 0$, then there exists $\lambda = \lambda_x \geq 0$ such that $x$ is a minimizer of the basis pursuit denoising \cref{eq0.3.2}.
+    \end{enumerate}
+\end{proposition}
+
+Another type of $\ell_1$-minimization problem is the \emph{\textcolor[rgb]{1,0,0}{Dantzig selector}},
+\begin{equation}
+    \mathop{\mathrm{minimize}}\limits_{z \in \mathbb{C}^N} \|z\|_1 \qquad \text{subject to } \|\mathbf{A}^*(\mathbf{A}z - y)\|_{\infty} \leq \tau.
+    \label{eq0.3.4}
+\end{equation}
+This is again a convex optimization problem. The intuition for the constraints is that the residual $r = \mathbf{A}z -y $ should have small correlation with all columns $a_j$ of the matrix $\mathbf{A}$---indeed, $\|\mathbf{A}^*(\mathbf{A}z -y)\|_{\infty} = \max_{j \in [N]} \left|\left<r, a_j\right>\right|$.  
+
+\subsection{Greedy Methods}
+
+\begin{mdframed}
+    \label{OMP}
+    \begin{center}
+        \textbf{Orthogonal matching pursuit (OMP)}
+    \end{center}
+    \emph{Input:} measurement matrix $\mathbf{A}$, measurement vector $y$.
+
+    \emph{Initialization: } $S^0 = \cancel{0}, x^0 = 0$. 
+    
+    \emph{Iteration:} repeat until a stopping criterion is met at $n = \bar{n}$:
+    \begin{equation}
+        S^{n+1} = S^n \cup \{j_{n+1}\}, j_{n+1} := \mathop{\mathrm{argmax}}\limits_{j \in [N]} \left\{ \left|(\mathbf{A}^*(y-\mathbf{A}x^n))_j\right| \right\}, \tag{$OMP_1$}
+        \label{eqOMP1}
+    \end{equation}
+    \begin{equation}
+        x^{n+1} = \mathop{\mathrm{argmin}}\limits_{z \in \mathbb{C}^N} \left\{ \|y - \mathbf{A}z\|_2,\mathop{\mathrm{supp}}(z) \subset S^{n+1} \right\}. \tag{$OMP_2$}
+        \label{OMP2}
+    \end{equation}
+
+    \emph{Output:} the $\bar{n}$-sparse vector $x^{\sharp} = x^{\bar{n}}$.
+\end{mdframed}
+
+The projection step \cref{OMP2} is the most costly part of the orthogonal matching pursuit algorithm, which can be accelerated by using the $QR$-decomposition of $\mathbf{A}_{S_n}$. 
+
+The choice of the index $j_{n+1}$ is dictated by a greedy strategy where one aims to reduce the $\ell_2$-norm of the residual $y - \mathbf{A}x^n$ as much as possible at each iteration. 
+
+\begin{lemma}
+    \label{lm0.3.3}
+    Let $\mathbf{A} \in \mathbb{C}^{m \times N}$ be a matrix with $\ell_2$-normalized columns. Given $S \subset [N]$, $v$ supported on $S$, and $j \in [N]$, if 
+    \[
+        w := \mathop{\mathrm{argmin}}\limits_{z \in \mathbb{C}^N} \left\{ \|y-\mathbf{A}z\|_2. \mathop{\mathrm{supp}}(z) \subset S \cup \{j\} \right\},
+    \]
+    then
+    \[
+        \|y - \mathbf{A}w\|_2^2 \leq \|y-\mathbf{A}v\|_2^2- \left|(\mathbf{A}^*(y - \mathbf{A}v))_j\right|^2.
+    \]
+\end{lemma}
