@@ -258,3 +258,19 @@ The choice of the index $j_{n+1}$ is dictated by a greedy strategy where one aim
         \|y - \mathbf{A}w\|_2^2 \leq \|y-\mathbf{A}v\|_2^2- \left|(\mathbf{A}^*(y - \mathbf{A}v))_j\right|^2.
     \]
 \end{lemma}
+
+\begin{proof}
+    Since any vector of the form $v + te_j$ with $t \in \mathbb{C}$ is supported on $S \cup \{j\}$, we have
+    \[
+        \|y - \mathbf{A}w\|_2^2 \leq \min\limits_{t \in \mathbb{C}} \|y - \mathbf{A}(v+te_j)\|_2^2.
+    \]
+    Writing $t = \rho e^{i\theta}$ with $\rho \geq 0$ and $\theta \in [0,2\pi)$, we compute
+        \begin{eqnarray*}
+            \|y - \mathbf{A}(v+te_j)\|_2^2 &=& \|y- \mathbf{A}v - t\mathbf{A}e_j\|_2^2
+            &=& \|y - \mathbf{A}w\|_2^2 + \left|t\right|^2 \|\mathbf{A}e_j\|_2^2 - 2 \mathop{\mathrm{Re}}\left( \bar{t}\left<y - \mathbf{A}v, \mathbf{A}e_j\right> \right)
+            &=& \|y - \mathbf{A}v\|_2^2 + \rho^2 - 2\mathop{\mathrm{Re}}\left( \rhoe^{-i\theta}(\mathbf{A}^*(y-\mathbf{A}v))_j \right)
+            &\geq& \|y - \mathbf{A}v\|_2^2 + \rho^2 - 2\rho\left|(\mathbf{A}^*(y-\mathbf{A}v))_j\right|,
+        \end{eqnarray*}
+        with equality for a property chosen $\theta$. As a quadratic polynomial in $\rho$, the latter expression is minimized when $\rho = \left|(\mathbf{A}^*(y - \mathbf{A}u))_j\right|^2$,
+        which concludes the proof.
+\end{proof}
