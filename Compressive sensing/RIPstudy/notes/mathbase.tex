@@ -266,11 +266,110 @@ The choice of the index $j_{n+1}$ is dictated by a greedy strategy where one aim
     \]
     Writing $t = \rho e^{i\theta}$ with $\rho \geq 0$ and $\theta \in [0,2\pi)$, we compute
         \begin{eqnarray*}
-            \|y - \mathbf{A}(v+te_j)\|_2^2 &=& \|y- \mathbf{A}v - t\mathbf{A}e_j\|_2^2
-            &=& \|y - \mathbf{A}w\|_2^2 + \left|t\right|^2 \|\mathbf{A}e_j\|_2^2 - 2 \mathop{\mathrm{Re}}\left( \bar{t}\left<y - \mathbf{A}v, \mathbf{A}e_j\right> \right)
-            &=& \|y - \mathbf{A}v\|_2^2 + \rho^2 - 2\mathop{\mathrm{Re}}\left( \rhoe^{-i\theta}(\mathbf{A}^*(y-\mathbf{A}v))_j \right)
+            \|y - \mathbf{A}(v+te_j)\|_2^2 &=& \|y- \mathbf{A}v - t\mathbf{A}e_j\|_2^2 \\
+            &=& \|y - \mathbf{A}v\|_2^2 + \left|t\right|^2 \|\mathbf{A}e_j\|_2^2 - 2 \mathop{\mathrm{Re}}\left( \bar{t}\left<y - \mathbf{A}v, \mathbf{A}e_j\right> \right) \\
+            &=& \|y - \mathbf{A}v\|_2^2 + \rho^2 - 2\mathop{\mathrm{Re}}\left( \rho e^{-i\theta}(\mathbf{A}^*(y-\mathbf{A}v))_j \right) \\
             &\geq& \|y - \mathbf{A}v\|_2^2 + \rho^2 - 2\rho\left|(\mathbf{A}^*(y-\mathbf{A}v))_j\right|,
         \end{eqnarray*}
-        with equality for a property chosen $\theta$. As a quadratic polynomial in $\rho$, the latter expression is minimized when $\rho = \left|(\mathbf{A}^*(y - \mathbf{A}u))_j\right|^2$,
+        with equality for a property chosen $\theta$. As a quadratic polynomial in $\rho$, the latter expression is minimized when $\rho = \left|(\mathbf{A}^* (y - \mathbf{A}u))_j\right|$. This shows that
+        \[
+            \min\limits_{t \in \mathbb{C}} \|y-\mathbf{A}(v + t e_j)\|_2^2 = \| y - \mathbf{A} v\|_2^2 - \left|(\mathbf{A}^*(y - \mathbf{A}u))_j\right|^2,
+        \]
         which concludes the proof.
 \end{proof}
+
+The step \cref{OMP2} also reads as 
+\[
+    x_{S^{n+1}}^{n+1} = \mathbf{A}_{S^{n+1}}^{\dagger}y,
+\]
+where $x_{S^{n+1}}^{n+1}$ denotes the restriction of $x^{n+1}$ to its support set $S^{n+1}$ and where $\mathbf{A}_{S^{n+1}}^{\dagger}$ is the pseudo-inverse of $\mathbf{A}_{S^{n+1}}$. This simply says taht $z = x_{S^{n+1}}^{n+1}$ is a solution of $\mathbf{A}_{S^{n+1}}^{n+1}\mathbf{A}_{S^{n+1}}z = \mathbf{A}_{S^{n+1}}^*y$. 
+
+\begin{lemma}
+    \label{lm0.3.1}
+    Given an index set $S \subset [N]$, if 
+    \[
+        v := \mathop{\mathrm{argmin}}\limits_{z \in \mathbb{C}^N} \left\{ \|y - \mathbf{A}z\|_2, \mathop{\mathrm{supp}}(z) \subset S \right\},
+    \]
+    then 
+    \begin{equation}
+        (\mathbf{A}^*(y - \mathbf{A}v))_S = 0.
+        \label{eq0.3.5}
+    \end{equation}
+\end{lemma}
+
+\begin{proposition}
+    \label{pr0.3.5}
+    Given a matrix $\mathbf{A} \in \mathbb{C}^{m \times N}$, every nonzero vector $x \in \mathbb{C}^N$ supported on a set $S$ of size $s$ is recovered from $y = \mathbf{A}x$ after at most $s$ iterations of orthogonal matching pursuit if and only if the matrix $\mathbf{A}_S$ is injective and 
+    \begin{equation}
+        \max\limits_{j \in S}\left|(\mathbf{A}^*r)_j\right| > \max\limits_{\ell \in \overline{S}} \left|(\mathbf{A}^*r)_{\ell}\right|
+        \label{eq0.3.6}
+    \end{equation}
+    for all nonzero $r \in \left\{ \mathbf{A}z, \mathop{\mathrm{supp}}(z) \subset S \right\}$.
+\end{proposition}
+
+\begin{remark}
+    \label{rmk0.3.6}
+    A more concise way to formulate the necessary and sufficient conditions of \cref{pr0.3.5} is the \textcolor[rgb]{1,0,0}{exact recovery condition}, which reads
+    \begin{equation}
+        \|\mathbf{A}_S^{\dagger}\mathbf{A}_{\overline{S}}\|_{1 \rightarrow 1} < 1;
+        \label{eq0.3.7}
+    \end{equation}
+    see A.1 for the definition of matrix norms. Implicitly, the existence of the pseudo-inverse $\mathbf{A}_S^{\dagger} = (\mathbf{A}_S^*\mathbf{A}_S)^{-1} \mathbf{A}_S^*$ is equivalent to the injectivity of $\mathbf{A}_S$. 
+\end{remark}
+
+\begin{mdframed}
+    \label{CoSaMP}
+    \begin{center}
+        \textbf{\textcolor[rgb]{1,0,0}{Compressive sampling matching pursuit (CoSaMP)}}
+    \end{center}
+        \emph{Input:} measurement matrix $\mathbf{A}$, measurement vector $y$, sparsity level $s$.
+
+        \emph{Initialization:} $s$-sparse vector $x^0$, typically $x^0 = 0$.
+
+        \emph{Iteration:} repeat until a stopping criterion is met at $n = \bar{n}$:
+        \begin{equation}
+            U^{n+1} = \mathop{\mathrm{supp}}(x^n) \cup L_{2s}(\mathbf{A}^*(y - \mathbf{A}x^n)), \tag{CoSaMP$_1$} 
+            \label{eqcosamp1}
+        \end{equation}
+        \begin{equation}
+            u^{n+1} = \mathop{\mathrm{argmin}}\limits_{z \in \mathbb{C}^N} \left\{ \|y - \mathbf{A}z\|_{2}, \mathop{\mathrm{supp}}(z) \subset U^{n+1} \right\}, \tag{CoSaMP$_2$}
+            \label{eqcosamp2}
+        \end{equation}
+        \begin{equation}
+            x^{n+1} = H_s(u^{n+1}). \tag{CoSaMP$_3$}
+            \label{eqcosamp3}
+        \end{equation}
+        
+        \emph{Output:} the $s$-sparse vector $x^{\sharp} = x^{\bar{n}}$.
+\end{mdframed}
+
+\subsection{Thresholding-Based Methods}
+
+\begin{mdframed}
+    \label{basicthresholding}
+\begin{center}
+    \textbf{\textcolor[rgb]{1,0,0}{Basic thresholding}}
+\end{center}
+    \emph{Input:} measurement matrix $\mathbf{A}$, measurement vector $y$, sparsity level $s$.
+
+    \emph{Instruction:} 
+    \begin{equation}
+        S^{\sharp} = L_s(\mathbf{A}^*y), \tag{BT$_1$}
+        \label{eqbt1}
+    \end{equation}
+    \begin{equation}
+        x^{\sharp} = \mathop{\mathrm{argmin}}\limits_{z \in \mathbb{C}^N} \left\{ \|y = \mathbf{A}z\|_2, \mathop{\mathrm{supp}}(z) \subset S^{\sharp} \right\}. \tag{BT$_2$}
+        \label{eqbt2}
+    \end{equation}
+
+    \emph{Output:} the $s$-sparse vector $x^{\sharp}$.
+\end{mdframed}
+
+\begin{proposition}
+    \label{pr0.3.7}
+    A vector $x \in \mathbb{C}^{N}$ supported on a set $S$ is recovered from $y = \mathbf{A}x$ via basic thresholding if and only if 
+    \begin{equation}
+        \min\limits_{j \in S}\left|(\mathbf{A}^* y)_j\right| > \max\limits_{\ell \in \overline{S}} \left|(\mathbf{A}^* y )_{\ell}\right|.
+        \label{eq0.3.10}
+    \end{equation}
+\end{proposition}
