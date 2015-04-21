@@ -577,6 +577,72 @@ The real and complex version are in fact equivalent. These vectors can be interp
     In particular, the real null space property of order $s$ is equivalent to the complex null space property of order $s$.
 \end{theorem}
 
+\begin{proof}
+    \cref{eq0.4.4} immediately follows from \cref{eq0.4.5} by setting $w = 0$. So one can assume that \cref{eq0.4.4} holds. We consider $v,w \in \text{ker}_{\mathbb{R}\mathbf{A}}$ with $(v,w) \neq (0,0)$. If $v$ and $w$ are linearly dependent, then the inequality $\sum_{j \in S} \sqrt{v_j^2} _+ w_j^2 < \sum_{\ell \in \bar{S} \sqrt{v_{\ell}^2 + w_{\ell}^2}}$ is clear, sow we suppose that they are linearly independent. Then $u := \cos\theta v + \sin \theta w \in \text{ker}_{\mathbb{R}}\mathbf{A}$ is nonzero, and \cref{eq0.4.4} yields, for any $\theta \in \mathbb{R}$, 
+    \begin{equation}
+        \sum\limits_{j \in S} \left|\cos \theta v_j + \sin \theta w_j\right| < \sum\limits_{\ell \in \bar{S}} \left|\cos \theta v_{\ell} + \sin \theta w_{\ell}\right|.
+        \label{eq0.4.6}
+    \end{equation}
+    For each $k \in [N]$, we define $\theta_k \in [-\pi, \pi]$ by the equalities
+    \[
+        v_k = \sqrt{v_k^2 + w_k^2} \cos \theta_k, \qquad w_k = \sqrt{v_k^2 + w_k^2} \sin \theta_k,
+    \]
+    so that \cref{eq0.4.6} reads
+    \[
+        \sum\limits_{j \in S} \sqrt{v_j^2 + w_j^2}\left|\cos (\theta - \theta_j)\right| < \sum\limits_{\ell \in \bar{S}} \sqrt{v_{\ell}^2 + w_{\ell}^2} \left|\cos(\theta - \theta_{\ell})\right|.
+    \]
+    We now integrate over $\theta \in [-\pi, \pi]$ to obtain
+    \[
+        \sum\limits_{j \in S} \sqrt{v_j^2 + w_j^2} \int_{-\pi}^{\pi} \left|\cos(\theta - \theta_j)\right|d\theta < \sum\limits_{\ell \in \bar{S}} \sqrt{v_{\ell}^2 + w_{\ell}^2} \int_{-\pi}^{\pi}\left|\cos(\theta - \theta_{\ell})\right|d\theta.
+    \]
+    For the inequality $\sum_{j \in S} \sqrt{v_j^2+w_j^2} < \sum_{\ell \in \bar{S}} \sqrt{v_{\ell}^2+ w_{\ell}^2}$, it remains to observe that 
+    \[
+        \int_{-\pi}^{\pi}\left|\cos(\theta - \theta')\right|d\theta
+    \]
+    is a positive constant independent of $\theta'\in [-\pi, \pi]$---namely,4. 
+\end{proof}
+
+\subsubsection{Nonconvex Minimization}
+
+The number of nonzero entries of a vector $z \in \mathbb{C}^N$ is approximated by the $q$th power of its $\ell_q$-quasinorm,
+\[
+    \sum\limits_{j = 1}^N \left|z_j\right|^q \xrightarrow[q \rightarrow 0]{} \sum\limits_{j=1}^N 1_{\{z_j \neq 0\}} = \|z\|_0. 
+\]
+This observation suggests to replace the $\ell_0$-minimization problem \cref{eq0.p0} by the optimization problem
+\begin{equation}
+    \mathop{\mathrm{minimize}}_{z \in \mathbb{C}^N} \|z\|_q \quad \text{subject to }\mathbf{A}z = y. \tag{P$_q$}
+    \label{eqpq}
+\end{equation}
+
+The problem \cref{eqpq} does not provide a worse approximation of the original problem \cref{eq0.p0} when $q$ gets smaller even though it becomes nonconvex and even NP-hard. An analog is needed to justify the null space property for $0 < q < 1$.
+
+\begin{theorem}
+    \label{th0.4.9}
+    Given a matrix $\mathbf{A} \in \mathbb{C}^{m \times N}$ and $0 <q \leq 1$, every $s$-sparse vector $x \in \mathbb{C}^N$ is the unique solution of \cref{eqpq} with $y = \mathbf{A}x$ if and only if, for any set $S\subset [N]$ with card$(S) \leq s$,
+    \[
+        \|v_S\|_q < \|v_{\bar{S}}\|_q \quad \text{for all }v \in \text{ker} \mathbf{A} \backslash \{0\}.
+    \]
+\end{theorem}
+
+\begin{theorem}
+    \label{th0.4.10}
+    Given a matrix $\mathbf{A} \in \mathbb{C}^{m \times N}$ and $0 < p<q\leq1$, if every $s$-sparse vector $x \in \mathbb{C}^N$ is the unique solution of \cref{eqpq}(P$_q$) with $y = \mathbf{A}x$, then every $s$-sparse vector $x \in \mathbb{C}^N$ is also the unique solution of (P$_p$) with $y = \mathbf{A}x$.
+\end{theorem}
+
+\subsection{Stability}
+The vectors we aim to recover via basis pursuit--or other schemes, for that matter--are sparse only in idealized situations. In more realistic scenarios, we can only claim that they are close to sparse vectors. In such cases, we would like to recover a vector $x \in \mathbb{C}^N$ with an error controlled by its distance to $s$-sparse vectors. This property: \emph{\textcolor[rgb]{1,0,0}{stability}} of the reconstruction scheme with respect to sparsity defect. 
+\begin{definition}
+    \label{def0.4.11}
+    A matrix $\mathbf{A} \in \mathbb{C}^{m\times N}$ is said to satisfy the \textcolor[rgb]{1,0,0}{stable null space property} with constant $0 < \rho <1$ relative to a set $S \subset [N]$ if 
+    \[
+        \|v_S\|_1 \leq \rho\|v_{\bar{S}}\|_1 \quad \text{for all } v \in \text{ker}\mathbf{A}.
+    \]<++>
+\end{definition}<++>
+
+
+
+
+
 
 
 
