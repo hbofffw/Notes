@@ -1,4 +1,4 @@
-\chapter{Mathbases}
+\chapter{Math Basics}
 \label{mathbase}
 \section{Background in Linear Algebra}
 \subsection{Types of Matrices}
@@ -136,6 +136,22 @@ and \emph{\textcolor[rgb]{1,0,0}{basis pursuit or $\ell_1$-minimization}}:
     \label{eq0.p1}
 \end{equation}
 
+\begin{mdframed}
+    \label{bp}
+    \begin{center}
+        \textbf{\textcolor[rgb]{1,0,0}{Basis pursuit}}
+    \end{center}
+    \emph{Input:} measurement matrix $\mathbf{A}$, measurement vector $y$.
+
+    \emph{Instruction:} 
+    \begin{equation}
+        x^{\sharp} = \mathop{\mathrm{argmin}} \|z\|_1 \quad \text{subject to } \mathbf{A}z = y. \tag{BP}
+        \label{eqbp}
+    \end{equation}
+
+    \emph{Output:} the vector $x^{\sharp}$.
+\end{mdframed}
+
 \begin{theorem}
     \label{th0.3.1}
     Let $\mathbf{A} \in \mathbb{R}^{m \times N}$ be a measurement matrix with columns $a_1, \dots, a_N$. Assuming the uniqueness of a minimizer $x^{\sharp}$ of 
@@ -179,12 +195,20 @@ Given a vector $z \in \mathbb{C}^N$, we introduce its real and imaginary parts $
 This is an instance of a \emph{\textcolor[rgb]{1,0,0}{second-order cone problem}};
 
 \begin{mdframed}
-    \label{bpd}
+    \label{qbp}
+    \begin{center}
+        \textbf{\textcolor[rgb]{1,0,0}{Quadratically constrained basis pursuit}}
+    \end{center}
+    \emph{Input:} measurement matrix $\mathbf{A}$, measurement vector $y$, noise level $\eta$.
+
+    \emph{Instruction:}
     \begin{equation}
         x^{\sharp} = \mathop{\mathrm{argmin}} \|z\|_1 \qquad \text{subject to } \|\mathbf{A}z - y\|_2 \leq \eta. \tag{$BP_{\eta}$}
-        Output: \text{the vector } x^{\sharp}.
-        \label{eq0.bpn}
+        \label{eqbpn}
     \end{equation}
+
+    \emph{Output:} the vector  $x^{\sharp}$.
+\end{mdframed}
     The solution $x^{\sharp}$ of 
     \begin{equation}
         \mathop{\mathrm{minimize}}\limits_{z \in \mathbb{C}^{N}}\|z\|_1 \qquad \text{subject to }\|\mathbf{A}z - y\|_2 \leq \eta
@@ -195,13 +219,13 @@ This is an instance of a \emph{\textcolor[rgb]{1,0,0}{second-order cone problem}
         \mathop{\mathrm{minimize}}\limits_{z \in \mathbb{C}^N} \lambda\|z\|_1 + \|\mathbf{A}z - y\|_2^2.
         \label{eq0.3.2}
     \end{equation}
-    The solution of \cref{eq0.3.1} is also related to the output of the \emph{LASSO}, shich consists in solving, for some parameter $\tau \geq 0$,
+    The solution of \cref{eq0.3.1} is also related to the output of the \emph{LASSO}, which consists in solving, for some parameter $\tau \geq 0$,
     \begin{equation}
         \mathop{\mathrm{minimize}}\limits_{z \in \mathbb{C}^N} \|\mathbf{A}z - y\|_2 \qquad \text{subject to }\|z\|_1 \leq \tau.
         \label{eq0.3.3}
     \end{equation}
     Precisely, some links between the three approaches are given below.
-\end{mdframed}
+
 
 \begin{proposition}
     \label{pr0.3.2}
@@ -282,7 +306,7 @@ The step \cref{OMP2} also reads as
 \[
     x_{S^{n+1}}^{n+1} = \mathbf{A}_{S^{n+1}}^{\dagger}y,
 \]
-where $x_{S^{n+1}}^{n+1}$ denotes the restriction of $x^{n+1}$ to its support set $S^{n+1}$ and where $\mathbf{A}_{S^{n+1}}^{\dagger}$ is the pseudo-inverse of $\mathbf{A}_{S^{n+1}}$. This simply says taht $z = x_{S^{n+1}}^{n+1}$ is a solution of $\mathbf{A}_{S^{n+1}}^{n+1}\mathbf{A}_{S^{n+1}}z = \mathbf{A}_{S^{n+1}}^*y$. 
+where $x_{S^{n+1}}^{n+1}$ denotes the restriction of $x^{n+1}$ to its support set $S^{n+1}$ and where $\mathbf{A}_{S^{n+1}}^{\dagger}$ is the pseudo-inverse of $\mathbf{A}_{S^{n+1}}$. This simply says that $z = x_{S^{n+1}}^{n+1}$ is a solution of $\mathbf{A}_{S^{n+1}}^{n+1}\mathbf{A}_{S^{n+1}}z = \mathbf{A}_{S^{n+1}}^*y$. 
 
 \begin{lemma}
     \label{lm0.3.1}
@@ -373,3 +397,189 @@ where $x_{S^{n+1}}^{n+1}$ denotes the restriction of $x^{n+1}$ to its support se
         \label{eq0.3.10}
     \end{equation}
 \end{proposition}
+\begin{proof}
+    It is clear that the vector $x$ is recovered if and only if the index set $S^{\sharp}$ defined in \cref{eqbt1} coincides with the set $S$, that is to say, if and only if any entry of $\mathbf{A}^*y$ on $S$ is greater than any entry of $\mathbf{A}^*y$ on $\overline{S}$. This is property \cref{eq0.3.10}.
+\end{proof}
+
+The more elaborate \emph{\textcolor[rgb]{1,0,0}{iterative hard thresholding algorithm}} is an iterative algorithm to solve the rectangular system $\mathbf{A}z = y$, knowing that the solution is $s$-sparse. We shall solve the square system $\mathbf{A}^*\mathbf{A}z = \mathbf{A}^*y$ instead, which can be interpreted as the fixed-point equation $z = (\mathbf{Id} - \mathbf{A}^*\mathbf{A})z + \mathbf{A}^*y$. Classical iterative methods suggest the \emph{\textcolor[rgb]{1,0,0}{fixed-point iteration}} $x^{n+1} = (\mathbf{Id} - \mathbf{A}^*\mathbf{A})x^n + \mathbf{A}^*y$. Since we target $s$-sparse vectors, we only keep the \emph{\textcolor[rgb]{1,0,0}{$s$ largest absolute entries of $(\mathbf{Id} - \mathbf{A}^*\mathbf{A})x^n + \mathbf{A}^*y = x^n + \mathbf{A}^*(y - \mathbf{A}x^n)$ at each iteration}}. The resulting algorithm:
+
+\begin{mdframed}
+    \label{IHT}
+    \begin{center}
+        \textbf{\textcolor[rgb]{1,0,0}{Iterative hard thresholding (HIT)}}
+    \end{center}
+    \emph{Input:} measurement matrix $\mathbf{A}$, measurement vector $y$, sparsity level $s$.
+
+    \emph{Initialization:} $s$-sparse vector $x^0$, typically $x^0 = 0$.
+
+    \emph{Iteration:} repeat until a stopping criterion is met at $n = \bar{n}$:
+    \begin{equation}
+        x^{n+1} = H_s(x^n + \mathbf{A}^*(y - \mathbf{A}x^n)). \tag{IHT}
+        \label{eqiht}
+    \end{equation}
+    
+    \emph{Output:} the $s$-sparse vector $x^{\sharp} = x ^{\bar{n}}$.
+\end{mdframed}
+
+The above algorithm does not require computation of any orthogonal projection. If the orthogonal projection needs to be paid attention, like in the greedy methods, \emph{\textcolor[rgb]{1,0,0}{it makes sense to look at the vector with the same support as $x^{n+1}$ that best fits the measurements}}. This leads to the \emph{\textcolor[rgb]{1,0,0}{hard thresholding pursuit algorithm}}:
+\begin{mdframed}
+    \label{HTP}
+    \begin{center}
+        \textbf{\textcolor[rgb]{1,0,0}{Hard thresholding pursuit (HTP)}}
+    \end{center}
+    \emph{Input:} measurement matrix $\mathbf{A}$, measurement vector $y$, sparsity level $s$.
+
+    \emph{Initialization:} $s$-sparse vector $x^0$, typically $x^0 = 0$.
+
+    \emph{Iteration:} repeat until stopping criterion is met an $n = \bar{n}$:
+    \begin{equation}
+        S^{n+1} = L_s(x^n + \mathbf{A}^*(y = \mathbf{A}x^n)), \tag{HTP$_1$}
+        \label{eqhtp1}
+    \end{equation}
+    \begin{equation}
+        x^{n+1} = \mathop{\mathrm{argmin}}\limits_{z \in \mathbb{C}^N} \left\{ \|y - \mathbf{A}z\|_2, \mathop{\mathrm{supp}}(z) \subset S^{n+1} \right\}. \tag{HTP$_2$}
+        \label{eqhtp2}
+    \end{equation}
+
+    \emph{Output:} the $s$-sparse vector $x^{\sharp} = x^{\bar{n}}$.
+\end{mdframed}
+
+\begin{mdframed}
+    \label{subspacepursuit}
+    \begin{center}
+        \textbf{\textcolor[rgb]{1,0,0}{Subspace Pursuit}}
+    \end{center}
+
+    \emph{Input:} measurement matrix $\mathbf{A}$, measurement vector $y$, sparsity level $s$.
+
+    \emph{Initialization:} $s$-sparse vector $x^0$, typically $x^0 = 0, S^0 = \mathop{\mathrm{supp}}(x^0)$.
+
+    \emph{Iteration:} repeat until a stopping criterion is met at $n = \bar{n}$:
+    \begin{equation}
+        U^{n+1} = S^n \cup L_s(\mathbf{A}^*(y-\mathbf{A}x^n)), \tag{SP$_1$}
+        \label{eqsp1}
+    \end{equation}
+    \begin{equation}
+        u^{n+1} = \mathop{\mathrm{argmin}}\limits_{z \in \mathbb{C}^N} \left\{ \|y-\mathbf{A}z\|_2, \mathop{\mathrm{supp}}(z) \subset U^{n+1} \right\}, \tag{SP$_2$}
+        \label{eqsp2}
+    \end{equation}
+    \begin{equation}
+        S^{n+1} = L_{s} (u^{n+1}), \tag{SP$_3$}
+        \label{eqsp3}
+    \end{equation}
+    \begin{equation}
+        x^{n+1} = \mathop{\mathrm{argmin}}\limits_{z \in \mathbb{C}^N} \left\{ \|y - \mathbf{A}z\|_2, \mathop{\mathrm{supp}}(z) \subset S^{n+1} \right\}. \tag{SP$_4$}.
+        \label{eqsp4}
+    \end{equation}
+
+    \emph{Output:} the $s$-sparse vector $x^{\sharp} = x^{\bar{n}}$.
+\end{mdframed}
+
+\subsection{Notes}
+
+\subsubsection{Which Algorithm Should One Choose?}
+\begin{itemize}
+    \item The minimal number $m$ of measurements for a sparsity $s$ and a signal length $N$ may vary with each algorithm. Comparing the recovery rates and identifying the best algorithm is a matter of numerical tests. 
+        For this criterion, the recovery performance of \emph{basic thresholding} is significantly worse than the one of other algorithms, although it is the fastest algorithm since it identifies the support in only one step.
+    \item The speed of the algorithm is also a criterion, and it is also a matter of numerical tests. If the sparsity $s$ is quite small, then \emph{orthogonal matching pursuit} is extremely fast because the speed essentially depends on \emph{the number of iterations, which typically equals $s$ when the algorithm succeeds}. \emph{Compressive sampling matching pursuit and hard thresholding pursuit} are fast for small $s$, because each step involves the computation of an orthogonal projection relative to $\mathbf{A}_S$ with small $S \subset [N]$. But if the sparsity $s$ is not that small compared to $N$, then orthogonal matching pursuit may nonetheless require a significant time. The same applies to the homotopy method which builds the support of an $\ell_1$-minimizer iteratively. The runtime of iterative hard thresholding is almost not influenced by the sparsity $s$ at all.
+
+        Basis pursuit \cref{bp}, per se, is not an algorithm, so the runtime depends on the actual algorithm that is used for the minimization. For \emph{\textcolor[rgb]{1,0,0}{Chambolle and Pock's primal dual algorithm}}, which constructs a sequence converging to an $\ell_1$-minimizer, the sparsity $s$ has no serious influence on the speed. Hence, for \textcolor[rgb]{1,0,0}{mildly large $s$}, it can be significantly faster than orthogonal matching pursuit. A point of view of regarding the orthogonal matching pursuit are always faster than $\ell_1$-minimization --- is only true for small sparsity. \textcolor[rgb]{1,0,0}{The iteratively reweighted least squares method} may also be a good alternative for mildly large sparsity.
+
+    \item Another Important feature of an algorithm is the \emph{\textcolor[rgb]{1,0,0}{possibility to exploit fast matrix-vector multiplication routines}} that are available for $\mathbf{A}$ and $\mathbf{A}^*$. In principle, any of the proposed methods can be sped up in this case, but the task is complicated if \emph{orthogonal projection} steps are involved. Fast matrix-vector multiplications are easily integrated in the \emph{iterative hard thresholding algorithm and in Chambolle and Pock's primal dual algorithm for $\ell_1$-minimization}. The acceleration achieved in this context depends on the algorithm, and the fastest algorithm should again be determined by numerical tests in the precise situation.
+\end{itemize}
+
+\section{Basis Pursuit}
+
+\subsection{Null Space Property}
+
+The null space property is a necessary and sufficient condition for exact recovery of sparse vectors via basis pursuit. 
+
+\begin{definition}
+    \label{def0.4.1}
+    A matrix $\mathbf{A} \in \mathbb{K}^{m \times N}$ is said to satisfy the \textcolor[rgb]{1,0,0}{null space property} relative to a set $S \subset [N]$ if 
+    \begin{equation}
+        \|v_S\|_1 < \|v_{\bar{S}}\|_1 \quad \text{for all } v \in \mathop{\mathrm{ker}}\mathbf{A} \backslash \{0\}.
+        \label{eq0.4.1}
+    \end{equation}
+\end{definition}
+
+It is to satisfy the null space property of order $s$ if it satisfies the null space property relative to any set $S \subset [N]$ with card$(S) \leq s$.
+
+\begin{remark}
+    \label{rmk0.4.2}
+    It is important to observe that, for a given $v \in \mathop{\mathrm{ker}}\mathbf{A} \backslash \{0\}$, the condition $\|v_S\|_1 < \|v_{\bar{S}}\|_1$ holds for any set $S \subset [N]$ with card$(S) \leq s$ as soon as it holds for an index set of $s$ largest (in modulus) entries of $v$.
+\end{remark}
+
+\begin{mdframed}
+    \begin{definition}
+        \label{def2.2ofbook}
+        For $p>0$, the $\ell_p$-error of best $s$-term approximation to a vector $x \in \mathbb{C}^{N}$ is defined by
+        \[
+            \sigma_s(x)_p := \inf \left\{ \|x-z\|_p, z \in \mathbb{C}^N \text{ is $s$-sparse} \right\}.
+        \]
+    \end{definition}
+\end{mdframed}
+
+
+\begin{remark}
+    \label{rmk0.4.3}
+    There are two convenient reformulations of the null space property. The first one is obtained by adding $\|v_S\|_1$ to both sides of the inequality $\|v_S\|_1 < \|v_{\bar{S}}\|_1$. Thus, the null space property relative to $S$ reads 
+    \begin{equation}
+        2\|v_S\|_1 < \|v\|_1 \quad \text{for all } v \in \mathop{\mathrm{ker}} \mathbf{A} \backslash \{0\}.
+        \label{eq0.4.2}
+    \end{equation}
+    The second one is obtained by choosing $S$ as an index set of $s$ largest (in modulus) entries of $v$ and this time by adding $\|v_{\bar{S}}\|_1$ to both sides of the inequality. Thus, the null space property of order $s$ reads
+    \begin{equation}
+        \|v\|_1 < 2 \sigma_s(v)_1 \quad \text{for all } v \in \mathop{\mathrm{ker}}\mathbf{A} \backslash \{0\},
+        \label{eq0.4.3}
+    \end{equation}
+    where we recall from \cref{def2.2ofbook} that, for $p>0$, the $\ell_p$-error of \textcolor[rgb]{1,0,0}{\emph{best $s$-term approximation}} to $x \in \mathbb{K}^N$ is defined by 
+    \[
+        \sigma_s(x)_p = \inf\limits_{\|z\|_0 \leq s} \|x-z\|_p.
+    \]
+\end{remark}
+
+\begin{theorem}
+    \label{th0.4.4}
+    Given a matrix $\mathbf{A} \in \mathbb{K}^{m \times N}$, every vector $x \in \mathbb{K}^N$ supported on a set $S$ is the unique solution of \cref{eq0.p1} with $y = \mathbf{A}x$ if and only if $\mathbf{A}$ satisfies the null space property relative to $S$.
+\end{theorem}
+
+\begin{remark}
+    \label{rmk0.4.6}
+    \begin{enumerate}[(a)]
+        \item This theorem \cref{th4.5frombook} shows that for every $y = \mathbf{A}x$ with $s$-sparse vector $x$ the $\ell_1$-minimization strategy \cref{eq0.p1} actually solves the $\ell_0$-minimization problem \cref{eq0.p0} when the null space property of order $s$ holds. Indeed, assume that every $s$-sparse vector $x$ is recovered via $\ell_1$-minimization from $y = \mathbf{A}x$. Let $z$ be the minimizer of the $\ell_0$-minimization problem \cref{eq0.p0} with $y = \mathbf{A}x$ then $\|z\|_0 \leq \|x\|_0$ so that also $z$ is $s$-sparse. But since every $s$-sparse vector is the unique $\ell_1$-minimizer, it follows that $x=z$.
+        \item It is desirable for any reconstruction scheme to preserve sparse recovery if some measurements are rescaled, reshuffled, or added. Basis pursuit actually features such properties. Indeed, mathematically speaking, these operations consist in replacing the original measurement matrix $\mathbf{A}$ by new measurement matrices $\hat{\mathbf{A}}$ and $\hat{\mathbf{A}}$ defined by 
+            \[
+                \hat{\mathbf{A}} := \mathbf{GA}, \quad \text{where $\mathbf{G}$ is some invertible $m\times m$ matrix},
+            \]
+            \[
+                \hat{\mathbf{A}} := \left[ \frac{\mathbf{A}}{\mathbf{B}} \right], \quad \text{where $\mathbf{B}$ is some $m' \times N$ matrix}.
+            \]
+            One can observe that ker$\hat{\mathbf{A}} = $ ker$\mathbf{A}$ and ker$\hat{\mathbf{A}} \subset $ ker$\mathbf{A}$, hence the null space property for the matrices $\hat{\mathbf{A}}$ and $\hat{\mathbf{A}}$ remains fulfilled if it is satisfied for the matrix $\mathbf{A}$. It is not true that the null space property remains valid if we multiply on the right by an invertible matrix.
+    \end{enumerate}
+\end{remark}
+
+The \emph{\textcolor[rgb]{1,0,0}{real null space relative to a set $S$}}:
+\begin{equation}
+    \sum\limits_{j \in S} \left|v_j\right| < \sum\limits_{\ell \in \bar{S}} \left|v_{\ell}\right| \quad \text{for all } v \in \text{ker}_{\mathbb{R}} \mathbf{A}, v \neq 0,
+    \label{eq0.4.4}
+\end{equation}
+and, on the other hand, to the \emph{\textcolor[rgb]{1,0,0}{complex null space property relative to $S$}}:
+\begin{equation}
+    \sum\limits_{j \in S} \sqrt{v_j^2 + w_j^2} < \sum\limits_{\ell \in \bar{S}} \sqrt{v_{\ell}^2 + w_{\ell}^2} \quad \text{for all } v,w \in \text{ker}_{\mathbb{R}} \mathbf{A},(v,w) \neq (0,0).
+    \label{eq0.4.5}
+\end{equation}
+The real and complex version are in fact equivalent. These vectors can be interpreted as real or as complex vectors. The followed theorem explains why we usually work in the complex setting.
+\begin{theorem}
+    \label{th0.4.7}
+    Given a matrix $\mathbf{A} \in \mathbb{R}^{m\times N}$, the real null space property \cref{eq0.4.4} relative to a set $S$ is equivalent to the complex null space property \cref{eq0.4.5} relative to this set $S$.
+
+    In particular, the real null space property of order $s$ is equivalent to the complex null space property of order $s$.
+\end{theorem}
+
+
+
+
+
+
+
