@@ -124,7 +124,7 @@ where the function $F_0 : \mathbb{R}^N \rightarrow \mathbb{R}$ is called an \emp
     \mathop{\mathrm{minimize}}\|z\|_0 \quad \text{subject to } \mathbf{A}z = y. \tag{$P_0$}
     \label{eq0.p0}
 \end{equation}
-This is a nonconvex problem and NP-hard in general. However, keeping in mind that $\|z\|_q^q$ opproaches $\|z\|_0$ as $q>0$ tends to zero, we can approximate \cref{eq0.p0} by the problem
+This is a nonconvex problem and NP-hard in general. However, keeping in mind that $\|z\|_q^q$ approaches $\|z\|_0$ as $q>0$ tends to zero, we can approximate \cref{eq0.p0} by the problem
 \begin{equation}
     \mathop{\mathrm{minimize}}\|z\|_q \quad \text{subject to } \mathbf{A}z = y. \tag{$P_q$}
     \label{eq0.pq}
@@ -230,7 +230,7 @@ This is an instance of a \emph{\textcolor[rgb]{1,0,0}{second-order cone problem}
 \begin{proposition}
     \label{pr0.3.2}
     \begin{enumerate}[(a)]
-        \item If $x$ is a minimizer of the basis pursuit denoising \cref{eq0.3.2} with $\lambda > 0$, then there exists $\eta = \eta_x \geq 0$ such that $x$ is a minimizer of ther quadratically constrained basis pursuit \cref{eq0.3.1}.
+        \item If $x$ is a minimizer of the basis pursuit denoising \cref{eq0.3.2} with $\lambda > 0$, then there exists $\eta = \eta_x \geq 0$ such that $x$ is a minimizer of the quadratically constrained basis pursuit \cref{eq0.3.1}.
         \item If $x$ is unique minimizer of the quadratically constrained basis pursuit \cref{eq0.3.1} with $\eta \geq 0$, then there exists $\tau = \tau_x \geq 0$ such that $x$ is a unique minimizer of the LASSO \cref{eq0.3.3}.
         \item If $x$ is a minimizer of the LASSO \cref{eq0.3.3} with $\tau \geq 0$, then there exists $\lambda = \lambda_x \geq 0$ such that $x$ is a minimizer of the basis pursuit denoising \cref{eq0.3.2}.
     \end{enumerate}
@@ -636,8 +636,45 @@ The vectors we aim to recover via basis pursuit--or other schemes, for that matt
     A matrix $\mathbf{A} \in \mathbb{C}^{m\times N}$ is said to satisfy the \textcolor[rgb]{1,0,0}{stable null space property} with constant $0 < \rho <1$ relative to a set $S \subset [N]$ if 
     \[
         \|v_S\|_1 \leq \rho\|v_{\bar{S}}\|_1 \quad \text{for all } v \in \text{ker}\mathbf{A}.
-    \]<++>
-\end{definition}<++>
+    \]
+    It is to satisfy the stable null space property of order $s$ with constant $0< \rho <1$ if it satisfies the stable null space property with constant $0 <\rho < 1$ relative to any set $S \subset [N]$ with card$(S) \leq s$.
+\end{definition}
+
+\begin{theorem}
+    \label{th0.4.12}
+    Suppose that a matrix $\mathbf{A} \in \mathbb{C}^{m \times N}$ satisfies the stable null space property of order $s$ with constant $0 < \rho <1$. Then, for any $x \in \mathbb{C}^N$, a solution $x^{\sharp}$ of \cref{eq0.p1} with $y = \mathbf{A}x$ approximates the vector $x$ with $\ell_1$-error
+    \begin{equation}
+        \|x - x^{\sharp}\|_1 \leq \frac{2(1+\rho)}{(1-\rho)} \sigma_s(x)_1.
+        \label{eq0.4.9}
+    \end{equation}
+\end{theorem}
+
+\begin{remark}
+    \label{rmk0.4.13}
+    In contrast to \cref{th0.4.4} we cannot guarantee uniqueness of the $\ell_1$-minimizer anymore---although nonuniqueness is rather pathological. In any case, even when the $\ell_1$-minimizer is not unique, the theorem above states that \emph{\textcolor[rgb]{1,0,0}{every solution $x^{\sharp}$ of \cref{0.p1} with $y = \mathbf{A}x$ satisfies \cref{eq0.4.9}}}.
+\end{remark}
+
+Apart from improving \cref{th0.4.12}, the result also says that, under the stable null space property relative to $S$, the distance between a vector $x \in \mathbb{C}^{N}$ supported on $S$ and a vector $z \in \mathbb{C}^N$ satisfying $\mathbf{A}z = \mathbf{A}x$ is controlled by the difference between their norms.
+
+\begin{theorem}
+    \label{th0.4.14}
+    The matrix $\mathbf{A} \in \mathbb{C}^{m \times N}$ satisfies the stable null space property with constant $0<\rho<1$ relative to $S$ if and only if 
+    \begin{equation}
+        \|z-x\|_1 \leq \frac{1+\rho}{1-zr}\left( \|z\|_1 - \|x\|_1 +2\|x_{\bar{S}}\|_1 \right)
+        \label{eq0.4.10}
+    \end{equation}
+    for all vectors $x,z \in \mathbb{C}^N$ with $\mathbf{A}z = \mathbf{A}x$.
+\end{theorem}
+
+\textcolor[rgb]{1,0,0}{The error bound \cref{eq0.4.9}} follows from \cref{th0.4.14} as follows: Take $S$ to be a set of $s$ largest absolute coefficients of $x$, so that $\|x_{\bar{S}}\|_1 = \sigma_s(x)_1$. If $x^{\sharp}$ is a minimizer of \cref{eq0.p1}, then $\|x^{\sharp}\|_1 \leq \|x\|_1$ and $\mathbf{A}x^{\sharp} = \mathbf{A}x$. The right-hand side of inequality \cref{eq0.4.10} with $z = x^{\sharp}$ can therefore be estimated by the right hand of \cref{eq0.4.9}.
+
+\begin{lemma}
+    \label{lm0.4.15}
+    Given a set $S \subset [N]$ and vectors $x,z \in \mathbb{C}^N$,
+    \[
+        \|(x-z)_{\overline{S}}\|_1 \leq \|z\|_1 - \|x\|_1 + \|(x-z)_S\|_1 + 2\|x_{\overline{S}}\|_1
+    \]
+\end{lemma}
 
 
 
