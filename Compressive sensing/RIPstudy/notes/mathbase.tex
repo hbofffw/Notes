@@ -676,6 +676,217 @@ Apart from improving \cref{th0.4.12}, the result also says that, under the stabl
     \]
 \end{lemma}
 
+We assume that the matrix $\mathbf{A}$ satisfies \cref{eq0.4.10} for all vectors $x,z \in \mathbb{C}^N$ with $\mathbf{A}z = \mathbf{A}x$. Given a vector $v \in \text{ker}\mathbf{A}$, since $\mathbf{A}v_{\overline{S}} = \mathbf{A}_{(-v_S)}$, we can apply \cref{eq0.4.10} with $x = -v_S$ and $z = v_{\overline{S}}$. It yields
+\[
+    \|v\|_1 \leq \frac{1+\rho}{1-\rho}\left( \|v_{\overline{S}}\|_1 - \|v_S\|_1 \right).
+\]
+This can be written as 
+\[
+    (1-\rho)(\|v_S\|_1 + \|v_{\overline{S}}\|_1) \leq (1+\rho)(\|v_{\overline{S}}\|_1 - \|v_S\|_1).
+\]
+After rearranging:
+\[
+    \|v_S\|_1 \leq \rho \|v_{\overline{S}}\|_1,
+\]
+and we recognize the stable null space property with constant $0 < \rho <1$ relative to $S$.
+
+Conversely, we now assume that the matrix $\mathbf{A}$ satisfies the stable null space property with constant $0<\rho<1$ relative to $S$. For $x,z \in \mathbb{C}^N$ with $\mathbf{A}z = \mathbf{A}x$, since $v := z-x \in \text{ker}\mathbf{A}$, the stable null space property yields
+\begin{equation}
+    \|v_S\|_1 \leq \rho \|v_{\overline{S}}\|_1
+    \label{eq0.4.11}
+\end{equation}
+Moreover, \cref{lm0.4.15} gives
+\begin{equation}
+    \|v_{\overline{S}}\|_1 \leq \|z\|_1 - \|x\|_1 + \|v_S\|_1 + 2\|x_{\overline{S}}\|_1.
+    \label{eq0.4.12}
+\end{equation}
+Substituting \cref{eq0.4.11} into \cref{eq0.4.12}:
+\[
+    \|v_{\overline{S}}\|_1 \leq \|z\|_1 - \|x\|_1 + \rho \|v_{\overline{S}}\|_1 + 2\|x_{\overline{S}}\|_1.
+\]
+Since $\rho < 1$, this can be rewritten as:
+\[
+    \|v_{\overline{S}}\|_1 \leq \frac{1}{1-\rho}\left( \|z\|_1 -\|x\|_1 + 2\|x_{\overline{S}}\|_1 \right),
+\]
+Using \cref{eq0.4.11} again:
+\[
+    \|v_1\| = \|v_{\overline{S}}\|_1 + \|v_S\|_1 \leq (1+\rho)\|v_{\overline{S}}\|_1 \leq \frac{1+\rho}{1-\rho}\left( \|z\|_1 - \|x\|_1 + 2\|x_{\overline{S}}\|_1 \right),
+\]
+which proves the \cref{th0.4.14}.
+
+
+\begin{remark}
+    \label{rmk0.4.16}
+    Given the matrix $\mathbf{A} \in \mathbb{C}^{m \times N}$, we consider, for each index set $S \subset [N]$ with card$(S) \leq s$, the operator $\mathbf{R}_S$ defined on ker$\mathbf{A}$ by $\mathbf{R}_S(v) = v_S$. The formulation \cref{0.4.2} of the null space property says that
+    \[
+        \mu := \max\left\{ \|\mathbf{R}_S\|_{1\rightarrow 1} : S \subset [N], \text{card}(S) \leq s \right\} < 1/2.
+    \]
+    It then follows that $\mathbf{A}$ satisfies the stable null space property with constant $\rho := \mu / (\bigcap\mu)<1$. Thus, the stability of the basis pursuit comes for free if sparse vectors are exactly recovered. However, the constant $1(1+\rho)/(1-\rho)$ in \cref{eq0.4.9} may be very large if $\rho$ is close to one.
+\end{remark}
+
+\subsection{Robustness}
+
+In realistic situations, it is also inconceivable to measure a signal $x \in \mathbb{C}^N$ with infinite precision. This means that the measurement vector $y \in \mathbb{C}^m$ is only an approximation of the vector $\mathbf{A}x \in \mathbb{C}^m$, with
+\[
+    \|\mathbf{A}x - y\| \leq \eta
+\]
+for some $\eta \geq 0$ and for some norm $\|\cdot\|$ on $\mathbb{C}^m$---usually the $\ell_2$-norm, but the $\ell_1$-norm will also be considered. In this case, the reconstruction scheme should be required to output a vector $x^* \in \mathbb{C}^N$ whose distance to the original vector $x \in \mathbb{C}^N$ is controlled by the measurement error $\eta \geq 0$, which is referred to as the \emph{\textcolor[rgb]{1,0,0}{robustness}} of the reconstruction scheme with respect to measurement error. Then the \cref{eq0.p1} is replaced by \cref{eq0.p1n}.
+
+\begin{definition}
+    \label{def0.4.17}
+    The matrix $\mathbf{A} \in \mathbb{C}^{m \times N}$ is said to satisfy the \textcolor[rgb]{1,0,0}{robust null space property} (with respect to $\|\cdot\|$) with constants $0<\rho<1$ and $\tau>0$ relative to a set $S \subset [N]$ if 
+    \begin{equation}
+        \|v_S\|_1 \leq \rho \|v_{\overline{S}}\|_1 + \tau\|\mathbf{A}v\| \quad \text{for all } v \in \mathbb{C}^N.
+        \label{eq0.4.13}
+    \end{equation}
+\end{definition}
+\begin{remark}
+    \label{rmk0.4.18}
+    Observe that the above definition does not require that $v$ is contained in $ker\mathbf{A}$. In fact, if $v \in ker\mathbf{A}$, then the term $\|\mathbf{A}v\|$ in \cref{eq0.4.13} vanishes, and we see that the \textcolor[rgb]{1,0,0}{robust null space property implies the stable null space property in \cref{def0.4.11}}.
+\end{remark}
+
+The theorem followed constitutes the first main result of this section. It incorporates the conclusion of \cref{th0.4.12} as the special case $\eta = 0$. The special case of an $s$-sparse vector $x \in \mathbb{C}^N$ is also worth a separate look.
+
+\begin{theorem}
+    \label{th0.4.19}
+    Suppose that a matrix $\mathbf{A} \in \mathbb{C}^{m\times N}$ satisfies the robust null space property of order $s$ with constants $0<\rho<1$ and $\tau>0$. Then, for any $x \in \mathbb{C}^N$, a solution $x^{\sharp}$ of \cref{eq0.p1n} with $y = \mathbf{A}x + e$ and $\|e\| \leq \eta$ approximates the vector $x$ with $\ell_1$-error
+    \[
+        \|x - x^{\sharp}\|_1 \leq \frac{2(1+\rho)}{(1-\rho)} \sigma_s(x)_1 + \frac{4 \tau}{1-\rho}\eta.
+    \]
+\end{theorem}
+
+A stronger ``if and only if'' statement valid for any index set $S$ is proved as follows:
+\begin{theorem}
+    \label{th0.4.20}
+    The matrix $\mathbf{A} \in \mathbb{C}^{m \times N}$ satisfies the robust null space property with constants $0<\rho<1$ and $\tau>0$ relative to $S$ if and only if 
+    \begin{equation}
+        \|z-x\|_1 \leq \frac{1+\rho}{1-\rho}(\|z\|_1 - \|x\|_1 + 2\|x_{\overline{S}}\|_1) + \frac{2 \tau}{1-\rho}\|\mathbf{A}(z-x)\|
+        \label{eq0.4.14}
+    \end{equation}
+    for all vectors $x, z \in \mathbb{C}^N$.
+\end{theorem}
+
+
+The second main result enhances the previous robustness result by \emph{\textcolor[rgb]{1,0,0}{replacing the $\ell_2$-error estimate by and $\ell_p$-error estimate for $p \geq 1$}}. A final strengthening of the null space property is required. The corresponding property could be defined relative to any fixed set $S \subset [N]$, but it is not introduced as such because this will not be needed later. 
+
+\begin{definition}
+    \label{def0.4.21}
+    Given $q \geq 1$, the matrix $\mathbf{A} \in \mathbb{C}^{m \times N}$ is said to satisfy the \emph{\textcolor[rgb]{1,0,0}{$\ell_q$-robust null space property}} of order $s$ (with respect to $\|\cdot\|$) with constants $0<\rho<1$ and $\tau>0$ if, for any set $S\subset [N]$ with $card(S) \leq s$,
+    \[
+        \|v_S\|_q \leq \frac{\rho}{s^{1-1/q}} \|V_{\bar{S}}\|_1 + \tau \|\mathbf{A}v\| \quad \text{for all } v \in \mathbb{C}^N.
+    \]
+\end{definition}
+
+In view of the inequality $\|v_S\|_p \leq s^{1/p-1/q}\|v_S\|_q$ for $1 \leq p \leq q$, we observe that the $\ell_p$-robust null space property with constants $ 0 <\rho < 1$ and $\tau > 0$ implies that, for any set $S \subset [N]$ with card$(S) \leq s$,
+\[
+    \|v_S\|_p \leq \frac{\rho}{s^{1-1/p}} \|v_{\overline{S}}\|_1 + \tau s^{1/p-1/q}\|\mathbf{A}v\| \quad \text{for all } v \in \mathbb{C}^N.
+\]
+Thus, for $1 \leq p \leq q$, the $\ell_q$-robust null space property implies the $\ell_p$-robust null space property with identical constants, modulo the change of norms $\|\cdot\| \leftarrow s^{1/p - 1/q}\|\cdot\|$. \textcolor[rgb]{1,0,0}{This justifies in particular that the $\ell_q$-robust null space property is a strengthening of the previous robust null space property}. The robustness of the quadratically constrained basis pursuit algorithm is then deduced according to the following theorem:
+\begin{theorem}
+    \label{th0.4.22}
+    Suppose that the matrix $\mathbf{A} \in \mathbb{C}^{m \times N}$ satisfies the $\ell_2$-robust null space property of order $s$ with constants $0 <\rho <1$ and $\tau > 0$. Then, for any $x \in \mathbb{C}^N$, a solution $x^{\sharp}$ of \cref{eq0.p1n} with $\|\cdot\| = \|\cdot\|_2, y = \mathbf{A}x + e$, and $\|e\|_2 \leq \eta$ approximates the vector $x$ with $\ell_p$-error
+    \begin{equation}
+        \|x-x^{\sharp}\|_p \leq \frac{C}{s^{1-1/p}} \sigma_s(x)_1 + D s^{1/p-1/2}\eta, \qquad 1 \leq q \leq 2,
+        \label{eq0.4.15}
+    \end{equation}
+    for some constants $C,D>0$ depending only on $\rho$ and $\tau$.
+\end{theorem}
+
+The estimates for the extremal values $p=1$ and $p=2$ are the most familiar. They read
+\begin{eqnarray}
+    \label{eqn0.4.16}
+    \|x - x^{\sharp}\|_1 &\leq& C \sigma_s(x)_1 + D \sqrt{s}\eta, \notag \\
+    \|x-x^{\sharp}\|_2 &\leq& \frac{C}{\sqrt{s}} \sigma_s(x)_1 + D \eta.
+\end{eqnarray}
+The coefficient of $\sigma_s(x)_1$ \textcolor[rgb]{1,0,0}{is a constant for $p=1$ and scales like $1/\sqrt{s}$ for $p=2$}, while the coefficient of $\eta$ \textcolor[rgb]{1,0,0}{scales like $\sqrt{s}$ for $p=1$ and is a constant for $p=2$}. 
+
+\begin{remark}
+    \label{rmk0.4.23}
+    Let us comment on the fact that, regardless of the $\ell_p$-sparse in which the error is estimated, the best $s$-term approximation error $\sigma_s(x)_1$ with respect to the $\ell_1$-norm always appears on the right-hand side. One may wonder why \emph{\textcolor[rgb]{1,0,0}{the error estimate in $\ell_2$ does not involve $\sigma_s(x)_1/\sqrt{s}$.}} In fact, we will see in \cref{th11.5frombook} that such an estimate is impossible in parameter regimes of $(m, N)$ that are interesting for Compressive sensing. Besides, we have seen that unit $\ell_p$-balls with $q<1$ provide good models for compressible vectors by virtue of \cref{th2.3frombook} and its refinement \cref{th2.5frombook}. Indeed, if $\|x\|_q \leq 1$ for $q<1$, then, for $p \geq 1$,
+    \[
+        \sigma_s(x)_p \leq s^{1/p-1/q}.
+    \]
+\end{remark}
+\begin{mdframed}
+    \begin{theorem}
+        \label{th11.5frombook}
+        If a pair of measurement matrix and reconstruction map is $\ell_2$-instance optimal of order $s \geq 1$ with constant $C$, then
+        \begin{equation}
+            m \geq cN
+            \label{eq11.3frombook}
+        \end{equation}
+        for some constant $c$ depending only on $C$.
+    \end{theorem}
+    \begin{theorem}
+        \label{th2.3frombook}
+        For any $q>p>0$ and any $x \in \mathbb{C}^N$,
+        \[
+            \sigma_s(x)_q \leq \frac{1}{s^{1/p-1/q}} \|x\|_p.
+        \]
+    \end{theorem}
+    \begin{theorem}
+        \label{th2.5frombook}
+        For any $q>p>0$ and any $x \in \mathbb{C}^N$, the inequality 
+        \[
+            \sigma_s(x)_q \leq \frac{c_{p,q}}{s^{1/p-1/q}} \|x\|_p
+        \]
+        holds with
+        \[
+            c_{p,q} := \left[ \left( \dfrac{p}{q} \right)^{p/q} \left( 1- \dfrac{p}{q}  \right)^{1-p/q} \right]^{1/p} \leq 1.
+        \]
+    \end{theorem}
+\end{mdframed}
+
+Assuming perfect measurements (that is, $\eta$), the error bound \cref{eq0.4.15} yields
+\[
+    \|x-x^{\sharp}\|_p \leq \frac{C}{s^{1-1/p}} \sigma_s(x)_1 \leq Cs^{1/p-1/q}, \quad 1 \leq p \leq 2.
+\]
+
+\begin{remark}
+    \label{rmk0.4.24}
+    The $\ell_q$-robust null space property may seem mysterious at first sight, but it is necessary---save for the condition $\rho<1$---to obtain estimates of the type
+    \begin{equation}
+        \|x-x^{\sharp}\|_q \leq \frac{C}{s^{1-1/q}} \sigma_s(x)_1 + D \eta,
+        \label{eq0.4.17}
+    \end{equation}
+    where $x^{\sharp}$ is a minimizer of \cref{eq0.p1n} with $y = \mathbf{A}x + e \leq \eta$. Indeed, given $v \in \mathbb{C}^N$ and $S \subset [N]$ with $card(S) \leq s$, we apply \cref{eq0.4.17} with $x=v, e= -\mathbf{A}v$ and $\eta=\|\mathbf{A}v\|$, so that $x^{\sharp} = 0$, to obtain
+    \[
+        \|v\|_q \leq \frac{C}{s^{1-1/q}} \|v_{\overline{S}}\|_1 + D \|\mathbf{A}v\|,
+    \]
+    and in particular
+    \[
+        \|v_S\|_q \leq \frac{C}{s^{1-1/q}} \|v_{\overline{S}}\|_1 + D \|\mathbf{A}v\|.
+    \]
+\end{remark}
+
+\begin{theorem}
+    \label{th0.4.25}
+    Given $1 \leq p \leq q$, suppose that the matrix $\mathbf{A} \in \mathbb{C}^{m \times N}$ satisfies the $\ell_q$-robust null space property of order $s$ with constants $0<\rho<1$ and $\tau > 0$. Then, for any $x,z \in \mathbb{C}^N$,
+    \[
+        \|z-x\|_p \leq \frac{C}{s^{1-1/p}}\left( \|z\|_1 - \|x\|_1 + 2\sigma_s(x)_1 \right) + D s^{1/p-1/q} \|\mathbf{A}(z-x)\|,
+    \]
+    where $C := (1+\rho)^2/(1-\rho)$ and $D := (3+\rho)\tau/(1-\rho)$.
+\end{theorem}
+
+\begin{proof}
+    Let us first remark that the $\ell_p$-robust null space properties imply the $\ell_1$-robust and $\ell_p$-robust null space property $(p \leq q)$ in the forms
+    \begin{equation}
+        \|v_S\|_1 \leq \rho \|v_{\overline{S}}\|_1 + \tau s^{1-1/q}\|\mathbf{A}v\|,
+        \label{eq0.4.18}
+    \end{equation}
+    \begin{equation}
+        \|v_S\|_p \leq \frac{\rho}{s^{1-1/p}}\|v_{\overline{S}}\|_1 + \tau s^{1/p-1/q} \|\mathbf{A}v\|,
+        \label{eq0.4.19}
+    \end{equation}
+    for all $v \in \mathbb{C}^N$ and all $S \subset [N]$ with card$(S) \leq s$. Thus, in view of \cref{0.4.18}, applying \cref{th0.4.20} with $S$ chosen as an index set of $s$ largest (in modulus) entries of $x$ leads to 
+    \begin{equation}
+         \|z-x\|_1 \leq \frac{1+\rho}{1-\rho}(\|z\|_1 - \|x\|_1 + 2\sigma_s(x)_1) + \frac{2\tau`}{1-\rho}s^{1-1/q} \|\mathbf{A}(z-x)\|.
+        \label{eq0.4.20}
+    \end{equation}
+
+\end{proof}<++>
+
+
 
 
 
