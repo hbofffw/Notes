@@ -651,7 +651,7 @@ The vectors we aim to recover via basis pursuit--or other schemes, for that matt
 
 \begin{remark}
     \label{rmk0.4.13}
-    In contrast to \cref{th0.4.4} we cannot guarantee uniqueness of the $\ell_1$-minimizer anymore---although nonuniqueness is rather pathological. In any case, even when the $\ell_1$-minimizer is not unique, the theorem above states that \emph{\textcolor[rgb]{1,0,0}{every solution $x^{\sharp}$ of \cref{0.p1} with $y = \mathbf{A}x$ satisfies \cref{eq0.4.9}}}.
+    In contrast to \cref{th0.4.4} we cannot guarantee uniqueness of the $\ell_1$-minimizer anymore---although nonuniqueness is rather pathological. In any case, even when the $\ell_1$-minimizer is not unique, the theorem above states that \emph{\textcolor[rgb]{1,0,0}{every solution $x^{\sharp}$ of \cref{eq0.p1} with $y = \mathbf{A}x$ satisfies \cref{eq0.4.9}}}.
 \end{remark}
 
 Apart from improving \cref{th0.4.12}, the result also says that, under the stable null space property relative to $S$, the distance between a vector $x \in \mathbb{C}^{N}$ supported on $S$ and a vector $z \in \mathbb{C}^N$ satisfying $\mathbf{A}z = \mathbf{A}x$ is controlled by the difference between their norms.
@@ -717,7 +717,7 @@ which proves the \cref{th0.4.14}.
 
 \begin{remark}
     \label{rmk0.4.16}
-    Given the matrix $\mathbf{A} \in \mathbb{C}^{m \times N}$, we consider, for each index set $S \subset [N]$ with card$(S) \leq s$, the operator $\mathbf{R}_S$ defined on ker$\mathbf{A}$ by $\mathbf{R}_S(v) = v_S$. The formulation \cref{0.4.2} of the null space property says that
+    Given the matrix $\mathbf{A} \in \mathbb{C}^{m \times N}$, we consider, for each index set $S \subset [N]$ with card$(S) \leq s$, the operator $\mathbf{R}_S$ defined on ker$\mathbf{A}$ by $\mathbf{R}_S(v) = v_S$. The formulation \cref{eq0.4.2} of the null space property says that
     \[
         \mu := \max\left\{ \|\mathbf{R}_S\|_{1\rightarrow 1} : S \subset [N], \text{card}(S) \leq s \right\} < 1/2.
     \]
@@ -878,7 +878,7 @@ Assuming perfect measurements (that is, $\eta$), the error bound \cref{eq0.4.15}
         \|v_S\|_p \leq \frac{\rho}{s^{1-1/p}}\|v_{\overline{S}}\|_1 + \tau s^{1/p-1/q} \|\mathbf{A}v\|,
         \label{eq0.4.19}
     \end{equation}
-    for all $v \in \mathbb{C}^N$ and all $S \subset [N]$ with card$(S) \leq s$. Thus, in view of \cref{0.4.18}, applying \cref{th0.4.20} with $S$ chosen as an index set of $s$ largest (in modulus) entries of $x$ leads to 
+    for all $v \in \mathbb{C}^N$ and all $S \subset [N]$ with card$(S) \leq s$. Thus, in view of \cref{eq0.4.18}, applying \cref{th0.4.20} with $S$ chosen as an index set of $s$ largest (in modulus) entries of $x$ leads to 
     \begin{equation}
          \|z-x\|_1 \leq \frac{1+\rho}{1-\rho}(\|z\|_1 - \|x\|_1 + 2\sigma_s(x)_1) + \frac{2\tau`}{1-\rho}s^{1-1/q} \|\mathbf{A}(z-x)\|.
         \label{eq0.4.20}
@@ -907,9 +907,8 @@ In some case, specific sparse vectors need to be dealt with rather than with all
     \right.
 \end{equation*}
 \emph{\textcolor[rgb]{1,0,0}{is a discrete quantity when $z$ is real, but it is not when $z$ is complex}}. For a vector $x \in \mathbb{C}^N$, we denote by $\mathop{\mathrm{sgn}}(x) \in \mathbb{C}^N$ the vector with components $\mathop{\mathrm{sgn}}(x_j), j \in [N]$. The following contents start with the complex version of a recovery condition valid for sparse vectors.
-
 \begin{theorem}
-    \label{thm0.4.26}
+    \label{th0.4.26}
     Given a matrix $\mathbf{A} \in \mathbb{C}^{m \times N}$, a vector $x \in \mathbb{C}^N$ with support $S$ is the unique minimizer of $\|z\|_1$ subject to $\mathbf{A}z = \mathbf{A}x$ if one of the following equivalent conditions holds:
     \begin{enumerate}[(a)]
         \item $\left|\sum\limits_{j \in S}^{} \overline{\mathop{\mathrm{sgn}}(x_j)v_j}\right| < \|v_{\overline{S}}\|_1$ for all $v \in \mathop{\mathrm{ker}} \mathbf{A} \backslash \{0\}$,
@@ -917,8 +916,54 @@ In some case, specific sparse vectors need to be dealt with rather than with all
             \[
                 (\mathbf{A}^*h)_j = \mathop{\mathrm{sgn}}(x_j), \quad j \in S, \qquad \left|(\mathbf{A}^*h)_{\ell}\right| < 1, \quad \ell \in \overline{S}.
             \]
-    \end{enumerate}<++>
-\end{theorem}<++>
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    Let us start by proving that (a) implies that $x$ is the unique minimizer of $\|z\|_1$ subject to $\mathbf{A}z = \mathbf{A}x$. For a vector $z \neq x$ such that $\mathbf{A}z = \mathbf{A}x$, we just have to write, with $v := x-z \in \text{ker}\mathbf{A} \backslash \{0\}$,
+    \begin{eqnarray*}
+        \|z\|_1 &=& \|z_S\|_1 + \|z_{\overline{S}}\|_1 = \|(x-v)_S\|_1 + \|v_{\overline{S}}\|_1 \\
+        &>& \left|\left<x - v, \text{sgn}(x)_S\right>\right| + \left|\left<v,\text{sgn}(x)_S\right>\right| \geq \left|\left<x, \text{sgn}(x)_S\right>\right| = \|x\|_1.
+    \end{eqnarray*}
+
+    The implication $(b) \Rightarrow (a)$ is also simple. Indeed, observing that $\mathbf{A}v_S = -\mathbf{A}v_{\overline{S}}$ for $v \in \text{ker}\mathbf{A} \backslash \{0\}$, we write
+    \begin{eqnarray*}
+        \left|\sum\limits_{j \in S}^{}\overline{\text{sgn}(x_j)}v_j\right| &=& \left|\left<v_S, \mathbf{A}^*h\right>\right| = \left|\left<\mathbf{A}v_S, h\right>\right| = \left|\left<\mathbf{A}v_{\overline{S}}, h\right>\right| \\
+        &=& \left|\left<v_{\overline{S}, \mathbf{A}^*h}\right>\right| \leq \max\limits_{\ell \in \bar{S}}^{} \left|(\mathbf{A}^*h)_{\ell}\right| \|v_{\overline{S}}\|_1 < \|v_{\overline{S}}\|_1.
+    \end{eqnarray*}
+    The strict inequality holds since $\|v_{\overline{S}}\|_1 > 0$; otherwise, the nonzero vector $v \in \text{ker}\mathbf{A}$ would be supported on $S$, contradicting the injectivity of $\mathbf{A}_S$. 
+    
+    The remaining implication $(a) \Rightarrow (b)$ requires more work. We start by noticing that $(a)$ implies $\|v_{\overline{S}}\| > 0$ for all $v \in \text{ker}\mathbf{A} \backslash \{0\}$. It follows that the matrix $\mathbf{A}_S$ is injective. Indeed, assume $\mathbf{A}_S v_S = 0$ for some $v_S \neq 0$ and complete $v_S$ to a vector $v \in \mathbb{C}^N$ by setting $v_{\overline{S}} = 0$. Then $v$ is contained in ker$\mathbf{A} \backslash \{0\}$, which is in contradiction with $\|v_{\overline{S}} > 0\|$ for all $v \in \text{ker}\mathbf{A}\backslash \{0\}$. Next, since the continuous function $v \mapsto\left|\left<v, \text{sgn}(x)_S\right>\right|/\|v_{\overline{S}}\|_1$ takes values less than one on the unit sphere of ker$\mathbf{A}$, which is compact, its maximum $\mu$ satisfies $\mu<1$. By homogeneity, we deduce
+    \[
+        \left|\left<v, \text{sgn}(x)_S\right>\right| \leq \mu \|v_{\overline{S}}\|_1 \quad \text{for all } v \in \text{ker}\mathbf{A}.
+    \]
+    We then define, for $\mu<\nu<1$, the convex set $\mathcal{C}$ and the affine set $\mathcal{D}$ by
+    \begin{eqnarray*}
+        \mathcal{C} &:=& \left\{ z \in \mathbb{C}^N : \|z_S\|_1 + \nu \|z_{\overline{S}}\|_1 \leq \|x\|_1 \right\}, \\
+        \mathcal{D} &:=& \left\{ z \in \mathbb{C}^N : \mathbf{A}z = \mathbf{A}x \right\}.
+    \end{eqnarray*}
+    The intersection $\mathcal{C} \cup \mathcal{D}$ reduces to $\{x\}$. Indeed, we observe that $x \in \mathcal{C} \cup \mathcal{D}$, and if $z \neq x$ belongs to $\mathcal{C}\cup \mathcal{D}$, setting $v := x-z \in \text{ker}\mathbf{A} \backslash \{0\}$, we obtain a contradiction from 
+    \begin{eqnarray*}
+        \|x\|_1 &\geq& \|z_S\|_1 + \nu\|z_{\overline{S}}\|_1 = \|(x-v)_S\|_1 + \nu\|v_{\overline{S}}\|_1 \\
+        &>& \|(x-v)_S\|_1 + \mu\|v_{\overline{S}}\|_1 \geq \left|\left<x-v, \text{sgn}(x)_S\right>\right| + \left|\left<v, \mathop{\mathrm{sgn}}(x)_S\right>\right| \\
+        &\geq& \left|\left<x, \mathop{\mathrm{sgn}}(x)_S\right>\right| = \|x\|_1.
+    \end{eqnarray*}
+    Thus, by the separation of convex sets via hyperplanes there exists a vector $w \in \mathbb{C}^N$ such that
+    \begin{eqnarray}
+        \label{eq0.4.22}
+        \mathcal{C} \subset \left\{ z \in \mathbb{C}^N : \mathop{\mathrm{Re}}\left<z,w\right> \leq \|x\|_1 \right\}, \\
+        \label{eq0.4.23}
+        \mathcal{D} \subset \left\{ z \in \mathbb{C}^N : \mathop{\mathrm{Re}}\left<z,w\right> = \|x\|_1 \right\}.
+    \end{eqnarray}
+    In view of \cref{eq0.4.22}, we have
+    \begin{eqnarray*}
+        \|x\|_1 &\geq& \max\limits_{\|z_S+\nu z_{\overline{S}}\|_1 \leq \|x\|_1}^{} \mathop{\mathrm{Re}}\left<z,w\right> \\
+        &=& \max\limits_{\|z_S + \nu z_{\overline{S}}\|_1 \leq \|x\|_1}^{} \mathop{\mathrm{Re}} \left( \sum\limits_{j \in S}^{} z_j \overline{w_j} + \sum\limits_{j \in \overline{S}}^{} \nu z_j \overline{w_j}/\nu \right) \\
+        &=& \max\limits_{\|z_S + \nu z_{\overline{S}}\|_1 \leq \|x\|_1}^{} \mathop{\mathrm{Re}} \left<z_S + \nu z_{\overline{S}}, w_s +(1/\nu)w_{\overline{S}}\right> \\
+        &=&  \|x\|_1 \|w_S + (1/\nu)w_{\overline{S}}\|_{\infty} = \|x\|_1 \max \{\|w_S\|_{\infty}, (1/\nu)\|w_{\overline{S}}\|_{\infty}\}.
+    \end{eqnarray*}
+    Setting aside the case $x \neq 0$ (where the choice $h=0$ would do), we obtain $\|w_S\|_{\infty} \leq `$ and $\|w_{\overline{S}}\|_{\infty} \leq \nu <`$. From \cref{eq0.4.23}, we derive $\mathop{\mathrm{Re}}<x,w> = \|x\|_1$, i.e., $w_j = \text{sgn}(x_j)$ for all $j \in S$, and also Re$<v,w> = 0$ for all $v \in \text{ker}\mathbf{A}$, i.e., $w \in (\text{ker}\mathbf{A})^{\perp}$. Since (ker$\mathbf{A}$)$^{\perp} = \text{ran}\mathbf{A}^*$, we write $w = \mathbf{A}^*h$ for some $h \in \mathbb{C}^m$. This establishes ($b$).
+
+\end{proof}
 
 \begin{remark}
     \label{rmk0.4.27}
@@ -940,7 +985,13 @@ In some case, specific sparse vectors need to be dealt with rather than with all
 
 Throughout the section, we have insisted on sparse vectors to be unique solutions of \cref{eq0.p1}. If the uniqueness requirement is dropped, then a necessary and sufficient condition for every $s$-sparse vector to be a solution of \cref{eq0.p1} would be a \textcolor[rgb]{1,0,0}{\emph{weak null space property where the strict inequality is replaced by a weak inequality sign}}.
 
+The null space property is somewhat folklore in the compressive sensing literature. It appears implicitly in works in \cite{Donoho2003}, in \cite{Donoho2001}, and in \cite{Elad2002}. In \cite{Gribonval2003} the notion was also isolated. The name was first used in \cite{Cohen2009}, albeit for a property slightly more general then \cref{eq0.4.3}, namely, $\|v\|_1 \leq C\sigma_s(v)_1$ for all $v \in \text{ker}\mathbf{A}$, where $C \geq 1$ is an unspecified constant. 
 
+The equivalence between the real and complex null space propertiew was established in \cite{Foucart2010}. using a \emph{\textcolor[rgb]{1,0,0}{different argument}} than the one of \cref{th0.4.7}. The result was generalized in \cite{Lai2011}. The proof of \cref{th0.4.7} follows their argument.
+
+The term \emph{\textcolor[rgb]{1,0,0}{instance optimality}} is sometimes also used for what we called stability. The stability and robustness of sparse reconstruction via basis pursuit, as stated after \cref{th0.4.22}, were established in \cite{Candes2006a} under a restricted isometry property---condition on the measurement matrix.
+
+The fact taht sparse recovery via $\ell_p$-minimization implies sparse recovery via $\ell_p$-minimization whenever $0<p<q\leq 1$ was proved in \cite{Gribonval2007}. 
 
 
 
