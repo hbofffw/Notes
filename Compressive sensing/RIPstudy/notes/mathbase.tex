@@ -777,7 +777,7 @@ The second main result enhances the previous robustness result by \emph{\textcol
     \]
 \end{definition}
 
-In view of the inequality $\|v_S\|_p \leq s^{1/p-1/q}\|v_S\|_q$ for $1 \leq p \leq q$, we observe that the $\ell_p$-robust null space property with constants $ 0 <\rho < 1$ and $\tau > 0$ implies that, for any set $S \subset [N]$ with card$(S) \leq s$,
+In view of the \emph{\textcolor[rgb]{1,0,0}{inequality $\|v_S\|_p \leq s^{1/p-1/q}\|v_S\|_q$ for $1 \leq p \leq q$}}, we observe that the $\ell_p$-robust null space property with constants $ 0 <\rho < 1$ and $\tau > 0$ implies that, for any set $S \subset [N]$ with card$(S) \leq s$,
 \[
     \|v_S\|_p \leq \frac{\rho}{s^{1-1/p}} \|v_{\overline{S}}\|_1 + \tau s^{1/p-1/q}\|\mathbf{A}v\| \quad \text{for all } v \in \mathbb{C}^N.
 \]
@@ -883,10 +883,62 @@ Assuming perfect measurements (that is, $\eta$), the error bound \cref{eq0.4.15}
          \|z-x\|_1 \leq \frac{1+\rho}{1-\rho}(\|z\|_1 - \|x\|_1 + 2\sigma_s(x)_1) + \frac{2\tau`}{1-\rho}s^{1-1/q} \|\mathbf{A}(z-x)\|.
         \label{eq0.4.20}
     \end{equation}
+    Then, choosing $S$ as an index of $s$ largest (in modulus) entries of $z-x$, we use \cref{th2.5frombook} to notice that
+    \[
+        \|z-x\|_p \leq \|(z-x)_{\overline{S}}\|_p + \|(z-x)_S\|_p \leq \frac{1}{s^{1-1/p}} \|z-x\|_1 + \|(z-x)_S\|_p.
+    \]
+    In view of \cref{eq0.4.19}, we derive
+    \begin{eqnarray}
+        \label{eq0.4.21}
+        \|z-x\|_p &\leq& \frac{1}{s^{1-1/p}} \|z-x\|_1 + \frac{\rho}{s^{1-1/p}} \|(z-x)_{\overline{S}}\|_1 + \tau s^{1/p-1/q} \|\mathbf{A}(z-x)\| \notag \\
+        &\leq& \frac{1+\rho}{s^{1-1/p}} \|z-x\|_1 + \tau s^{1/p-1/q} \|\mathbf{A}(z-x)\|.
+    \end{eqnarray}
+\end{proof}
 
-\end{proof}<++>
+\subsection{Recovery of Individual Vectors}
+In some case, specific sparse vectors need to be dealt with rather than with all vectors supported on a given set or all vectors with a given sparsity. Therefore, some recovery conditions finer than the null space property are required. Such conditions are provided as follows, with a subtle difference between the real and complex settings, due to the fact the \emph{sign} of a number $z$, defined as
+\begin{equation*}
+    \mathop{\mathrm{sng}}(z) :=
+    \left\{ 
+        \begin{array}{cc}
+            \dfrac{z}{\left|z\right|} \quad & if \ z\neq 0, \\
+            0 \quad & if \ z=0,
+        \end{array}
+    \right.
+\end{equation*}
+\emph{\textcolor[rgb]{1,0,0}{is a discrete quantity when $z$ is real, but it is not when $z$ is complex}}. For a vector $x \in \mathbb{C}^N$, we denote by $\mathop{\mathrm{sgn}}(x) \in \mathbb{C}^N$ the vector with components $\mathop{\mathrm{sgn}}(x_j), j \in [N]$. The following contents start with the complex version of a recovery condition valid for sparse vectors.
 
+\begin{theorem}
+    \label{thm0.4.26}
+    Given a matrix $\mathbf{A} \in \mathbb{C}^{m \times N}$, a vector $x \in \mathbb{C}^N$ with support $S$ is the unique minimizer of $\|z\|_1$ subject to $\mathbf{A}z = \mathbf{A}x$ if one of the following equivalent conditions holds:
+    \begin{enumerate}[(a)]
+        \item $\left|\sum\limits_{j \in S}^{} \overline{\mathop{\mathrm{sgn}}(x_j)v_j}\right| < \|v_{\overline{S}}\|_1$ for all $v \in \mathop{\mathrm{ker}} \mathbf{A} \backslash \{0\}$,
+        \item $\mathbf{A}_S$ is injective, and there exists a vector $h \in \mathbb{C}^m$ such that
+            \[
+                (\mathbf{A}^*h)_j = \mathop{\mathrm{sgn}}(x_j), \quad j \in S, \qquad \left|(\mathbf{A}^*h)_{\ell}\right| < 1, \quad \ell \in \overline{S}.
+            \]
+    \end{enumerate}<++>
+\end{theorem}<++>
 
+\begin{remark}
+    \label{rmk0.4.27}
+    \begin{enumerate}[(a)]
+        \item If a vector $x \in \mathbb{C}^N$ with support $S$ satisfies condition (a) of the previous theorem, then all vectors $x' \in \mathbb{C}^N$ with support $S' \subset S$ and $\text{sgn}(x')_{S'}$ are also recovered via basis pursuit. Indeed, for $v \in \text{ker}\mathbf{A} \backslash \{0\}$,
+            \begin{eqnarray*}
+                \left|\sum\limits_{j\in S'}^{}\text{sgn}(x_j')v_j\right| &=& \left|\sum\limits_{j \in S}^{}\text{sgn}(x_j)v_j - \sum\limits_{j \in S\backslash S'}^{}\text{sgn}(x_j)v_j\right| \\
+                &\leq& \left|\sum\limits_{j \in S}^{}\text{sgn}(x_j)v_j \right| + \sum\limits_{j \in S \backslash S'}^{}|v_j| < \|v_{\overline{S}}\|_1 + \|v_{S \backslash S'}\|_1 = \|v_{\overline{S'}}\|_1.
+            \end{eqnarray*}
+        \item \cref{th0.4.26} can be made stable under noise on the measurements and under passing to compressible vectors. However, the resulting error bounds are slightly weaker than the ones of \cref{th0.4.25} under the $\ell_2$-robust null space property.
+    \end{enumerate}
+\end{remark}
+
+\subsection{The Projected Cross-Polytope}
+
+\subsection{Low-Rank Matrix Recovery}
+
+\subsection{Notes}
+
+Throughout the section, we have insisted on sparse vectors to be unique solutions of \cref{eq0.p1}. If the uniqueness requirement is dropped, then a necessary and sufficient condition for every $s$-sparse vector to be a solution of \cref{eq0.p1} would be a \textcolor[rgb]{1,0,0}{\emph{weak null space property where the strict inequality is replaced by a weak inequality sign}}.
 
 
 
