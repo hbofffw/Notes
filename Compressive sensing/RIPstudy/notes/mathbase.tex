@@ -977,6 +977,171 @@ In some case, specific sparse vectors need to be dealt with rather than with all
     \end{enumerate}
 \end{remark}
 
+\begin{corollary}
+    \label{clr0.4.28}
+    let $a_1,\dots,a_N$ be the columns of $\mathbf{A} \in \mathbb{C}^{c \times N}$. For $x \in \mathbb{C}^N$ with support $S$, if the matrix $\mathbf{A}_S$ is injective and if 
+    \begin{equation}
+        \left|\left<\mathbf{A}_S^{\dagger}a_{\ell}, \text{sgn}(x_S)\right>\right| < 1 \quad \text{for all } \ell \in \overline{S},
+        \label{eq0.4.24}
+    \end{equation}
+    then the vector $x$ is the unique solution of \cref{eq0.p1} with $y = \mathbf{A}x$.
+\end{corollary}
+
+\begin{remark}
+    \label{rmk0.4.29}
+    In general, there is no converse to \cref{th0.4.26}. Let us consider, for instance,
+    \[
+        \mathbf{A} := \left[ 
+            \begin{array}[]{ccc}
+                1 & 0 & -1 \\
+                0 & 1 & -1
+            \end{array}
+        \right],
+        x = \left[ 
+            \begin{array}[]{c}
+                e^{-\pi i/3} \\
+                e^{\pi i/3} \\
+                0
+            \end{array}
+        \right].
+    \]
+\end{remark}
+We can verify that $x$ is the unique minimizer of $\|z\|_1$ subject to $\mathbf{A}z = \mathbf{A}x$; However, (a) in \cref{th0.4.26} fails. Indeed, for a vector $v = [\zeta,\zeta,\zeta] \in \mathop{\mathrm{ker}}\mathbf{A} \backslash \{0\}$, we have $|\overline{\mathop{\mathrm{sgn}}(x_1)}v_1 + \overline{\mathop{\mathrm{sgn}}(x_2)}v_2| = |(e^{\pi i/3} + e^{-\pi i/3})\zeta| = |\zeta|$， while $\|v_{\{3\}}\|_1 = |\zeta|$. A converse to \cref{th0.4.26} holds in the real setting.
+
+\begin{theorem}
+    \label{th0.4.30}
+    Given a matrix $\mathbf{A} \in \mathbb{R}^{m \times N}$, a vector $x \in \mathbb{R}^N$ with support $S$ is the  unique minimizer of $\|z\|_1$ subject to $\mathbf{A}z = \mathbf{A}x$ if and only if one of the following equivalent conditions holds:
+    \begin{enumerate}[(a)]
+        \item $\left|\sum\limits_{j \in X}^{} \mathop{\mathrm{sgn}}(x_j)v_j\right| < \|v_{\overline{S}}\|_1$ for all $v \in \mathop{\mathrm{ker}} \mathbf{A} \backslash \{0\}$.
+        \item $\mathbf{A}_S$ is injective, and there exists a vector $h \in \mathbb{R}^m$ such that 
+            \[
+                (\mathbf{A}^T h)_j = \mathop{\mathrm{sgn}}(x_j), \quad j \in S, \qquad \left|(\mathbf{A}^T h)_{\ell}\right| < 1, \quad \ell \in \overline{S}.
+            \]
+    \end{enumerate}
+\end{theorem}
+
+\begin{remark}
+    \label{rmk0.4.31}
+    \cref{th0.4.30} shows that in the real setting the recovery of a given vector via basis pursuit depends only on its sign pattern, but not on the magnitude of its entries. Moreover, by \cref{rmk0.4.27}(a), if a vector $x \in \mathbb{R}^N$ with support $S' \subset S$ and sgn$(x')_{S'} = \mathop{\mathrm{sgn}}(x)_{S'}$ are slso exactly recovered via basis pursuit.
+\end{remark}
+
+The construction of the ``dual vector'' $h$ described in property (b) of \cref{th0.4.26} and \cref{th0.4.30} is not always straightforward. The following condition involving an ``inexact dual vector'' is somtimes easier to verify.
+
+\begin{theorem}
+    \label{th0.4.32}
+    Let $a_1,\dots,a_N$ be the columns of $\mathbf{A} \in \mathbb{C}^{m \times N}$ and let $x \in \mathbb{C}^N$ with support $S$. For $\alpha,\beta,\gamma,\theta \geq 0$, assume that
+    \begin{equation}
+        \|(\mathbf{A}^*_S \mathbf{A}_S)^{-1}\|_{2 \rightarrow 2} \leq \alpha, \qquad \max\limits_{\ell \in \overline{S}}^{}\|\mathbf{A}^*_S a_{\ell}\|_2 \leq \beta,
+        \label{eq0.4.25}
+    \end{equation}
+    and that there exists a vector $u = \mathbf{A}^*h \in \mathbb{C}^N$ with $h \in \mathbb{C}^m $ such that 
+    \begin{equation}
+        \|u_S - \mathop{\mathrm{sgn}}(x_S)\|_2 \leq \gamma \quad and \quad \|u_{\overline{S}}\|_{\infty} \leq \theta.
+        \label{eq0.4.26}
+    \end{equation}
+    If $\theta + \alpha\beta\gamma<1$, then $x$ is the unique minimizer of $\|z\|_1$ subject to $\mathbf{A}z = \mathbf{A}x$. 
+\end{theorem}
+
+\begin{theorem}
+    \label{th0.4.33}
+    Let $a_1,\dots,a_N$ be the columns of $\mathbf{A} \in \mathbb{C}^{m \times N}$, let $x \in \mathbb{C}^N$ with $s$ largest absolute entries supported on $S$, and let $y = \mathbf{A}x+e$ with $\|e\|_2 \leq \eta$. For $\delta,\beta,\gamma,\tau\geq 0$ with $\delta<1$, assume that
+    \begin{equation}
+        \|\mathbf{A}^*_S \mathbf{A}_S - \mathbf{Id}\|_{2 \rightarrow 2} \leq \delta, \qquad \|\mathbf{A}^*_S a_{\ell}\|_2 \leq \beta,
+        \label{eq0.4.27}
+    \end{equation}
+    and that there exists a vector $u = \mathbf{A}^*h \in \mathbb{C}^N$ with $h \in \mathbb{C}^m$ such that
+    \begin{equation}
+        \|u_S - \mathop{\mathrm{sgn}}(x_S)\|_2 \leq \gamma, \quad \|u_{\overline{S}}\|_{\infty} \leq \theta, \quad and \quad \|h\|_2 \leq \tau\sqrt{s}.
+        \label{eq0.4.28}
+    \end{equation}
+    if $\rho := \theta + \beta \gamma/(1-\delta)<1$, then a minimizer $x^{\sharp}$ of $\|z\|_1$ subject to $\|\mathbf{A}z - y\|_2 \leq \eta$ satisfies
+    \[
+        \|x - x^{\sharp}\|_2 \leq C_1 \sigma_s(x)_1 + (C_2 + C_3 \sqrt{s})\eta
+    \]
+    for some constant $C_1,C_2,C_3 > 0$ depending only on $\delta,\beta,\gamma,\theta,\tau$.
+\end{theorem}
+
+\begin{remark}
+    \label{rmk0.4.34}
+     The proof reveals explicit values of the constants, namely,
+     \[
+         C_1 = \frac{2}{1-\rho}\left( 1+\frac{\beta}{1-\delta} \right), \qquad C_2 = \frac{2\sqrt{1+\delta}}{1-\delta}\mu\left( \frac{\gamma}{1-\rho}\left( 1+\frac{\beta}{1-\delta} \right)+1 \right),
+     \]
+     \[
+         C_3 = \frac{2\tau}{1-\rho}\left( 1+\frac{\beta}{1-\delta} \right).
+     \]
+     For instance, the specific choice $\delta = \beta = \gamma = 1/2, \theta = 1/4$, and $\tau = 2$, for which $\rho = 3/4$, results in $C_1 \approx 16, C_2 = 10\sqrt{6} \approx 24.49,$ and $C_3 \approx 32.$ 
+\end{remark}
+
+\begin{proof}
+    Observe that $x$ is feasible for the quadratically constrained $\ell_1$-minimization problem due to the assumed $\ell_2$-bound of the perturbation $e$. Setting $v:=x^{\sharp} - x$, the minimality of $\|x^{\sharp}\|_1$ implies
+    \begin{eqnarray*}
+        \|x\|_1 &\geq& \|x^{\sharp}\|_1 = \|x+v\|_1 = \|(x+v)_S\|_1 + \|(x+v)_{\overline{S}}\|_1 \\
+        &\geq& \mathop{\mathrm{Re}}\left<(x+v)_S, \mathop{\mathrm{sgn}}(x_S)\right> +\|v_{\overline{S}}\|_1 - \|x_{\overline{S}}\|_1 \\
+        &=& \|x_S\|_1 + \mathop{\mathrm{Re}}\left<v_S, \mathop{\mathrm{sgn}}(x_S)\right> + \|v_{\overline{S}}\|_1 - \|x_{\overline{S}}\|_1.
+    \end{eqnarray*}
+    Rearranging and using the fact that $\|x\|_1 = \|x_S\|_1 + \|x_{\overline{S}}\|_1$ yields 
+    \begin{equation}
+        \|v_{\overline{S}}\|_1 \leq 2\|x_{\overline{S}}\|_1 + \left|\left<v_S\right>, \mathop{\mathrm{sgn}}(x_S)\right|.
+        \label{eq0.4.29}
+    \end{equation}
+    In view of \cref{eq0.4.28}, we have
+    \begin{eqnarray}
+        \label{eq0.4.30}
+        \left|\left<v_S, \mathop{\mathrm{sgn}}(x_S)\right>\right| &\leq& \left|\left<v_S, \mathop{\mathrm{sgn}}(x_S) - u_S\right>\right| + \left|\left<v_S, u_S\right>\right| \notag \\
+        &\leq&\gammah\|v_S\|_2 + \left|\left<v,u\right>\right| + \left|\left<v_{\overline{S}}, u_{\overline{S}}\right>\right|.
+    \end{eqnarray}
+    The first inequality of \cref{eq0.4.27} guarantees that $\|(\mathbf{A}^*_S \mathbf{A}_S)^{-1}\|_{2\rightarrow 2} \leq 1/(1-\delta)$ and $\|\mathbf{A}^*_S\|_{2 \rightarrow 2} \leq \sqrt{1+\delta}$. Hence,
+    \begin{eqnarray}
+        \label{eq0.4.31}
+        \|v_S\|_2 &\leq& \frac{1}{1-\delta} \|\mathbf{A}^*_S\mathbf{A}_S v_S\|_2 \leq \frac{1}{1-\delta} \|\mathbf{A}^*_S \mathbf{A}_{\overline{S}}v_{\overline{S}}\|_2 + \frac{1}{1-\delta} \|\mathbf{A}^*_S \mathbf{A} v\|_2 \\
+        &\leq&\frac{1}{1-\delta}\sum\limits_{\ell \in \overline{S}}^{}\left|v_{\ell}\right\left\|\mathbf{A}^*_S a_{\ell}\right\|_2 + \frac{\sqrt{1+\delta}}{1-\delta} \|\mathbf{A}v\|_2 \\
+        &\leq& \frac{\beta}{1-\delta}\|v_{\overline{S}}\|_1 + \frac{2\sqrt{1+\delta}}{1-\delta} \eta.
+    \end{eqnarray}
+    The last step involved the inequality $\|\mathbf{A}v\|_2 \leq 2\eta$, which follows from the optimization constraints as 
+    \[
+        \|\mathbf{A}v\|_2 = \|\mathbf{A}(x^{\sharp} -x)\|_2 \leq \|\mathbf{A}x^{\sharp} -y\|_2 + \|y-\mathbf{A}x\|_2 \leq 2\eta.
+    \]
+    The latter inequalituy combined with $\|h\|_2 \leq \tau\sqrt{s}$ also gives
+    \[
+        \left|\left<v,u\right>\right| = \left|\left<v, \mathbf{A}^*h\right>\right| = \left|\left<\mathbf{A}v, h\right>\right| \leq \|\mathbf{A}v\|_2 \|h\|_2 \leq 2\tau\eta\sqrt{s},
+    \]
+    while $\|u_{\overline{S}}\|_{\infty} \leq \theta$ implies $\left|\left<v_{\overline{S}}, u_{\overline{S}}\right>\right| \leq \theta \|v_{\overline{S}}\|_1$. Substituting these estimates in \cref{eq0.4.30} and in turn in \cref{eq0.4.29} yields
+    \[
+        \|v_{\overline{S}}\|_1 \leq 2\|\overline{S}\|_1 + \left( \theta+\frac{\beta\gamma}{1-\delta} \right)\|v_{\overline{S}}\|_1 + \left( 2\gamma\frac{\sqrt{1+\delta}}{1-\delta}+2\tau\sqrt{s} \right)\eta.
+    \]
+    Since $\rho = \theta + \beta\gamma/(1-\delta) < 1$, this can be rearranged as 
+    \begin{equation}
+        \|v_{\overline{S}}\|_1 \leq \frac{2}{1-\rho}\|x_{\overline{S}}\|_1 + \frac{2(\mu\gamma+\tau\sqrt{s})}{1-\rho}\eta,
+        \label{eq0.4.32}
+    \end{equation}
+    where $\mu := \sqrt{1+\delta}/(1-\delta)$. Using \cref{eq0.4.31} once again, we derive
+    \begin{equation}
+        \|v_S\|_2 \leq \frac{2\beta}{(1-\rho)(1-\delta)} \|x_{\overline{S}}\|_1 + \left( \frac{2\beta(\mu\gamma+\tau\sqrt{s})}{(1-\rho)(1-\delta)}+2\mu \right)\eta.
+        \label{eq0.4.33}
+    \end{equation}
+    Finally, combining \cref{eq0.4.32} and \cref{eq0.4.33}, we obtain
+    \begin{eqnarray*}
+        \|v\|_2 &\leq& \|v_{\overline{S}}\|_2 + \|v_S\|_2 \leq \|v_{\overline{S}}\|_1 + \|v_S\|_2 \\
+        &\leq&\frac{2}{1-\rho}\left( 1+\frac{\beta}{1-\delta} \right) \|x_{\overline{S}}\|_1 + \left( \frac{2(\mu\gamma+\tau\sqrt{s})}{1-\rho} \left( 1+\frac{\beta}{1-\delta} \right) + 2\mu \right)\eta.
+    \end{eqnarray*}
+    Taking $\|x_{\overline{S}}\|_1 = \sigma_s(x)_1$ into account, we arrive at the desired result.
+\end{proof}
+
+The next characterization of exact recovery via $\ell_1$-minimization involves \emph{\textcolor[rgb]{1,0,0}{tangent cones}} to the $\ell_1$-ball. For a vector $x \in \mathbb{R}^N$, we introduce the convex cone
+\begin{equation}
+    T(x) = \mathop{\mathrm{cone}}\left\{ z-x : z\in \mathbb{R}^N, \|z\|_1 \leq \|x\|_1 \right\},
+    \label{eq0.4.34}
+\end{equation}
+where the notation \emph{\textcolor[rgb]{1,0,0}{cone represents the conic hll;}}<++>
+
+\begin{theorem}
+    \label{th0.4.35}
+    For $\mathbf{A} \in \mathbb{R}^{m \times N}$, a vector $x \in \mathbb{R}^N$ is the unique minimizer of $\|z\|_1$ subject to $\mathbf{A}z = \mathbf{A}x$ if and only if $ker\mathbf{A} \cup T(x) = \{0\}$.
+\end{theorem}<++>
+
+\emph{\textbf{\textcolor[rgb]{1,0,0}{Really cannot understand, so , to be continued\dots}}}
+
 \subsection{The Projected Cross-Polytope}
 
 \subsection{Low-Rank Matrix Recovery}
@@ -987,11 +1152,11 @@ Throughout the section, we have insisted on sparse vectors to be unique solution
 
 The null space property is somewhat folklore in the compressive sensing literature. It appears implicitly in works in \cite{Donoho2003}, in \cite{Donoho2001}, and in \cite{Elad2002}. In \cite{Gribonval2003} the notion was also isolated. The name was first used in \cite{Cohen2009}, albeit for a property slightly more general then \cref{eq0.4.3}, namely, $\|v\|_1 \leq C\sigma_s(v)_1$ for all $v \in \text{ker}\mathbf{A}$, where $C \geq 1$ is an unspecified constant. 
 
-The equivalence between the real and complex null space propertiew was established in \cite{Foucart2010}. using a \emph{\textcolor[rgb]{1,0,0}{different argument}} than the one of \cref{th0.4.7}. The result was generalized in \cite{Lai2011}. The proof of \cref{th0.4.7} follows their argument.
+The equivalence between the real and complex null space properties was established in \cite{Foucart2010}. using a \emph{\textcolor[rgb]{1,0,0}{different argument}} than the one of \cref{th0.4.7}. The result was generalized in \cite{Lai2011}. The proof of \cref{th0.4.7} follows their argument.
 
 The term \emph{\textcolor[rgb]{1,0,0}{instance optimality}} is sometimes also used for what we called stability. The stability and robustness of sparse reconstruction via basis pursuit, as stated after \cref{th0.4.22}, were established in \cite{Candes2006a} under a restricted isometry property---condition on the measurement matrix.
 
-The fact taht sparse recovery via $\ell_p$-minimization implies sparse recovery via $\ell_p$-minimization whenever $0<p<q\leq 1$ was proved in \cite{Gribonval2007}. 
+The fact that sparse recovery via $\ell_p$-minimization implies sparse recovery via $\ell_p$-minimization whenever $0<p<q\leq 1$ was proved in \cite{Gribonval2007}. 
 
 
 
