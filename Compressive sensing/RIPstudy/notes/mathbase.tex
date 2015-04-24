@@ -1089,20 +1089,20 @@ The construction of the ``dual vector'' $h$ described in property (b) of \cref{t
     \begin{eqnarray}
         \label{eq0.4.30}
         \left|\left<v_S, \mathop{\mathrm{sgn}}(x_S)\right>\right| &\leq& \left|\left<v_S, \mathop{\mathrm{sgn}}(x_S) - u_S\right>\right| + \left|\left<v_S, u_S\right>\right| \notag \\
-        &\leq&\gammah\|v_S\|_2 + \left|\left<v,u\right>\right| + \left|\left<v_{\overline{S}}, u_{\overline{S}}\right>\right|.
+        &\leq&\gamma \|v_S\|_2 + \left|\left<v,u\right>\right| + \left|\left<v_{\overline{S}}, u_{\overline{S}}\right>\right|.
     \end{eqnarray}
     The first inequality of \cref{eq0.4.27} guarantees that $\|(\mathbf{A}^*_S \mathbf{A}_S)^{-1}\|_{2\rightarrow 2} \leq 1/(1-\delta)$ and $\|\mathbf{A}^*_S\|_{2 \rightarrow 2} \leq \sqrt{1+\delta}$. Hence,
     \begin{eqnarray}
         \label{eq0.4.31}
         \|v_S\|_2 &\leq& \frac{1}{1-\delta} \|\mathbf{A}^*_S\mathbf{A}_S v_S\|_2 \leq \frac{1}{1-\delta} \|\mathbf{A}^*_S \mathbf{A}_{\overline{S}}v_{\overline{S}}\|_2 + \frac{1}{1-\delta} \|\mathbf{A}^*_S \mathbf{A} v\|_2 \\
-        &\leq&\frac{1}{1-\delta}\sum\limits_{\ell \in \overline{S}}^{}\left|v_{\ell}\right\left\|\mathbf{A}^*_S a_{\ell}\right\|_2 + \frac{\sqrt{1+\delta}}{1-\delta} \|\mathbf{A}v\|_2 \\
+        &\leq& \frac{1}{1-\delta}\sum\limits_{\ell \in \overline{S}}^{}\left|v_{\ell}\right\| \left\|\mathbf{A}^*_S a_{\ell}\right\|_2 + \frac{\sqrt{1+\delta}}{1-\delta} \|\mathbf{A}v\|_2 \\
         &\leq& \frac{\beta}{1-\delta}\|v_{\overline{S}}\|_1 + \frac{2\sqrt{1+\delta}}{1-\delta} \eta.
     \end{eqnarray}
     The last step involved the inequality $\|\mathbf{A}v\|_2 \leq 2\eta$, which follows from the optimization constraints as 
     \[
         \|\mathbf{A}v\|_2 = \|\mathbf{A}(x^{\sharp} -x)\|_2 \leq \|\mathbf{A}x^{\sharp} -y\|_2 + \|y-\mathbf{A}x\|_2 \leq 2\eta.
     \]
-    The latter inequalituy combined with $\|h\|_2 \leq \tau\sqrt{s}$ also gives
+    The latter inequality combined with $\|h\|_2 \leq \tau\sqrt{s}$ also gives
     \[
         \left|\left<v,u\right>\right| = \left|\left<v, \mathbf{A}^*h\right>\right| = \left|\left<\mathbf{A}v, h\right>\right| \leq \|\mathbf{A}v\|_2 \|h\|_2 \leq 2\tau\eta\sqrt{s},
     \]
@@ -1133,16 +1133,75 @@ The next characterization of exact recovery via $\ell_1$-minimization involves \
     T(x) = \mathop{\mathrm{cone}}\left\{ z-x : z\in \mathbb{R}^N, \|z\|_1 \leq \|x\|_1 \right\},
     \label{eq0.4.34}
 \end{equation}
-where the notation \emph{\textcolor[rgb]{1,0,0}{cone represents the conic hll;}}<++>
+where the notation \emph{\textcolor[rgb]{1,0,0}{cone represents the conic hll;}}
+\begin{mdframed}
+    \label{cone}
+    The \emph{\textcolor[rgb]{1,0,0}{norm cone}} associated with the norm $\|\cdot\|$ is the set 
+    \[
+        \mathcal{C} = \left\{ (x,t) \  | \  \|x\| \leq t \right\} \subseteq \mathbf{R}^{n+1}.
+    \]
+    It is (as the name suggests) a \textbf{\textcolor[rgb]{1,0,0}{convex cone}}.
+    \textbf{Example 2.3} \emph{The second-order cone} is the norm cone for the Euclidean norm, i.e.,
+    \begin{eqnarray*}
+        \mathcal{C} &=&  \left\{ (x,t) \in \mathbf{R}^{n+1} \ | \ \|x\|_2 \leq t \right\} \\
+        &=& \left\{ \left[ 
+            \begin{array}[]{c}
+                x \\
+                t
+            \end{array}
+        \right] \ \left| \ \left[ 
+            \begin{array}[]{c}
+                x \\
+                t
+            \end{array}
+        \right]^T \right. 
+        \left[ 
+            \begin{array}[]{cc}
+                I & 0 \\
+                0 & -1
+            \end{array}
+        \right]
+        \left[ 
+            \begin{array}[]{c}
+                x \\
+                t
+            \end{array}
+        \right]
+        \leq 0, t \geq 0
+    \right\}.
+    \end{eqnarray*}
+    The second-order cone is also known by several other names. It is called the \emph{\textbf{\textcolor[rgb]{1,0,0}{quadratic cone}}}, since it is defined by a quadratic inequality. It is also called the \emph{\textbf{\textcolor[rgb]{1,0,0}{Lorentz cone}}} or \emph{\textbf{\textcolor[rgb]{1,0,0}{ice-cream cone}}}. 
+\end{mdframed}
 
 \begin{theorem}
     \label{th0.4.35}
     For $\mathbf{A} \in \mathbb{R}^{m \times N}$, a vector $x \in \mathbb{R}^N$ is the unique minimizer of $\|z\|_1$ subject to $\mathbf{A}z = \mathbf{A}x$ if and only if $ker\mathbf{A} \cup T(x) = \{0\}$.
-\end{theorem}<++>
+\end{theorem}
 
-\emph{\textbf{\textcolor[rgb]{1,0,0}{Really cannot understand, so , to be continued\dots}}}
+\begin{theorem}
+    \label{th0.4.36}
+    For $\mathbf{A} \in \mathbb{R}^{m \times N}$, let $x \in \mathbb{R}^N$ and $y= \mathbf{A}x + e \in \mathbb{R}^m$ with $\|e\|_2 \leq \eta$. If 
+    \[
+        \inf\limits_{v \in T(x), \|v\|_2=1} \|\mathbf{A}v\|_2 \geq \tau
+    \]
+    for some $\tau > 0$, then a minimizer $x^{\sharp}$ of $\|z\|_1$ subject to $\|\mathbf{A}z - y\|_2 \leq \eta$ satisfies 
+    \begin{equation}
+        \|x - x^{\sharp}\|_2 \leq \frac{2\eta}{\tau}
+        \label{eq0.4.35}
+    \end{equation}
+\end{theorem}
+
+\begin{proof}
+    The inequality $\|x^{\sharp}\|_1 \leq \|x\|_1$ yields $v := (x^{\sharp} - x)/ \|x^{\sharp} - x\|_2 \in T(x)$---note that $x^{\sharp} - x \neq 0$ can be safely assumed. Since $\|v\|_2 = 1$, the assumption implies $\|\mathbf{A}v\|_2 \geq \tau$, i.e., $\|\mathbf{A}(x^{\sharp} - x)\|_2 \geq \tau \|x^{\sharp} - x\|_2$. It remains to remark that
+    \[
+        \|\mathbf{A}(x^{\sharp} - x)\|_2 \leq \|\mathbf{A}x^{\sharp} - y\|_2 + \|\mathbf{A}x - y\|_2 \leq 2\eta
+    \]
+    in order to obtain the desired result.
+\end{proof}
 
 \subsection{The Projected Cross-Polytope}
+
+
 
 \subsection{Low-Rank Matrix Recovery}
 
