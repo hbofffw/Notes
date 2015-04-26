@@ -1229,10 +1229,15 @@ is a convex polytope which is sometimes called \emph{\textcolor[rgb]{1,0,0}{cros
         (A^{-1})^T = (A^T)^{-1} \equiv A^{-T}
     \]
     The eigenvalues of $A^H A$ are nonnegative. Their square roots are called \emph{\textcolor[rgb]{1,0,0}{singular values}} of $A$ and are denoted by $\sigma_i,\ i=1,\dots,m$. Thus:
-    \begin{eqnarray*}
-        \|A\|_1 &=& 
-    \end{eqnarray*}<++>
-\end{mdframed}<++>
+    \begin{eqnarray}
+        \|A\|_1 &=& \max\limits_{j = 1, \dots, m}^{}\sum\limits_{i = 1}^{n}\left|a_{ij}\right|, \notag \\
+        \|A\|_{\infty} &=& \max\limits_{i = 1, \dots, n}^{} \sum\limits_{j=1}^{m}\left|a_{ij}\right|, \notag \\
+        \|A\|_2 &=&  [\rho(A^HA)]^{1/2} = [\rho(AA^H)]^{1/2} , \\
+        \|A\|_F &=& [tr(A^HA)]^{1/2} = [tr(AA^H)]^{1/2}, \notag
+        \label{eqsingular}
+    \end{eqnarray}
+    the relation \cref{eqsingular} states that $\|A\|_2$ is equal to $\sigma_1$, the largest sigular value of $A$.
+\end{mdframed}
 In this context, the number of nonzero singular values---the rank of a matrix---replaces the number of nonzero entries: the sparsity of a vector.
 
 We suppose that a matrix $\mathbf{X} \in \mathbb{C}^{n_1 \times n_2}$ of rank at most $r$ is observed via the measurement vector $y = \mathbf{\mathcal{A}}(\mathbf{X})\in \mathbb{C}^m$ where $\mathbf{\mathcal{A}}$ is a linear map from $\mathbb{C}^{n_1 \times n_2}$ to $\mathbb{C}^m$. As in the vector case the first approach to this problem that probably comes to mind is to solve the rank-minimization problem
