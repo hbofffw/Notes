@@ -1203,14 +1203,44 @@ where the notation \emph{\textcolor[rgb]{1,0,0}{cone represents the conic hll;}}
 \begin{mdframed}
     \label{polytope}
     A \emph{\textcolor[rgb]{1,0,0}{polyhedron}} is defined as the solution set of a finite number of linear equalities and inequalities:
+    \label{eqpolytope}
     \[
         \mathcal{P} = \left\{ x \ | \ a_j^T x \leq b_j, j =1,\dots,m, c_j^T x = d_j, j =1,\dots,p \right\}.
     \]
-    A polyhedron is thus the intersection of a finite number of halfspaces and hyperplanes. Affine sets (e.g., subspaces, hyperplanes, lines), rays, line segments, and halfspaces are all polyhedra.
-\end{mdframed}<++>
+    A polyhedron is thus the intersection of a finite number of halfspaces and hyperplanes. Affine sets (e.g., subspaces, hyperplanes, lines), rays, line segments, and halfspaces are all \emph{\textcolor[rgb]{1,0,0}{polyhedra}}. It is easily shown that polyhedra are convex sets. A bounded polyhedron is sometimes called a \emph{\textcolor[rgb]{1,0,0}{polytope}}, but some authors use the opposite convention (i.e., polytope for any set of the form \cref{eqpolytope}, and polyhedron when it is bounded).
+\end{mdframed}
+
+A \emph{\textcolor[rgb]{1,0,0}{convex polytope}} in $\mathbb{R}^n$ can be viewed either as the convex hull of a finite set of points or as a bounded intersection of finitely many half-spaces. For instance, with $(e_1,\dots,e_N)$ denoting the canonical basis of $\mathbb{R}^N$, the unit ball of $\ell_1^N$ described as 
+\[
+    B_1^N := \mathop{\mathrm{conv}} \left\{ e_1, -e_1,\dots,e_N,-e_N \right\} = \bigcap\limits_{\varepsilon \in \{-1,1\}^N} \left\{ z \in \mathbb{R}^N\ :\ \sum\limits_{i = 1}^{N} \varepsilon_i z_i \leq 1 \right\}
+\]
+is a convex polytope which is sometimes called \emph{\textcolor[rgb]{1,0,0}{cross-polytope}}. 
 
 
 \subsection{Low-Rank Matrix Recovery}
+\begin{mdframed}
+    \label{singular}
+    If $A$ and $X$ are in $\mathbb{R}^{n \times n}$ and satisfy $AX=I$, then $X$ is the \emph{inverse} of $A$ and is denoted by $A^{-1}$. If $A^{-1}$ exists, then $A$ is said to be \emph{\textcolor[rgb]{1,0,0}{nonsigular}}. Otherwise, we say $A$ is \emph{\textcolor[rgb]{1,0,0}{singular}}. The inverse of a product is the reverse product of the inverses:
+    \[
+        (AB)^{-1} = B^{-1}A^{-1}.
+    \]
+    Likewise, the transpose of the inverse is the inverse of the transpose:
+    \[
+        (A^{-1})^T = (A^T)^{-1} \equiv A^{-T}
+    \]
+    The eigenvalues of $A^H A$ are nonnegative. Their square roots are called \emph{\textcolor[rgb]{1,0,0}{singular values}} of $A$ and are denoted by $\sigma_i,\ i=1,\dots,m$. Thus:
+    \begin{eqnarray*}
+        \|A\|_1 &=& 
+    \end{eqnarray*}<++>
+\end{mdframed}<++>
+In this context, the number of nonzero singular values---the rank of a matrix---replaces the number of nonzero entries: the sparsity of a vector.
+
+We suppose that a matrix $\mathbf{X} \in \mathbb{C}^{n_1 \times n_2}$ of rank at most $r$ is observed via the measurement vector $y = \mathbf{\mathcal{A}}(\mathbf{X})\in \mathbb{C}^m$ where $\mathbf{\mathcal{A}}$ is a linear map from $\mathbb{C}^{n_1 \times n_2}$ to $\mathbb{C}^m$. As in the vector case the first approach to this problem that probably comes to mind is to solve the rank-minimization problem
+\[
+    \mathop{\mathrm{minimize}}\limits_{\mathbf{Z} \in \mathbb{C}^{n_1 \times n_2}} \mathop{\mathrm{rank}}(\mathbf{Z}) \quad \text{subject to } \mathbf{\mathcal{A}}(\mathbf{X}) = y.
+\]
+Unfortunately, like $\ell_0$-minimization this problem is NP-hard. In fact, the rank of $\mathbf{Z}$ equals the $\ell_0$-norm of the vector $[\sigma_1(\mathbf{Z}),\dots,\sigma_n(\mathbf{Z})]^T$ of singular values of $\mathbf{Z}$. 
+
 
 \subsection{Notes}
 
