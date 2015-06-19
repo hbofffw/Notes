@@ -1,0 +1,12 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+A simple proof of the restricted isometry property for random matrics	.\simpleproof.tex	/^\\chapter{A simple proof of the restricted isometry property for random matrics}$/;"	c
+Coherence	.\coherence.tex	/^\\chapter{Coherence}$/;"	c
+Definitions and Basic Properties	.\coherence.tex	/^\\section{Definitions and Basic Properties}$/;"	s
+Lemma	.\JM-lemma.tex	/^\\section{Lemma}$/;"	s
+Math basic John Lindenstrauss lemma	.\JM-lemma.tex	/^\\chapter{Math basic: John-Lindenstrauss lemma}$/;"	c
+The restricted isometry property and its implications for compressed sensing	.\Therestrictedisometrypropertyanditsimplications.tex	/^\\chapter{The restricted isometry property and its implications for compressed sensing}$/;"	c
