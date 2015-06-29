@@ -1,6 +1,5 @@
-\chapter{Compressive Wireless Sensing}
+\chapter{General}
 \label{CWS}
-
 \section{Compressive Wireless Sensing (CWS)}
 A major challenge in the design of sensor networks is developing \textcolor[rgb]{0,0,1}{schemes that extract relevant information about the sensed data} at a desired fidelity at FC with \textcolor[rgb]{0,0,1}{least consumption of network resources}. The relevant metrics of interest are
 \begin{enumerate}
@@ -36,6 +35,31 @@ The approach represented in this section, in contrast to previous methods, elimi
 
 In essence, this paper identifies a trade-off between universality and optimality: CWS is universal for a broad class of sensor fields but cannot reach the optimality of \cref{eq1.2}, whereas and optimal distributed scheme can never be universal. CWS is primarily \textbf{\textcolor[rgb]{1,0,0}{a framework for sensor networks having either little prior knowledge about the sensed field or low confidence level about the accuracy of the available knowledge}}. CWS, in contrast to previous methods, eliminates the need for in-network communications and processing and instead requires \emph{\textcolor[rgb]{1,0,0}{phase synchronization among nodes}}, which imposes \emph{\textcolor[rgb]{1,0,0}{a relatively small burden on}} network resources and can be achieved by employing the distributed synchronization scheme \cite{Mudumbai2005}. 
 
+
+\section{Practical data compression in wireless sensor networks: A survey}
+A number of techniques such as \textbf{\textcolor[rgb]{1,0,0}{energy-efficient medium access control or routing protocols}} have been proposed to solve the \textbf{\textcolor[rgb]{1,0,0}{power consumption issue}}. Among those proposed techniques, the data compression scheme is one that can be used to reduce transmitted data over wireless channels, which leads to a reduction in the required \textbf{\textcolor[rgb]{1,0,0}{inter-node}} communication, known as the main power consumer in wireless sensor networks. In this paper, first, suitable sets of criteria are defined to classify existing techniques as well as to determine what practical data compression in wireless sensor networks should be. Next, the details of each classified compression category are described.
+
+When designing a WSN system, there are a number of challenges which can be broadly classified into \textbf{\textcolor[rgb]{0,0,1}{three major issues}}.
+\begin{enumerate}
+    \item information management architecture has to be designed to address information conflict and interaction that occurs when gathering information from many sensors;
+    \item key management is a prerequisite of encryption and authentication should be addressed carefully;
+    \item power consumption or power management.
+\end{enumerate}
+This paper focus on tackling \emph{\textcolor[rgb]{1,0,0}{power consumption issue}}.
+
+The main factor of power consumption is the radio transmission process. To reducing radio communication, two main approaches have been introduced:
+\begin{enumerate}
+    \item \textbf{\textcolor[rgb]{1,0,0}{Duty cycle}}---the scheme coordinates and defines wake and sleep schedules among nodes in the network.
+    \item \textbf{\textcolor[rgb]{1,0,0}{in-networking processing}}---this scheme solves this issue through reducing the amount of data to be transmitted by means of \textbf{\textcolor[rgb]{1,0,0}{aggregation techniques and/or data compression}}. The aggregation techniques involve different ways of routing data packets in order to combine them by exploiting the extracted features and statistics of data sets coming from different sensor nodes, e.g., maximum value, minimum value and average value. To achieve its objective, the aggregation approach requires three basic components: \textbf{\textcolor[rgb]{1,0,0}{a routing algorithm, data aggregation and data representation/data compression}}.
+\end{enumerate}
+
+New data compression algorithms can be classified into two categories:
+\begin{enumerate}
+    \item distributed data compression approach;
+    \item local data compression approach.
+\end{enumerate}
+
+
 \section{Compressive Data Gathering for Large-Scale Wireless Sensor Networks}
 
 The proposed scheme considers the scenario which a large number of sensor nodes are densely deployed and sensor readings are spatially correlated and it can cope with abnormal sensor readings gracefully.
@@ -46,3 +70,14 @@ Two major challenges the successful deployment of large scale sensor networks fa
     \item energy consumption load balancing.
 \end{enumerate}
 Existing approaches as \textbf{\textcolor[rgb]{1,0,0}{entropy coding}} and \textbf{\textcolor[rgb]{1,0,0}{transform coding}}, adopt in-network data compression, to reduce global traffic. However, theses approaches introduce significant \textbf{\textcolor[rgb]{0,0,1}{computation and control overheads}} that often not suitable for sensor networks applications.
+
+This paper summarized in this section presents the \textbf{\textcolor[rgb]{1,0,0}{first}} complete design to apply compressive sampling theory to sensor data gathering for large-scale WSNs, successfully addressing the two major challenges as outlined above. 
+
+The proposed data gathering (CDG) is able to achieve substantial sensor data compression without introducing excessive computation and control overheads as well as to disperse the communication costs to all sensor nodes along a given sensor data gathering route with elegant design. Instead of receiving individual sensor readings, the sink will be sent a few weighted sums of all the readings, from which to restore the original data. 
+
+When $N$ is large and $M$ is much smaller than $N$, CDG can significantly reduce the total number of transmissions and save energy. Then the key problems now is becoming whether the sink is able to restore $N$ individual readings from $M$ measurements when $M$ is far smaller than $N$. 
+
+\section{Compressive data gathering using random projection for energy efficient wireless sensor networks}
+
+\textbf{\textcolor[rgb]{1,0,0}{Minimum Spanning Tree Projection (MSTP)}} creates a number of Minimum-Spanning-Trees(MSTs), each rooted at a randomly selected projection node, which in turn aggregates sensed data from sensors using compressive sensing. The author further extend MSTP and introduced eMSTP, which joints the sink node to each MST and makes the sink node as the root for each tree.
+
