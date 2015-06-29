@@ -1,5 +1,5 @@
-\chapter{Compressive Wireless Sensing}
-\label{CWS}
+\chapter{Compressive Data Gathering for Large-Scale Wireless Sensor Networks}
+\label{CDG}
 
 \section{Compressive Wireless Sensing (CWS)}
 A major challenge in the design of sensor networks is developing \textcolor[rgb]{0,0,1}{schemes that extract relevant information about the sensed data} at a desired fidelity at FC with \textcolor[rgb]{0,0,1}{least consumption of network resources}. The relevant metrics of interest are
@@ -30,19 +30,4 @@ Assuming sufficient prior knowledge about the sensed data, in section 3 there ex
     \label{eq1.2}
 \end{equation}
 
-CWS is universal for a broad class of sensor fields but cannot reach the optimality of \cref{eq1.2}, whereas an optimal distributed scheme can fail miserably under false prior information and therefore, can never be universal. CWS is primarily a \emph{\textcolor[rgb]{1,0,0}{framework for sensor networks having either little prior knowledge about the sensed field or low confidence level about the accuracy of the available knowledge}}.
-
-The approach represented in this section, in contrast to previous methods, eliminates the need for in-network communications and processing and instead requires \emph{\textcolor[rgb]{1,0,0}{phase synchronization}} among nodes, which imposes a relatively small burden on network resources and can be achieved by employing the \emph{\textcolor[rgb]{1,0,0}{distributed synchronization scheme}}. 
-
-In essence, this paper identifies a trade-off between universality and optimality: CWS is universal for a broad class of sensor fields but cannot reach the optimality of \cref{eq1.2}, whereas and optimal distributed scheme can never be universal. CWS is primarily \textbf{\textcolor[rgb]{1,0,0}{a framework for sensor networks having either little prior knowledge about the sensed field or low confidence level about the accuracy of the available knowledge}}. CWS, in contrast to previous methods, eliminates the need for in-network communications and processing and instead requires \emph{\textcolor[rgb]{1,0,0}{phase synchronization among nodes}}, which imposes \emph{\textcolor[rgb]{1,0,0}{a relatively small burden on}} network resources and can be achieved by employing the distributed synchronization scheme \cite{Mudumbai2005}. 
-
-\section{Compressive Data Gathering for Large-Scale Wireless Sensor Networks}
-
-The proposed scheme considers the scenario which a large number of sensor nodes are densely deployed and sensor readings are spatially correlated and it can cope with abnormal sensor readings gracefully.
-
-Two major challenges the successful deployment of large scale sensor networks faces:
-\begin{enumerate}
-    \item communication cost reduction;
-    \item energy consumption load balancing.
-\end{enumerate}
-Existing approaches as \textbf{\textcolor[rgb]{1,0,0}{entropy coding}} and \textbf{\textcolor[rgb]{1,0,0}{transform coding}}, adopt in-network data compression, to reduce global traffic. However, theses approaches introduce significant \textbf{\textcolor[rgb]{0,0,1}{computation and control overheads}} that often not suitable for sensor networks applications.
+In essence, this paper identifies a trade-off between universality and optimality: CWS is universal for a broad class of sensor fields but cannot reach the optimality of \cref{eq1.2}, whereas and optimal distributed scheme can never be universal. CWS is primarily \textbf{\textcolor[rgb]{1,0,0}{a framework for sensor networks having either little prior knowledge about the sensed field or low confidence level about the accuracy of the available knowledge}}. CWS, in contrast to previous methods, eliminates the need for in-network communications and processing and instead requires \emph{\textcolor[rgb]{1,0,0}{phase synchronization among nodes}}, which imposes \emph{\textcolor[rgb]{1,0,0}{a relatively small burden on}} network resources and can be achieved by employing the distributed synchronization scheme. 
