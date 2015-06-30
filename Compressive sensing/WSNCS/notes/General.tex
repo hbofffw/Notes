@@ -79,8 +79,14 @@ The proposed data gathering (CDG) is able to achieve substantial sensor data com
 
 When $N$ is large and $M$ is much smaller than $N$, CDG can significantly reduce the total number of transmissions and save energy. Then the key problems now is becoming whether the sink is able to restore $N$ individual readings from $M$ measurements when $M$ is far smaller than $N$. 
 
-\section{Compressive data gathering using random projection for energy efficient wireless sensor networks}
+\section{Distributed sparse random projections for refinable approximation}
 \label{sec1.4}
+This paper addressed the problem of recovering an approximation of the $n$ data values by querying any $L$ sensors, so that the reconstruction error is \emph{\textcolor[rgb]{1,0,0}{comparable to the optimal $k$-term approximation}}. To solve this problem, this paper presented a distributed algorithm based on sparse random projections, which requires \emph{\textcolor[rgb]{1,0,0}{no global coordination or knowledge}}. This algorithm allows the collector to choose the number of sensors to query according to the desired approximation error. The reconstruction quality depends only on the number of sensors queried, enabling robust refinable approximation. 
+
+Computing the deterministic 
+
+\section{Compressive data gathering using random projection for energy efficient wireless sensor networks}
+\label{sec1.5}
 \textbf{\textcolor[rgb]{1,0,0}{Minimum Spanning Tree Projection (MSTP)}} creates a number of Minimum-Spanning-Trees(MSTs), each rooted at a randomly selected projection node, which in turn aggregates sensed data from sensors using compressive sensing. The author further extend MSTP and introduced eMSTP, which joints the sink node to each MST and makes the sink node as the root for each tree.
 
 There are several approaches to maximize the lifetime of WSNs:
@@ -93,4 +99,12 @@ There are several approaches to maximize the lifetime of WSNs:
 \end{enumerate}
 Data aggregation, unlike the other approaches, aims at \textbf{\textcolor[rgb]{1,0,0}{reducing the amount of data to be transported}}, and hence significantly helps in overall energy consumption load. This paper summarized in this section proposed a method based on data aggregation using CS. 
 
-In this paper, the author indicated that, the scheme presented in \cref{sec1.3}, clearly using CS for all nodes is not very attractive, but most importantly, CS resolved the problem of bottleneck nodes. Then, \textcolor[rgb]{1,0,0}{plain-CS and hybrid-CS} were introduced by J.Lue et al., where the former (plain-CS) uses CS encoding for all nodes in the network (same as CDG scheme) and the latter (hybrid-CS) applies CS \textbf{\textcolor[rgb]{1,0,0}{only to}} \textcolor[rgb]{1,0,0}{relay nodes that are overloaded}. Hybrid-CS resolved the drawback of CDG with respect to the number of packet transmission and hence reduced the global network communication cost.
+In this paper, the author indicated that, the scheme presented in \cref{sec1.3}, clearly using CS for all nodes is not very attractive, but most importantly, CS resolved the problem of bottleneck nodes. Then, \textcolor[rgb]{1,0,0}{plain-CS and hybrid-CS} were introduced by J.Lue et al., where the former (plain-CS) uses CS encoding for all nodes in the network (same as CDG scheme) and the latter (hybrid-CS) applies CS \textbf{\textcolor[rgb]{1,0,0}{only to}} \textcolor[rgb]{1,0,0}{relay nodes that are overloaded}. Hybrid-CS resolved the drawback of CDG with respect to the number of packet transmission and hence reduced the global network communication cost. The algorithm cannot guarantee that all the nodes are selected at random for each projection node. Further, \textcolor[rgb]{0,0,1}{the algorithm cannot minimize the global network communication cost since for each random projection, the algorithm requires a large number of multi-hop transmissions to collect the data from individual sparse nodes and no data gathering is used in the routing paths to projection nodes}.
+
+A new data gathering method was proposed, which combines the CDG with sparse random projection to reduce further the overall number of transmissions and most importantly to distribute the energy consumption load more evenly throughout the network to increase the lifetime of wireless sensor network. 
+
+MSTP selects different nodes at random to do projection, same as hybrid-CS. Unlike hybrid-CS scheme, of which each projection node after collecting the native data from set of nodes sends the projected data to the sink, MSTP uses CDG for each projection node to collect and gathers one weighted sum by constructing independent forwarding tree which ensures fewer transmissions. MSTP gathers a weighted sum from nodes step by step starting from leaf nodes following the routing paths towards the projection node. Finally, each projection node sends the gathered data in one packet through a shortest path to the sink. 
+
+The novelty of this approach lies in utilizing independent forwarding trees, where each forwarding tree carries one weighted sum (compressed data rather than native) to the sink. These forwarding trees are constructed to ensure fewer number of transmissions as well as evenly distribute the transmission load cross the network.
+
+eMSTP let the sink node gather weighted sums directly from nodes instead of projection nodes; in this way the traffic resulting is eliminated from transmitting the corresponding projection packets from projection nodes to the sink. 
