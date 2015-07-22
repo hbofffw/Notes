@@ -2,27 +2,27 @@
 \label{CWS}
 \section{Compressive Wireless Sensing (CWS)}
 \label{sec1.1}
-A major challenge in the design of sensor networks is developing \textcolor[rgb]{0,0,1}{schemes that extract relevant information about the sensed data} at a desired fidelity at FC with \textcolor[rgb]{0,0,1}{least consumption of network resources}. The relevant metrics of interest are
+A major challenge in the design of sensor networks is developing \textcolor[rgb]{1,0,0}{schemes that extract relevant information about the sensed data} at a desired fidelity at FC with \textcolor[rgb]{1,0,0}{least consumption of network resources}. The relevant metrics of interest are
 \begin{enumerate}
-    \item \textbf{\textcolor[rgb]{0,0,1}{the latency (or alternatively, bandwidth) involved in information retrieval}};
-    \item \textbf{\textcolor[rgb]{0,0,1}{the associated power distortion trade-off: the power $P_{tot}$ consumed by the sensor network in delivering relevant information to FC at the desired distortion $D$}}.
+    \item \textbf{\textcolor[rgb]{1,0,0}{the latency (or alternatively, bandwidth) involved in information retrieval}};
+    \item \textbf{\textcolor[rgb]{1,0,0}{the associated power distortion trade-off: the power $P_{tot}$ consumed by the sensor network in delivering relevant information to FC at the desired distortion $D$}}.
 \end{enumerate}
 
-\emph{\textcolor[rgb]{0,0,1}{Compressive Wireless Sensing (CWS)}}, based on a distributed matched source-channel communication architecture, contain some sort of structural regularity for energy efficient estimation (at FC) of sensor data. Resting on the fact that a relatively small number of random projections of a signal can contain most of its salient information, CWS, in essence, is a completely decentralized scheme for delivering random projections of the sensor network data to FC in a distributed and energy efficient manner. Three distinct features of CWS are:
+\emph{\textcolor[rgb]{1,0,0}{Compressive Wireless Sensing (CWS)}}, based on a distributed matched source-channel communication architecture, contain some sort of structural regularity for energy efficient estimation (at FC) of sensor data. Resting on the fact that a relatively small number of random projections of a signal can contain most of its salient information, CWS, in essence, is a completely decentralized scheme for delivering random projections of the sensor network data to FC in a distributed and energy efficient manner. Three distinct features of CWS are:
 \begin{enumerate}
-    \item \emph{\textcolor[rgb]{0,0,1}{processing and communications are combined into one distributed operation}};
-    \item \emph{\textcolor[rgb]{0,0,1}{it requires almost no in-network processing and communications}};
-    \item \emph{\textcolor[rgb]{0,0,1}{consistent field estimation is possible ($D\searrow0$ as node density increases), even if little or no prior knowledge about the sensed data is assumed, while $P_{tot}$ grows at most sub-linearly with the number of nodes in the network}}.
+    \item \emph{\textcolor[rgb]{1,0,0}{processing and communications are combined into one distributed operation}};
+    \item \emph{\textcolor[rgb]{1,0,0}{it requires almost no in-network processing and communications}};
+    \item \emph{\textcolor[rgb]{1,0,0}{consistent field estimation is possible ($D\searrow0$ as node density increases), even if little or no prior knowledge about the sensed data is assumed, while $P_{tot}$ grows at most sub-linearly with the number of nodes in the network}}.
 \end{enumerate}
 
-Thus, CWS provides \emph{a universal and efficient approach} to distributed estimation of sensor network data without \emph{\textcolor[rgb]{0,0,1}{putting strict constraints}} on the underlying structure of sensed data. Nevertheless, this universal comes at the cost of optimality (in terms of a less favorable power-distortion-latency trade-off). 
+Thus, CWS provides \emph{a universal and efficient approach} to distributed estimation of sensor network data without \emph{\textcolor[rgb]{1,0,0}{putting strict constraints}} on the underlying structure of sensed data. Nevertheless, this universal comes at the cost of optimality (in terms of a less favorable power-distortion-latency trade-off). 
 
 Assuming no prior knowledge about the sensed data, the theoretical analysis of CWS in Section 4 yields a power-distortion-latency trade-off of the form
 \begin{equation}
     D \sim P_{tot}^{-2 \alpha/(2\alpha + 1)} \sim L^{-2\alpha/(2\alpha + 1)}
     \label{eq1.1}
 \end{equation}
-Note that this relation does not mean that a fixed number of sensor nodes using more power and/or latency can provide more accuracy. Rather, distortion $(D)$, power consumption $(P_{tot})$ and latency $(L)$ are functions of the number of nodes, and the above relation indicates \emph{\textcolor[rgb]{1,0,0}{how the three performance metrics behave as the density of nodes increases}}.
+Note that this relation does not mean \textbf{\textcolor[rgb]{0,0,1}{that a fixed number of sensor nodes using more power and/or latency can provide more accuracy}}. Rather, distortion $(D)$, power consumption $(P_{tot})$ and latency $(L)$ are functions of the number of nodes, and the above relation indicates \emph{\textcolor[rgb]{1,0,0}{how the three performance metrics behave as the density of nodes increases}}.
 
 Assuming sufficient prior knowledge about the sensed data, in section 3 there exists an efficient distributed estimation scheme that achieves the distortion scaling of an ideal centralized estimator and has a power-distortion-latency trade-off of the form
 \begin{equation}
