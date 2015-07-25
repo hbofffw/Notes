@@ -6,4 +6,21 @@ Consider a wireless sensor network with $n$ nodes where each node takes a noisy 
     x_{j} = x^{*}_{j} + w_{j}, \qquad j = 1,\dots,n
     \label{eq2.1.3}
 \end{equation}
-and the errors ${w_j}_{j=1}^n$ are independent, zero-mean Gaussian random variables with variance $\sigma_w^2$. 
+and the errors ${w_j}_{j=1}^n$ are independent, zero-mean Gaussian random variables with variance $\sigma_w^2$. We can consider this data as a vector $x \in \mathbb{R}^{n}$ such that $x = x^*+w$, where $x^* \in \mathbb{R}$ is the noiseless data vector and $w \sim \mathcal{N}(0,\sigma^2_w\mathbf{I}_n)$. The author further assumed that $\left|x_j^*\right| \leq B, \ j=1,\dots,n$, for some constant $B > 0$, which is determined by the \textbf{\textcolor[rgb]{1,0,0}{sensing range of the sensors}}.
+
+The existing  compression standards such as JPEG, MPEG and MP3, that data in real world often contain redundancies. Moreover, data collected at nearby nodes in a dense sensor network is expected to be highly correlated. Therefore, $x^*$ is assumed compressible in the sense that it is well-approximated by a linear combination of $k$ vectors taken from an orthonormal basis of $\mathbb{R}^n$. PS: (\emph{\textcolor[rgb]{1,0,0}{smooth signals tend to be compressible}} and \emph{\textcolor[rgb]{1,0,0}{piecewise smooth signals tend to be compressible in a wavelet/wedgelet basis}}). More precisely, let $\Psi \triangleq \{\psi_i\}^n_{i=1}$ be an orthonormal basis of $\mathbb{R}^n$. Denote by $\theta_i = \psi^T_i x^*$ (\emph{\textcolor[rgb]{1,0,0}{projection of $x^*$ onto $\psi_i$}}) the coefficients of $x^*$ in this new basis.
+\begin{equation}
+    |\theta_1| \geq |\theta_2| \geq \dots \geq |\theta_n|
+    \label{eq2.1.4}
+\end{equation}
+
+The best $k-term$ approximation of $x^*$ in terms of $\Psi$ is given by 
+\begin{equation}
+    x^{*(k)} = \sum\limits_{i+1}^{k}\theta_i\psi_i 
+    \label{eq2.1.5}
+\end{equation}
+then $x^*$ is \emph{\textcolor[rgb]{1,0,0}{$\alpha-$compressible}} in $\Psi$ (\emph{\textcolor[rgb]{1,0,0}{or that $\Psi$ is the compressing basis of $x^*$}}) if the \textcolor[rgb]{1,0,0}{average squared-error} behaves like
+\begin{equation}
+    \dfrac{\left\|x^*-x^{*(k)}\right\|^2}{n} \triangleq \dfrac{1}{n} \sum\limits_{j=1}^{n}\left( x^* - x_j^{8(k)} \right)^2 = O (k^{-2\alpha})
+    \label{eq2.1.6}
+\end{equation} 
