@@ -24,3 +24,29 @@ then $x^*$ is \emph{\textcolor[rgb]{1,0,0}{$\alpha-$compressible}} in $\Psi$ (\e
     \dfrac{\left\|x^*-x^{*(k)}\right\|^2}{n} \triangleq \dfrac{1}{n} \sum\limits_{j=1}^{n}\left( x^* - x_j^{8(k)} \right)^2 = O (k^{-2\alpha})
     \label{eq2.1.6}
 \end{equation} 
+the parameter $\alpha$ governs the degree to which $x^*$ is compressible with respect to $\Psi$. The ordering of coefficients in \cref{eq2.1.4} may be a function of the underlying signal $x^*$ and in such cases, could never be known a priori. The goal is to compute a reconstruction $\hat{x}$ of $x^*$ at FC with a small latency and expected squared-error \[
+    D = \mathbb{E}[\dfrac{1}{n}\|\hat{x}-x^*\|^2] 
+\], meanwhile consuming minimal amount of total power $P_{tot}$.
+
+\textbf{\textcolor[rgb]{1,0,0}{Ideal Centralized Estimation}}
+
+Given $x$, a centralized estimator $\hat{x}_{cen}$ at the FC can be easily constructed by projecting $x$ onto the first $k$ elements of $\Psi$
+
+\begin{eqnarray}
+    \label{eq2.1.7}
+    \hat{x}_{cen} &=& \sum\limits_{i = 1}^{k} \left( \psi_i^T x\right)\psi_i \notag \\
+    &=& x^{*(k)} + \sum\limits_{i=1}^{k}\left( \psi_i^T w \right)\psi_i 
+\end{eqnarray}
+this equation can be deducted from \cref{eq2.1.3},\cref{eq2.1.4}, \cref{eq2.1.5}.
+
+A bias/variance trade-off then
+\begin{equation}
+    D_{cen} = \mathbb{E}\left[ \dfrac{1}{n}\|\hat{x}_{cen}-x^*\|^2 \right] \preceq k^{-2\alpha}+\left( \dfrac{k}{n} \right)\sigma_w^2
+    \label{eq2.1.8}
+\end{equation}
+where the first term is \emph{\textcolor[rgb]{1,0,0}{the squared bias}} and the second is \emph{\textcolor[rgb]{1,0,0}{the variance}}. The minimum is attained by setting $k \sim n^{1/(2\alpha+1)}$, resulting in
+\begin{equation}
+    D_{cen} \preceq n^{-2\alpha/(2\alpha+1)}
+    \label{eq2.1.9}
+\end{equation}
+
