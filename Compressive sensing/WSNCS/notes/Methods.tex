@@ -54,3 +54,53 @@ where the first term is \emph{\textcolor[rgb]{1,0,0}{the squared bias}} and the 
     \label{def2.1.1}
     Let $q\in\mathbb{R}^n$ and $S_p\ :\ \mathbb{R}^n \rightarrow P (\{1,\dots,n\})$, where $P(X)$ means power set of $X$. We call $S_{p}$ the sparsity map of $q$ if $S_q(q)=\{j \in \{1,\dots,n\}\ :\ q_j\neq0\}$ and $|S_p(q)|$ is a counting measure on $S_p(q)$.
 \end{definition} 
+
+Let $\varphi \in \mathbb{R}^N$, where $\|\varphi\|^2=1$, and $v = \varphi^Tx^* = \sum_{j=1}^{n}\varphi_jx_j^*$ be the projection of $x^*$ onto $\varphi$. Using the notion of sparsity map, denote $|S_p(\varphi)| = n_{\varphi}$. Since $\|\varphi\|^2 = 1$, this implies $|\varphi_j|^2 \approx \|\varphi\|^2/n_{\varphi}=1/n_{\varphi} \ \forall j \in S_p(\varphi)$. The goal is to compute an estimate $(\hat{v})$ of $v$ at the FC given $x$.
+
+\emph{\textcolor[rgb]{1,0,0}{One possibility is to nominate a clusterhead in the network and then, assuming at the sensor nodes know $\varphi$ and have constructed routes which form a spanning tree through the network to the clusterhead, sensor nodes locally compute $\varphi_j x_j$ and aggregate these values up the tree to obtain $\hat{v} = \sum_{j=1}^{n}\varphi_jx_j$ at the clusterhead. However, even if we ignore the communication cost of delivering $\hat{v}$ from the clusterhead to the FC, it is easy to see that this shceme requires at least $n$ transmissions.}} 一个可能性是在网络中指定簇头，假设每个传感器节点已知$\varphi$并且可以生成到达簇头节点的生成树路径。传感器节点在本地计算$\varphi_jx_j$并且沿着树结构路径上传，在簇头得到一个聚合值$\hat{v}=\sum_{j=1}^{n}\varphi_jx_j$。然而，即便我们忽略了从簇头到FC传输$\hat{v}$的通信支出，也很容易看出该方案需要最少$n$个传输。
+
+\emph{\textcolor[rgb]{1,0,0}{Another, more promising, alternative is to exploit recent results concerning uncoded coherent transmission schemes. The proposed distributed communication architecture involves phase-coherent, low-power, analog transmission of weighted sample values directly from the nodes in the network to the FC via the narrowband AWGN network-to-FC communication channel.To begin with, assume all the nodes in the network have knowledge of $\varphi$. Each node multiplies its measurement $x_j$ with $\sqrt{\rho}\varphi_jx_j$ to obtain $m_j=\sqrt{\rho}\varphi_jx_j$, where $\rho>0$ is a scaling factor used to satisfy sensors' transmit power constraint $P$, and all the nodes coherently transmit their respective $m_j$'s in an analog fashion over the network-to-FC communication channel}}.
+
+$\mathbb{E}[|m_j|^2] \leq \rho(B^2+\sigma_w^2)/n_{\varphi}$ if $j\in S_p(x^*) \cap S_p(\varphi)$ and $\mathbb{E}[|m_j|^2] = \rho (B^2+\sigma_w^2)/n_{\varphi}$ if $j \in S_p(x^*)^c \cap S_p(\varphi)$. Thus, $\mathbb{E}[|m_j|^2] = \rho(B^2 + \sigma_w^2)/n_{\varphi} \ \forall\ j \in S_p(\varphi)$ and $m_j \equiv 0$ if $j \notin S_p(\varphi)$. Hence, the average transmission power for each sensor $(\in S_p(\varphi))$ is given by
+
+\begin{equation}
+    P_j \leq \rho(B^2+\sigma_w^2)/n_{\varphi}
+    \label{eq2.1.10}
+\end{equation}
+and to satisfy the individual sensor transmit power constraint, we need to take $\rho = (n_{\varphi}\lambda P)/(B^2+\sigma_w^2)$ for $0<\lambda\leq 1$, resulting in $P_j \leq \lambda P(\leq P)$. 
+
+The network-to-FC communication channel is effectively transformed into an AWGN MAC channel and the received signal at the FC is given by
+\begin{eqnarray}
+    \label{eq2.1.11}
+    r &=& \sum\limits_{j=1}^{n}m_j+z = \sqrt{\rho}\sum\limits_{j=1}^{n}\varphi_jx_j+z \notag \\
+    &=& \sqrt{\rho}\varphi^T(x^*+w)+z = \sqrt{\rho}(v+\tilde{w})+z
+\end{eqnarray}
+where $z \sim \mathcal{N}(0,\sigma^2_z)$ is the channel additive white Gaussian noise and $\tilde{w} \sim \mathcal{N}(0,\sigma_w^2)$. \emph{\textcolor[rgb]{1,0,0}{Strictly speaking, the received signal from each node, $m_j$, in the above expression should be scaled by an attenuation constant, $a_j \in (0,1)$, that depends on the distance $d_j$ between the node and FC and the path loss exponent}}.
+\emph{\textcolor[rgb]{0,0,1}{However, under the assumption of identical path losses, the $a_j$'s are nearly the same and we ignore this uniform attenuation since it will uniformly increase the required power per node by a constant factor to attain a desired distortion}}.
+
+The above setup corresponds to obtaining a noisy projection of x onto $\varphi$ at the FC that is scaled by $\sqrt{\rho}$ and given $r$, the FC can easily estimate $v$ as $\hat{v} = r /\sqrt{\rho}$ and the resulting distortion is given by 
+\begin{eqnarray}
+    \label{eq2.1.12}
+    D_v &=& \mathbb{E}[|\hat{v} - v|^2] = \sigma_w^2 + \dfrac{\sigma_z^2}{\rho} \notag \\
+    &=& \sigma_w^2 + \dfrac{\sigma_z^2(B^2+\sigma_w^2)}{n_{\varphi}\lambda P}
+\end{eqnarray}
+the first term is due to the \textcolor[rgb]{1,0,0}{measurement noise} and the second term is due to the \textcolor[rgb]{1,0,0}{communication noise} and the key question becomes: \textcolor[rgb]{1,0,0}{What is the necessary and sufficient value of $\lambda$ (and correspondingly of $\rho$) to make the distortion in \cref{eq2.1.12} as small as possible?}
+
+\begin{theorem}
+    \label{th2.1.1}
+    Given the observation model of \cref{eq2.1.3}, it is possible to obtain an estimate $(\hat{v})$ of the projection of sensor network data onto any normalized vector in $\mathbb{R}^n$, such that $D_v \sim \sigma_w^2$, by using only a fixed amount of total power, $P_v = O(1)$, independent of the number of nodes in the network and the structure of the vector of the vectors on which data is projected.
+\end{theorem}
+
+\begin{proof}
+    The first term in \cref{eq2.1.12} is unaffected by the proposed communication scheme and the second term decays as $1/\lambda$. Both the terms in \cref{eq2.1.12} must be of the same order for fastest distortion:
+    \begin{equation}
+        \sigma_w^2 \sim \dfrac{\sigma_z^2(B^2+\sigma_w^2)}{n_{\varphi}\lambda P} \Longleftrightarrow \lambda \sim \dfrac{\sigma_z^2(B^2+\sigma_w^2)}{n_{\varphi} \sigma_w^2 P}
+        \label{eq2.1.13}
+    \end{equation}
+\end{proof}
+Hence, the necessary and sufficient $\lambda$ to obtain the optimal distortion should be chosen as:
+\begin{equation}
+    \lambda \sim \dfrac{\sigma_z^2(B^2+\sigma_w^2)}{n_{\varphi}\sigma_w^2 P} \sim \dfrac{1}{n_{\varphi}}
+    \label{eq2.1.14}
+\end{equation}
+and from \cref{eq2.1.12}, this would result in $D_v \sim \sigma_w^2$. 
