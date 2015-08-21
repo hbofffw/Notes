@@ -87,7 +87,7 @@ The above setup corresponds to obtaining a noisy projection of x onto $\varphi$ 
 the first term is due to the \textcolor[rgb]{1,0,0}{measurement noise} and the second term is due to the \textcolor[rgb]{1,0,0}{communication noise} and the key question becomes: \textcolor[rgb]{1,0,0}{What is the necessary and sufficient value of $\lambda$ (and correspondingly of $\rho$) to make the distortion in \cref{eq2.1.12} as small as possible?}
 
 \begin{theorem}
-    \label{th2.1.1}
+    \label{thm2.1.1}
     Given the observation model of \cref{eq2.1.3}, it is possible to obtain an estimate $(\hat{v})$ of the projection of sensor network data onto any normalized vector in $\mathbb{R}^n$, such that $D_v \sim \sigma_w^2$, by using only a fixed amount of total power, $P_v = O(1)$, independent of the number of nodes in the network and the structure of the vector of the vectors on which data is projected.
 \end{theorem}
 
@@ -97,14 +97,28 @@ the first term is due to the \textcolor[rgb]{1,0,0}{measurement noise} and the s
         \sigma_w^2 \sim \dfrac{\sigma_z^2(B^2+\sigma_w^2)}{n_{\varphi}\lambda P} \Longleftrightarrow \lambda \sim \dfrac{\sigma_z^2(B^2+\sigma_w^2)}{n_{\varphi} \sigma_w^2 P}
         \label{eq2.1.13}
     \end{equation}
-\end{proof}
-Hence, the necessary and sufficient $\lambda$ to obtain the optimal distortion should be chosen as:
+    Hence, the necessary and sufficient $\lambda$ to obtain the optimal distortion should be chosen as:
 \begin{equation}
     \lambda \sim \dfrac{\sigma_z^2(B^2+\sigma_w^2)}{n_{\varphi}\sigma_w^2 P} \sim \dfrac{1}{n_{\varphi}}
     \label{eq2.1.14}
 \end{equation}
+<<<<<<< HEAD
 and from \cref{eq2.1.12}, this would result in $D_v \sim \sigma_w^2$. 
 
 
 Let $\Psi = \{\psi_i\}^n_{i=1}$ be orthonormal basis of $\mathbb{R}^n$ such that $\|x^*-x^{*(k)}\|^2 /n = O(k^{-2\alpha})$, where $x^{*(k)} = \sum_{i=1}^k \theta_i \psi_i$ (perhaps after re-labeling the indices $i$) and each coefficients $\theta_i$ is computed as a projection of the form $\theta_i = \psi_i^T x^* = \sum_{j=1}^n \psi_{ij}x_j^*$. The sensor network can compute $k$ projections of $x$ onto $\{\psi_i\}_{i=1}^k$ by employing the scheme in $k$ consecutive channel uses. Thus, \textcolor[rgb]{1,0,0}{at the end of $k$ channel uses, each one corresponding to }<++>
 
+=======
+and from \cref{eq2.1.12}, this would result in $D_v \sim \sigma_w^2$. Moreover, since a total of $n_{\varphi}$ nodes used the communication channel during this distributed projection, necessary and sufficient total power ($P_v$) involved in obtaining $\hat{v}$ at the FC would behave as 
+\begin{equation}
+    \sum_{j=1}^{n}P_j \leq (\lambda P) \sim \dfrac{\sigma_z^2(B^2+\sigma_w^2)}{\sigma_w^2} = O(1)
+    \label{eq2.1.15}
+\end{equation}
+\end{proof}
+
+
+\begin{remark}
+    \label{rmk2.1.1}
+    Given the observation model of \cref{eq2.1.3}, it is easy to see that $D_v \sim \sigma_w^2$ is the best that any (centralized or distributed) scheme can hope to achieve in terms of distortion and \cref{thm2.1.1} shows that the distributed scheme described in this paper can achieve that by using \textcolor[rgb]{1,0,0}{only a fixed amount of power}.
+\end{remark}
+>>>>>>> edeb1af7a25b935d5667141e4f08203094c3a3b0
