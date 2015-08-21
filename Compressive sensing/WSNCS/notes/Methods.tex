@@ -102,13 +102,7 @@ the first term is due to the \textcolor[rgb]{1,0,0}{measurement noise} and the s
     \lambda \sim \dfrac{\sigma_z^2(B^2+\sigma_w^2)}{n_{\varphi}\sigma_w^2 P} \sim \dfrac{1}{n_{\varphi}}
     \label{eq2.1.14}
 \end{equation}
-<<<<<<< HEAD
-and from \cref{eq2.1.12}, this would result in $D_v \sim \sigma_w^2$. 
 
-
-Let $\Psi = \{\psi_i\}^n_{i=1}$ be orthonormal basis of $\mathbb{R}^n$ such that $\|x^*-x^{*(k)}\|^2 /n = O(k^{-2\alpha})$, where $x^{*(k)} = \sum_{i=1}^k \theta_i \psi_i$ (perhaps after re-labeling the indices $i$) and each coefficients $\theta_i$ is computed as a projection of the form $\theta_i = \psi_i^T x^* = \sum_{j=1}^n \psi_{ij}x_j^*$. The sensor network can compute $k$ projections of $x$ onto $\{\psi_i\}_{i=1}^k$ by employing the scheme in $k$ consecutive channel uses. Thus, \textcolor[rgb]{1,0,0}{at the end of $k$ channel uses, each one corresponding to }<++>
-
-=======
 and from \cref{eq2.1.12}, this would result in $D_v \sim \sigma_w^2$. Moreover, since a total of $n_{\varphi}$ nodes used the communication channel during this distributed projection, necessary and sufficient total power ($P_v$) involved in obtaining $\hat{v}$ at the FC would behave as 
 \begin{equation}
     \sum_{j=1}^{n}P_j \leq (\lambda P) \sim \dfrac{\sigma_z^2(B^2+\sigma_w^2)}{\sigma_w^2} = O(1)
@@ -121,4 +115,9 @@ and from \cref{eq2.1.12}, this would result in $D_v \sim \sigma_w^2$. Moreover, 
     \label{rmk2.1.1}
     Given the observation model of \cref{eq2.1.3}, it is easy to see that $D_v \sim \sigma_w^2$ is the best that any (centralized or distributed) scheme can hope to achieve in terms of distortion and \cref{thm2.1.1} shows that the distributed scheme described in this paper can achieve that by using \textcolor[rgb]{1,0,0}{only a fixed amount of power}.
 \end{remark}
->>>>>>> edeb1af7a25b935d5667141e4f08203094c3a3b0
+
+Let $\Psi = \{\psi_i\}^n_{i=1}$ be orthonormal basis of $\mathbb{R}^n$ such that $\|x^*-x^{*(k)}\|^2 /n = O(k^{-2\alpha})$, where $x^{*(k)} = \sum_{i=1}^k \theta_i \psi_i$ (perhaps after re-labeling the indices $i$) and each coefficients $\theta_i$ is computed as a projection of the form $\theta_i = \psi_i^T x^* = \sum_{j=1}^n \psi_{ij}x_j^*$. The sensor network can compute $k$ projections of $x$ onto $\{\psi_i\}_{i=1}^k$ by employing the scheme in $k$ consecutive channel uses. Thus, \textcolor[rgb]{1,0,0}{at the end of $k$ channel uses, each one corresponding to a projection of $x$ onto an element of $\Psi$, FC has access to the estimates of $k$ projection coefficients given by}
+\begin{equation}
+    \hat{\theta} = r_i/\sqrt{\rho_i} = \theta_i = \psi_i^T w + z_i /\sqrt{\rho_i}, \quad i = 1,\dots,k
+    \label{eq2.1.16}
+\end{equation}
