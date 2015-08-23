@@ -126,4 +126,30 @@ Let $\Psi = \{\psi_i\}^n_{i=1}$ be orthonormal basis of $\mathbb{R}^n$ such that
 
 \textbf{Data compression algorithm classification}
 
-The aggregation techniques are usually adopted in dense sensor networks with multi-hop topology which require routing algorithms. This aggregation function in existing literature was usually \emph{\textcolor[rgb]{1,0,0}{performed by extracting maximum, minimum and average values of aggregated data}}. In such way, it can \emph{\textcolor[rgb]{1,0,0}{reduce the amount of communicating data}} in dense networks which affect the power consumption but \textcolor[rgb]{0,0,1}{lose much of the original structure in the extracted data} because it \textcolor[rgb]{0,0,1}{provides only coarse statistics without local variations} such as \textcolor[rgb]{1,0,0}{data distribution over an area}\cite{1307317}. A number of papers solved this issue by using \textcolor[rgb]{1,0,0}{rules or factors to tune the degree of aggregation. This means that the aggregation is considered to operate based on the network's information, such as the differences of consecutive data, location of nodes and network capacity}. 
+The aggregation techniques are usually adopted in dense sensor networks with multi-hop topology which require routing algorithms. This aggregation function in existing literature was usually \emph{\textcolor[rgb]{1,0,0}{performed by extracting maximum, minimum and average values of aggregated data}}. In such way, it can \emph{\textcolor[rgb]{1,0,0}{reduce the amount of communicating data}} in dense networks which affect the power consumption but \textcolor[rgb]{0,0,1}{lose much of the original structure in the extracted data} because it \textcolor[rgb]{0,0,1}{provides only coarse statistics without local variations} such as \textcolor[rgb]{1,0,0}{data distribution over an area}\cite{1307317}. A number of papers solved this issue by using \textcolor[rgb]{1,0,0}{rules or factors to tune the degree of aggregation. This means that the aggregation is considered to operate based on the network's information, such as the differences of consecutive data, location of nodes and network capacity}. However, these improved schemes have the possibility of \textcolor[rgb]{0,0,1}{losing their original data structure} when there is a high degree of aggregation. 
+
+One set of existing algorithms have been applied to solve original data structure loss problems. Since these compression algorithms were extended from aggregation techniques which operate on multi-hop network topology, they usually \textcolor[rgb]{1,0,0}{distribute a compression algorithm throughout the network}. Another set of existing algorithms are performed \textcolor[rgb]{1,0,0}{at each local node independently of other nodes}. The algorithms described above can be classified into two categories: \emph{\textcolor[rgb]{1,0,0}{distributed data compression approach}} and \emph{\textcolor[rgb]{1,0,0}{local data compression approach}}. 
+
+\textbf{Data compresion algorithm in wireless sensor networks for real-world requirements}
+
+Two sets of requirements in real-world WSN applications:
+\begin{enumerate}
+    \item The first set contains the common constraints of wireless sensor networks that should be considered in designing a data compression algorithm. 第一个集合包含了在设计无线传感网络数据压缩算法时，需要考虑的一般约束条件。
+    \item The second set identifies the unique requirements related to the data compression designed for each particular existing real-world application. 第二个集合确定了，每一个特定的应用场景中设计压缩算法时，相应的独特唯一的必要条件。
+\end{enumerate}
+
+\emph{Common requirements in real-world WSN applications}
+
+An efficient data compression algorithm needs to be designed by considering the trade-off between the computational cost and the power saving from compression ratio.
+
+\emph{\textcolor[rgb]{1,0,0}{Distributed data compression approaches}}
+
+\begin{enumerate}
+    \item distributed source modeling (DSM);
+    \item distributed transform coding (DTC);
+    \item distributed source coding (DSC)
+    \item compressed sensing (CS) techniques. 
+\end{enumerate}
+
+
+
