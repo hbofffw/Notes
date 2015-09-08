@@ -151,5 +151,46 @@ An efficient data compression algorithm needs to be designed by considering the 
     \item compressed sensing (CS) techniques. 
 \end{enumerate}
 
+\subsubsection{Distributed source modeling (DSM)}
+It aims to search for a function/model that best fits a set of input measurements acquired by a specific group of sensor nodes using \emph{\textcolor[rgb]{1,0,0}{parametric modeling}} and \emph{\textcolor[rgb]{1,0,0}{non-parametric modeling}}. 
 
+\emph{\textcolor[rgb]{1,0,0}{parametric modeling}}
+
+Using parametric modeling, an algorithm treats sensor data as a \textcolor[rgb]{1,0,0}{random process that has to be optimally estimated when knowing tis statistical parameters}, such as mean and variance. Parametric modeling could yield superior performance when the statistical structure of the random process (sensor data) being observed is known. 
+
+\emph{\textcolor[rgb]{1,0,0}{Non-parametric modeling}}
+
+Non-parametric modeling utilizes kernel-based regression to represent the sensor data where the regression coefficients are learned by treating the sensor data as input-output example pairs of some deterministic function observed in noise. In this case, it requires very little prior information about the nature of the data in the random process and is considered to be very robust. 
+
+\subsubsection{Compressed sensing (CS)}
+
+Given a set of sparse signal $\mathbf{x} = (x_{ij})_{n \times 1}$, we can find a random projection matrix $\mathbf{A} = (A_{i,j})_{k \times n}$ with far fewer rows than columns to obtain a small compressed data set as 
+\begin{equation}
+    \mathbf{y} = (y_{i,j})_{k \times 1} = \mathbf{Ax}.
+    \label{eq2.3.33}
+\end{equation}
+
+Then, we can reconstruct an estimation of $\mathbf{x}$ by solving an optimization problem as follows:
+\begin{equation*}
+    \hat{\mathbf{x}} = \mathop{\mathrm{argmin}}\limits_z \|\mathbf{z}\|_1 \text{ subject to  }\mathbf{y} = \mathbf{Az},
+\end{equation*}
+where $\|\mathbf{z}\|_1 = \sum_{i=1}^{N}\left|z_i\right|$ denotes the $\ell_1$-norm.
+
+
+A WSN with four sensor nodes and one sink node. If the projection vector is $\mathbf{A} = [0.2,0.1,0.3,0.4]$ and the projected value is $\mathbf{y} = \mathbf{Ax} = [0.2x_1+0.1x_2+0.3x_3+0.4x_4]$. The sink node can obtain this projected value without the sensor nodes sending their sensor readings to the sink node. This can be achieved by the sink node passing a message along the route $S-1-2-4-3-S$ using source routing in the WSN. This paper considered a case of projection vector $\mathbf{A} = [0.2,0,0.3,0]$. This sink node obtains the projected value $\mathbf{y} = \mathbf{Ax} = 0.2x_1+0.3x_3$ and the route is $S-1-3-S$. Thus, $\mathbf{A}$ is one of the key parameters that should be considered correctly in this scheme. Matrix $\mathbf{A}$ is mentioned in \cite{5044947} referred to as a \emph{\textcolor[rgb]{1,0,0}{routing matrix}}. When in some WSN applications (monitoring or data gathering), the observed $x$ may be not always sparse. Another key parameter is a \textcolor[rgb]{1,0,0}{suitable transformation that makes the signal sparse int its domain}. There must exist an invertible transformation matrix $\mathbf{T}$ of size $n \times n$ such that we can write
+\begin{equation}
+    \mathbf{x} = \mathbf{Ts}.
+    \label{eq2.3.34}
+\end{equation}
+where $\mathbf{s}$ is sparse. Substituting \cref{eq2.3.34} to \cref{eq2.3.33}, the compressed data can be obtained as 
+\begin{equation*}
+    \mathbf{y} = \mathbf{Ax} = \mathbf{ATs}
+\end{equation*}
+Then the optimization problem for obtaining a recovered version of $\mathbf{s}$ can be written as: 
+\begin{equation}
+    \hat{\mathbf{s}}=\mathop{\mathrm{argmin}}\limits_z \|\mathbf{z}\|_1 \text{ subject to } \mathbf{y} = \mathbf{ATz}.
+    \label{eq2.3.35}
+\end{equation}
+It was shown that the $\ell_1$-minimization could be solved with a linear programming (LP) technique \cite{Haupt2008}. The complexity \textcolor[rgb]{0,0,1}{increases dramatically when $n$ is very large} although the reconstruction complexity of the LP-based decoder is polynomial. There are several ongoing researches looking for low-complexity reconstruction techniques \cite{Tropp2007, Blumensath2008}. Once we obtained a sparse solution $\hat{\mathbf{s}}$, the original data $\mathbf{x}$ can be recovered through \cref{eq2.3.34}. 
+If the projection matrix is $\mathbf{A} = [0.2, 0.1, 0.3, 0.4]$, the sink node obtains the projected value as $\mathbf{y} = \mathbf{Ax} = 0.2x_1+0.1x_2+0.3x_3+0.4x_4$ by passing a message along the route $S-1-2-4-3-S$ using source routing in the WSNs. 
 
