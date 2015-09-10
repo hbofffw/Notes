@@ -122,7 +122,7 @@ Let $\Psi = \{\psi_i\}^n_{i=1}$ be orthonormal basis of $\mathbb{R}^n$ such that
     \label{eq2.1.16}
 \end{equation}
 
-\subsection{Practical data compression in wireless sensor networks: A survey}
+\section{Practical data compression in wireless sensor networks: A survey}
 
 \textbf{Data compression algorithm classification}
 
@@ -151,7 +151,7 @@ An efficient data compression algorithm needs to be designed by considering the 
     \item compressed sensing (CS) techniques. 
 \end{enumerate}
 
-\subsubsection{Distributed source modeling (DSM)}
+\subsection{Distributed source modeling (DSM)}
 It aims to search for a function/model that best fits a set of input measurements acquired by a specific group of sensor nodes using \emph{\textcolor[rgb]{1,0,0}{parametric modeling}} and \emph{\textcolor[rgb]{1,0,0}{non-parametric modeling}}. 
 
 \emph{\textcolor[rgb]{1,0,0}{parametric modeling}}
@@ -162,7 +162,7 @@ Using parametric modeling, an algorithm treats sensor data as a \textcolor[rgb]{
 
 Non-parametric modeling utilizes kernel-based regression to represent the sensor data where the regression coefficients are learned by treating the sensor data as input-output example pairs of some deterministic function observed in noise. In this case, it requires very little prior information about the nature of the data in the random process and is considered to be very robust. 
 
-\subsubsection{Compressed sensing (CS)}
+\subsection{Compressed sensing (CS)}
 
 Given a set of sparse signal $\mathbf{x} = (x_{ij})_{n \times 1}$, we can find a random projection matrix $\mathbf{A} = (A_{i,j})_{k \times n}$ with far fewer rows than columns to obtain a small compressed data set as 
 \begin{equation}
@@ -189,7 +189,7 @@ where $\mathbf{s}$ is sparse. Substituting \cref{eq2.3.34} to \cref{eq2.3.33}, t
 Then the optimization problem for obtaining a recovered version of $\mathbf{s}$ can be written as: 
 \begin{equation}
     \hat{\mathbf{s}}=\mathop{\mathrm{argmin}}\limits_z \|\mathbf{z}\|_1 \text{ subject to } \mathbf{y} = \mathbf{ATz}.
-    \label{eq2.3.35}
+    \label{eq2.3.35}\sum_{}^{<++>}<++>
 \end{equation}
 It was shown that the $\ell_1$-minimization could be solved with a linear programming (LP) technique \cite{Haupt2008}. The complexity \textcolor[rgb]{0,0,1}{increases dramatically when $n$ is very large} although the reconstruction complexity of the LP-based decoder is polynomial. There are several ongoing researches looking for low-complexity reconstruction techniques \cite{Tropp2007, Blumensath2008}. Once we obtained a sparse solution $\hat{\mathbf{s}}$, the original data $\mathbf{x}$ can be recovered through \cref{eq2.3.34}. 
 If the projection matrix is $\mathbf{A} = [0.2, 0.1, 0.3, 0.4]$, the sink node obtains the projected value as $\mathbf{y} = \mathbf{Ax} = 0.2x_1+0.1x_2+0.3x_3+0.4x_4$ by passing a message along the route $S-1-2-4-3-S$ using source routing in the WSNs. 
@@ -203,3 +203,13 @@ In \cite{5044947} and \cite{Luo2009}, the authors addressed the data gathering p
 In addition to sparsity, the gathering cost also depends on the position of the sensors whose samples are aggregated in the measurements. Based on this motivation, authors in \cite{Lee2009} proposed a framework for efficient data gathering in WSNs using spatially localized sparse projections. For the purpose of designing \textcolor[rgb]{1,0,0}{distributed measurement strategies that are both sparse and spatially localized}, the scheme divides the network into \textcolor[rgb]{1,0,0}{clusters of adjacent nodes and forces projections to be obtained only from nodes within a cluster}. This means that routing matrix $\mathbf{A}$ has \textcolor[rgb]{1,0,0}{a diagonal structure}. This scheme introduces overlapping energy measurement among transform functions $\mathbf{T}$ and based on their analysis and experiment of independent and joint reconstruction methods, a joint reconstruction method is adopted for localized projections. Thus, it can exploit measurements in multiple clusters corresponding to energy in a given transform function $\mathbf{T}$ that overlaps those clusters. Comparing to the approach of \cite{5044947}, the method proposed in \cite{Lee2009} achieved \textcolor[rgb]{1,0,0}{power saving with localized aggregation and captured more evenly distributed energy of transform functions}. 
 
 While most of the previous works proposed \textcolor[rgb]{0,0,1}{static compressed sensing} for WSNs, the author in \cite{Chou2009} proposed an adaptive algorithm based on the recently developed theory of adaptive compressive sensing (\cite{Ji2008, Kho2009}) to \textcolor[rgb]{1,0,0}{collect information from WSNs in an energy-efficient manner}. The key idea of the algorithm is to perform \emph{\textcolor[rgb]{1,0,0}{projections iteratively to maximize the amount of information gained per energy expenditure}}. 
+
+
+\subsection{Local data compression approaches}
+The local data compression approach performs data compression locally on each sensor node without distributed collaboration among other sensor nodes. These schemes usually exploit \textcolor[rgb]{1,0,0}{only temporal correlation of the data} and \textcolor[rgb]{1,0,0}{do not depend on the specific WSN topologies}. These schemes are suitable for \textcolor[rgb]{1,0,0}{sparse WSNs which have a low spatial correlation property}. 
+
+\subsubsection{Lossless Compression Algorithms}
+
+Scientists may not have a priori knowledge about the magnitude of observational errors that are tolerable without affecting their new research findings \cite{Liang2010}. In some application scenarios such as body area networks (BANs), becuase the criticality of some application domains demands sensors with high accuracy and cannot tolerate measurement being corrupted by compression processes, sensor nodes need permanently monitor and log vital signs. Each small variation of these important signals has to be captured because it might provide crucial information to make a diagnosis \cite{Marcelloni2009}.
+\subsubsection{Lossy Compression Algorithms}
+
