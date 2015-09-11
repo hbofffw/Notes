@@ -215,7 +215,20 @@ have discussed the lossless compression for local data compression approaches:
 \begin{enumerate}
     \item The first type of such algorithms is the lossless compression based on dictionary approaches (\cite{Marcelloni2009, Sadler2006}).
 
-        Typically, dictionary-based algorithms are used to compress all kinds of data; however, care should be taken with their use. This approach is most useful when \emph{\textcolor[rgb]{1,0,0}{structural constraints restrict the frequently occurring patterns to a small subset of all possible patterns}}. The techniques consists of \textcolor[rgb]{1,0,0}{static dictionary} and \textcolor[rgb]{1,0,0}{adaptive dictionary} techniques. While the static dictionary techniques such as \textcolor[rgb]{1,0,0}{diagram coding have a fixed code length}, the adaptive dictionary techniques have a \textcolor[rgb]{1,0,0}{dynamic code length}, such as LZ77 (\cite{Ziv1977}), LZ78 (\cite{Ziv1978}), and LZW (\cite{Welch1984}). 
+        Typically, dictionary-based algorithms are used to compress all kinds of data; however, care should be taken with their use. This approach is most useful when \emph{\textcolor[rgb]{1,0,0}{structural constraints restrict the frequently occurring patterns to a small subset of all possible patterns}}. The techniques consists of \textcolor[rgb]{1,0,0}{static dictionary} and \textcolor[rgb]{1,0,0}{adaptive dictionary} techniques. While the static dictionary techniques such as \textcolor[rgb]{1,0,0}{diagram coding have a fixed code length}, the adaptive dictionary techniques have a \textcolor[rgb]{1,0,0}{dynamic code length}, such as LZ77 (\cite{Ziv1977}), LZ78 (\cite{Ziv1978}), and LZW (\cite{Welch1984}). For WSNs, the authors in \cite{Barr2006, Sadler2006} analyzed the original version of those algorithms and pointed out that they were \textcolor[rgb]{0,0,1}{not suitable for sensor nodes because their processing and memory requirements were greater than the ones available in commercial sensor nodes}. Authors in \cite{Marcelloni2009} proposed approximated version of \emph{exponential-Golomb} code called \emph{\textbf{\textcolor[rgb]{1,0,0}{LEC (simple Lossless Entropy Compression)}}} showed that their algorithm outperformed S-LZW. 
+
+        LEC scheme: 
+        \begin{enumerate}
+            \item First, the measured signal from the sensing unit in a sensor node is converted by an ADC into a binary representation $r_i$ with a size of $R$ bits. 
+            \item Then, the LEC algorithm computes a difference $d_i=r_i-r_{i-1}$ which is an input to an encoder. 
+        \end{enumerate}
+        A key concept of this scheme is to apply a modified version of \emph{exponential-Golomb code} in the encoder. The basic idea of exponential-Golomb code is \emph{\textcolor[rgb]{1,0,0}{to divide the alphabets of non-negative numbers into groups whose sizes increase exponentially}}. Unary code (a variable-length code) specifies the group, while the binary code (a fixed-length code) represents the index within the group. In the LEC scheme, they also divide numbers into groups whose sizes increase exponentially but each group is entropy coded rather than unary coded as in the original version. A dictionary used in this scheme is called a \textcolor[rgb]{1,0,0}{prefix-free-table}. Additionally, the LEC scheme can be used with both negative and non-negative numbers. 
+
+        \begin{quote}
+            \textbf{Example: } It is assumed that $d_1 = -7$ is the input of the LEC encoder. Since $d_1$ is less than $0$ and belongs to $n_1 = \lceil \log_2(|-7|)\rceil = 3$, we obtain the code $s_1 = 100$ and the code $a_1 = 000$ which is $3$ low-order bits of the two's complement representation of $-7-1 = -8$ which is 000. Thus, the bit sequence used to represent $d_1 = -7$ is $s_i|a_i = 100|000$.
+        \end{quote}<++>
+
+
     \item The second type is he lossless compression based on \textcolor[rgb]{1,0,0}{predictive coding approaches (\cite{Liang2010, Huang2007})} 
 \end{enumerate}<++>
 \subsubsection{Lossy Compression Algorithms}
