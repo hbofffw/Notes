@@ -210,6 +210,13 @@ The local data compression approach performs data compression locally on each se
 
 \subsubsection{Lossless Compression Algorithms}
 
-Scientists may not have a priori knowledge about the magnitude of observational errors that are tolerable without affecting their new research findings \cite{Liang2010}. In some application scenarios such as body area networks (BANs), becuase the criticality of some application domains demands sensors with high accuracy and cannot tolerate measurement being corrupted by compression processes, sensor nodes need permanently monitor and log vital signs. Each small variation of these important signals has to be captured because it might provide crucial information to make a diagnosis \cite{Marcelloni2009}.
+Scientists may not have a priori knowledge about the magnitude of observational errors that are tolerable without affecting their new research findings \cite{Liang2010}. In some application scenarios such as body area networks (BANs), because the criticality of some application domains demands sensors with high accuracy and cannot tolerate measurement being corrupted by compression processes, sensor nodes need permanently monitor and log vital signs. Each small variation of these important signals has to be captured because it might provide crucial information to make a diagnosis \cite{Marcelloni2009}. Only a few literature works
+have discussed the lossless compression for local data compression approaches:
+\begin{enumerate}
+    \item The first type of such algorithms is the lossless compression based on dictionary approaches (\cite{Marcelloni2009, Sadler2006}).
+
+        Typically, dictionary-based algorithms are used to compress all kinds of data; however, care should be taken with their use. This approach is most useful when \emph{\textcolor[rgb]{1,0,0}{structural constraints restrict the frequently occurring patterns to a small subset of all possible patterns}}. The techniques consists of \textcolor[rgb]{1,0,0}{static dictionary} and \textcolor[rgb]{1,0,0}{adaptive dictionary} techniques. While the static dictionary techniques such as \textcolor[rgb]{1,0,0}{diagram coding have a fixed code length}, the adaptive dictionary techniques have a \textcolor[rgb]{1,0,0}{dynamic code length}, such as LZ77 (\cite{Ziv1977}), LZ78 (\cite{Ziv1978}), and LZW (\cite{Welch1984}). 
+    \item The second type is he lossless compression based on \textcolor[rgb]{1,0,0}{predictive coding approaches (\cite{Liang2010, Huang2007})} 
+\end{enumerate}<++>
 \subsubsection{Lossy Compression Algorithms}
 
