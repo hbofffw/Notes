@@ -217,7 +217,7 @@ have discussed the lossless compression for local data compression approaches:
 
         Typically, dictionary-based algorithms are used to compress all kinds of data; however, care should be taken with their use. This approach is most useful when \emph{\textcolor[rgb]{1,0,0}{structural constraints restrict the frequently occurring patterns to a small subset of all possible patterns}}. The techniques consists of \textcolor[rgb]{1,0,0}{static dictionary} and \textcolor[rgb]{1,0,0}{adaptive dictionary} techniques. While the static dictionary techniques such as \textcolor[rgb]{1,0,0}{diagram coding have a fixed code length}, the adaptive dictionary techniques have a \textcolor[rgb]{1,0,0}{dynamic code length}, such as LZ77 (\cite{Ziv1977}), LZ78 (\cite{Ziv1978}), and LZW (\cite{Welch1984}). For WSNs, the authors in \cite{Barr2006, Sadler2006} analyzed the original version of those algorithms and pointed out that they were \textcolor[rgb]{0,0,1}{not suitable for sensor nodes because their processing and memory requirements were greater than the ones available in commercial sensor nodes}. Authors in \cite{Marcelloni2009} proposed approximated version of \emph{exponential-Golomb} code called \emph{\textbf{\textcolor[rgb]{1,0,0}{LEC (simple Lossless Entropy Compression)}}} showed that their algorithm outperformed S-LZW. 
 
-        LEC scheme: 
+        LEC scheme demonstration: 
         \begin{enumerate}
             \item First, the measured signal from the sensing unit in a sensor node is converted by an ADC into a binary representation $r_i$ with a size of $R$ bits. 
             \item Then, the LEC algorithm computes a difference $d_i=r_i-r_{i-1}$ which is an input to an encoder. 
@@ -225,11 +225,32 @@ have discussed the lossless compression for local data compression approaches:
         A key concept of this scheme is to apply a modified version of \emph{exponential-Golomb code} in the encoder. The basic idea of exponential-Golomb code is \emph{\textcolor[rgb]{1,0,0}{to divide the alphabets of non-negative numbers into groups whose sizes increase exponentially}}. Unary code (a variable-length code) specifies the group, while the binary code (a fixed-length code) represents the index within the group. In the LEC scheme, they also divide numbers into groups whose sizes increase exponentially but each group is entropy coded rather than unary coded as in the original version. A dictionary used in this scheme is called a \textcolor[rgb]{1,0,0}{prefix-free-table}. Additionally, the LEC scheme can be used with both negative and non-negative numbers. 
 
         \begin{quote}
-            \textbf{Example: } It is assumed that $d_1 = -7$ is the input of the LEC encoder. Since $d_1$ is less than $0$ and belongs to $n_1 = \lceil \log_2(|-7|)\rceil = 3$, we obtain the code $s_1 = 100$ and the code $a_1 = 000$ which is $3$ low-order bits of the two's complement representation of $-7-1 = -8$ which is 000. Thus, the bit sequence used to represent $d_1 = -7$ is $s_i|a_i = 100|000$.
-        \end{quote}<++>
+            First type of lossless compression:  \textbf{Example: } It is assumed that $d_1 = -7$ is the input of the LEC encoder. Since $d_1$ is less than $0$ and belongs to $n_1 = \lceil \log_2(|-7|)\rceil = 3$, we obtain the code $s_1 = 100$ and the code $a_1 = 000$ which is $3$ low-order bits of the two's complement representation of $-7-1 = -8$ which is 000. Thus, the bit sequence used to represent $d_1 = -7$ is $s_i|a_i = 100|000$.  
+        \end{quote}
 
 
-    \item The second type is he lossless compression based on \textcolor[rgb]{1,0,0}{predictive coding approaches (\cite{Liang2010, Huang2007})} 
+    \item The second type is he lossless compression based on \textcolor[rgb]{1,0,0}{predictive coding approaches (\cite{Liang2010, Huang2007})}. This approach is motivated by the fact that environment monitoring data collected from real-world situations are usually temporally correlated, which leads to information redundancy inside the observation data. \emph{\textcolor[rgb]{1,0,0}{Two-modal transmission (TMT) scheme}}: The works of \cite{Liang2010} and \cite{Huang2007} adopted the modified version of the predictive coding scheme based on the principle of predictive coding originally introduced by \cite{Elias1955}. 
+        
+        The differences between current observed values and predictive values called \emph{\textcolor[rgb]{1,0,0}{error terms}} are generally small. However, large error terms may occur in real-world applications. This small number of large error terms, often called outliers, degrade the overall coding efficiency. The author of \cite{Huang2007} proposed an approach called \textbf{\textcolor[rgb]{1,0,0}{two-modal transmission for predictive coding}}.
+        \begin{enumerate}
+            \item The first modal transmission, called \emph{\textcolor[rgb]{1,0,0}{compressed mode}}, transmits the compressed bits of error terms falling inside the interval $\left[ -R,R \right]$. 
+            \item The second transmission, called \emph{\textcolor[rgb]{1,0,0}{non-compressed mode}}, transmits the original raw data of error terms falling outside the interval $\left[ -R,R \right]$. 
+        \end{enumerate}
+        The modified predictive coding based on the two-modal transmission approach can solve the problem of decreased coding efficiency \emph{\textcolor[rgb]{1,0,0}{due to the low performance of large error terms prediction}}. The proposed solution to this problem is to find an optimal interval of $\left[ -R,R \right]$ that \textcolor[rgb]{1,0,0}{\textbf{provides the maximum compression ratio}}. In that work, the authors found the optimal interval $\left[ -R,R \right]$ by an \textcolor[rgb]{1,0,0}{empirical method that used a predictive coding configuration} as follows:
+        \begin{enumerate}
+            \item \emph{\textcolor[rgb]{1,0,0}{Data characteristics of the error term were \textbf{fitted with Gaussian distribution}}}. 
+            \item \emph{\textcolor[rgb]{1,0,0}{A \textbf{linear predictor} was employed due to the computational cost and limited computing capability of the sensor nodes. Its coefficient values were computed by \textbf{using a training set}}}.
+            \item \emph{\textcolor[rgb]{1,0,0}{\textbf{Arithmetic coding with 10-based alphabet was chosen as the coding scheme} according to a theory suggested by Sayood that arithmetic coding can achieve near-optimal performance value if the \textbf{alphabet is small and highly skewed}}}.
+        \end{enumerate}
+
+        They found that $R=10$ yielded the interval of $\left[ -10,10 \right]$ which was the optimal bound in this case. 
+
+        This scheme was extended by the authors in \cite{Liang2010} by using a predictive coding configuration as follows: 
+        \begin{enumerate}
+            \item \emph{\textcolor[rgb]{1,0,0}{Data characteristics of the error term were fitted with a \textbf{Laplacian distribution rather than Gaussian distribution}}}.
+            \item \emph{\textcolor[rgb]{1,0,0}{A linear predictor was also employed. The \textbf{sink node is responsible for computing its coefficient values}}}.
+            \item \emph{\textcolor[rgb]{1,0,0}{Arithmetic coding was also chosen as the coding scheme. However, they were not fixed to a 10-based alphabet. Instead, they applied \textbf{the optimal $M$-based alphabet}}}.
+        \end{enumerate}
 \end{enumerate}<++>
 \subsubsection{Lossy Compression Algorithms}
 
