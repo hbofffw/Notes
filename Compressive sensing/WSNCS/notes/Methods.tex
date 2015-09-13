@@ -251,7 +251,16 @@ have discussed the lossless compression for local data compression approaches:
             \item \emph{\textcolor[rgb]{1,0,0}{A linear predictor was also employed. The \textbf{sink node is responsible for computing its coefficient values}}}.
             \item \emph{\textcolor[rgb]{1,0,0}{Arithmetic coding was also chosen as the coding scheme. However, they were not fixed to a 10-based alphabet. Instead, they applied \textbf{the optimal $M$-based alphabet}}}.
         \end{enumerate}
-\end{enumerate}<++>
+        The key problem for this configuration is to \textcolor[rgb]{1,0,0}{search for the optimal function of $R$ and $M$ that yields the maximum compression ratio}. Thus, the authors in \cite{Liang2010} devised a simple heuristic method to solve the constrained optimization. This proposed heuristic algorithm is \emph{\textcolor[rgb]{1,0,0}{adaptively computed at the sink node}}. The sink node is not energy-limited and searches for optimal predictor's coefficients, the optimal bound $R$ and the optimal $M$ for $M$-based alphabet coding. These optimal parameters are then broadcasted to other sensor nodes in order to perform a predictive coding based on the two-modal transmission algorithm.
+\end{enumerate}
+
+
 \subsubsection{Lossy Compression Algorithms}
+
+Although lossy compression algorithms may cause some loss of information during compression and decompression process, it enables an encoder to increase its compression rate, which is higher than the lossless compression algorithms. It is beneficial for some applications that do not strictly require precise information. For WSNs, there are a few literature works, such as \cite{Schoellhammer2004} and \cite{Marcelloni:2010aa}, that discussed the lossy compression for \textcolor[rgb]{1,0,0}{local data compression approaches}.
+
+\emph{\textcolor[rgb]{1,0,0}{Lightweight temporal compression (LTC) scheme}} \cite{Schoellhammer2004}: 
+
+
 
 
