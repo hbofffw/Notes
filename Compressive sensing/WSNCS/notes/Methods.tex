@@ -98,16 +98,16 @@ the first term is due to the \textcolor[rgb]{1,0,0}{measurement noise} and the s
         \label{eq2.1.13}
     \end{equation}
     Hence, the necessary and sufficient $\lambda$ to obtain the optimal distortion should be chosen as:
-\begin{equation}
-    \lambda \sim \dfrac{\sigma_z^2(B^2+\sigma_w^2)}{n_{\varphi}\sigma_w^2 P} \sim \dfrac{1}{n_{\varphi}}
-    \label{eq2.1.14}
-\end{equation}
+    \begin{equation}
+        \lambda \sim \dfrac{\sigma_z^2(B^2+\sigma_w^2)}{n_{\varphi}\sigma_w^2 P} \sim \dfrac{1}{n_{\varphi}}
+        \label{eq2.1.14}
+    \end{equation}
 
-and from \cref{eq2.1.12}, this would result in $D_v \sim \sigma_w^2$. Moreover, since a total of $n_{\varphi}$ nodes used the communication channel during this distributed projection, necessary and sufficient total power ($P_v$) involved in obtaining $\hat{v}$ at the FC would behave as 
-\begin{equation}
-    \sum_{j=1}^{n}P_j \leq (\lambda P) \sim \dfrac{\sigma_z^2(B^2+\sigma_w^2)}{\sigma_w^2} = O(1)
-    \label{eq2.1.15}
-\end{equation}
+    and from \cref{eq2.1.12}, this would result in $D_v \sim \sigma_w^2$. Moreover, since a total of $n_{\varphi}$ nodes used the communication channel during this distributed projection, necessary and sufficient total power ($P_v$) involved in obtaining $\hat{v}$ at the FC would behave as 
+    \begin{equation}
+        \sum_{j=1}^{n}P_j \leq (\lambda P) \sim \dfrac{\sigma_z^2(B^2+\sigma_w^2)}{\sigma_w^2} = O(1)
+        \label{eq2.1.15}
+    \end{equation}
 \end{proof}
 
 
@@ -230,7 +230,7 @@ have discussed the lossless compression for local data compression approaches:
 
 
     \item The second type is he lossless compression based on \textcolor[rgb]{1,0,0}{predictive coding approaches (\cite{Liang2010, Huang2007})}. This approach is motivated by the fact that environment monitoring data collected from real-world situations are usually temporally correlated, which leads to information redundancy inside the observation data. \emph{\textcolor[rgb]{1,0,0}{Two-modal transmission (TMT) scheme}}: The works of \cite{Liang2010} and \cite{Huang2007} adopted the modified version of the predictive coding scheme based on the principle of predictive coding originally introduced by \cite{Elias1955}. 
-        
+
         The differences between current observed values and predictive values called \emph{\textcolor[rgb]{1,0,0}{error terms}} are generally small. However, large error terms may occur in real-world applications. This small number of large error terms, often called outliers, degrade the overall coding efficiency. The author of \cite{Huang2007} proposed an approach called \textbf{\textcolor[rgb]{1,0,0}{two-modal transmission for predictive coding}}.
         \begin{enumerate}
             \item The first modal transmission, called \emph{\textcolor[rgb]{1,0,0}{compressed mode}}, transmits the compressed bits of error terms falling inside the interval $\left[ -R,R \right]$. 
@@ -259,18 +259,34 @@ have discussed the lossless compression for local data compression approaches:
 
 Although lossy compression algorithms may cause some loss of information during compression and decompression process, it \emph{\textcolor[rgb]{1,0,0}{enables an encoder to increase its compression rate}}, which is higher than the lossless compression algorithms. It is beneficial for some applications that do not strictly require precise information. For WSNs, there are a few literature works, such as \cite{Schoellhammer2004} and \cite{Marcelloni:2010aa}, that discussed the lossy compression for \textcolor[rgb]{1,0,0}{local data compression approaches}.
 
-\emph{\textcolor[rgb]{1,0,0}{Lightweight temporal compression (LTC) scheme}} \cite{Schoellhammer2004}: This scheme is designed by considering two key points:
 \begin{enumerate}
-    \item First, the observations of micro-climate data over a small enough window of time are linear. 
-    \item Second, the noise exists in commercial sensors.
+    \item \emph{\textcolor[rgb]{1,0,0}{Lightweight temporal compression (LTC) scheme}} \cite{Schoellhammer2004}: This scheme is designed by considering two key points:
+        \begin{enumerate}
+            \item First, the observations of micro-climate data over a small enough window of time are linear. 
+            \item Second, the noise exists in commercial sensors.
+        \end{enumerate}
+        Based on these observations, LTC was designed for climate monitoring applications by \textcolor[rgb]{1,0,0}{fitting micro-climate data during a short range of time (window) with a sub-linear model}. LTC was also designed to compress data when \textcolor[rgb]{1,0,0}{sensor accuracy was expressed as an error margin (e)} and when the \textcolor[rgb]{1,0,0}{probability distribution of error was wither uniform or unknown}. 
+
+        \textbf{Description of modified LTC:}
+
+        \begin{quote}
+            Corresponding to each time point $t_i$, there exists a sample value $v_i$. From the value $v_i$, we can get the value range of error margin $\left[v_i-e, v_i+e\right]$, where $v_i+e$ called the \emph{upper limit (UL)} and $v_i-e$ called the \emph{lower limit (LL)}. From point $v_0$, line connect $v_0$ and UL of $v_1$ is called \emph{\textcolor[rgb]{1,0,0}{highLine}} and line connect $v_0$ and LL of $v_1$ is called \emph{\textcolor[rgb]{1,0,0}{lowLine}}, respectively. The highLine and lowLine are denoted as lh12 and lw12 respectively. When $v_3$ locates in the region limited by lh12 and lw12, draw line lh13 and lw13. If the slope of lh13 and lw13 are bigger than lh12 and lw12 respectively, than the region now is formed by lh12 and lw13; otherwise, the region is formed by lw12 and lh13. 
+
+            When $v_3$ locates outside the region, we obtain the first \textcolor[rgb]{1,0,0}{sub-linear model}. At this point, the first sub-linear model is denoted by $m_1$, which is the line that connects $v_1$ to a mid point \emph{\textcolor[rgb]{1,0,0}{MP}} of lh12 and lw12 at $t_2$. Then $m_1$ becomes the next starting point for next sub-linear model ($m_2$) searching. 
+        \end{quote}
+        This technique is analogous to a \textcolor[rgb]{1,0,0}{run length encoding} in the sense that it \textcolor[rgb]{1,0,0}{attempts to represent a long sequence of similar data with a single symbol}. Where run length encoding searches for \textcolor[rgb]{1,0,0}{strings of a repeated symbol}, LTC searches for \textcolor[rgb]{1,0,0}{linear trends}.
+    \item \emph{\textcolor[rgb]{1,0,0}{Differential pulse code modulation-based optimization (DPCM-optimization) scheme \cite{Marcelloni:2010aa}}}: This scheme considered three key points:
+        \begin{enumerate}
+            \item First, the consecutive observations that are typically collected by WSNs are strongly correlated;
+            \item Second, there are important metrics such as \textcolor[rgb]{1,0,0}{compression ratio, information loss and power consumption} that should be considered in designing a lossy data compression for WSNs.
+            \item Finally, similar to the LEC scheme, this scheme considers the noise that exists in commercial sensors.
+        \end{enumerate}
+        Based on the tree observations, the authors in \cite{Marcelloni:2010aa} applied an \emph{\textcolor[rgb]{1,0,0}{adapted version of differential pulse code modulation (DPCM)}} for WSNs. DPCM is a scheme which typically exploits the \textcolor[rgb]{1,0,0}{strong correlation that usually exists between neighboring samples}. In order to design a set of \textcolor[rgb]{1,0,0}{optimal combinations of the quantization process parameters for DPCM that trades off the three important factors}---\emph{\textcolor[rgb]{1,0,0}{information entropy (compression performance metrics), signal-to-noise ratio (information loss) and quantization complexity (power consumption)}}--they adopted one of the most popular \emph{\textcolor[rgb]{1,0,0}{multi-objective evolutionary algorithms (MOEAs)}}, namely \emph{\textcolor[rgb]{1,0,0}{NSGAII}} \cite{Deb2002}. In this off-line optimization, the training sets collected by real-world WSNs were used. Additionally, \textcolor[rgb]{1,0,0}{de-noise techniques} were applied on these data sets which allowed \textcolor[rgb]{1,0,0}{the loss of information in this lossy compression algorithm to be only the only noise}. Thus, this scheme can achieve a higher compression ratio without losing relevant information.
 \end{enumerate}
-Based on these observations, LTC was designed for climate monitoring applications by \textcolor[rgb]{1,0,0}{fitting micro-climate data during a short range of time (window) with a sub-linear model}. LTC was also designed to compress data when \textcolor[rgb]{1,0,0}{sensor accuracy was expressed as an error margin (e)} and when the \textcolor[rgb]{1,0,0}{probability distribution of error was wither uniform or unknown}. 
 
-\textbf{Description of modified LTC:}
 
-\begin{quote}
-    Corresponding to each time point $t_i$, there exists a sample value $v_i$. From the value $v_i$, we can get the value range of error margin $\left[v_i-e, v_i+e\right]$, where $v_i+e$ called the \emph{upper limit (UL)} and $v_i-e$ called the \emph{lower limit (LL)}. From point $v_0$, line connect $v_0$ and UL of $v_1$ is called \emph{\textcolor[rgb]{1,0,0}{higherLine}} and line connect $v_0$ and LL of $v_1$ is called \emph{\textcolor[rgb]{1,0,0}{lowerLine}}, respectively. 
-\end{quote}<++>
+
+
 
 
 
