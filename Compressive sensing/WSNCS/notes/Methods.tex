@@ -257,9 +257,20 @@ have discussed the lossless compression for local data compression approaches:
 
 \subsubsection{Lossy Compression Algorithms}
 
-Although lossy compression algorithms may cause some loss of information during compression and decompression process, it enables an encoder to increase its compression rate, which is higher than the lossless compression algorithms. It is beneficial for some applications that do not strictly require precise information. For WSNs, there are a few literature works, such as \cite{Schoellhammer2004} and \cite{Marcelloni:2010aa}, that discussed the lossy compression for \textcolor[rgb]{1,0,0}{local data compression approaches}.
+Although lossy compression algorithms may cause some loss of information during compression and decompression process, it \emph{\textcolor[rgb]{1,0,0}{enables an encoder to increase its compression rate}}, which is higher than the lossless compression algorithms. It is beneficial for some applications that do not strictly require precise information. For WSNs, there are a few literature works, such as \cite{Schoellhammer2004} and \cite{Marcelloni:2010aa}, that discussed the lossy compression for \textcolor[rgb]{1,0,0}{local data compression approaches}.
 
-\emph{\textcolor[rgb]{1,0,0}{Lightweight temporal compression (LTC) scheme}} \cite{Schoellhammer2004}: 
+\emph{\textcolor[rgb]{1,0,0}{Lightweight temporal compression (LTC) scheme}} \cite{Schoellhammer2004}: This scheme is designed by considering two key points:
+\begin{enumerate}
+    \item First, the observations of micro-climate data over a small enough window of time are linear. 
+    \item Second, the noise exists in commercial sensors.
+\end{enumerate}
+Based on these observations, LTC was designed for climate monitoring applications by \textcolor[rgb]{1,0,0}{fitting micro-climate data during a short range of time (window) with a sub-linear model}. LTC was also designed to compress data when \textcolor[rgb]{1,0,0}{sensor accuracy was expressed as an error margin (e)} and when the \textcolor[rgb]{1,0,0}{probability distribution of error was wither uniform or unknown}. 
+
+\textbf{Description of modified LTC:}
+
+\begin{quote}
+    Corresponding to each time point $t_i$, there exists a sample value $v_i$. From the value $v_i$, we can get the value range of error margin $\left[v_i-e, v_i+e\right]$, where $v_i+e$ called the \emph{upper limit (UL)} and $v_i-e$ called the \emph{lower limit (LL)}. From point $v_0$, line connect $v_0$ and UL of $v_1$ is called \emph{\textcolor[rgb]{1,0,0}{higherLine}} and line connect $v_0$ and LL of $v_1$ is called \emph{\textcolor[rgb]{1,0,0}{lowerLine}}, respectively. 
+\end{quote}<++>
 
 
 
