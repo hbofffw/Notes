@@ -4,15 +4,27 @@ Lossless entropy compression (LEC) algorithm can be implemented in \textcolor[rg
 
 Data communication is far more expensive than data processing by sensor nodes. The energy cost of receiving or transmitting a single bit of information is approximately the same as that \emph{\textcolor[rgb]{1,0,0}{required by the processing unit for executing a thousand operations}}. Most of the energy conservation schemes aim to minimize the energy consumption of th communication unit. To achieve this objective, two main approaches have been followed:
 \begin{enumerate}
-    \item \textbf{\textcolor[rgb]{1,0,0}{power saving through duty cycling}}: Duty cycling schemes define coordinated sleep/wakup schedules among nodes in the network. \cite{Anastasi2009}
+    \item \textbf{\textcolor[rgb]{1,0,0}{power saving through duty cycling}}: Duty cycling schemes define coordinated sleep/wakeup schedules among nodes in the network. \cite{Anastasi2009}
     \item \textbf{\textcolor[rgb]{1,0,0}{In-network processing}}: In-network processing consists in reducing the amount of information to be transmitted by means of \emph{\textcolor[rgb]{1,0,0}{aggregation and/or compression techniques}}. 
 \end{enumerate}
 
 Aggregation techniques can be roughly classified into two categories: 
 \begin{enumerate}
-    \item sturcture-based techniques, in which all nodes periodically report to the sink;
+    \item structure-based techniques, in which all nodes periodically report to the sink;
     \item structure-free techniques, in which data aggregation is performed without explicit maintenance of a structure.
-\end{enumerate}<++>
+\end{enumerate}
+
+\textbf{Lempel-Ziv-Welch (LZW)}
+\begin{quote}
+    In a nutshell, it replaces strings of characters with single codes. Since codes are generally smaller than strings, compression can be achieved by replacing strings with codes in the original data. LZW performs no analysis of the incoming text: \emph{\textcolor[rgb]{1,0,0}{for each new string, just a new code is created. Codes are of any arbitrary length.}}. When using eight-bit coding for characters, the first 256 codes are by default assigned to \textcolor[rgb]{1,0,0}{the standard character set}. The other codes are generated when they are needed. Since both the compressor and the decompressor have the initial dictionary and all new dictionary entries are created based on existing dictionary entries, the receiver can recreate the dictionary on the fly as data are received.
+
+    简单概括而言，LZW使用单一码代替字符串，以达到原始数据压缩的目的。LZW对接收数据不进行分析：对每一个新字符串都新单独进行编码，码字可以任意长。当时用8比特码字对字符串进行编码时，256个码字与标准字符集一一对应。当有字符不在该字符集中时，则需要对该字符进行额外编码。由于编码器与解码器都使用初始字典，且新的字典条目都是基于该初始字典产生的，接收器收到信数据后可即刻重新生成新的字典。
+\end{quote}
+
+\textbf{S-LZW}
+\begin{quote}
+    S-LZW splits the uncompressed input bitstream into fixed size blocks and then compresses separately each block. During the block compression, for each new string, that is, a string which is not already in the dictionary, a new entry is added to the dictionary. For each new block, the dictionary used in the compression is re-initialized by using the 256 codes that represent the standard character set. Since each new string in the input bitstream produces a new entry in the dictionary, the dictionary might become \textcolor[rgb]{0,0,1}{full}. If this occurs, an appropriate strategy has to be adopted.
+\end{quote}<++>
 
 
 
