@@ -1,0 +1,18 @@
+\chapter{Lossless Entropy Compression (LEC) algorithm}
+
+Lossless entropy compression (LEC) algorithm can be implemented in \textcolor[rgb]{1,0,0}{a few line of code}, requires \textcolor[rgb]{1,0,0}{very low computational power}, \textcolor[rgb]{1,0,0}{compresses data on the fly}, and \textcolor[rgb]{1,0,0}{uses a very small dictionary whose size is determined by the resolution of the ADC converter}. 
+
+Data communication is far more expensive than data processing by sensor nodes. The energy cost of receiving or transmitting a single bit of information is approximately the same as that \emph{\textcolor[rgb]{1,0,0}{required by the processing unit for executing a thousand operations}}. Most of the energy conservation schemes aim to minimize the energy consumption of th communication unit. To achieve this objective, two main approaches have been followed:
+\begin{enumerate}
+    \item \textbf{\textcolor[rgb]{1,0,0}{power saving through duty cycling}}: Duty cycling schemes define coordinated sleep/wakup schedules among nodes in the network. \cite{Anastasi2009}
+    \item \textbf{\textcolor[rgb]{1,0,0}{In-network processing}}: In-network processing consists in reducing the amount of information to be transmitted by means of \emph{\textcolor[rgb]{1,0,0}{aggregation and/or compression techniques}}. 
+\end{enumerate}
+
+Aggregation techniques can be roughly classified into two categories: 
+\begin{enumerate}
+    \item sturcture-based techniques, in which all nodes periodically report to the sink;
+    \item structure-free techniques, in which data aggregation is performed without explicit maintenance of a structure.
+\end{enumerate}<++>
+
+
+
