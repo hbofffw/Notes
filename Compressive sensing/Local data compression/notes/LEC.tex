@@ -14,17 +14,38 @@ Aggregation techniques can be roughly classified into two categories:
     \item structure-free techniques, in which data aggregation is performed without explicit maintenance of a structure.
 \end{enumerate}
 
-\textbf{Lempel-Ziv-Welch (LZW)}
+\section{Previous Methods}
+
+\subsection{Lempel-Ziv-Welch (LZW)}
 \begin{quote}
     In a nutshell, it replaces strings of characters with single codes. Since codes are generally smaller than strings, compression can be achieved by replacing strings with codes in the original data. LZW performs no analysis of the incoming text: \emph{\textcolor[rgb]{1,0,0}{for each new string, just a new code is created. Codes are of any arbitrary length.}}. When using eight-bit coding for characters, the first 256 codes are by default assigned to \textcolor[rgb]{1,0,0}{the standard character set}. The other codes are generated when they are needed. Since both the compressor and the decompressor have the initial dictionary and all new dictionary entries are created based on existing dictionary entries, the receiver can recreate the dictionary on the fly as data are received.
 
     简单概括而言，LZW使用单一码代替字符串，以达到原始数据压缩的目的。LZW对接收数据不进行分析：对每一个新字符串都新单独进行编码，码字可以任意长。当时用8比特码字对字符串进行编码时，256个码字与标准字符集一一对应。当有字符不在该字符集中时，则需要对该字符进行额外编码。由于编码器与解码器都使用初始字典，且新的字典条目都是基于该初始字典产生的，接收器收到信数据后可即刻重新生成新的字典。
 \end{quote}
 
-\textbf{S-LZW}
+\subsection{S-LZW}
 \begin{quote}
-    S-LZW splits the uncompressed input bitstream into fixed size blocks and then compresses separately each block. During the block compression, for each new string, that is, a string which is not already in the dictionary, a new entry is added to the dictionary. For each new block, the dictionary used in the compression is re-initialized by using the 256 codes that represent the standard character set. Since each new string in the input bitstream produces a new entry in the dictionary, the dictionary might become \textcolor[rgb]{0,0,1}{full}. If this occurs, an appropriate strategy has to be adopted.
-\end{quote}<++>
+    S-LZW splits the uncompressed input bitstream into fixed size blocks and then compresses separately each block. During the block compression, for each new string, that is, a string which is not already in the dictionary, a new entry is added to the dictionary. For each new block, the dictionary used in the compression is re-initialized by using the 256 codes that represent the standard character set. Since each new string in the input bitstream produces a new entry in the dictionary, the dictionary might become \textcolor[rgb]{0,0,1}{full}. If this occurs, an appropriate strategy has to be adopted. For instance, the dictionary can be frozen and used as is to compress the remainder of the data in the block (in the worst case, by using the code of each character), or it can be reset and started from scratch.
+
+    S-LZW将输入的未经压缩的比特流分割为若干个固定大小的数据块，然后分别对每个块进行压缩。在对数据块进行压缩的过程中，对于每一个新的字符串，生成一个新的字典条目。对于每个新数据块，重新初始化其字典标准字符集的256各码字。由于每一个新的字符串都生成新的字典条目，字典存储空间可能不够。在此情况下，则需要采用合适的策略。例如，字典会被冻结并用其对块中数据的残余进行压缩，或者在出错处字典进行重置或重启。
+
+    Because Sensor data are generally repetitive, the basic S-LZW algorithm does not take specific advantage of sensor data characteristics. Even data that change drastically over time \emph{\textcolor[rgb]{1,0,0}{tend to adhere to this pattern}} since sampling intervals are taken \emph{\textcolor[rgb]{1,0,0}{very short so as to model the drastic changes in the data}}.
+\end{quote}
+
+\subsection{S-LZW with mini-cache}
+\begin{quote}
+    To take the repetitive behaviour of sensor data into account, a \emph{\textcolor[rgb]{1,0,0}{mini-cache is added to S-LZW}}: The mini-cache is a \textcolor[rgb]{1,0,0}{hash-indexed dictionary of size $N$}, where $N$ is a power of 2, that stores recently used and created dictionary entries. Further, the repetitive behaviour can be used to \textcolor[rgb]{1,0,0}{pre-process} the raw data so as to build \textbf{\textcolor[rgb]{1,0,0}{approximately structured data sets, which can perform better with the compression algorithm}}\cite{Sadler2006}. S-LZW has to balance four major inter-related parameters: \textcolor[rgb]{1,0,0}{the block size}, \textcolor[rgb]{1,0,0}{the dictionary size}, \textcolor[rgb]{1,0,0}{the strategy to follow when the dictionary is full} and \textcolor[rgb]{1,0,0}{mini-caches size}. The four parameters must be fined tuned before deployed in sensor networks because they deeply influence compression performances.
+\end{quote}
+
+\subsection{Lightweight temporal compression (LTC) algorithm}
+
+It is an efficient and simple \textcolor[rgb]{1,0,0}{lossy compression} technique for the \textcolor[rgb]{1,0,0}{context of habitat monitoring}. LTC introduces a small amount of error into each reading bounded by a control knob: 
+\begin{quote}
+    \textbf{\textcolor[rgb]{1,0,0}{the larger the bound on this error, the greater the saving from compression}}. 
+\end{quote}
+Basically LTC is similar to \emph{\textcolor[rgb]{1,0,0}{run length encoding (RLE)}} in the sense that \textcolor[rgb]{1,0,0}{it attempts to represent a long sequence of similar data with a single symbol}. The difference with RLE is that while the latter searches for strings of a repeated symbol, LTC \textbf{\textcolor[rgb]{1,0,0}{searches for linear trends}}. 
 
 
+\section{The LEC Algorithm}
 
+LEC algorithm follows a scheme similar to the one used in baseline JPEG$y(k)$ algorithm for compressing the so-called \emph{DC coefficients} of a digital image. Such coefficients are characterized by a high correlation, very similar to that characterizing data collected by WSNs. LEC computes the difference $d_i = r_i - r_i-1$, which is input to an entropy encoder (in order to compute $d_0$ it is assumed that $r_-1$ is equal to the central value among the $2^R$ possible discrete values). Each none-zero $d_i$ value is represented as a bit sequence $bs_i$ composed of two parts $s_i | a_i$, where $s_i$ codifies the number $n_i$ of bits needed to represent $d_i$ and $a_i$ is the representation of $d_i$. $n_i$ is trivially computed as $\lceil\log_2(|d_i|)\rceil$: at most $n_i$ is equal to $R$. Thus, in order to encode $n_i$ a prefix-free table of $R+1$ entries has to be specified. This table depends on the distribution of the differences $d_i$: \textbf{\textcolor[rgb]{1,0,0}{more frequent differences have to be associated with shorter codes}}. 
