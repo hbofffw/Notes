@@ -2,4 +2,22 @@
 
 For saving power, several approaches exist, including \textcolor[rgb]{1,0,0}{energy-aware routing}, \textcolor[rgb]{1,0,0}{energy-efficient MAC protocols}, \textcolor[rgb]{1,0,0}{adaptive sampling}, and \textcolor[rgb]{1,0,0}{source coding}. The works of two-modal transmission focuses on \emph{\textcolor[rgb]{1,0,0}{exploiting temporal correlation in WSN data}}.
 
-Two-modal transmission exploits the principle of predictive coding. In predictive coding, an error term (i.e. residue) is calculated at source node as the \textcolor[rgb]{1,0,0}{difference between the predicted message/signal and the actual message/signal}. This error is then encoded and transmitted to the receiving node. At receiving node, with an identical predictor as the source node, the original message can be obtained by adding the received error term (decoded) to the predicted message produced at the receiving node. However, the distribution of residue signals generated at sensor node usually \textcolor[rgb]{0,0,1}{exhibits ``long tails''}. A bad shape of residue distribution adversely \textcolor[rgb]{0,0,1}{impacts the entropy coding performance}. In addition, the traditional predictive coding lacks ability to facilitate the (re)synchronization of predictors at \textcolor[rgb]{0,0,1}{both sensor nodes and the sink} in WSNs.
+Two-modal transmission exploits the principle of predictive coding. In predictive coding, an error term (i.e. residue) is calculated at source node as the \textcolor[rgb]{1,0,0}{difference between the predicted message/signal and the actual message/signal}. This error is then encoded and transmitted to the receiving node. At receiving node, with an identical predictor as the source node, the original message can be obtained by adding the received error term (decoded) to the predicted message produced at the receiving node. However, the distribution of residue signals generated at sensor node usually \textcolor[rgb]{0,0,1}{exhibits ``long tails''}. A bad shape of residue distribution adversely \textcolor[rgb]{0,0,1}{impacts the entropy coding performance}. In addition, the traditional predictive coding lacks ability to facilitate the (re)synchronization of predictors at \textcolor[rgb]{0,0,1}{both sensor nodes and the sink} in WSNs. Unlike LEC \cref{chapLEC}, two-modal transmission is aimed to effectively over come the above limitations of predictive coding. This presented work significantly extends and elaborates the preliminary work in \cite{Huang2007}. 
+
+The idea of two-modal transmission is to encode only those residues which \textcolor[rgb]{1,0,0}{fall inside a relatively small range $[-R,R]$ ($R>0$ and is called \emph{compression radius} hereafter)} by entropy coding (referred to as \emph{compression mode}) and to transmit the original raw samples uncoded (referred to as \emph{normal mode}) otherwise or for predictor (re)synchronization.
+
+\begin{itemize}
+    \item $K$ -- The size of one raw data sample in bits;
+    \item $N$ -- The number of samples in a packet;
+    \item $s=K\times N$ -- The original amount of uncompressed data to be transmitted.
+    \item $s'$ -- The size of data in bits after lossless compression.
+    \item $\gamma$ -- The \emph{compression ratio}:
+        \begin{equation}
+            \gamma = (1-\dfrac{s'}{s}) \times 100\% = (1- \dfrac{s'}{K\times N})\times 100 \%
+            \label{eq2.1}
+        \end{equation}
+\end{itemize}
+
+\section{M-based alphabet system}
+
+To address the stringent resource constraints, a flexible family of alphabets called \emph{\textcolor[rgb]{1,0,0}{M-based alphabet system}} is proposed to represent residues for entropy coding. With an $M$-based alphabet, a residue is represented using \textcolor[rgb]{1,0,0}{base $M$}, where $M(M>1)$ is an integer. 
