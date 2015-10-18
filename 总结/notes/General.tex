@@ -1,0 +1,110 @@
+\chapter{General}
+\label{CWS}
+\section{Compressive Wireless Sensing (CWS)}
+\label{sec1.1}
+A major challenge in the design of sensor networks is developing \textcolor[rgb]{1,0,0}{schemes that extract relevant information about the sensed data} at a desired fidelity at FC with \textcolor[rgb]{1,0,0}{least consumption of network resources}. The relevant metrics of interest are
+\begin{enumerate}
+    \item \textbf{\textcolor[rgb]{1,0,0}{the latency (or alternatively, bandwidth) involved in information retrieval}};
+    \item \textbf{\textcolor[rgb]{1,0,0}{the associated power distortion trade-off: the power $P_{tot}$ consumed by the sensor network in delivering relevant information to FC at the desired distortion $D$}}.
+\end{enumerate}
+
+\emph{\textcolor[rgb]{1,0,0}{Compressive Wireless Sensing (CWS)}}, based on a distributed matched source-channel communication architecture, contain some sort of structural regularity for energy efficient estimation (at FC) of sensor data. Resting on the fact that a relatively small number of random projections of a signal can contain most of its salient information, CWS, in essence, is a completely decentralized scheme for delivering random projections of the sensor network data to FC in a distributed and energy efficient manner. Three distinct features of CWS are:
+\begin{enumerate}
+    \item \emph{\textcolor[rgb]{1,0,0}{processing and communications are combined into one distributed operation}};
+    \item \emph{\textcolor[rgb]{1,0,0}{it requires almost no in-network processing and communications}};
+    \item \emph{\textcolor[rgb]{1,0,0}{consistent field estimation is possible ($D\searrow0$ as node density increases), even if little or no prior knowledge about the sensed data is assumed, while $P_{tot}$ grows at most sub-linearly with the number of nodes in the network}}.
+\end{enumerate}
+
+Thus, CWS provides \emph{a universal and efficient approach} to distributed estimation of sensor network data without \emph{\textcolor[rgb]{1,0,0}{putting strict constraints}} on the underlying structure of sensed data. Nevertheless, this universal comes at the cost of optimality (in terms of a less favorable power-distortion-latency trade-off). 
+
+Assuming no prior knowledge about the sensed data, the theoretical analysis of CWS in Section 4 yields a power-distortion-latency trade-off of the form
+\begin{equation}
+    D \sim P_{tot}^{-2 \alpha/(2\alpha + 1)} \sim L^{-2\alpha/(2\alpha + 1)}
+    \label{eq1.1}
+\end{equation}
+Note that this relation does not mean \textbf{\textcolor[rgb]{0,0,1}{that a fixed number of sensor nodes using more power and/or latency can provide more accuracy}}. Rather, distortion $(D)$, power consumption $(P_{tot})$ and latency $(L)$ are functions of the number of nodes, and the above relation indicates \emph{\textcolor[rgb]{1,0,0}{how the three performance metrics behave as the density of nodes increases}}.
+
+Assuming sufficient prior knowledge about the sensed data, in section 3 there exists an efficient distributed estimation scheme that achieves the distortion scaling of an ideal centralized estimator and has a power-distortion-latency trade-off of the form
+\begin{equation}
+    D \sim P_{tot}^{-2\alpha} \sim L^{-2\alpha}
+    \label{eq1.2}
+\end{equation}
+
+CWS is universal for a broad class of sensor fields but cannot reach the optimality of \cref{eq1.2}, whereas an optimal distributed scheme can fail miserably under false prior information and therefore, can never be universal. CWS is primarily a \textbf{\textcolor[rgb]{1,0,0}{framework for sensor networks having either little prior knowledge about the sensed field or low confidence level about the accuracy of the available knowledge}}.
+
+The approach represented in this section, in contrast to previous methods, eliminates the need for in-network communications and processing and instead requires \emph{\textcolor[rgb]{1,0,0}{phase synchronization}} among nodes, which imposes a relatively small burden on network resources and can be achieved by employing the \emph{\textcolor[rgb]{1,0,0}{distributed synchronization scheme}}. 
+
+In essence, this paper identifies a trade-off between universality and optimality: CWS is universal for a broad class of sensor fields but cannot reach the optimality of \cref{eq1.2}, whereas and optimal distributed scheme can never be universal. CWS is primarily \textbf{\textcolor[rgb]{1,0,0}{a framework for sensor networks having either little prior knowledge about the sensed field or low confidence level about the accuracy of the available knowledge}}. CWS, in contrast to previous methods, eliminates the need for in-network communications and processing and instead requires \emph{\textcolor[rgb]{1,0,0}{phase synchronization among nodes}}, which imposes \emph{\textcolor[rgb]{1,0,0}{a relatively small burden on}} network resources and can be achieved by employing the distributed synchronization scheme \cite{Mudumbai2005}. 
+
+
+\section{Practical data compression in wireless sensor networks: A survey}
+\label{sec1.2}
+A number of techniques such as \textbf{\textcolor[rgb]{1,0,0}{energy-efficient medium access control or routing protocols}} have been proposed to solve the \textbf{\textcolor[rgb]{1,0,0}{power consumption issue}}. Among those proposed techniques, the data compression scheme is one that can be used to reduce transmitted data over wireless channels, which leads to a reduction in the required \textbf{\textcolor[rgb]{1,0,0}{inter-node}} communication, known as the main power consumer in wireless sensor networks. In this paper, first, suitable sets of criteria are defined to classify existing techniques as well as to determine what practical data compression in wireless sensor networks should be. Next, the details of each classified compression category are described.
+
+When designing a WSN system, there are a number of challenges which can be broadly classified into \textbf{\textcolor[rgb]{0,0,1}{three major issues}}.
+\begin{enumerate}
+    \item information management architecture has to be designed to address information conflict and interaction that occurs when gathering information from many sensors;
+    \item key management is a prerequisite of encryption and authentication should be addressed carefully;
+    \item power consumption or power management.
+\end{enumerate}
+This paper focus on tackling \emph{\textcolor[rgb]{1,0,0}{power consumption issue}}.
+
+The main factor of power consumption is the radio transmission process. To reducing radio communication, two main approaches have been introduced:
+\begin{enumerate}
+    \item \textbf{\textcolor[rgb]{1,0,0}{Duty cycle}}---the scheme coordinates and defines wake and sleep schedules among nodes in the network.
+    \item \textbf{\textcolor[rgb]{1,0,0}{in-networking processing}}---this scheme solves this issue through reducing the amount of data to be transmitted by means of \textbf{\textcolor[rgb]{1,0,0}{aggregation techniques and/or data compression}}. The aggregation techniques involve different ways of routing data packets in order to combine them by exploiting the extracted features and statistics of data sets coming from different sensor nodes, e.g., maximum value, minimum value and average value. To achieve its objective, the aggregation approach requires three basic components: \textbf{\textcolor[rgb]{1,0,0}{a routing algorithm, data aggregation and data representation/data compression}}.
+\end{enumerate}
+
+New data compression algorithms can be classified into two categories:
+\begin{enumerate}
+    \item distributed data compression approach;
+    \item local data compression approach.
+\end{enumerate}
+
+
+\section{Compressive Data Gathering for Large-Scale Wireless Sensor Networks}
+\label{sec1.3}
+The proposed scheme considers the scenario which a large number of sensor nodes are densely deployed and sensor readings are spatially correlated and it can cope with abnormal sensor readings gracefully.
+
+Two major challenges the successful deployment of large scale sensor networks faces:
+\begin{enumerate}
+    \item communication cost reduction;
+    \item energy consumption load balancing.
+\end{enumerate}
+Existing approaches as \textbf{\textcolor[rgb]{1,0,0}{entropy coding}} and \textbf{\textcolor[rgb]{1,0,0}{transform coding}}, adopt in-network data compression, to reduce global traffic. However, theses approaches introduce significant \textbf{\textcolor[rgb]{0,0,1}{computation and control overheads}} that often not suitable for sensor networks applications.
+
+This paper summarized in this section presents the \textbf{\textcolor[rgb]{1,0,0}{first}} complete design to apply compressive sampling theory to sensor data gathering for large-scale WSNs, successfully addressing the two major challenges as outlined above. 
+
+The proposed data gathering (CDG) is able to achieve substantial sensor data compression without introducing excessive computation and control overheads as well as to disperse the communication costs to all sensor nodes along a given sensor data gathering route with elegant design. Instead of receiving individual sensor readings, the sink will be sent a few weighted sums of all the readings, from which to restore the original data. 
+
+When $N$ is large and $M$ is much smaller than $N$, CDG can significantly reduce the total number of transmissions and save energy. Then the key problems now is becoming whether the sink is able to restore $N$ individual readings from $M$ measurements when $M$ is far smaller than $N$. 
+
+\section{Distributed sparse random projections for refinable approximation}
+\label{sec1.4}
+This paper addressed the problem of recovering an approximation of the $n$ data values by querying any $L$ sensors, so that the reconstruction error is \emph{\textcolor[rgb]{1,0,0}{comparable to the optimal $k$-term approximation}}. To solve this problem, this paper presented a distributed algorithm based on sparse random projections, which requires \emph{\textcolor[rgb]{1,0,0}{no global coordination or knowledge}}. This algorithm allows the collector to choose the number of sensors to query according to the desired approximation error. The reconstruction quality depends only on the number of sensors queried, enabling robust refinable approximation. 
+
+Computing the deterministic 
+
+\section{Compressive data gathering using random projection for energy efficient wireless sensor networks}
+\label{sec1.5}
+\textbf{\textcolor[rgb]{1,0,0}{Minimum Spanning Tree Projection (MSTP)}} creates a number of Minimum-Spanning-Trees(MSTs), each rooted at a randomly selected projection node, which in turn aggregates sensed data from sensors using compressive sensing. The author further extend MSTP and introduced eMSTP, which joints the sink node to each MST and makes the sink node as the root for each tree.
+
+There are several approaches to maximize the lifetime of WSNs:
+\begin{enumerate}
+    \item adjusting sensing ranges;
+    \item sleep scheduling;
+    \item clustering routing protocol;
+    \item cross-layer network formulation;
+    \item data aggregation. 
+\end{enumerate}
+Data aggregation, unlike the other approaches, aims at \textbf{\textcolor[rgb]{1,0,0}{reducing the amount of data to be transported}}, and hence significantly helps in overall energy consumption load. This paper summarized in this section proposed a method based on data aggregation using CS. 
+
+In this paper, the author indicated that, the scheme presented in \cref{sec1.3}, clearly using CS for all nodes is not very attractive, but most importantly, CS resolved the problem of bottleneck nodes. Then, \textcolor[rgb]{1,0,0}{plain-CS and hybrid-CS} were introduced by J.Lue et al., where the former (plain-CS) uses CS encoding for all nodes in the network (same as CDG scheme) and the latter (hybrid-CS) applies CS \textbf{\textcolor[rgb]{1,0,0}{only to}} \textcolor[rgb]{1,0,0}{relay nodes that are overloaded}. Hybrid-CS resolved the drawback of CDG with respect to the number of packet transmission and hence reduced the global network communication cost. The algorithm cannot guarantee that all the nodes are selected at random for each projection node. Further, \textcolor[rgb]{0,0,1}{the algorithm cannot minimize the global network communication cost since for each random projection, the algorithm requires a large number of multi-hop transmissions to collect the data from individual sparse nodes and no data gathering is used in the routing paths to projection nodes}.
+
+A new data gathering method was proposed, which combines the CDG with sparse random projection to reduce further the overall number of transmissions and most importantly to distribute the energy consumption load more evenly throughout the network to increase the lifetime of wireless sensor network. 
+
+MSTP selects different nodes at random to do projection, same as hybrid-CS. Unlike hybrid-CS scheme, of which each projection node after collecting the native data from set of nodes sends the projected data to the sink, MSTP uses CDG for each projection node to collect and gathers one weighted sum by constructing independent forwarding tree which ensures fewer transmissions. MSTP gathers a weighted sum from nodes step by step starting from leaf nodes following the routing paths towards the projection node. Finally, each projection node sends the gathered data in one packet through a shortest path to the sink. 
+
+The novelty of this approach lies in utilizing independent forwarding trees, where each forwarding tree carries one weighted sum (compressed data rather than native) to the sink. These forwarding trees are constructed to ensure fewer number of transmissions as well as evenly distribute the transmission load cross the network.
+
+eMSTP let the sink node gather weighted sums directly from nodes instead of projection nodes; in this way the traffic resulting is eliminated from transmitting the corresponding projection packets from projection nodes to the sink. 
