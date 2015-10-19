@@ -3,14 +3,13 @@
 % 勾股定理
 %9 essential packages everyone should use
 \RequirePackage[l2tabu, orthodox]{nag}
-\documentclass[oneside]{book}
+\documentclass[UTF8]{ctexart}
 
 \title{\heiti ``编码总结}
 \author{\kaishu 黄冬勃}
 \date{\today}
 
 \usepackage{geometry}
-\usepackage[UTF8]{ctex}
 \geometry{a4paper,centering,scale=0.88}
 \usepackage[format=hang,font=footnotesize,textfont=it]{caption}
 \usepackage{float}
@@ -36,21 +35,21 @@
 \usepackage{eqnarray}
 
 
-\usepackage{cancel}
+
 
 \bibliographystyle{IEEEtran}
 %\usepackage{hyperref}
-%\theoremstyle{plain}
-\newtheorem{theorem}{Theorem}[chapter]
-\newtheorem{lemma}{Lemma}[chapter]
-\newtheorem{proposition}{Proposition}[chapter]
-\newtheorem{corollary}{Corollary}[chapter]
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{corollary}{Corollary}[section]
 %\newtheorem{remark}{Remark}[subsection][section]
 
 %\theoremstyle{definition}
-\newtheorem{definition}{Definition}[chapter]
-\newtheorem{conjecture}{Conjecture}[chapter]
-\newtheorem{example}{Example}[chapter]
+\newtheorem{definition}{Definition}[section]
+\newtheorem{conjecture}{Conjecture}[section]
+\newtheorem{example}{Example}[section]
 
 %\theoremstyle{remark}
 \newtheorem{remark}{Remark}
@@ -63,12 +62,12 @@
   {\begin{quote}\kaishu\zihao\emph{{-5}}}    
   {\end{quote}}
 %公式序号与章节关联
-\renewcommand{\theequation}{\arabic{chapter}.\arabic{section}.\arabic{equation}}
+\renewcommand{\theequation}{\arabic{section}.\arabic{equation}}
 \makeatletter\@addtoreset{equation}{section}\makeatother
 %
 \newcommand{\upcite}[1]{\textsuperscript{\textsuperscript{\cite{#1}}}}
-%\renewcommand\thesection{\arabic{section}}
-%\renewcommand\thesubsection{\thesection.\arabic{subsection}}
+\renewcommand\thesection{\arabic{section}}
+\renewcommand\thesubsection{\thesection.\arabic{subsection}}
 %arabic 阿拉伯数字
 %roman 小写的罗马数字
 %Roman 大写的罗马数字
