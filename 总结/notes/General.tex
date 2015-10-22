@@ -51,10 +51,14 @@ DSC利用信源之间的空间相关性对信息进行压缩编码，但各节�
 \end{equation}
 
 \textbf{基于CF相关性模型 (CF-Based (Copula Function) correlation model)}
+连续边缘概率密度函数可以使用\emph{kernel density estimation (KDE)} 方法来进行估计：
 \begin{equation}
     f_n(x_n) = \dfrac{1}{M \times h_n} \sum_{i=1}^{M}K\left( \dfrac{x-x_i}{h_n} \right).
     \label{eq1.11}
 \end{equation}
+其中，$M$ 是样本数量。该方法使用高斯核$K(\mathfrak{v}) = \dfrac{1}{\sqrt{2\pi}}\exp\left(-\dfrac{1}{2}\mathfrak{v}^2\right)$进行曲线估计。对于每一个传感器采集样本的$f_n(x_n)$都会选择一个适当的平滑参数$h_n$。
+
+相关性矩阵$\Gamma$中的非对角线元素等于估算Spearman的rho值，对角线元素为1。Spearman参数由每个簇内传感器节点通过“训练”过程进行估计。
 
 
 
