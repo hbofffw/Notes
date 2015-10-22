@@ -41,6 +41,23 @@ DSC利用信源之间的空间相关性对信息进行压缩编码，但各节�
 
 由于对于一些环境参数的编码，就其码字较短的角度来考虑，SW编码较为适用，问题在于\textcolor[rgb]{1,0,0}{要合理分配节点通信量，尽量平均节点能耗；相关性模型建立}。对于例如温湿度等参数，空间相关性通常认为其符合典型的多元高斯分布，相应的其边缘概率密度函数分布也应该为高斯分布，但实际情况中并非如此。有一种更为合适的相关性模型:\emph{\textcolor[rgb]{1,0,0}{Copula-Function-Based Correlation Model}}。
 
+\subsubsection{相关性模型}
+\textbf{多元高斯相关性模型(Multivariate Gaussian Correlation Model)}.
+
+多元高斯相关性模型中，联合概率密度分布函数：
+\begin{equation}
+    f(x_1,x_2,\dots,x_N) = \dfrac{1}{(2\pi)^{\dfrac{N}{2}}|\Sigma|^{\dfrac{1}{2}}} \times exp\left( -\dfrac{1}{2} (x-\mu)^T \Sigma^{-1}(x-\mu) \right)
+    \label{eq1.4}
+\end{equation}
+
+\textbf{基于CF相关性模型 (CF-Based (Copula Function) correlation model)}
+\begin{equation}
+    f_n(x_n) = \dfrac{1}{M \times h_n} \sum_{i=1}^{M}K\left( \dfrac{x-x_i}{h_n} \right).
+    \label{eq1.11}
+\end{equation}
+
+
+
 
 \begin{quote}
     但对于实时性要求不严格，且仅需要一定空间范围内采集参数的情况时，使用合适的分簇以及簇头选择方法，分簇方法可以大大减少网络通信数据量。
