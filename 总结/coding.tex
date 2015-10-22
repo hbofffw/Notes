@@ -1,0 +1,91 @@
+%-*- coding: UTF-8 -*-
+% gougu.tex
+% 勾股定理
+%9 essential packages everyone should use
+\RequirePackage[l2tabu, orthodox]{nag}
+\documentclass[UTF8]{ctexart}
+
+\title{\heiti ``编码总结}
+\author{\kaishu 黄冬勃}
+\date{\today}
+
+\usepackage{geometry}
+\geometry{a4paper,centering,scale=0.88}
+\usepackage[format=hang,font=footnotesize,textfont=it]{caption}
+\usepackage{float}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsfonts}    
+\usepackage{pgfplots}
+\usepackage[nottoc]{tocbibind}
+\usepackage{cite}
+\usepackage{cancel}
+%9 essential packages everyone should use
+\usepackage{microtype}
+\usepackage{siunitx}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[bookmarks=true]{hyperref}
+\usepackage{cleveref}
+%
+\usepackage{enumerate}
+\usepackage{bm}
+\usepackage{xy}
+\usepackage{eqnarray}
+
+
+
+
+\bibliographystyle{IEEEtran}
+%\usepackage{hyperref}
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{corollary}{Corollary}[section]
+%\newtheorem{remark}{Remark}[subsection][section]
+
+%\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{conjecture}{Conjecture}[section]
+\newtheorem{example}{Example}[section]
+
+%\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\newtheorem{note}{Note}
+
+%\newtheorem{thm}{定理}
+%\newcommand\degree{^\circ}
+
+\newenvironment{myquote}
+  {\begin{quote}\kaishu\zihao\emph{{-5}}}    
+  {\end{quote}}
+%公式序号与章节关联
+\renewcommand{\theequation}{\arabic{section}.\arabic{equation}}
+\makeatletter\@addtoreset{equation}{section}\makeatother
+%
+\newcommand{\upcite}[1]{\textsuperscript{\textsuperscript{\cite{#1}}}}
+\renewcommand\thesection{\arabic{section}}
+\renewcommand\thesubsection{\thesection.\arabic{subsection}}
+%arabic 阿拉伯数字
+%roman 小写的罗马数字
+%Roman 大写的罗马数字
+%alph 小写字母
+%Alph 大写字母
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+%\mainmatter
+\include{notes/General}
+
+
+
+
+
+
+\bibliography{CSWSN}
+
+\end{document}
