@@ -1,3 +1,20 @@
-\section{Mathbasis}
-
-什么情况
+\section{信源相关性建模Correlation Modeling}
+\subsection{Copulas Function (CF)}
+CF仅仅确定随机变量之间的相关性，并不影响变量本身的分布特。CF的一个思想是将原始随机变量$X_j$，通过变换的方法得到均匀分布的随机变量$U_j = F_j(X_j)$(在一个向量空间中分布不均匀的变量映射为另一个向量空间中均匀分布的变量)。前提是，变换后变量间相关性分布于原始变量保持一致。该方法优势在于，变换之后，变量间相关性分布更容易被获取。
+\subsubsection{边缘统计(Marginal Statistics)}
+对于联合统计$x,y$，$F_x(x)$为边缘分布，$f_x(x)$为$x$的边缘概率密度函数。
+\begin{equation}
+    F_x(x) = F(x,\infty) \qquad F_y(y) = F(\infty,y)
+    \label{eq0.1}
+\end{equation}
+\begin{equation}
+    f_x(x) = \int_{-\infty}^{\infty} f(x,y) dy \qquad f_y(y) = \int_{-\infty}^{\infty} f(x,y) dx
+    \label{eq0.2}
+\end{equation}
+\subsubsection{Copula模型估计}
+建立一个Copula模型，有两组参数需要估算:
+\begin{enumerate}
+    \item 第一组是每个选择的边缘分布$\Theta = \{\theta_1,\dots,\theta_m\}$的参数；
+    \item 第二组是所选CF的相关参数。
+\end{enumerate}
+常用方法使用了两步法对这些参数进行估算：先分别估算边缘分布的参数；然后基于以上的估算对相关矩阵$\Gamma$进行估算。前一步骤可以通过多种方式实现，如最大似然(maximum likelihood(ML))、贝叶斯(Bayesian)、或者基于时刻的方法(a method of moments based approach)。。但是$\Gamma$的估算就要复杂的多了，并且取决于随机变量是连续或离散的。
