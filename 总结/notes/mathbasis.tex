@@ -6,7 +6,7 @@
     基于简单SW编码\cite{Srisooksai2012}，利用相关性将码字分8个组，簇内其他节点只需要传输index即可，我这里将其定义为一维相关性；若有可能，将时间相关性同时利用的话，利用二维相关性，可否将分组减少，这样传输比特位将会更少。
 
     关于相关性思考，如果利用CF方法，假设我们采集环境参数。应该将环境参数随着距离，时间的变化是呈现怎样的分布？
-\end{quote}<++>
+\end{quote}
 
 \subsection{Dependence(相关性)}
 要进行相关性建模，必须先弄清楚随机变量之间相关性变化关系。
@@ -37,11 +37,38 @@ CF仅仅确定随机变量之间的相关性，并不影响变量本身的分布
 
 \subsubsection{关于变换}
 \textbf{\textcolor[rgb]{1,0,0}{Rosenblatt Transformation}}
-Rosenblatt变换(RT)是将环境变量从物理空间映射到一个标准常变量相互独立的变换空间中。
+\begin{quotation}
+    \textbf{\textcolor[rgb]{1,0,0}{Rosenblatt变换(RT)是将环境变量从物理空间映射到一个变量是独立标准正太(standard normal variables)分布的变换空间中。然后通过已定义的，在变换空间中给定超概率分布的一个独立标准正太变量集，映射回到物理空间中。}}\cite{Montes2015}
+\end{quotation}
+
+
+该变换通过映射:$\mathcal{R}: \mathbb{R}^d \rightarrow (0,1)^d$，将物理空间中的一个随机向量$\mathbf{X}=(x_1,\dots,x_d)$，映射到随机变量独立均匀分布的空间上。映射之后:$\mathbf{E} = (E_1,\dots,E_d)$\cite{Montes2015}，
+
+\begin{eqnarray}
+    E_1 &=& F_1(X_1)  \notag \\
+    E_2 &=& F_{2|1}(X_2|X_1) \notag \\
+    \vdots \\
+    E_d &=& F_{d|1,2,\dots,d-1} (X_d | X_1,\dots,X_{d-1}) \notag
+    \label{eq-rosenblatt}
+\end{eqnarray}
+其中，$F_i(x_i)$是$X_i$的\textcolor[rgb]{1,0,0}{边缘累积分布函数(marginal cumulative distribution function)}。$F_{i|1,\dots,i-1}(x_i|x_1,\dots,x_{i-1})$是给定$X_1 = x_1,\dots,X_{i-1}=x_{i-1}$条件下$X_i$的条件分布。然后，利用$\mathbf{E}$来得到所谓\textcolor[rgb]{1,0,0}{约化空间(reduced space)}中的一个随机变量集$\mathbf{Z} = (Z_1,\dots,Z_d)$：
+\begin{equation}
+    \Phi (Z_j) = E_j, \qquad j=1,\dots,d
+    \label{eq-cdf}
+\end{equation}
+其中，$\Phi$是标准正太变量的累积分布函数。
 
 
 \subsection{几种实际建模的流程}
-根据\cite{Montes2015}中使用copulas获取环境变量变化轮廓(environmental contous)，使用\textcolor[rgb]{1,0,0}{Inverting Rosenblatt transformation}，通过将向量$\mathbb{V}$映射到物理空间中环境变量$\mathbb{X}$来实现。
+根据\cite{Montes2015}中使用copulas获取环境变量变化轮廓(environmental contous)，使用\textcolor[rgb]{1,0,0}{Inverting Rosenblatt transformation}，通过将向量$\mathbf{V}$映射到物理空间中环境变量$\mathbf{X}$来实现：
+\begin{eqnarray}
+    x_1 &=& F_1^{-1}(e_1)  \notag \\
+    x_2 &=& F_{2|1}^{-1}(e_2|x_1) \notag \\
+    \vdots \\
+    x_d &=& F_{d|1,2,\dots,d-1}^{-1} (e_d | x_1,x_2,\dots,x_{d-1}) \notag
+    \label{eq-invervse-rosenblatt}
+\end{eqnarray}
+
 \subsubsection{Independent Copula}
 \subsubsection{Gaussian Copula}
 \subsubsection{Archimedean Copula}
