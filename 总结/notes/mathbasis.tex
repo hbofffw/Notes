@@ -2,7 +2,10 @@
 使用SW进行编码，节点的时空相关性究竟如何体现？个人认为，需要先有时间空间``协作''概念，需要考虑的是如何``协作'':
 \begin{quote}
     假设一个簇内所有节点都通过储存前一次或几次采集的信息时间相关信息，簇内其他节点都利用簇头节点信息作为边信息(空间相关信息)。
+
     基于简单SW编码\cite{Srisooksai2012}，利用相关性将码字分8个组，簇内其他节点只需要传输index即可，我这里将其定义为一维相关性；若有可能，将时间相关性同时利用的话，利用二维相关性，可否将分组减少，这样传输比特位将会更少。
+
+    关于相关性思考，如果利用CF方法，假设我们采集环境参数。应该将环境参数随着距离，时间的变化是呈现怎样的分布？
 \end{quote}<++>
 
 \subsection{Dependence(相关性)}
@@ -31,3 +34,9 @@ CF仅仅确定随机变量之间的相关性，并不影响变量本身的分布
     \item 第二组是所选CF的相关参数。
 \end{enumerate}
 常用方法使用了两步法对这些参数进行估算：先分别估算边缘分布的参数；然后基于以上的估算对相关矩阵$\Gamma$进行估算。前一步骤可以通过多种方式实现，如最大似然(maximum likelihood(ML))、贝叶斯(Bayesian)、或者基于时刻的方法(a method of moments based approach)。。但是$\Gamma$的估算就要复杂的多了，并且取决于随机变量是连续或离散的。
+
+\subsubsection{关于变换}
+\textbf{\textcolor[rgb]{1,0,0}{Rosenblatt Transformation}}
+Rosenblatt变换(RT)是将环境变量从物理空间映射到一个标准常变量相互独立的变换空间中。
+
+在文章\cite{Montes2015}中，作者使用\textcolor[rgb]{1,0,0}{Inverting Rosenblatt transformation}，通过将向量$\mathbb{V}$映射到物理空间中环境变量$\mathbb{X}$，定义了环境轮廓(environmental contous)。

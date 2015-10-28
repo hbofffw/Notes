@@ -18,6 +18,8 @@ DSC利用信源之间的空间相关性对信息进行压缩编码，但各节�
 
 由于对于一些环境参数的编码，就其码字较短的角度来考虑，SW编码较为适用，问题在于\textcolor[rgb]{1,0,0}{要合理分配节点通信量，尽量平均节点能耗；相关性模型建立}。对于例如温湿度等参数，空间相关性通常认为其符合典型的多元高斯分布，相应的其边缘概率密度函数分布也应该为高斯分布，但实际情况中并非如此。有一种更为合适的相关性模型:\emph{\textcolor[rgb]{1,0,0}{Copula-Function-Based Correlation Model}}。另外，目前的DSC方法并没有能够真正实现平均分配节点能耗，需要考虑能否尽量平均分配节点能耗。
 
+文章\cite{Fresia2009}中提出了将信源建模呈隐形马尔科夫过程(Hidden Markov Processes (HMPs))，使用raptor编码方法对信源进行编码。
+
 \subsubsection{相关性模型}
 \textbf{多元高斯相关性模型(Multivariate Gaussian Correlation Model)}.
 
