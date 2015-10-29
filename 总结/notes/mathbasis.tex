@@ -60,19 +60,61 @@ CF仅仅确定随机变量之间的相关性，并不影响变量本身的分布
 \end{equation}
 其中，$\Phi$是标准正太变量的累积分布函数。
 
-
-\subsection{几种实际建模的流程}
 根据\cite{Montes2015}中使用copulas获取环境变量变化轮廓(environmental contous)，使用\textcolor[rgb]{1,0,0}{Inverting Rosenblatt transformation}，通过将向量$\mathbf{V}$映射到物理空间中环境变量$\mathbf{X}$来实现：
 \begin{eqnarray}
+    \label{eq-invervse-rosenblatt}
     x_1 &=& F_1^{-1}(e_1)  \notag \\
     x_2 &=& F_{2|1}^{-1}(e_2|x_1) \notag \\
     \vdots \\
     x_d &=& F_{d|1,2,\dots,d-1}^{-1} (e_d | x_1,x_2,\dots,x_{d-1}) \notag
-    \label{eq-invervse-rosenblatt}
 \end{eqnarray}
+
+Copula $C(\mathbf{u})$定义：
+\begin{equation}
+    \label{eq-cf}
+    C(\mathbf{u}) = F(F_1^{-1}(u_1),\dots,F_d^{-1}(u_d))
+\end{equation}
+相应的copula密度为：
+\begin{equation}
+    \label{eq-cfd}
+    c(\mathbf{u}) = \dfrac{\partial^d C(u_1,\dots,u_d)}{\partial u_1\dots\partial u_d}
+\end{equation}
+
+通常，$\mathbf{X}$的边缘分布可以通过计算：
+\begin{equation}
+    \label{eq-margin}
+    F_{i|1,\dots,i-1}(x_i|x_1,\dots,x_{i-1}) = C_{i|1,\dots,i-1}(u_i|u_1,\dots,u_{i-1})
+\end{equation}
+其中，
+\begin{equation}
+    \label{eq-margin2}
+    C_{i|1,\dots,i-1}(u_i|u_1,\dots,u_{i-1}) = \dfrac{\partial^{i-1}C(u_1,\dots,u_i,1,\dots,1)/\partial u_1\dots\partial u_{i-1}}{\partial^{i-1}C(u_1,\dots,u_{i-1},1,\dots,1)/\partial u_1\dots\partial u_{i-1}} 
+\end{equation}
+对于二维变量来说,设$u_1 = u,\ u_2 = v$
+\begin{equation*}
+    F_{x_2|x_1}(x_2|x_1) = C(v|u) = \dfrac{\partial C(u,u)}{\partial u}
+\end{equation*}
+
+\cref{eq-invervse-rosenblatt}可以写为
+\begin{eqnarray}
+    \label{eq-inverse-transform-using-copula}
+    u_1 &=& e_1 \notag \\
+    u_2 &=& C_{2|1}^{-1}(e_2|u_1) \notag\\
+    &\vdots& \\
+    u_d &=& C_{d|1,2,\dots,d-1}^{-1}(e_d|u_1,u_2,\dots u_{d-1})
+\end{eqnarray}
+
+接下来，如何确定Copula
+
+
+\subsection{几种实际建模的流程}
 
 \subsubsection{Independent Copula}
 \subsubsection{Gaussian Copula}
+使$p(u)$和$p(v)$定义了联合标准正太分布函数$\Phi$的\textcolor[rgb]{1,0,0}{分位函数(quantile fuction)}，即$\Phi(p(u)) = u$和$\Phi(p(v))=v$。
+\begin{quotation}
+    关于分位函数
+\end{quotation}<++>
 \subsubsection{Archimedean Copula}
 \subsubsection{Frank Copula}
 \subsubsection{Gumbel Copula}
