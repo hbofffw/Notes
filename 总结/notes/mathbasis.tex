@@ -91,9 +91,10 @@ Copula $C(\mathbf{u})$定义：
     C_{i|1,\dots,i-1}(u_i|u_1,\dots,u_{i-1}) = \dfrac{\partial^{i-1}C(u_1,\dots,u_i,1,\dots,1)/\partial u_1\dots\partial u_{i-1}}{\partial^{i-1}C(u_1,\dots,u_{i-1},1,\dots,1)/\partial u_1\dots\partial u_{i-1}} 
 \end{equation}
 对于二维变量来说,设$u_1 = u,\ u_2 = v$
-\begin{equation*}
+\begin{equation}
+    \label{eq-bivariate}
     F_{x_2|x_1}(x_2|x_1) = C(v|u) = \dfrac{\partial C(u,u)}{\partial u}
-\end{equation*}
+\end{equation}
 
 \cref{eq-invervse-rosenblatt}可以写为
 \begin{eqnarray}
@@ -111,10 +112,21 @@ Copula $C(\mathbf{u})$定义：
 
 \subsubsection{Independent Copula}
 \subsubsection{Gaussian Copula}
-使$p(u)$和$p(v)$定义了联合标准正太分布函数$\Phi$的\textcolor[rgb]{1,0,0}{分位函数(quantile fuction)}，即$\Phi(p(u)) = u$和$\Phi(p(v))=v$。
 \begin{quotation}
     分位函数(quantile function)也被成为点函数(percent point function)或逆累计分布函数(inverse cumulative distribution function)。假设$F_X(x) := \Pr (X \leq x) = p$，其分位函数$Q(p) = \inf\{x \in \mathbb{R} : p \leq F(x)\}$，即求得使累计函数F的值大于$p$的最小$x$值，可记为$Q = F^{-1}$。
-\end{quotation}<++>
+\end{quotation}
+
+使$p(u)$和$p(v)$定义了联合标准正太分布函数$\Phi$的\textcolor[rgb]{1,0,0}{分位函数(quantile fuction)}，即$\Phi(p(u)) = u$和$\Phi(p(v))=v$。$p(u)$和$p(v)$都是实际无力变量在\emph{Nataf 空间}上的变换值。高斯copula定义为：
+\begin{equation}
+    \label{eq-gaussiancopula}
+    C(u,v) = B(p(u),p(v);\varrho)
+\end{equation}
+其中$B$是标准双变量正太累计分布(bivariate normal cumulative distribution)，$\varrho$是$p(u)$和$p(v)$之间的Pearson系数(Pearson coefficient)。从公式\ref{eq-bivariate}可得到：
+\begin{equation} 
+    \label{eq-copula-bivariate}
+    C(v|u) = \dfrac{\partial C(u,v)}{\partial u} = \Phi \left(\dfrac{p(v)-\varrho p(u)}{\sqrt{1-\varrho^{2}}}\rightB\emph{\textcolor[rgb]{1,0,0}{}}<++>
+\end{equation}<++>
+
 \subsubsection{Archimedean Copula}
 \subsubsection{Frank Copula}
 \subsubsection{Gumbel Copula}
