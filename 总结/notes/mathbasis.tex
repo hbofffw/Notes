@@ -1,5 +1,5 @@
 \section{信源相关性建模Correlation Modeling}
-使用SW进行编码，节点的时空相关性究竟如何体现？个人认为，需要先有时间空间``协作''概念，需要考虑的是如何``协作'':
+使用SW进行编码，节点的时空相关性究竟如何体现？个人认为，需要先有时间空间``协作''概念，需要考虑的是如何``协作''，个人理解:
 \begin{quote}
     假设一个簇内所有节点都通过储存前一次或几次采集的信息时间相关信息，簇内其他节点都利用簇头节点信息作为边信息(空间相关信息)。
 
@@ -12,7 +12,7 @@
 要进行相关性建模，必须先弄清楚随机变量之间相关性变化关系。
 \subsubsection{Concordance(一致性/调和性)}
 非正式的，假设两个随机变量，如果一对取值中，若一个变量的大数值与另一个变量的大数值配在一起，若一个变量的小数值与另一个变量的小树枝配在一起，则称这对变量是一致的(concordant)。更确切的：$(x_i,y_i)$和$(x_j,y_j)$表示两个向量$(X,Y)$的两对观测值，如果$x_i<x_j,y_i<y_j$或者$x_i>x_j,y_i>y_j$，则称$(x_i,y_i),(x_j,y_j)$是一致的。若$x_i<x_j,y_i>y_j$或者$x_i>x_j,y_i<y_j$，则称$(x_i,y_i),(x_j,y_j)$是不一致的。以上可总结为:
-$(x_i,y+i)$ and $(x_j,y_j)$ are concordant if $(x_i-x_j)(y_i-y_j)>0$ and disconcordant if $(x_i-x_j)(y_i-y_j)<0$。
+$(x_i,y_i)$ and $(x_j,y_j)$ are concordant if $(x_i-x_j)(y_i-y_j)>0$ and disconcordant if $(x_i-x_j)(y_i-y_j)<0$。
 
 \subsubsection{Kendall's tau}
 Kendall's tau可以对变量之间这种联合的一致性进行采样量化。使$\{(x_1,y_1),(x_2,y_2),\dots,(x_n,y_n)\}$表示关于连续随机变量$(X,Y)$的$n$个观测的随机采样。
@@ -102,13 +102,13 @@ Copula $C(\mathbf{u})$定义：
     F_{x_2|x_1}(x_2|x_1) = C(v|u) = \dfrac{\partial C(u,u)}{\partial u}
 \end{equation}
 
-\cref{eq-invervse-rosenblatt}可以写为
+公式\ref{eq-invervse-rosenblatt}可以写为
 \begin{eqnarray}
     \label{eq-inverse-transform-using-copula}
     u_1 &=& e_1 \notag \\
     u_2 &=& C_{2|1}^{-1}(e_2|u_1) \notag\\
     &\vdots& \\
-    u_d &=& C_{d|1,2,\dots,d-1}^{-1}(e_d|u_1,u_2,\dots u_{d-1})
+    u_d &=& C_{d|1,2,\dots,d-1}^{-1}(e_d|u_1,u_2,\dots u_{d-1}) \notag
 \end{eqnarray}
 
 接下来，如何确定Copula
