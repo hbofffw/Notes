@@ -8,6 +8,11 @@
     关于相关性思考，如果利用CF方法，假设我们采集环境参数。应该将环境参数随着距离，时间的变化是呈现怎样的分布？
 \end{quote}
 
+\subsection{Basis}
+两个随机变量$X,Y$，他们的分布函数分别为$F(x) = P[X \leq x]$和$G(y) = P[Y \leq y]$，联合分布函数为$H(x,y) = P[X \leq x, Y \leq y]$。每一对实测值对应的$F(x),G(y),H(x,y)$取值范围都在$[0,1]$之间。即点$(F(x),G(y))$位于单位平方形$[0,1]\times[0,1]$中。
+
+在一个矩形平面$\hat{\mathbf{R}}^2$中两相邻点的直积(笛卡尔积(Cartesian product))$B=[x_1,x_2]\times[y_1,y_2]$，可得$B$的顶点：$(x_1,y_1),(x_1,y_2),(x_2,y_1),(x_2,y_2)$。
+
 
 \subsection{Copulas Function (CF)}
 ``Copula Models''的优点有\cite{Smith2009}：
@@ -74,6 +79,21 @@ CF仅仅确定随机变量之间的相关性，并不影响变量本身的分布
 
 
 \subsubsection{Concordance(一致性/调和性)}
+\begin{theorem}\cite{Bill2000An}
+    Let $(X_1,Y_1)$ and $(X_2,Y_2)$ be independent vectors of continuous random variables with joint distribution functions $H_1$ and $H_2$, respectively, with common margins $F$ (of $X_1$ and $X_2$) and $G$ (of $Y_1$ and $Y_2$). Let $C_1$ and $C_2$ denote the copulas of $(X_1,Y_1)$ and $(X_2,Y_2)$, respectively, so that $H_1(x,y) = C_1(F(x), G(y))$ and $H_2(x,y) = C_2(F(x),G(y))$. Let $\mathcal{Q}$ denote the difference between the probabilities of concordance and discordance of $(X_1,Y_1)$ and $(X_2,Y_2)$, i.e., let
+    \begin{equation}
+        \mathcal{Q} = P [(X_1-X_2)(Y_1-Y_2) > 0] - P[(X_1-X_2)(Y_1-Y_2)<0]
+        \label{eq-diff}
+    \end{equation}
+    Then
+    \begin{equation}
+        \mathcal{Q} = \mathcal{Q}(C_1,C_2) = 4 \iint_{\mathbf{I}^2}C_2(u,v)dC_1(u,v)-1
+        \label{eq-diff2}
+    \end{equation}
+    where $u,v$ are the transformations of $F(x),G(y)$, $u=F(x)$ and $v = G(y)$.
+    \label{th5.1.1}
+\end{theorem}
+
 非正式的，假设两个随机变量，如果一对取值中，若一个变量的大数值与另一个变量的大数值配在一起，若一个变量的小数值与另一个变量的小树枝配在一起，则称这对变量是一致的(concordant)。更确切的：$(x_i,y_i)$和$(x_j,y_j)$表示两个向量$(X,Y)$的两对观测值，如果$x_i<x_j,y_i<y_j$或者$x_i>x_j,y_i>y_j$，则称$(x_i,y_i),(x_j,y_j)$是一致的。若$x_i<x_j,y_i>y_j$或者$x_i>x_j,y_i<y_j$，则称$(x_i,y_i),(x_j,y_j)$是不一致的。以上可总结为:
 $(x_i,y_i)$ and $(x_j,y_j)$ are concordant if $(x_i-x_j)(y_i-y_j)>0$ and disconcordant if $(x_i-x_j)(y_i-y_j)<0$。
 
