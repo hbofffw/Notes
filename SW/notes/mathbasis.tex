@@ -20,6 +20,7 @@
 \textcolor[rgb]{1,0,0}{Cupols目的在于将多变量的分布函数累积耦合出它们的边缘分布。对于传统多变量分布，一旦参数化分布函数选定，可以通过积分来获得其边缘分布。这样，由原来多变量自身分布可以决定其边缘分布特征。这种方法限制在于这些多变量要属于同一个分布族。而Copula建模则可以利用copula function将不属于同一分布族的变量``粘贴(glued together)''起来确定其边缘分布。(2.1 of \cite{Smith2009}}）
 
 
+
 CF仅仅确定随机变量之间的相关性，并不影响变量本身的分布特。CF的一个思想是将原始随机变量$X_j$，通过变换的方法得到均匀分布的随机变量$U_j = F_j(X_j)$(在一个向量空间中分布不均匀的变量映射为另一个向量空间中均匀分布的变量)。前提是，变换后变量间相关性分布于原始变量保持一致。该方法优势在于，变换之后，变量间相关性分布更容易被获取。
 \subsubsection{边缘统计(Marginal Statistics)}
 对于联合统计$x,y$，$F_x(x)$为边缘分布，$f_x(x)$为$x$的边缘概率密度函数。
@@ -40,35 +41,71 @@ CF仅仅确定随机变量之间的相关性，并不影响变量本身的分布
 常用方法使用了两步法对这些参数进行估算：先分别估算边缘分布的参数；然后基于以上的估算对相关矩阵$\Gamma$进行估算。前一步骤可以通过多种方式实现，如最大似然(maximum likelihood(ML))、贝叶斯(Bayesian)、或者基于时刻的方法(a method of moments based approach)。但是$\Gamma$的估算就要复杂的多了，并且取决于随机变量是连续或离散的。
 
 \subsection{Dependence(相关性)}
-要进行相关性建模，必须先弄清楚随机变量之间相关性变化关系。
+\subsubsection{基本概念}
+随机变量$x$，方差：
+\begin{equation}
+    \text{var}(x) = \mathbf{D}x = \mathbf{E}(x-\mathbf{E}x)^2 = \mathbf{E}x^2-(\mathbf{E}x)^2
+    \label{eq-var}
+\end{equation}
+
+两个随机变量$x,y$的方差：
+\begin{eqnarray}
+    \mathbf{D}(x+y) &=& \mathbf{E}[(x-\mathbf{E}x) + (y-\mathbf{E}y)]^2 \notag \\
+    &=&\mathbf{D}x+\mathbf{D}y+2\mathbf{E}(x-\mathbf{E}x)(y-\mathbf{E}y) \notag \\
+    &=&\mathbf{D}x+\mathbf{D}y+2\text{cov}(x,y)
+    \label{eq-cov-var}
+\end{eqnarray}
+
+其中
+\begin{equation}
+    \text{cov}(x,y) = \mathbf{E}(x-\mathbf{E}x) (y-\mathbf{E}y)
+    \label{eq-covariation}
+\end{equation}
+
+是$x,y$的协方差，相关系数：
+\begin{equation}
+    \rho (x,y) = \dfrac{\text{cov}(x,y)}{\sqrt{\mathbf{D}x\times\mathbf{D}y}}
+    \label{eq-coefficient}
+\end{equation}
+若$x,y$独立，则cov$(x,y) = 0$。若$\rho(x,y) = \pm 1$，则$x,y$线性相关：
+\begin{equation*}
+    y = ax+b
+\end{equation*}
+
+
 \subsubsection{Concordance(一致性/调和性)}
 非正式的，假设两个随机变量，如果一对取值中，若一个变量的大数值与另一个变量的大数值配在一起，若一个变量的小数值与另一个变量的小树枝配在一起，则称这对变量是一致的(concordant)。更确切的：$(x_i,y_i)$和$(x_j,y_j)$表示两个向量$(X,Y)$的两对观测值，如果$x_i<x_j,y_i<y_j$或者$x_i>x_j,y_i>y_j$，则称$(x_i,y_i),(x_j,y_j)$是一致的。若$x_i<x_j,y_i>y_j$或者$x_i>x_j,y_i<y_j$，则称$(x_i,y_i),(x_j,y_j)$是不一致的。以上可总结为:
 $(x_i,y_i)$ and $(x_j,y_j)$ are concordant if $(x_i-x_j)(y_i-y_j)>0$ and disconcordant if $(x_i-x_j)(y_i-y_j)<0$。
 
 \subsubsection{Kendall's $(\tau)$, Pearson's $\varrho$, and Spearman's rho $(\rho)$}
+两个随机变量$X,Y$。
+
 \emph{\textbf{\textcolor[rgb]{1,0,0}{Kendall's $\tau$}}}可以对变量之间这种联合的一致性进行采样量化。它描述了两个随机独立均匀分布向量的一致性与非一致性概率的差值\cite{Montes2015}:
 \begin{equation}
-    \label{eq-tau}
     \tau = P[(X_1-X_2)(Y_1-Y_2) > 0] - P[(X_1-X_2)(Y_1-Y_2)<0]
+    \label{eq-tau}
 \end{equation}
 
 \emph{\textbf{\textcolor[rgb]{1,0,0}{Person's $\varrho$}}}:
 \begin{equation}   
     \label{eq-varrho}
-    \varrho^{p}_{j_1 j_2} = \text{cov}(X_{j_1},X_{j_2})/\sqrt{\text{var}(X_{j_1})\text{var}(X_{j_2})}
+    \varrho^{p}_{X,Y} = \text{cov}(X,Y)/\sqrt{\text{var}(X)\text{var}(Y)}
 \end{equation}
-$\varrho_{j_1 j_2}^{p}$应该看做是在变量服从正态分布情况下，自然产生的总体参数。需要注意的是，当变量不服从正态分布的情况下，用它来作为变量的相关性系数则不适用\cite{Smith2009}。公式\ref{eq-varrho}可变为：
+
+
+$\varrho_{j_1 j_2}^{p}$就，应该看做是在变量服从正态分布情况下，自然产生的总体相关系数。需要注意的是，当变量不服从正态分布的情况下，用它来作为变量的相关性系数则不适用\cite{Smith2009}。公式\ref{eq-varrho}可变为：
 \begin{equation}
-    \rho_{j_1 j_2}^s = \text{corr}(F_{j_1}(X_{j_1}),F_{j_2}(X_{j_2}))
+    \rho_{X,Y}^s = \text{corr}(F_{X}(X),F_{Y}(Y))
     \label{eq-varrhotorho}
 \end{equation}
-为了对相关性进行建模，该测量方法与copula方法联系紧密。因为它简单描述了通过变换后的随机变量$U_j = F_j(X_j)$的相关性，这些变量本身就可以使用copula函数C描述他们的分布关系。\textcolor[rgb]{1,0,0}{由于$U_j$服从均匀分布}，其方差为$1/12$，期望为$1/2$。因此\cref{eq-varrhotorho}可简写为
+为了对相关性进行建模，该测量方法与copula方法联系紧密。因为它简单描述了通过变换后的随机变量$U_j = F_j(j)$的相关性，这些变量本身就可以使用copula函数C描述他们的分布关系。\textcolor[rgb]{1,0,0}{由于$U_j$服从$[0,1]$均匀分布}，其方差为$1/12$，期望为$1/2$。因此\cref{eq-varrhotorho}可简写为
 \begin{eqnarray}
-    \rho_{j_1 j_2}^s &=& \text{cov}(U_{j_1},U_{j_2})/(\text{var}(U_{j_1})\text{var}(U_{j_2}))^{1/2} \notag \\
-    &=& 12E \left[ \left(U_{j_1} - \dfrac{1}{2}\right)\left(U_{j_2} - \dfrac{1}{2}\right) \right] \notag \\
-    &=& 12E [U_{j_1}U_{j_2}] -3
+    \rho_{X,Y}^s &=& \text{cov}(U_{X},U_{Y})/(\text{var}(U_{X})\text{var}(U_{Y}))^{1/2} \notag \\
+    &=& 12E \left[ \left(U_{X} - \dfrac{1}{2}\right)\left(U_{Y} - \dfrac{1}{2}\right) \right] \notag \\
+    &=& 12E [U_{X}U_{Y}] -3
     \label{eq-rhoSimplified}
 \end{eqnarray}
+cov$(U_X,U_Y)$不再有原始变量边缘分布来决定。因此相比Spearman's $\varrho$，Pearson's $\rho$对原始变量边缘分布不敏感，就不再受到原始变量必须服从正态分布的限制。
 
 
 
