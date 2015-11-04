@@ -11,10 +11,92 @@
 \subsection{Basis}
 两个随机变量$X,Y$，他们的分布函数分别为$F(x) = P[X \leq x]$和$G(y) = P[Y \leq y]$，联合分布函数为$H(x,y) = P[X \leq x, Y \leq y]$。每一对实测值对应的$F(x),G(y),H(x,y)$取值范围都在$[0,1]$之间。即点$(F(x),G(y))$位于单位平方形$[0,1]\times[0,1]$中。
 
-在一个矩形平面$\hat{\mathbf{R}}^2$中两相邻点的直积(笛卡尔积(Cartesian product))$B=[x_1,x_2]\times[y_1,y_2]$，可得$B$的顶点：$(x_1,y_1),(x_1,y_2),(x_2,y_1),(x_2,y_2)$。
+一个\emph{\textcolor[rgb]{1,0,0}{``2-increasing''}}函数：一个变量的非减函数的一个二维类比。一个单位矩形$\mathbf{I}^2=\mathbf{I}\times\mathbf{I}$，其中$\mathbf{I} = [0,1]$。在一个矩形平面$\bar{\mathbf{R}}^2$中两相邻点的直积(笛卡尔积(Cartesian product))$B=[x_1,x_2]\times[y_1,y_2]$，可得$B$的顶点：$(x_1,y_1),(x_1,y_2),(x_2,y_1),(x_2,y_2)$。一个两点实函数(\emph{\textcolor[rgb]{1,0,0}{2-place real function}}) $H$的域为Dom$H$，是$\bar{\mathbf{R}}^2$的一个子集，它的数值域Ran$H$是$\mathbf{R}$的一个子集。
+\begin{definition}
+    Let $S_1$ and $S_2$ be noempty subsets of $\bar{\mathbf{R}}$, and let $H$ be a 2-place real function such that Dom$H = S_1 \times S_2$. Let $B = [x_1,x_2] \times [y_1,y_2]$ be rectangle all of whose vertices are in Dom$H$. Then the \emph{\textcolor[rgb]{1,0,0}{H-volume of B}} is given by
+    \begin{equation}
+        V_H(B) = H(x_2,y_2) - H(x_2,y_1) - H(x_1,y_2) + H(x_1,y_1)
+        \label{eq-volume}
+    \end{equation}
+    \label{def2.1.1}
+\end{definition}
+如果定义矩形平面$B$中$H$的一阶差分(first order differences)为
+\begin{equation*}
+        \bigtriangleup_{x_1}^{x_2}H(x,y) = H(x_2,y) - H(x_1,y) \ 和 \ \bigtriangleup_{y_1}^{y_2}H(x,y) = H(x,y_2) - H(x,y_1),
+    \end{equation*}
+    then the H-volume of a rectangle $B$ is the \emph{\textcolor[rgb]{1,0,0}{second order difference}} of $H$ on $B$,
+    \[
+        V_H(B) = \bigtriangleup_{y_1}^{y_2}\bigtriangleup_{x_1}^{x_2}H(x,y).
+    \]
+
+\begin{definition}
+    A 2-place real function $H$ is 2-increasing if $V_H(B) \geq 0$ for all rectangles $B$ whose vertices lie in Dom$H$.
+    \label{def2.1.2}
+\end{definition}
+
+判断$H$是否为2-increasing，根据\cref{eq-volume}，利用$[x_1,x_2],[y_1,y_2]$产生的四个点来进行计算。
 
 
 \subsection{Copulas Function (CF)}
+根据上节，再引入一个``触底''(\emph{\textcolor[rgb]{1,0,0}{grounded}})概念：
+\begin{quotation}
+    设$S_1,S_2$是$\bar{\mathbf{R}}$的非空子集，$S_1$中最小的元素为$a_1$，$S_2$中最小元素为$a_2$，$S_1,S_2$的一个联合分布函数$H$，对于$S_1 \times S_2$的所有$(x,y)$，都满足$H(x,a_2)=0=H(a_1,y)$的话，则$H$是触底的(grounded)。
+\end{quotation}
+
+将copulas看作在单位矩形平面$\mathbf{I}^2$中的subcopulas
+\begin{definition}
+    一个二维subcopula(2-subcopula或简言之subcopula)是一个具有以下性质的函数：
+    \begin{enumerate}[1.]
+        \item Dom$C' = S_1 \times S_2$，其中$S_1$和$S_2$是单位向量$\mathbf{I}=[0,1]$的子集；
+        \item $C'$是触底且2-increasing；
+        \item 对于$S_1$中任意元素$u$，$S_2$中任意元素$v$，满足
+            \begin{equation}
+                C'(u,1) = u \quad \text{和} \quad C'(1,v) = v
+                \label{eq-subcopula}
+            \end{equation}
+    \end{enumerate}
+    \label{def2.2.1}
+\end{definition}
+
+\begin{definition}
+    一个取值空间为$\mathbf{I}^2$的subcopula成为copula，$C' = \mathbf{I}^2$。Copula具有以下性质：
+    \begin{enumerate}
+        \item 对于$\mathbf{I}$中的每个$u,v$，都有
+            \begin{eqnarray}
+                C(u,0) = &0& = C(0,v) \\
+                C(u,1) = 1 \quad &and& \quad C(1,v) = v;
+                \label{eq-copula1}
+            \end{eqnarray}
+        \item 对于$\mathbf{I}$中的每个$u_1,u_2,v_1,v_2$，且$u_1 \leq u_2, v_1 \leq v_2$，则:
+            \begin{equation}
+                C(u_2,v_2) - C(u_2,v_1) - C(u_1,v_2)+C(u_1,v_1) \geq 0
+                \label{eq-copula2}
+            \end{equation}
+    \end{enumerate}
+    \label{def-copula}
+\end{definition}
+
+接下来引入CF的几个定理：
+\begin{theorem}
+    设$C'$是一个subcopula，对于Dom$C'$中的每一对$(u,v)$都有：
+    \begin{equation}
+        \max(u+v-1,0) \leq C'(u,v) \leq min(u,v)
+        \label{eq-thr2.2.3}
+    \end{equation}
+    \label{thr2.2.3}
+\end{theorem}
+    
+\begin{theorem}
+    设$C'$是一个subcopula，对于Dom$C'$中的每一对$(u_1,u_2),(v_1,v_2)$都有：
+    \begin{equation}
+        \left|C'(u_2,v_2)-C'(u_1,v_1)\right| \leq \left|u_2-u_1\right|+\left|v_2-v_1\right|
+        \label{eq-thr2.2.4}
+    \end{equation}
+    因此，$C'$在它的域中是\emph{\textcolor[rgb]{1,0,0}{均匀连续的}}。
+    \label{thr2.2.4}
+\end{theorem}
+
+
 ``Copula Models''的优点有\cite{Smith2009}：
 \begin{enumerate}
     \item 它可以将任意的非同一分布族的单变量边缘分布进行组合；
@@ -102,7 +184,7 @@ $(x_i,y_i)$ and $(x_j,y_j)$ are concordant if $(x_i-x_j)(y_i-y_j)>0$ and disconc
 
 \emph{\textbf{\textcolor[rgb]{1,0,0}{Kendall's $\tau$}}}可以对变量之间这种联合的一致性进行采样量化。它描述了两个随机独立均匀分布向量的一致性与非一致性概率的差值\cite{Montes2015}:
 \begin{equation}
-    \tau = P[(X_1-X_2)(Y_1-Y_2) > 0] - P[(X_1-X_2)(Y_1-Y_2)<0]
+    \tau = \tau_{X,Y} = P[(X_1-X_2)(Y_1-Y_2) > 0] - P[(X_1-X_2)(Y_1-Y_2)<0]
     \label{eq-tau}
 \end{equation}
 
