@@ -38,6 +38,7 @@
 
 
 \subsection{Copulas Function (CF)}
+\subsubsection{CF基本概念}
 根据上节，再引入一个``触底''(\emph{\textcolor[rgb]{1,0,0}{grounded}})概念：
 \begin{quotation}
     设$S_1,S_2$是$\bar{\mathbf{R}}$的非空子集，$S_1$中最小的元素为$a_1$，$S_2$中最小元素为$a_2$，$S_1,S_2$的一个联合分布函数$H$，对于$S_1 \times S_2$的所有$(x,y)$，都满足$H(x,a_2)=0=H(a_1,y)$的话，则$H$是触底的(grounded)。
@@ -47,7 +48,7 @@
 \begin{definition}
     一个二维subcopula(2-subcopula或简言之subcopula)是一个具有以下性质的函数：
     \begin{enumerate}[1.]
-        \item Dom$C' = S_1 \times S_2$，其中$S_1$和$S_2$是单位向量$\mathbf{I}=[0,1]$的子集；
+        \item Dom$C' = S_1 \times S_2$($C'$的操作域)，其中$S_1$和$S_2$是单位向量$\mathbf{I}=[0,1]$的子集；
         \item $C'$是触底且2-increasing；
         \item 对于$S_1$中任意元素$u$，$S_2$中任意元素$v$，满足
             \begin{equation}
@@ -57,6 +58,10 @@
     \end{enumerate}
     \label{def2.2.1}
 \end{definition}
+
+
+接下来将操作域是$\mathbf{I}$子集的subcopula $C'$拓展至操作域为整个$\mathbf{I}$的copula $C$：
+
 
 \begin{definition}
     一个取值空间为$\mathbf{I}^2$的subcopula成为copula，$C' = \mathbf{I}^2$。Copula具有以下性质：
@@ -73,10 +78,13 @@
                 \label{eq-copula2}
             \end{equation}
     \end{enumerate}
-    \label{def-copula}
+    \label{def-2.2.2}
 \end{definition}
+从\cref{eq-volume}可得，$C(u,v)=V_C([0,u]\times[0,v]) = C(u,v)-C(u,0)-C(0,v)+C(0,0)$，可以将$C(u,v)$看做利用一个在$\mathbf{I}$中的数生成一个$[0,u]\times[0,v]$的矩形平面。\cref{def-2.2.2}中第二点给出了一个依托``容斥(\textcolor[rgb]{1,0,0}{inclusion-exclusion})''\footnote{``容斥''原理是一种计数方法，使计算结果既无遗漏又无重复(类似拓扑学中的遍历最短路径？)}原理并使用$C$的一个不等式，将给定的$u_1,u_2,v_1,v_2$分配到$\mathbf{I}^2$中的矩形平面$[u_1,u_2]\times[v_1,v_2]$。
 
-接下来引入CF的几个定理：
+
+
+接下来引入copula和subcopula的几个性质：
 \begin{theorem}
     设$C'$是一个subcopula，对于Dom$C'$中的每一对$(u,v)$都有：
     \begin{equation}
@@ -85,6 +93,18 @@
     \end{equation}
     \label{thr2.2.3}
 \end{theorem}
+
+\begin{proof}
+    ($u,v$)为Dom$C'$中任意一点。有
+    \begin{eqnarray*}
+        C'(u,v) &\leq& C'(u,1) = u \\
+        &and& \\
+        C'(u,v) &\leq& C'(u,v) = v \\
+        &\Rightarrow& \\
+        C'(u,v) &\leq& \text{min} (u,v)
+    \end{eqnarray*}
+    $V_{C'}([u,1]\times[v,1]) \geq 0$\cref{eq-copula2}可引申出$C'(u,v)\geq u+v-1$，再结合$C'(u,v) \geq 0$可以得出$C'(u,v)\geq \text{max}(u+v-1,0)$。
+\end{proof}
     
 \begin{theorem}
     设$C'$是一个subcopula，对于Dom$C'$中的每一对$(u_1,u_2),(v_1,v_2)$都有：
