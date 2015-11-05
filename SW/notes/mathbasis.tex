@@ -105,6 +105,12 @@
     \end{eqnarray*}
     $V_{C'}([u,1]\times[v,1]) \geq 0$\cref{eq-copula2}可引申出$C'(u,v)\geq u+v-1$，再结合$C'(u,v) \geq 0$可以得出$C'(u,v)\geq \text{max}(u+v-1,0)$。
 \end{proof}
+
+对于copula，使$M(u,v) = \text{min}(u,v)$，$W(u,v) = \text{max}(u+v-1,0)$，则对于每一个$C$和每一个$\mathbf{I}^2$中的$(u,v)$，
+\begin{equation}
+    W(u,v) \leq C(u,v) \leq M(u,v)
+    \label{eq2.2.5}
+\end{equation}
     
 \begin{theorem}
     设$C'$是一个subcopula，对于Dom$C'$中的每一对$(u_1,u_2),(v_1,v_2)$都有：
@@ -120,10 +126,32 @@
     \label{def2.2.5}
 \end{definition}
 \begin{corollary}
-    Copula C 的水平界面，垂直截面以及对角截面在$\mathbf{I}$上都是非减，均匀连续的。
+    Copula C 的水平截面，垂直截面以及对角截面在$\mathbf{I}$上都是非减，均匀连续的。
     \label{coro2.2.6}
 \end{corollary}
 
+\begin{theorem}
+    C为一个copula，对于$\mathbf{I}$中的任意$v$，对于几乎所有的$u$，存在偏微分$\partial C(u,v)/\partial u$，并且对于$v$和$u$，有
+    \begin{equation}
+        0 \leq \dfrac{\partial}{\partial u}C(u,v) \leq 1
+        \label{eq2.2.7}
+    \end{equation}
+    相似的，对于$\mathbf{I}$中的任意$u$，对于几乎所有的$v$，存在偏微分$\partial C(u,v)/\partial v$，且对于$u$和$v$，有
+    \begin{equation}
+        0 \leq \dfrac{\partial}{\partial v}C(u,v) \leq 1
+        \label{eq2.2.8}
+    \end{equation}
+    函数$u \mapsto \partial C(u,v)/\partial v$和函数$v \mapsto \partial C(u,v)/\partial u$在$\mathbf{I}$几乎任意点都是非减的。
+    \label{thr2.2.7}
+\end{theorem}
+
+\begin{theorem}
+    $C$是copula，如果$\partial C(u,v)\partial u$和$\partial^2 C(u,v)/\partial u\partial v$在$\mathbf{I}^2$上是连续的，且对于所有$u \in (0,1),v=0$，存在$\partial C(u,v)/\partial u$，那么在$(0,1)^2$上存在$\partial C(u,v)\partial u$和$\partial^2C(u,v)/\partial v \partial u$，并且$\partial^2C(u,v)/\partial u \partial v = \partial^2C(u,v)/\partial v \partial u$。
+    \label{thr2.2.8}
+\end{theorem}
+
+\subsubsection{Sklar's Theorem}
+Sklar定理阐明了，Copula函数如何描述多变量联合分布和其各自单独边缘分布之间的关系。
 
 
 ``Copula Models''的优点有\cite{Smith2009}：
