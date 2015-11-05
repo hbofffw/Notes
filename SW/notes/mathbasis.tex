@@ -9,6 +9,7 @@
 \end{quote}
 
 \subsection{Basis}
+\label{subsection-basis}
 两个随机变量$X,Y$，他们的分布函数分别为$F(x) = P[X \leq x]$和$G(y) = P[Y \leq y]$，联合分布函数为$H(x,y) = P[X \leq x, Y \leq y]$。每一对实测值对应的$F(x),G(y),H(x,y)$取值范围都在$[0,1]$之间。即点$(F(x),G(y))$位于单位平方形$[0,1]\times[0,1]$中。
 
 一个\emph{\textcolor[rgb]{1,0,0}{``2-increasing''}}函数：一个变量的非减函数的一个二维类比。一个单位矩形$\mathbf{I}^2=\mathbf{I}\times\mathbf{I}$，其中$\mathbf{I} = [0,1]$。在一个矩形平面$\bar{\mathbf{R}}^2$中两相邻点的直积(笛卡尔积(Cartesian product))$B=[x_1,x_2]\times[y_1,y_2]$，可得$B$的顶点：$(x_1,y_1),(x_1,y_2),(x_2,y_1),(x_2,y_2)$。一个两点实函数(\emph{\textcolor[rgb]{1,0,0}{2-place real function}}) $H$的域为Dom$H$，是$\bar{\mathbf{R}}^2$的一个子集，它的数值域Ran$H$是$\mathbf{R}$的一个子集。
@@ -38,7 +39,7 @@
 
 
 \subsection{Copulas Function (CF)}
-\subsubsection{CF基本概念}
+\subsubsection{CF基本概念}\cite{Bill2000An}
 根据上节，再引入一个``触底''(\emph{\textcolor[rgb]{1,0,0}{grounded}})概念：
 \begin{quotation}
     设$S_1,S_2$是$\bar{\mathbf{R}}$的非空子集，$S_1$中最小的元素为$a_1$，$S_2$中最小元素为$a_2$，$S_1,S_2$的一个联合分布函数$H$，对于$S_1 \times S_2$的所有$(x,y)$，都满足$H(x,a_2)=0=H(a_1,y)$的话，则$H$是触底的(grounded)。
@@ -146,12 +147,123 @@
 \end{theorem}
 
 \begin{theorem}
-    $C$是copula，如果$\partial C(u,v)\partial u$和$\partial^2 C(u,v)/\partial u\partial v$在$\mathbf{I}^2$上是连续的，且对于所有$u \in (0,1),v=0$，存在$\partial C(u,v)/\partial u$，那么在$(0,1)^2$上存在$\partial C(u,v)\partial u$和$\partial^2C(u,v)/\partial v \partial u$，并且$\partial^2C(u,v)/\partial u \partial v = \partial^2C(u,v)/\partial v \partial u$。
+    $C$是copula，如果$\partial C(u,v)\partial v$和$\partial^2 C(u,v)/\partial u\partial v$在$\mathbf{I}^2$上是连续的，且当$v=0$，对于所有$u \in (0,1)$，都有$\partial C(u,v)/\partial u$，那么在$(0,1)^2$上存在$\partial C(u,v)/\partial u$和$\partial^2C(u,v)/\partial v \partial u$，并且$\partial^2C(u,v)/\partial u \partial v = \partial^2C(u,v)/\partial v \partial u$。
     \label{thr2.2.8}
 \end{theorem}
 
-\subsubsection{Sklar's Theorem}
-Sklar定理阐明了，Copula函数如何描述多变量联合分布和其各自单独边缘分布之间的关系。
+\subsubsection{Sklar's Theorem}\cite{Bill2000An}
+Sklar定理阐明了，Copula函数如何描述多变量联合分布和其各自单独边缘分布之间的关系。Skalr定理给出了可使用copula的单变量以及多变量分布的特征：
+\begin{definition}
+    域$\overline{\mathbf{R}}$中的单变量分布函数$F$满足：
+    \begin{enumerate}
+        \item $F$是非减的，
+        \item $F(-\infty) = 0$且$F(\infty) = 1$。
+    \end{enumerate}
+    \label{def2.3.1}
+\end{definition}
+
+\begin{definition}
+    域$\overline{\mathbf{R}}^2$中的联合变量分布$H$满足：
+    \begin{enumerate}
+        \item $H$是2-increasing(\cref{subsection-basis})的，
+        \item $H(x,-\infty) = H(-\infty,y) = 0$，且$H(\infty,\infty) = 1$。
+    \end{enumerate}
+    $H$是``触底的''，由于Dom$H = \overline{\mathbf{R}}$，可由联合分布$H$推出各变量各自的边缘分布\textbf{\textcolor[rgb]{1,0,0}{$F(x) = H(x,\infty)$,$G(y) = H(\infty,y)$}}。
+    \label{def2.3.2}
+\end{definition}
+
+\begin{theorem}[\textbf{\textcolor[rgb]{1,0,0}{Sklar's Theorem}}]
+    Let $H$ be a joint distribution function with margins F and G. Then there exists a copula C such that for all x,y in $\overline{\mathbf{R}}$,
+
+    假设H为两个边缘分布分别为F和G的随机变量的联合分布函数，那么存在一个copula函数C，使$\overline{\mathbf{R}}$中的所有$x,y$满足，
+    \begin{equation}
+        H(x,y) = C(F(x),G(y)).
+        \label{eq2.3.1}
+    \end{equation}
+    \begin{equation}
+        C(x,y) = H(F^{(-1)}(x),G^{(-1)}(y))
+        \label{eq2.3.3}
+    \end{equation}
+    If F and G are continuous, then C is unique; otherwise, C is uniquely determined on $RanF\times RanG$. Conversely, if C is a copula and F and G are distribution fuctions, then the function H defined by \cref{eq2.3.1} is a joint distribution function with margins F and G.
+   
+    如果F和G是连续的，则C是唯一的；否则，C则仅由$RanF\times RanG$决定。反之来说，如果C是一个copula，F和G是分布函数，那么，由\cref{eq2.3.1}定义的联合分布H的边缘分布为F和G。
+    \label{thr-sklar}
+\end{theorem}
+
+举例说明$H,F,G$以及$C$的关系：
+\begin{example}
+    联合分布函数$H$:
+    \begin{equation*}
+        H(x,y) = 
+            \begin{cases}
+                \dfrac{(x+1)(e^y-1)}{x+2e^y-1}, & (x,y) \in [-1,1]\times [0,\infty], \\
+            1-e^{-y},   & (x,y) \in (1,\infty] \times [0,\infty], \\
+            0, & \mbox{elsewhere}
+            \end{cases}
+    \end{equation*}
+    其边缘分布F和G分别为：
+    \begin{equation*}
+        F(x) = H(x,\infty)=
+        \begin{cases}
+            0, &x<-1,\\
+            (x+1)/2, &x\in[-1,1], \\
+            1, &x>1
+        \end{cases}
+        \ and \ 
+        G(y) = H(\infty,y) = 
+        \begin{cases}
+            0, &y<0, \\
+            1-e^{-y}, &y\geq 0.
+        \end{cases}
+    \end{equation*}
+    $F$和$G$的准逆函数(quasi-inverses)分别为$F^{(-1)}(u) = 2u-1$，$G^{(-1)}(v) = -\ln (1-v)$, $u,v \in \mathbf{I}$。则根据\cref{eq2.3.3}：
+    \begin{equation}
+        C(u,v) = \dfrac{uv}{u+v-uv}
+        \label{eq2.3.4}
+    \end{equation}
+    \label{example-copula}
+\end{example}
+对于在$\overline{\mathbf{R}}^2$中的联合分布$H_C$，可小结之：
+\begin{equation}
+    H_C(x,y) = 
+    \begin{cases}
+        0, &x<0 \ or \ y<0,\\
+        C(x,y) &(x,y) \in \mathbf{I}^2, \\
+        x, &y>1, x \in \mathbf{I}, \\
+        y, &x>1, y \in \mathbf{I}, \\
+        1, &x>1 \ and \ y>1.
+    \end{cases}
+    \label{eq-conclusion}
+\end{equation}
+
+Copula还有个重要的性质：
+\begin{theorem}
+    Let X and Y be continuous random variables with copulas $C_{XY}$. If $\alpha$ and $\beta$ are strictly increasing on RanX and RanY, respectively, then $C_{\alpha(X)\beta(Y)} = C_{XY}$. Thus \textcolor[rgb]{1,0,0}{$C_{xy}$ is invariant under strictly increasing tranformations of $X$ and $Y$}.
+    \label{thr2.4.3}
+\end{theorem}
+以上定理阐述了，若两个连续随机变量X,Y的在RanX和RanY中的变换$\alpha,\beta$是严格递增的，则变换前后的copula函数是一样的。
+
+\begin{theorem}
+    X和Y是两个连续随机变量，copula函数为$C_{XY}$。$\alpha,\beta$分别在RanX和RanY严格单调：
+    \begin{enumerate}
+        \item 如果$\alpha$严格递增，$\beta$严格递减，则
+            \begin{equation*}
+                C_{\alpha(X)\beta(Y)}(u,v) = u- C_{XY}(u,1-v)
+            \end{equation*}
+        \item 如果$\alpha$严格递减，$\beta$严格递增，则
+            \begin{equation*}
+                 C_{\alpha(X)\beta(Y)}(u,v) = v- C_{XY}(1-u,v)
+            \end{equation*}
+        \item 如果$\alpha,\beta$都是严格递增的，则
+            \begin{equation*}
+                C_{\alpha(X)\beta(Y)}(u,v) = u+v-1+C_{XY}(1-u,1-v)
+            \end{equation*}
+    \end{enumerate}
+    \label{thr2.4.4}
+\end{theorem}
+
+
+\subsubsection{Copula的优势}
 
 
 ``Copula Models''的优点有\cite{Smith2009}：
@@ -166,6 +278,8 @@ Sklar定理阐明了，Copula函数如何描述多变量联合分布和其各自
 
 
 CF仅仅确定随机变量之间的相关性，并不影响变量本身的分布特。CF的一个思想是将原始随机变量$X_j$，通过变换的方法得到均匀分布的随机变量$U_j = F_j(X_j)$(在一个向量空间中分布不均匀的变量映射为另一个向量空间中均匀分布的变量)。前提是，变换后变量间相关性分布于原始变量保持一致。该方法优势在于，变换之后，变量间相关性分布更容易被获取。
+
+
 \subsubsection{边缘统计(Marginal Statistics)}
 对于联合统计$x,y$，$F_x(x)$为边缘分布，$f_x(x)$为$x$的边缘概率密度函数。
 \begin{equation}
@@ -217,9 +331,14 @@ CF仅仅确定随机变量之间的相关性，并不影响变量本身的分布
 \end{equation*}
 
 
-\subsubsection{Concordance(一致性/调和性)}
+\subsubsection{Concordance(调和性)}
+假设两个随机变量，$(x_i,y_i)$和$(x_j,y_j)$表示两个向量$(X,Y)$的两对观测值，如果$x_i<x_j,y_i<y_j$或者$x_i>x_j,y_i>y_j$，则称$(x_i,y_i),(x_j,y_j)$是``调和''(concordant)的。若$x_i<x_j,y_i>y_j$或者$x_i>x_j,y_i<y_j$，则称$(x_i,y_i),(x_j,y_j)$是``不调和''(discordant)的。以上可总结为:
+$(x_i,y_i)$ and $(x_j,y_j)$ are concordant if $(x_i-x_j)(y_i-y_j)>0$ and disconcordant if $(x_i-x_j)(y_i-y_j)<0$。
+
 \begin{theorem}\cite{Bill2000An}
     Let $(X_1,Y_1)$ and $(X_2,Y_2)$ be independent vectors of continuous random variables with joint distribution functions $H_1$ and $H_2$, respectively, with common margins $F$ (of $X_1$ and $X_2$) and $G$ (of $Y_1$ and $Y_2$). Let $C_1$ and $C_2$ denote the copulas of $(X_1,Y_1)$ and $(X_2,Y_2)$, respectively, so that $H_1(x,y) = C_1(F(x), G(y))$ and $H_2(x,y) = C_2(F(x),G(y))$. Let $\mathcal{Q}$ denote the difference between the probabilities of concordance and discordance of $(X_1,Y_1)$ and $(X_2,Y_2)$, i.e., let
+
+    $(X_1,Y_1)$和$(X_2,Y_2)$分别是两个随机变量的两对向量，其联合分布函数分别为$H_1$和$H_2$。$C_1$和$C_2$分别表示$(X_1,Y_1)$和$(X_2,Y_2)$的copula函数，则$H_1(x,y) = C_1(F(x),G(y))$，$H_2(x,y) = C_2(F(x),G(y))$。用$\mathcal{Q}$表示两对取值调和概率与不调和概率的差值：
     \begin{equation}
         \mathcal{Q} = P [(X_1-X_2)(Y_1-Y_2) > 0] - P[(X_1-X_2)(Y_1-Y_2)<0]
         \label{eq-diff}
@@ -233,8 +352,7 @@ CF仅仅确定随机变量之间的相关性，并不影响变量本身的分布
     \label{th5.1.1}
 \end{theorem}
 
-非正式的，假设两个随机变量，如果一对取值中，若一个变量的大数值与另一个变量的大数值配在一起，若一个变量的小数值与另一个变量的小树枝配在一起，则称这对变量是一致的(concordant)。更确切的：$(x_i,y_i)$和$(x_j,y_j)$表示两个向量$(X,Y)$的两对观测值，如果$x_i<x_j,y_i<y_j$或者$x_i>x_j,y_i>y_j$，则称$(x_i,y_i),(x_j,y_j)$是一致的。若$x_i<x_j,y_i>y_j$或者$x_i>x_j,y_i<y_j$，则称$(x_i,y_i),(x_j,y_j)$是不一致的。以上可总结为:
-$(x_i,y_i)$ and $(x_j,y_j)$ are concordant if $(x_i-x_j)(y_i-y_j)>0$ and disconcordant if $(x_i-x_j)(y_i-y_j)<0$。
+
 
 \subsubsection{Kendall's $(\tau)$, Pearson's $\varrho$, and Spearman's rho $(\rho)$}
 两个随机变量$X,Y$。
