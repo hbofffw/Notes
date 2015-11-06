@@ -1,0 +1,88 @@
+%-*- coding: UTF-8 -*-
+% gougu.tex
+% 勾股定理
+%9 essential packages everyone should use
+\RequirePackage[l2tabu, orthodox]{nag}
+\documentclass[oneside]{article}
+
+\title{\heiti Copula 小结及后续}
+\author{\kaishu 黄冬勃}
+\date{\today}
+
+\usepackage{geometry}
+\usepackage[UTF8]{ctex}
+\geometry{a4paper,centering,scale=0.88}
+\usepackage[format=hang,font=footnotesize,textfont=it]{caption}
+\usepackage{float}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsfonts}    
+\usepackage{pgfplots}
+\usepackage[nottoc]{tocbibind}
+\usepackage{cite}
+\usepackage{cancel}
+%9 essential packages everyone should use
+\usepackage{microtype}
+\usepackage{siunitx}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{cleveref}
+%
+\usepackage{enumerate}
+\usepackage{bm}
+\usepackage{xy}
+\usepackage{eqnarray}
+
+
+\usepackage{cancel}
+
+\bibliographystyle{IEEEtran}
+%\usepackage{hyperref}
+%\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{corollary}{Corollary}[section]
+%\newtheorem{remark}{Remark}[subsection][section]
+
+%\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{conjecture}{Conjecture}[section]
+\newtheorem{example}{Example}[section]
+
+%\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\newtheorem{note}{Note}
+
+%\newtheorem{thm}{定理}
+%\newcommand\degree{^\circ}
+
+\newenvironment{myquote}
+  {\begin{quote}\kaishu\zihao\emph{{-5}}}    
+  {\end{quote}}
+%公式序号与章节关联
+\renewcommand{\theequation}{\arabic{chapter}.\arabic{section}.\arabic{equation}}
+\makeatletter\@addtoreset{equation}{section}\makeatother
+%
+\newcommand{\upcite}[1]{\textsuperscript{\textsuperscript{\cite{#1}}}}
+%\renewcommand\thesection{\arabic{section}}
+%\renewcommand\thesubsection{\thesection.\arabic{subsection}}
+%arabic 阿拉伯数字
+%roman 小写的罗马数字
+%Roman 大写的罗马数字
+%alph 小写字母
+%Alph 大写字母
+
+\begin{document}
+\maketitle
+
+\section{copula基础}
+两个随机变量X,Y，其概率密度函数分别为：$F(x) = P[X\leq x], G(y) = P[Y \leq y]$，联合概率密度函数为$H(x,y) = P[X\leq x, Y\leq y]$。$F(x),G(y),H(x,y) \in [0,1]$，一对关于X,Y的观测值$(x,y)$，其各自概率密度函数组成一对数值$(F(x),G(y))$，可看做实在单位矩形平面$[0,1]\times[0,1]$上的一个点。
+
+
+
+\bibliography{pre}
+
+\end{document}

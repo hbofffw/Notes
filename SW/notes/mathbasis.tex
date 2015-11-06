@@ -236,8 +236,7 @@ Sklar定理阐明了，Copula函数如何描述多变量联合分布和其各自
     \label{eq-conclusion}
 \end{equation}
 
-\subsubsection{Copula的优势}
-\textbf{\textcolor[rgb]{1,0,0}{Copula还有个重要的性质}}：
+\subsubsection{Copula的重要性质}
 \begin{theorem}
     Let X and Y be continuous random variables with copulas $C_{XY}$. If $\alpha$ and $\beta$ are strictly increasing on RanX and RanY, respectively, then $C_{\alpha(X)\beta(Y)} = C_{XY}$. Thus \textcolor[rgb]{1,0,0}{$C_{xy}$ is invariant under strictly increasing tranformations of $X$ and $Y$}.
     \label{thr2.4.3}
@@ -255,7 +254,7 @@ Sklar定理阐明了，Copula函数如何描述多变量联合分布和其各自
             \begin{equation*}
                  C_{\alpha(X)\beta(Y)}(u,v) = v- C_{XY}(1-u,v)
             \end{equation*}
-        \item 如果$\alpha,\beta$都是严格递增的，则
+        \item 如果$\alpha,\beta$都是严格递减的，则
             \begin{equation*}
                 C_{\alpha(X)\beta(Y)}(u,v) = u+v-1+C_{XY}(1-u,1-v)
             \end{equation*}
@@ -398,6 +397,13 @@ cov$(U_X,U_Y)$不再有原始变量边缘分布来决定。因此相比Spearman'
 
 
 在文献\cite{Deligiannis2012}中，作者表明了相关矩阵和相关系数的关系：$\rho_{lj}^{(p)} = \dfrac{\text{Cov}(X_l,X_j)}{\sqrt{\left(\text{Var}(X_l)\text{Var}(X_j)\right)}}$，其中Var$(X_l)$和Var$(X_j)$分别表示随机变量$X_l$和$X_j$的方差，$l,j \in \{1,2,\dots,N\}$；Cov$(X_l,X_j)$是相关矩阵$\Sigma$的第$(l,j)$个元素。
+
+在文章\cite{Genest2007}，作者给出了Spearman's $\rho$优于pearson's $\varrho$的几个方面：
+\begin{enumerate}[1.]
+    \item 当且仅当随机变量X，Y是函数相关时，$E(\rho) = \pm 1$;
+    \item 当且仅当X，Y是线性相关时，才满足$E(\varrho) = \pm 1$，相比$\rho$更受限制，且
+    \item $\rho$较为通用，对于不同分布都可以估算出一个意义明确的总体参数，然而当$\varrho$应用在``重尾分布''的情形时(heavy-tailed distributions)，例如柯西分布，是无法得到一个理论上的相关参数的。
+\end{enumerate}<++>
 
 
 
