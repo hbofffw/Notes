@@ -3,14 +3,13 @@
 % 勾股定理
 %9 essential packages everyone should use
 \RequirePackage[l2tabu, orthodox]{nag}
-\documentclass[oneside]{article}
+\documentclass[UTF8]{ctexart}
 
 \title{\heiti Copula 小结及后续}
 \author{\kaishu 黄冬勃}
 \date{\today}
 
 \usepackage{geometry}
-\usepackage[UTF8]{ctex}
 \geometry{a4paper,centering,scale=0.88}
 \usepackage[format=hang,font=footnotesize,textfont=it]{caption}
 \usepackage{float}
@@ -36,7 +35,6 @@
 \usepackage{eqnarray}
 
 
-\usepackage{cancel}
 
 \bibliographystyle{IEEEtran}
 %\usepackage{hyperref}
@@ -63,7 +61,7 @@
   {\begin{quote}\kaishu\zihao\emph{{-5}}}    
   {\end{quote}}
 %公式序号与章节关联
-\renewcommand{\theequation}{\arabic{chapter}.\arabic{section}.\arabic{equation}}
+\renewcommand{\theequation}{\arabic{section}.\arabic{equation}}
 \makeatletter\@addtoreset{equation}{section}\makeatother
 %
 \newcommand{\upcite}[1]{\textsuperscript{\textsuperscript{\cite{#1}}}}
@@ -79,9 +77,88 @@
 \maketitle
 
 \section{copula基础}
-两个随机变量X,Y，其概率密度函数分别为：$F(x) = P[X\leq x], G(y) = P[Y \leq y]$，联合概率密度函数为$H(x,y) = P[X\leq x, Y\leq y]$。$F(x),G(y),H(x,y) \in [0,1]$，一对关于X,Y的观测值$(x,y)$，其各自概率密度函数组成一对数值$(F(x),G(y))$，可看做实在单位矩形平面$[0,1]\times[0,1]$上的一个点。
+两个随机变量X,Y，其概率密度函数分别为：$F(x) = P[X\leq x], G(y) = P[Y \leq y]$，$F,G$是递增的且$F(-\infty)=G(-\infty)=0,F(\infty)=G(\infty)=1$。联合概率密度函数为$H(x,y) = P[X\leq x, Y\leq y]$。$F(x),G(y),H(x,y) \in [0,1]$，一对关于X,Y的观测值$(x,y)$，其各自概率密度函数组成一对数值$(F(x),G(y))$，可看做是在单位矩形平面$[0,1]\times[0,1]$上的一个点。$H(x,y)$具有以下性质：
+\begin{enumerate}[1.]
+    \item $H(x,y)$是二维递增的；
+    \item $H(x,-\infty) = H(-\infty,y) = 0$，$H(\infty,\infty)=1$；
+    \item $F(x) = H(x,\infty)$，$G(y) = H(\infty,y)$。
+\end{enumerate}
+
+用以上例子的各种表示来说明，Copula $C(F(x),G(y))$可以将多变量各自边缘分布$F(x),G(y)$与联合分布$H(x,y)$连接起来，定义域为$[0,1]\times[0,1]$，另$u=F(x),v=G(y)$，其具有以下性质：
+\begin{enumerate}[1.]
+    \item C是``零基面的(grounded)''$C(0,v)=C(u,0)=0$;
+    \item $C(1,v) = v$，$C(u,1)=u$；
+    \item C是二维递增(扩展到N个变量则是N维递增)的，即对于$u_1,u_2,v_1,v_2 \in [0,1]$且$u_1 \leq u_2, v_1 \leq v_2$，有:
+        \begin{equation*}
+            C(u_2,v_2) - C(u_2,v_1) - C(u_1,v_2) + C(u_1,v_1) \geq 0
+        \end{equation*}
+\end{enumerate}
+
+Sklar 定理阐明了,Copula 函数如何描述多变量联合分布和其各自单独边缘分布之间的关系\cite{Bill2000An}：
+\begin{theorem}
+    H为两个边缘分布分别为F和G的随机变量的联合分布函数，那么存在一个copula函数C，使$\mathbf{I}^2, (\mathbf{I}=[0,1])$中所有x,y满足,
+    \begin{equation}
+        H(x,y) = C(F(x),G(y))
+        \label{eq-joint}
+    \end{equation}
+    如果F和G是连续的，则C是唯一的；否则，C则被确定在$RanF\times RanG$中。反之，如果C是一个copula,F和G是分布函数,那么,由\cref{eq-joint}定义H是一个边缘分布为F和G的联合分布函数。
+    \label{thr-sklar}
+\end{theorem}
+从\cref{eq-joint}可得：
+\begin{equation}
+    C(x,y) = H(F^{-1}(x),G^{-1}(y))
+    \label{eq-copula}
+\end{equation}
 
 
+
+
+\section{相关性}
+对于线性关系的双变量，可以用相关系数\[
+    \rho(x,y) = \dfrac{comv(x,y)}{\sqrt{(\mathbf{D})x \times \mathbf{D}y}}
+\]
+来测量，但当两个变量是非线性相关关系时，如$y=x^2$，协方差$cov(x,y)=\mathbf{E}(x-\mathbf{E}x)(x^2-\mathbf{E}x^2) = 0$，$\rho=0$，则无法测量其相关性。
+
+
+
+
+\subsubsection{Kendall's $(\tau)$, Pearson's $\varrho$, and Spearman's rho $(\rho)$}
+两个随机变量$X,Y$。
+
+\emph{\textbf{\textcolor[rgb]{1,0,0}{Kendall's $\tau$}}}可以对变量之间这种联合的一致性进行采样量化。它描述了两个随机独立均匀分布向量的一致性与非一致性概率的差值\cite{Montes2015}:
+\begin{equation}
+    \tau = \tau_{X,Y} = P[(X_1-X_2)(Y_1-Y_2) > 0] - P[(X_1-X_2)(Y_1-Y_2)<0]
+    \label{eq-tau}
+\end{equation}
+
+
+
+\emph{\textbf{\textcolor[rgb]{1,0,0}{Person's $\varrho$}}}:
+\begin{equation}   
+    \label{eq-varrho}
+    \varrho_{X,Y} = \text{cov}(X,Y)/\sqrt{\text{var}(X)\text{var}(Y)}
+\end{equation}
+
+
+$\varrho_{j_1 j_2}$仅适用现行相关的变量，但可以将其经过变换，使$U=F(X),V=G(Y)$，\cite{Smith2009}，$U,V$为$[0,1]$的均匀分布，公式\ref{eq-varrho}可变为\textcolor[rgb]{1,0,0}{Spearman's rho $(\rho)$}：
+\begin{eqnarray}
+    \rho_{X,Y} &=& corr(U,V) \notag \\
+    \rho_{X,Y}^s &=& \text{cov}(U,V)/(\text{var}(U)\text{var}(Y))^{1/2} \notag \\
+    &=& 12E \left[ \left(U - \dfrac{1}{2}\right)\left(V - \dfrac{1}{2}\right) \right] \notag \\
+    &=& 12E [UV] -3
+    \label{eq-rhoSimplified}
+\end{eqnarray}
+
+\emph{\textbf{\textcolor[rgb]{1,0,0}{Spearman's $\rho$}}}是变换后变量$F(X)$和$G(Y)$的Pearson系数$\varrho$\cite{Montes2015}，它不是根据原始变量来计算，而是通过变量的秩次来计算$\varrho$，即得到$\rho$。通过关联性测量，当$X,Y$是正（负）关联时，$\tau,\rho$也是正（负）关联的。当X,Y相互独立时，它们为0。当X,Y通过非线性变换后是严格递增的，它们的值保持不变。
+
+\textcolor[rgb]{1,0,0}{$\tau$和$\rho$是基于秩次的关联性测量值。从文章\cite{Genest2007}关于相关性结构的统计推断应该总是基于秩次的，因为它们在X,Y的单增变换条件下是不变统计量。}
+
+在文章\cite{Genest2007}，作者给出了Spearman's $\rho$优于pearson's $\varrho$的几个方面：
+\begin{enumerate}[1.]
+    \item 当且仅当随机变量X，Y是函数相关时，$E(\rho) = \pm 1$;
+    \item 当且仅当X，Y是线性相关时，才满足$E(\varrho) = \pm 1$，相比$\rho$更受限制，且
+    \item $\rho$较为通用，对于不同分布都可以估算出一个意义明确的总体参数，然而当$\varrho$应用在``重尾分布''的情形时(heavy-tailed distributions)，例如柯西分布，是无法得到一个理论上的相关参数的。
+\end{enumerate}
 
 \bibliography{pre}
 
