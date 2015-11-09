@@ -280,7 +280,8 @@ Sklar定理阐明了，Copula函数如何描述多变量联合分布和其各自
                 C_{\alpha(X)\beta(Y)}(u,v) = u+v-1+C_{XY}(1-u,1-v)
             \end{equation*}
     \end{enumerate}
-    \label{thr2.4.4}
+    \label{thr-2.4.4}
+
 \end{theorem}
 
 ``Copula Models''的优点有\cite{Smith2009}：
@@ -323,9 +324,52 @@ CF仅仅确定随机变量之间的相关性，并不影响变量本身的分布
 \end{lemma}
 \begin{theorem}
     Let X and Y be random variables with joint distribution fuction H. Then H is identically equal to its Fr$\acute{e}$chet-Hoeffding upper bound if and only if the support of H is a nondecreasing subset of $\overline{\mathbf{R}}^2$.
+    
     随机变量X,Y的联合分布函数H。当且仅当H的定义域为一个非减的$\overline{\mathbf{R}}^2$子集时，H恒等于Fr$\acute{e}$chet-Hoeffding上界。
     \label{thr-fhupper}
 \end{theorem}
+
+
+\subsubsection{Survival Copulas}
+$\overline{F}(x) = P[X>x] = 1- F(x)$, $\overline{H}(x,y) = P[X>x,Y>y]$，$\overline{H}$的边缘分布分别为$\overline{F}=\overline{H}(x,-\infty),\overline{G}=\overline{H}(-\infty,y)$，根据\cref{thr-sklar}，可得
+\begin{eqnarray*}
+    \overline{H}(x,y) &=& 1-F(x)-G(y)+H(x,y) \\
+    &=&\overline{F}(x)+\overline{G}(y)-1+C(F(x),G(y)) \\
+    &=&\overline{F}(x)+\overline{G}(y)-1+C(1-\overline{F}(x),1-\overline{G}(y)),
+\end{eqnarray*}
+根据\cref{thr-2.4.4}
+\begin{equation}
+    \hat{C}(u,v) = u+v-1+C(1-u,1-v),
+    \label{eq2.6.1}
+\end{equation}
+\begin{equation}
+    \overline{H}(x,y) = \hat{C}(\overline{F}(x),\overline{G}(y)).
+    \label{eq2.6.2}
+\end{equation}
+需要注意的还有，从\cref{eq2.6.1}推得
+\begin{eqnarray*}
+    \overline{C}(u,v) &=& P[U>u,V>v] \\
+    &=& 1-u-v+C(u,v) \\
+    &=& \hat{C}(1-u,1-v) 
+\end{eqnarray*}
+而从\cref{eq2.6.2}推得
+\begin{equation}
+    \hat{C}(u,v) = \overline{H}(\bar{F}^{-1}(u),\bar{G}^{-1}(v))
+    \label{eq-survivalcopula}
+\end{equation}
+通过一个例子，来充分说明$\overline{H},\overline{F},\overline{G},\hat{C}$之间的关系
+\begin{example}
+    A bivariate Pareto distribution. Let X and Y be random variables whose joint survival function is given by
+    \begin{equation*}
+        \overline{H}_{\theta}(x,y) = 
+        \begin{cases}
+            (1+x+y)^{-\theta}, &x\geq0,y\geq0, \\
+            (1+x)^{-\theta}, &x\geq0,y\geq0, \\
+        \end{cases}<++>
+    \end{equation*}<++>
+    \label{<++>}
+\end{example}<++>
+
 
 
 \subsubsection{边缘统计(Marginal Statistics)}
