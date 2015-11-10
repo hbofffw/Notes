@@ -410,6 +410,22 @@ $\overline{F}(x) = P[X>x] = 1- F(x)$, $\overline{H}(x,y) = P[X>x,Y>y]$，$\overl
     \overline{H}(-\infty,-\infty) &=& \overline{H}(u<0,v<0) = 1
 \end{eqnarray*}
 
+The \textcolor[rgb]{1,0,0}{dual of a copula C} is the function $\tilde{C}$ defined by $\tilde{C}(u,v) = u+v-C(u,v)$; the co-copula is the function $C^*$ defined by $C^*(u,v) = 1-C(1-u,1-v)$。$\tilde{C}$和$C^*$都不是一个copupla，但当$C$是一对随机变量$X,Y$的copula时，
+\begin{equation*}
+    P[X \leq x, Y\leq y] = C(F(x),G(y)) \ and \ P[X>x,Y>y] = \hat{C}(\bar{F}(x),\bar{G}(y)),
+\end{equation*}
+可以得出
+\begin{equation}
+    P[X\leq x \ or\ Y\leq y] = \tilde{C}(F(x),G(y)),
+    \label{eq-dual}
+\end{equation}
+和
+\begin{equation}
+    P[X>x \ or \ Y>y] = C^*(\bar{F}(x),\bar{G}(y))
+    \label{eq-cocopula}
+\end{equation}
+
+
 
 \subsection{Symmetric and Ordering}
 一个随机变量X关于a对称，则$P[X-a]\leq x = P[a-X]\leq x$，可得
