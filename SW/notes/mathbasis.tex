@@ -410,11 +410,11 @@ $\overline{F}(x) = P[X>x] = 1- F(x)$, $\overline{H}(x,y) = P[X>x,Y>y]$，$\overl
     \overline{H}(-\infty,-\infty) &=& \overline{H}(u<0,v<0) = 1
 \end{eqnarray*}
 
-The \textcolor[rgb]{1,0,0}{dual of a copula C} is the function $\tilde{C}$ defined by $\tilde{C}(u,v) = u+v-C(u,v)$; the co-copula is the function $C^*$ defined by $C^*(u,v) = 1-C(1-u,1-v)$。$\tilde{C}$和$C^*$都不是一个copupla，但当$C$是一对随机变量$X,Y$的copula时，
+The \textcolor[rgb]{1,0,0}{dual of a copula C} is the function $\tilde{C}$ defined by $\tilde{C}(u,v) = u+v-C(u,v)$; the \textcolor[rgb]{1,0,0}{co-copula} is the function $C^*$ defined by $C^*(u,v) = 1-C(1-u,1-v)$。$\tilde{C}$和$C^*$都不是一个copupla，但当$C$是一对随机变量$X,Y$的copula时，
 \begin{equation*}
     P[X \leq x, Y\leq y] = C(F(x),G(y)) \ and \ P[X>x,Y>y] = \hat{C}(\bar{F}(x),\bar{G}(y)),
 \end{equation*}
-可以得出
+还有
 \begin{equation}
     P[X\leq x \ or\ Y\leq y] = \tilde{C}(F(x),G(y)),
     \label{eq-dual}
@@ -433,6 +433,27 @@ The \textcolor[rgb]{1,0,0}{dual of a copula C} is the function $\tilde{C}$ defin
     F(a+x) = \bar{F}(a-x)
     \label{eq-symmetricF}
 \end{equation}
+
+\begin{definition}
+    X和Y是两个随机变量，(a,b)是$\mathbf{R}^2$中的一个点，
+    \begin{enumerate}
+        \item 若X和Y分别关于a和b是对称的，则(X,Y)是关于(a,b)边缘对称(marginally symmetric)的。
+        \item 若$X-a$和$Y-b$的联合分布函数与$a-X$和$b-Y$联合分布函数一样，则(X,Y)是关于(a,b)径向对称的(radially symmetric)。
+        \item 若四对随机变量:$(X-a,Y-b),(X-a,b-Y),(a-X,Y-b),(a-X,b-Y)$共用一个联合分布，则称(X,Y)关于(a,b)是联合对称的(jointly symmetric)。
+    \end{enumerate}
+    \label{def-symmetric}
+\end{definition}
+
+\begin{theorem}
+    X和Y是连续随机变量，其联合分布函数为H，H的边缘分布分别为F和G。(a,b)是$\mathbf{R}^2$上一点。当且仅当
+    \begin{equation}
+        H(a+x,b+y) = \overline{H}(a-x,b-y)\ \text{for all $(x,y)$ in $\mathbf{R}^2$}
+        \label{eq-radiallysymmetric}
+    \end{equation}
+    时，(X,Y)是关于(a,b)径向对称的。
+    \label{thr-radiallysymmetric}
+\end{theorem}
+
 
 
 
