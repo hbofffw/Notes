@@ -236,6 +236,22 @@ Sklar定理阐明了，Copula函数如何描述多变量联合分布和其各自
     \label{eq-conclusion}
 \end{equation}
 
+\begin{definition}
+    设F是一个变量的分布函数，那么F的准逆/拟逆(\emph{quasi-inverse})函数是定义域为$\mathbf{I}$，满足以下情况的任意$F^{(-1)}$，
+    \begin{enumerate}
+        \item 如果t在RanF内，那么$F^{(-1)}(t)$是任意一个$x \in \overline{\mathbf{R}}$满足$F(x)=t$，$t \in RanF$
+            \begin{equation*}
+                F(F^{(-1)}(t)) = t;
+            \end{equation*}
+        \item 如果$t \notin RanF$，那么
+            \begin{equation*}
+                F^{(-1)}(t) = \inf{x | F(x) \geq t} = \sup{x|F(x) \leq t}.
+            \end{equation*}
+    \end{enumerate}
+    如果$F$是严格递增的，那么它有且仅有一个准逆函数，即它的逆函数$F^{-1}$。即当F严增时，F的准逆函数即是它的逆函数。
+    \label{eq-quasiinverse}
+\end{definition}
+
 \subsection{Copula的重要性质}
 \begin{theorem}
     Let X and Y be continuous random variables with copulas $C_{XY}$. If $\alpha$ and $\beta$ are strictly increasing on RanX and RanY, respectively, then $C_{\alpha(X)\beta(Y)} = C_{XY}$. Thus \textcolor[rgb]{1,0,0}{$C_{xy}$ is invariant under strictly increasing tranformations of $X$ and $Y$}.
@@ -454,6 +470,12 @@ The \textcolor[rgb]{1,0,0}{dual of a copula C} is the function $\tilde{C}$ defin
     \label{thr-radiallysymmetric}
 \end{theorem}
 
+\subsection{随机变量的生成}
+为了获取分布函数为F的随机变量X的一个观测值$x$，
+\begin{enumerate}
+    \item 生成一个变量$u$，其为(0,1)上的均匀分布；
+    \item 令$x = F^{(-1)}(u)$，其中$F^{(-1)}$是任意的F的准逆/拟逆(quasi-inverse)函数
+\end{enumerate}<++>
 
 
 
