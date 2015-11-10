@@ -249,7 +249,7 @@ Sklar定理阐明了，Copula函数如何描述多变量联合分布和其各自
             \end{equation*}
     \end{enumerate}
     如果$F$是严格递增的，那么它有且仅有一个准逆函数，即它的逆函数$F^{-1}$。即当F严增时，F的准逆函数即是它的逆函数。
-    \label{eq-quasiinverse}
+    \label{def-quasiinverse}
 \end{definition}
 
 \subsection{Copula的重要性质}
@@ -472,10 +472,44 @@ The \textcolor[rgb]{1,0,0}{dual of a copula C} is the function $\tilde{C}$ defin
 
 \subsection{随机变量的生成}
 为了获取分布函数为F的随机变量X的一个观测值$x$，
-\begin{enumerate}
+\begin{enumerate}[1.]
     \item 生成一个变量$u$，其为(0,1)上的均匀分布；
     \item 令$x = F^{(-1)}(u)$，其中$F^{(-1)}$是任意的F的准逆/拟逆(quasi-inverse)函数
-\end{enumerate}<++>
+\end{enumerate}
+关于准逆函数，\cref{def-quasiinverse}给出了定义。
+
+得益于skalr定理，仅需要在(0,1)均匀分布的随机变量(U,V)生成一对观测值(u,v)，(U,V)的联合分布函数为关于原始随机变量X,Y的copula C。一种生成这样的(u,v)的方法，叫做条件分布法(conditional distribution method)。对于该方法，需要得出在$U=u$条件下的$V$，记为$c_u(v)$,
+\begin{equation}
+    c_u(v) = P[V \leq v| U=u] = \lim_{\bigtriangleup u \rightarrow 0} \dfrac{C(u+\bigtriangleup u,v)-C(u,v)}{\bigtriangleup u} = \dfrac{\partial C(u,v)}{\partial u}
+    \label{eq-condionaldistribution}
+\end{equation}
+[从\cref{thr2.2.7}知道$v \longmapsto \partial C(u,v)/\partial u$，$v$存在且$v \in \mathbf{I}$是非减的，这里记为$c_u(v)$。]
+
+方法流程为：
+\begin{enumerate}[1.]
+    \item 生成两个$(0,1)$上均匀分布的变量$u$和$t$;
+    \item 令$v = c_u^{(-1)}(t)$，其中$c_u^{(-1)}$为$c_u$的准逆函数；
+    \item 得到$(u,v)$。
+\end{enumerate}
+\begin{example}
+    这里拿\cref{example-copula}继续举例说明，根据\cref{eq2.3.4}得
+    \begin{equation*}
+        C(u,v) = \dfrac{uv}{u+v-uv}, 
+    \end{equation*}
+    然后计算$c_u$和$c_u^{(-1)}$：
+    \begin{equation*}
+        c_u(v) = \dfrac{\partial}{\partial u}C(u,v) = \left(\dfrac{v}{u+v-uv}\right)^2 \quad and \quad c_u^{-1}(t) = \dfrac{u \sqrt{t}}{1-(1-u)\sqrt{t}}
+    \end{equation*}
+    \label{example-cgeneration}
+\end{example}
+接下来的算法用于生成随机变量$(x,y)$：
+\begin{enumerate}
+    \item 生成两个独立的(0,1)均匀分布变量$u$和$t$；
+    \item 令$v = \frac{u\sqrt{t}}{1-(1-u)\sqrt{t}}$，
+    \item 令$x = 2u-1$以及$y=-\ln(1-v)$。(从\cref{example-copula}中计算的$F^{(-1)}(u)=2u-1$和$G^{(-1)}(v)=-\ln(1-v)$)
+    \item 得到$(x,y)$。
+\end{enumerate}
+
 
 
 
