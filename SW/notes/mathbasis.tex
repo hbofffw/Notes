@@ -589,6 +589,37 @@ Survival copulas也可以用在条件分布法中，从一个给定survival函�
 假设两个随机变量，$(x_i,y_i)$和$(x_j,y_j)$表示两个向量$(X,Y)$的两对观测值，如果$x_i<x_j,y_i<y_j$或者$x_i>x_j,y_i>y_j$，则称$(x_i,y_i),(x_j,y_j)$是``调和''(concordant)的。若$x_i<x_j,y_i>y_j$或者$x_i>x_j,y_i<y_j$，则称$(x_i,y_i),(x_j,y_j)$是``不调和''(discordant)的。以上可总结为:
 $(x_i,y_i)$ and $(x_j,y_j)$ are concordant if $(x_i-x_j)(y_i-y_j)>0$ and disconcordant if $(x_i-x_j)(y_i-y_j)<0$。
 
+\begin{definition}
+    A numeric measure $\kappa$ of association between two continuous random variables X and Y whose copula is C is a measure of concordance if it satisfies the following properties (again we write $\kappa_{X,Y}$ or $\kappa_C$ when convenient):
+    
+    两个copula为C的随机变量X和Y，一个对它们的相关性的数值测量$\kappa$是一致性测量的条件是其满足以下性质：
+\begin{enumerate}[1.]
+    \item $\kappa$ is defined for every pair $X,Y$ of continuous random variables;
+    \item $-1 \leq \kappa_{X,Y} \leq 1$, $\kappa_{X,X}=1$, and $\kappa_{X,-X}=-1$;
+    \item $\kappa_{X,Y} = \kappa_{Y,X}$;
+    \item if $X$ and $Y$ are independent, then $\kappa_{X,Y} = \kappa_{\Pi} = 0$;
+    \item $\kappa_{-X,Y} = \kappa_{X,-Y} = -\kappa_{X,Y}$;
+    \item if $C_1$ and $C_2$ are copulas such that $C_1 \prec C_2$, then $\kappa_{C_1} \leq \kappa_{C_2}$;
+    \item if$\{(X_n,Y_n)\}$ is a sequence of continuous random variables with copulas $C_n$, and if $\{C_n\}$ converges pointwise to $C$, then $\lim_{n\rightarrow \infty}\kappa_{C_n} = \kappa_C$.
+\end{enumerate}
+    \label{def5.1.7}
+\end{definition}
+
+\begin{theorem}
+    Let $\kappa$ be a measure of concordance for continuous random variables X and Y:
+    \begin{enumerate}[1.]
+        \item if Y is almost surely an \textcolor[rgb]{1,0,0}{increasing function of X}, then $\kappa_{X,Y}=\kappa_M=1$;
+        \item if Y is almost surely a \textcolor[rgb]{1,0,0}{decreasing function of X}, then $\kappa_{X,Y} = \kappa_W = -1$;
+        \item if $\alpha$ and $\beta$ are almost surely strictly monotone functions on RanX and RanY, respectively, then $\kappa_{\alpha(X),\beta(Y)} = \kappa_{X,Y}$.
+    \end{enumerate}
+    \label{thr5.1.8}
+\end{theorem}
+
+根据以上的定义，从下面的定理可以看到tau和rho都是一致性的测量工具：
+\begin{theorem}
+    If X and Y are continuous random variables whose copula is C, then the population versions of Kendall's tau \cref{eq-tau} and Spearman's rho \cref{eq-Spearman'srho} satisfy the properties in \cref{def5.1.7} and \cref{thr5.1.8} for a measure of concordance. 
+    \label{thr5.1.9}
+\end{theorem}
 
 
 
@@ -602,7 +633,7 @@ $(x_i,y_i)$ and $(x_j,y_j)$ are concordant if $(x_i-x_j)(y_i-y_j)>0$ and disconc
 \emph{\textbf{\textcolor[rgb]{1,0,0}{Kendall's $\tau$}}}可以对变量之间这种联合的一致性进行采样量化。它描述了两个随机独立均匀分布向量的一致性与非一致性概率的差值\cite{Montes2015}:
 \begin{equation}
     \tau = \tau_{X,Y} = P[(X_1-X_2)(Y_1-Y_2) > 0] - P[(X_1-X_2)(Y_1-Y_2)<0]
-    \label{eq-tau}
+    \label{eq-pretau1}
 \end{equation}
 引入基本概念定理：
 \begin{theorem}\cite{Bill2000An}
@@ -611,12 +642,12 @@ $(x_i,y_i)$ and $(x_j,y_j)$ are concordant if $(x_i-x_j)(y_i-y_j)>0$ and disconc
     $(X_1,Y_1)$和$(X_2,Y_2)$分别是两个随机变量的两对向量，其联合分布函数分别为$H_1$和$H_2$。$C_1$和$C_2$分别表示$(X_1,Y_1)$和$(X_2,Y_2)$的copula函数，则$H_1(x,y) = C_1(F(x),G(y))$，$H_2(x,y) = C_2(F(x),G(y))$。用$\mathcal{Q}$表示两对取值调和概率与不调和概率的差值：
     \begin{equation}
         \mathcal{Q} = P [(X_1-X_2)(Y_1-Y_2) > 0] - P[(X_1-X_2)(Y_1-Y_2)<0]
-        \label{eq-diff}
+        \label{eq-pretau2}
     \end{equation}
     Then
     \begin{equation}
         \mathcal{Q} = \mathcal{Q}(C_1,C_2) = 4 \iint_{\mathbf{I}^2}C_2(u,v)dC_1(u,v)-1
-        \label{eq-diff2}
+        \label{eq-tau}
     \end{equation}
     where $u,v$ are the transformations of $F(x),G(y)$, $u=F(x)$ and $v = G(y)$.
     \label{thr5.1.1}
@@ -632,7 +663,7 @@ $(x_i,y_i)$ and $(x_j,y_j)$ are concordant if $(x_i-x_j)(y_i-y_j)>0$ and disconc
 \end{corollary}
 
 \begin{theorem}
-    Let X and Y be continous random variables whose copula is C. Then the population version of Kendall's tau for X and Y (which we will denote either $\tau_{X,Y}$ or $\tau_C$) is giben by
+    Let X and Y be continuous random variables whose copula is C. Then the population version of Kendall's tau for X and Y (which we will denote either $\tau_{X,Y}$ or $\tau_C$) is given by
     \begin{equation}
         \tau_{X,Y} = \tau_C = \mathcal{Q}(C,C) = 4 \iint_{\mathbf{I}^2} C(u,v)dC(u,v)-1
         \label{eq-tau1}
@@ -688,6 +719,24 @@ cov$(U_X,U_Y)$不再有原始变量边缘分布来决定。因此相比Spearman'
 \end{equation}
 通过关联性测量，当$X,Y$是正（负）关联时，$\tau,\rho$也是正（负）关联的。当X,Y相互独立时，它们为0。当X,Y通过非线性变换后是严格递增的，它们的值保持不变。
 
+三对独立随机向量$(X_1,Y_1),(X_2,Y_2),(X_3,Y_3)$，它们共用的联合分布函数为$H$(边缘分布为$F$和$G$)以及copula函数$C$。Spearman's rho的总体版本$\rho_{X,Y}$被定义为与两个向量$(X_1,Y_1),(X_2,Y_3)$一致的概率减去不一致的概率值成比例。\begin{equation}
+    \rho_{X,Y} = 3(P[(X_1-X_2)(Y_1-Y_3)>0]-P[(X_1-X_2)(Y_1-Y_3)<0])
+    \label{eq5.1.14}
+\end{equation}
+这两对向量特点是：两对边缘分布相同的变量，但其中一对的两个变量有联合分布函数H，但另一对的两个变量是相互独立的，即$(X_1,Y_1)$的联合分布为$H(x,y)$，但$(X_2,Y_3)$的联合分布为$F(x)G(y)$($X_2,Y_3$是相互独立的)。因此$X_2,Y_3$的copula是$\Pi$，根据\cref{thr5.1.1}和\cref{cor5.1.2}的第一部分，引出定理：
+
+\begin{theorem}
+    Let X and Y be continous random variables whose copula is C. Then the population version of Sperman's rho for X and Y (which we will denote by either $\rho_{X,Y}$ or $\rho_C$) is given by
+    \begin{eqnarray}
+        \rho_{X,Y} = \rho_C &=& 3\mathcal{Q}(C,\Pi), \\
+        &=&12\iint_{\mathbf{I}^2}uv\ dC(u,v) - 3, \\
+        &=&12\iint_{\mathbf{I}^2}C(u,v)\ dudv - 3
+        \label{eq-Spearman'srho}
+    \end{eqnarray}
+    \label{thr5.1.6}
+\end{theorem}
+
+
 \textcolor[rgb]{1,0,0}{$\tau$和$\rho$是基于秩次的关联性测量值。从文章\cite{Genest2007}关于相关性结构的统计推断应该总是基于秩次的，因为它们在X,Y的单增变换条件下是不变统计量。}
 
 
@@ -700,6 +749,16 @@ cov$(U_X,U_Y)$不再有原始变量边缘分布来决定。因此相比Spearman'
     \item $\rho$较为通用，对于不同分布都可以估算出一个意义明确的总体参数，然而当$\varrho$应用在``重尾分布''的情形时(heavy-tailed distributions)，例如柯西分布，是无法得到一个理论上的相关参数的。
 \end{enumerate}
 
+\subsection{$\tau$和$\rho$的关系}
+
+\begin{theorem}
+    X和Y是连续随机变量，则$\tau$和$\rho$：
+    \begin{equation}
+        -2 \leq 3\tau - 2\rho \leq 1
+        \label{eq-5.1.17}
+    \end{equation}
+    \label{thr5.1.10}
+\end{theorem}
 
 
 
