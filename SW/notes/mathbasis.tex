@@ -297,8 +297,14 @@ Sklar定理阐明了，Copula函数如何描述多变量联合分布和其各自
             \end{equation*}
     \end{enumerate}
     \label{thr2.4.4}
-
 \end{theorem}
+
+\begin{example}
+    The support of the Fr$\acute{e}$chet-Hoeffding upper bound $M$ is the main diagonal of $\mathbf{I}^2$, i.e., the graph of $v = u$ for $u$ in $\mathbf{I}$, so that $M$ is singular. This follows from the fact that the $M$-measure of any open rectangle that lies entirely above or below the main diagonal is zero. Also note that $\partial^2M;/\partial u\partial v=0$ everywhere in $\mathbf{I}^2$ except on the main diagonal. Similarly, the support of the Fr$\acute{e}$chet-Hoeffding lower bound $W$ is the secondary diagonal of $\mathbf{I}^2$, i.e., the graph of $v = 1-u$ for $u$ in $\mathbf{I}$, and thus $W$ is singular as well.
+
+    Fr$\acute{e}$chet-Hoeffding上界$M$的支集\footnote{支集就是带入该函数中满足此条件的元素}是$\mathbf{I}^2$主对角线。以上是根据：任意整体位于注对角线上方或下方的开方矩形，其$M$-测量值为0。同样需要注意的是，除了在主对角线上，$\mathbf{I}^2$中任一点都有$\partial^2M/\partial u\partial v=0$。相似的，Fr$\acute{e}$chet-Hoeffding下界$W$的支集是$\mathbf{I}^2$的次对角线，即图形$v = 1-u, u\in \mathbf{I}$，$W$也是非奇异的。
+    \label{exp2.11}
+\end{example}
 
 ``Copula Models''的优点有\cite{Smith2009}：
 \begin{enumerate}
@@ -341,9 +347,10 @@ CF仅仅确定随机变量之间的相关性，并不影响变量本身的分布
 \begin{theorem}
     Let X and Y be random variables with joint distribution fuction H. Then H is identically equal to its Fr$\acute{e}$chet-Hoeffding upper bound if and only if the support of H is a nondecreasing subset of $\overline{\mathbf{R}}^2$.
     
-    随机变量X,Y的联合分布函数H。当且仅当H的定义域为一个非减的$\overline{\mathbf{R}}^2$子集时，H恒等于Fr$\acute{e}$chet-Hoeffding上界。
+    随机变量X,Y的联合分布函数H。当且仅当H的定义域为一个非减的$\overline{\mathbf{R}}^2$子集时，H恒等于Fr$\acute{e}$chet-Hoeffding上界，也就是图形(直线)$v=u, u\in\mathbf{I}$，所以$M$是非奇异的。
     \label{thr-fhupper}
 \end{theorem}
+
 
 
 \subsection{Survival Copulas}
@@ -641,7 +648,14 @@ $(x_i,y_i)$ and $(x_j,y_j)$ are concordant if $(x_i-x_j)(y_i-y_j)>0$ and disconc
     \end{equation}
     \label{cor5.1.4}
 \end{corollary}
-
+\begin{theorem}
+    Let $C_1$ and $C_2$ be copulas. Then 
+    \begin{equation}
+        \iint_{\mathbf{I}^2}C_1(u,v)dC_2(u,v) = \dfrac{1}{2}-\iint_{\mathbf{I}^2}\dfrac{\partial}{\partial u} C_1(u,v)\dfrac{\partial}{\partial v}C_2(u,v)dudv
+        \label{eq5.1.13}
+    \end{equation}
+    \label{thr5.1.5}
+\end{theorem}
 
 
 \subsection{Pearson's $\varrho$}
@@ -663,6 +677,7 @@ $\varrho_{j_1 j_2}^{p}$就，应该看做是在变量服从正态分布情况下
     \label{eq-rhoSimplified}
 \end{eqnarray}
 cov$(U_X,U_Y)$不再有原始变量边缘分布来决定。因此相比Spearman's $\varrho$，Pearson's $\rho$对原始变量边缘分布不敏感，就不再受到原始变量必须服从正态分布的限制。
+
 
 
 \subsection{Spearman's rho $(\rho)$}
