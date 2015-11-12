@@ -4,7 +4,8 @@
 %9 essential packages everyone should use
 \RequirePackage[l2tabu, orthodox]{nag}
 \documentclass[oneside]{book}
-
+\setcounter{secnumdepth}{5}
+\setcounter{tocdepth}{5}
 
 \title{\heiti ``Slepian-Wolf''编码及相关性研究}
 \author{\kaishu 黄冬勃}
@@ -73,13 +74,17 @@
 \makeatletter\@addtoreset{equation}{section}\makeatother
 %
 \newcommand{\upcite}[1]{\textsuperscript{\textsuperscript{\cite{#1}}}}
-\renewcommand\thesection{\arabic{section}}
-\renewcommand\thesubsection{\thesection.\arabic{subsection}}
+%\renewcommand\thesection{\arabic{section}}
+%\renewcommand\thesubsection{\thesection.\arabic{subsection}}
+%\renewcommand\thesubsubsection{\thesection.\thesubsection.\arabic{subsubsection}}
 %arabic 阿拉伯数字
 %roman 小写的罗马数字
 %Roman 大写的罗马数字
 %alph 小写字母
 %Alph 大写字母
+
+
+
 
 \begin{document}
 \maketitle

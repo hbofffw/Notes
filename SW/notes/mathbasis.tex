@@ -253,6 +253,12 @@ Sklar定理阐明了，Copula函数如何描述多变量联合分布和其各自
 \end{definition}
 
 \subsection{Copula的重要性质}
+
+\begin{theorem}
+    Le X and Y be continous random variables. Then X and Y are independent if and only if $C_{XY} = \Pi$
+    \label{thr2.4.2}
+\end{theorem}
+
 \begin{theorem}
     Let X and Y be continuous random variables with copulas $C_{XY}$. If $\alpha$ and $\beta$ are strictly increasing on RanX and RanY, respectively, then $C_{\alpha(X)\beta(Y)} = C_{XY}$. Thus \textcolor[rgb]{1,0,0}{$C_{xy}$ is invariant under strictly increasing tranformations of $X$ and $Y$}.
     \label{thr2.4.3}
@@ -477,6 +483,9 @@ The \textcolor[rgb]{1,0,0}{dual of a copula C} is the function $\tilde{C}$ defin
     \label{thr-radiallysymmetric}
 \end{theorem}
 
+
+
+
 \subsection{随机变量的生成}
 为了获取分布函数为F的随机变量X的一个观测值$x$，
 \begin{enumerate}[1.]
@@ -623,11 +632,7 @@ $(x_i,y_i)$ and $(x_j,y_j)$ are concordant if $(x_i-x_j)(y_i-y_j)>0$ and disconc
 
 
 
-
-
-
-
-\subsection{Kendall's $(\tau)$}
+\subsubsection{Kendall's $(\tau)$}
 两个随机变量$X,Y$。
 
 \emph{\textbf{\textcolor[rgb]{1,0,0}{Kendall's $\tau$}}}可以对变量之间这种联合的一致性进行采样量化。它描述了两个随机独立均匀分布向量的一致性与非一致性概率的差值\cite{Montes2015}:
@@ -689,7 +694,7 @@ $(x_i,y_i)$ and $(x_j,y_j)$ are concordant if $(x_i-x_j)(y_i-y_j)>0$ and disconc
 \end{theorem}
 
 
-\subsection{Pearson's $\varrho$}
+\subsubsection{Pearson's $\varrho$}
 \emph{\textbf{\textcolor[rgb]{1,0,0}{Person's $\varrho$}}}:
 \begin{equation}   
     \label{eq-varrho}
@@ -711,7 +716,7 @@ cov$(U_X,U_Y)$不再有原始变量边缘分布来决定。因此相比Spearman'
 
 
 
-\subsection{Spearman's rho $(\rho)$}
+\subsubsection{Spearman's rho $(\rho)$}
 \emph{\textbf{\textcolor[rgb]{1,0,0}{Spearman's $\rho$}}}是变换后变量$F(X)$和$G(Y)$的Pearson系数$\varrho$\cite{Montes2015}，它不是根据原始变量来计算，而是通过变量的秩次来计算$\varrho$，即得到$\rho$。F和G分别是变量X和Y的分布函数:
 \begin{equation}
     \label{eq-rho}
@@ -749,7 +754,7 @@ cov$(U_X,U_Y)$不再有原始变量边缘分布来决定。因此相比Spearman'
     \item $\rho$较为通用，对于不同分布都可以估算出一个意义明确的总体参数，然而当$\varrho$应用在``重尾分布''的情形时(heavy-tailed distributions)，例如柯西分布，是无法得到一个理论上的相关参数的。
 \end{enumerate}
 
-\subsection{$\tau$和$\rho$的关系}
+\subsubsection{$\tau$和$\rho$的关系}
 
 \begin{theorem}
     X和Y是连续随机变量，则$\tau$和$\rho$：
@@ -787,7 +792,7 @@ cov$(U_X,U_Y)$不再有原始变量边缘分布来决定。因此相比Spearman'
     \label{cor5.1.12}
 \end{corollary}
 
-\subsection{其他的一致性测量方法}
+\subsubsection{其他的一致性测量方法}
 \begin{theorem}
     Let X and Y be continuous random variables whose copula is C. Then the population version of \textcolor[rgb]{1,0,0}{Gini's measure of association} for X and Y (which we will denote by either $\gamma_{X,Y}$ or $\gamma_C$) is given by 
     \begin{equation}
@@ -800,13 +805,49 @@ cov$(U_X,U_Y)$不再有原始变量边缘分布来决定。因此相比Spearman'
 关于$\rho$和$\gamma$，可以这样理解：$\rho = 3\mathcal{Q}(C,\Pi)$测量的一种一致性关系是；使用copula C来表达的X和Y的分布，与使用copula $\Pi$来表达X和Y不相关之间``距离''。而$\gamma=\mathcal{Q}(C,M)+\mathcal{Q}(C,W)$ 测量的一致性关系是：C和单调相关$M$和$W$之间的``距离''。
 
 \begin{corollary}
-    Under the hypotheses of \cref{thr5.1.13},
+    Under the hypotheses of \cref{thr-gamma},
     \begin{equation}
         \gamma_C = 4\left[ \int_0^1C(u,1-u)du-\int_0^1[u-C(u,u)]du \right].
         \label{eq5.1.25}
     \end{equation}
     \label{cor5.1.14}
 \end{corollary}
+
+还有一种测量参数为$\beta$
+<+未完待续+>
+
+\subsection{相关性的性质}
+之前章节已经涉及了很多关于相关性的性质，如：当X和Y独立时，根据\cref{thr2.4.2}，它们的copula函数为$C_{XY}=\Pi = uv$；当这两个变量的联合分布函数是Fr$\acute{e}$chet-Hoeffding的一个边界$M$获$W$时，几乎可以确定它们是呈线性相关的。因此一对随机变量的``相关性性质''可以认为是它们所有的联合分布函数组成的集中的一个子集。很多相关性质，根据变量的分布函数，可被直接描述为copulas，或者copulas的简单性质。
+
+但多数情况下变量的分布并不是相互独立的，也很少是呈线性相关的，这才是我们要研究的重点。
+
+为了引出以下内容，先定义两个基本概念，``正相关''与``负相关''。正相关与之前描述的一致性概念相对应，而负相关则与不一致概念相对应。
+
+\subsubsection{象限相关(Quadrant Dependence)}
+
+\begin{definition}
+    Let X and Y be random variables. X and Y are \textcolor[rgb]{1,0,0}{positively quadrant dependent (PQD)} if for all $(x,y)$ in $\mathbf{R}^2$,
+    \begin{equation}
+        P[X\leq x, Y \leq y] \geq P[X \leq x] P[Y\leq Y].
+        \label{eq5.2.1}
+    \end{equation}
+    or equivalently
+    \begin{equation}
+        P[X > x, Y> y] \geq P[X>x]P[Y>y].
+        \label{eq5.2.2}
+    \end{equation}
+    \label{def-quadrant}
+\end{definition}
+如果X,Y正象限相关，则记为$PQD(X,Y)$。负象限相关(negative quadrant dependent (NQD))的概念则是与PQD相反，记为$NQD(X,Y)$。
+
+\begin{theorem}
+    连续随机变量X,Y，联合分布为边缘分布分别为F,G的H，copula C，如果X和Y是满足PQD，则
+    \begin{equation*}
+        3\tau_{X,Y} \geq \rho_{X,Y} \geq 0,\ and \ \beta_{X,Y} \geq 0
+    \end{equation*}
+    \label{thr5.2.2}
+\end{theorem}
+
 
 
 \section{关于变换}
