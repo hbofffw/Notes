@@ -48,7 +48,7 @@
 将copulas看作在单位矩形平面$\mathbf{I}^2$中的subcopulas
 \begin{definition}
     一个二维subcopula(2-subcopula或简言之subcopula)是一个具有以下性质的函数：
-    \begin{enumerate}[1.]
+    \begin{enumerate}
         \item Dom$C' = S_1 \times S_2$($C'$的操作域)，其中$S_1$和$S_2$是单位向量$\mathbf{I}=[0,1]$的子集；
         \item $C'$是触底且2-increasing；
         \item 对于$S_1$中任意元素$u$，$S_2$中任意元素$v$，满足
@@ -488,7 +488,7 @@ The \textcolor[rgb]{1,0,0}{dual of a copula C} is the function $\tilde{C}$ defin
 
 \subsection{随机变量的生成}
 为了获取分布函数为F的随机变量X的一个观测值$x$，
-\begin{enumerate}[1.]
+\begin{enumerate}
     \item 生成一个变量$u$，其为(0,1)上的均匀分布；
     \item 令$x = F^{(-1)}(u)$，其中$F^{(-1)}$是任意的F的准逆/拟逆(quasi-inverse)函数
 \end{enumerate}
@@ -502,7 +502,7 @@ The \textcolor[rgb]{1,0,0}{dual of a copula C} is the function $\tilde{C}$ defin
 [从\cref{thr2.2.7}知道$v \longmapsto \partial C(u,v)/\partial u$，$v$存在且$v \in \mathbf{I}$是非减的，这里记为$c_u(v)$。]
 
 方法流程为：
-\begin{enumerate}[1.]
+\begin{enumerate}
     \item 生成两个$(0,1)$上均匀分布的变量$u$和$t$;
     \item 令$v = c_u^{(-1)}(t)$，其中$c_u^{(-1)}$为$c_u$的准逆函数；
     \item $(u,v)$即是所求。
@@ -527,7 +527,7 @@ The \textcolor[rgb]{1,0,0}{dual of a copula C} is the function $\tilde{C}$ defin
 \end{enumerate}
 
 Survival copulas也可以用在条件分布法中，从一个给定survival函数的分布中来生成随机变量。从\cref{thr2.4.4}和\cref{eq2.6.1}中，知随机变量$U,V$的$C(u,v)$相应的survival copula$\hat{C}(u,v) = u+v-1+C(1-u,1-v)$，是$(1-U,1-V)$的分布函数。如果$U$是$(0,1)$均匀分布，则$1-U$也是。下面的算法用来生成$(U,V)$，
-\begin{enumerate}[1.]
+\begin{enumerate}
     \item 生成两个独立的(0,1)均匀分布变量$u$和$t$；
     \item 令$v = \hat{c}_u^{(-1)}(t)$，其中$\hat{c}_u^{(-1)}$表示$\hat{c}_u(v) = \partial \hat{C}(u,v)/\partial u$的准逆函数；
     \item $(u,v)$即是所求。
@@ -602,7 +602,7 @@ $(x_i,y_i)$ and $(x_j,y_j)$ are concordant if $(x_i-x_j)(y_i-y_j)>0$ and disconc
     A numeric measure $\kappa$ of association between two continuous random variables X and Y whose copula is C is a measure of concordance if it satisfies the following properties (again we write $\kappa_{X,Y}$ or $\kappa_C$ when convenient):
     
     两个copula为C的随机变量X和Y，一个对它们的相关性的数值测量$\kappa$是一致性测量的条件是其满足以下性质：
-\begin{enumerate}[1.]
+\begin{enumerate}
     \item $\kappa$ is defined for every pair $X,Y$ of continuous random variables;
     \item $-1 \leq \kappa_{X,Y} \leq 1$, $\kappa_{X,X}=1$, and $\kappa_{X,-X}=-1$;
     \item $\kappa_{X,Y} = \kappa_{Y,X}$;
@@ -616,7 +616,7 @@ $(x_i,y_i)$ and $(x_j,y_j)$ are concordant if $(x_i-x_j)(y_i-y_j)>0$ and disconc
 
 \begin{theorem}
     Let $\kappa$ be a measure of concordance for continuous random variables X and Y:
-    \begin{enumerate}[1.]
+    \begin{enumerate}
         \item if Y is almost surely an \textcolor[rgb]{1,0,0}{increasing function of X}, then $\kappa_{X,Y}=\kappa_M=1$;
         \item if Y is almost surely a \textcolor[rgb]{1,0,0}{decreasing function of X}, then $\kappa_{X,Y} = \kappa_W = -1$;
         \item if $\alpha$ and $\beta$ are almost surely strictly monotone functions on RanX and RanY, respectively, then $\kappa_{\alpha(X),\beta(Y)} = \kappa_{X,Y}$.
@@ -659,7 +659,7 @@ $(x_i,y_i)$ and $(x_j,y_j)$ are concordant if $(x_i-x_j)(y_i-y_j)>0$ and disconc
 \end{theorem}
 \begin{corollary}
     Let $C_1,C_2$ and $\mathcal{Q}$ be as given in \cref{thr5.1.1}. Then 
-    \begin{enumerate}[1.]
+    \begin{enumerate}
         \item $\mathcal{Q}$ is symmetric in tis arguments: $\mathcal{Q}(C_1,C_2) = \mathcal{Q}(C_2,C_1)$;
         \item $\mathcal{Q}$ is nondecreasing in each argument: if $C_1\prec C_1'$ and $C_2 \prec C_2'$ for all $(u,v)$ in $\mathbf{I}^2$, then $\mathcal{Q}(C_1,C_2) \leq \mathcal{Q}(C_1',C_2')$.
         \item Copulas can be replaced by survival copulas in $\mathcal{Q}$, i.e., $\mathcal{Q}(C_1,C_2) = \mathcal{Q}(\hat{C}_1,\hat{C}_2)$.
@@ -748,7 +748,7 @@ cov$(U_X,U_Y)$不再有原始变量边缘分布来决定。因此相比Spearman'
 在文献\cite{Deligiannis2012}中，作者表明了相关矩阵和相关系数的关系：$\rho_{lj}^{(p)} = \dfrac{\text{Cov}(X_l,X_j)}{\sqrt{\left(\text{Var}(X_l)\text{Var}(X_j)\right)}}$，其中Var$(X_l)$和Var$(X_j)$分别表示随机变量$X_l$和$X_j$的方差，$l,j \in \{1,2,\dots,N\}$；Cov$(X_l,X_j)$是相关矩阵$\Sigma$的第$(l,j)$个元素。
 
 在文章\cite{Genest2007}，作者给出了Spearman's $\rho$优于pearson's $\varrho$的几个方面：
-\begin{enumerate}[1.]
+\begin{enumerate}
     \item 当且仅当随机变量X，Y是函数相关时，$E(\rho) = \pm 1$;
     \item 当且仅当X，Y是线性相关时，才满足$E(\varrho) = \pm 1$，相比$\rho$更受限制，且
     \item $\rho$较为通用，对于不同分布都可以估算出一个意义明确的总体参数，然而当$\varrho$应用在``重尾分布''的情形时(heavy-tailed distributions)，例如柯西分布，是无法得到一个理论上的相关参数的。
@@ -847,6 +847,36 @@ cov$(U_X,U_Y)$不再有原始变量边缘分布来决定。因此相比Spearman'
     \end{equation*}
     \label{thr5.2.2}
 \end{theorem}
+
+\subsubsection{(尾单调)Tail Monotonicity}
+式\cref{eq5.2.1}可以写作：
+\begin{equation*}
+    P[Y\leq y|X\leq x] \geq P[Y\leq y]
+\end{equation*}
+或者
+\begin{equation*}
+    P[Y\leq y | X \leq x] \geq P[Y\leq y| X \leq \infty] = P[y|\infty]
+\end{equation*}
+
+\begin{definition}
+    X和Y为随机变量
+    \begin{enumerate}
+        \item Y在X上是左拖尾递减的(记为LTD(Y|X))，如果
+            \begin{equation}
+                P[Y\leq y | X\leq x] \text{对于所有y是x递减的。}
+                \label{eq5.2.5}
+            \end{equation}
+        \item X在Y中是左拖尾递减的(LTD(X|Y))，如果
+            \begin{equation}
+                P[X \leq x| Y \leq y] \text{对于所有x是y递减的。}
+                \label{eq5.2.6}
+            \end{equation}
+        \item 
+    \end{enumerate}<++>
+    \label{<++>}
+\end{definition}<++>
+
+
 
 
 

@@ -11,6 +11,7 @@
 \author{\kaishu 黄冬勃}
 \date{\today}
 
+%\usepackage{paralist}
 \usepackage{geometry}
 \usepackage[UTF8]{ctex}
 \geometry{a4paper,centering,scale=0.88}
@@ -32,7 +33,8 @@
 \usepackage[bookmarks=true]{hyperref}
 \usepackage{cleveref}
 %
-\usepackage{enumerate}
+%\usepackage{enumerate,letltxmacro}
+\usepackage[shortlabels]{enumitem}
 \usepackage{bm}
 \usepackage{xy}
 \usepackage{eqnarray}
@@ -74,6 +76,11 @@
 \makeatletter\@addtoreset{equation}{section}\makeatother
 %
 \newcommand{\upcite}[1]{\textsuperscript{\textsuperscript{\cite{#1}}}}
+
+
+%\LetLtxMacro\itemold\item
+%\renewcommand{\item}{\itemindent1cm\itemold}
+%\renewcommand{\item}{\itemindent10cm\itemold}
 %\renewcommand\thesection{\arabic{section}}
 %\renewcommand\thesubsection{\thesection.\arabic{subsection}}
 %\renewcommand\thesubsubsection{\thesection.\thesubsection.\arabic{subsubsection}}
@@ -82,8 +89,8 @@
 %Roman 大写的罗马数字
 %alph 小写字母
 %Alph 大写字母
-
-
+%\setdefaultleftmargin{1.5cm}{}{}{}{}{}
+\setlist[enumerate,1]{leftmargin=1.5cm}
 
 
 \begin{document}
