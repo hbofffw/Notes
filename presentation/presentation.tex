@@ -9,6 +9,7 @@
 \author{\kaishu 黄冬勃}
 \date{\today}
 
+%\usepackage{paralist}
 \usepackage{geometry}
 \geometry{a4paper,centering,scale=0.88}
 \usepackage[format=hang,font=footnotesize,textfont=it]{caption}
@@ -26,10 +27,11 @@
 \usepackage{booktabs}
 \usepackage{amsmath}
 \usepackage{graphicx}
-\usepackage{hyperref}
+\usepackage[bookmarks=true]{hyperref}
 \usepackage{cleveref}
 %
-\usepackage{enumerate}
+%\usepackage{enumerate,letltxmacro}
+\usepackage[shortlabels]{enumitem}
 \usepackage{bm}
 \usepackage{xy}
 \usepackage{eqnarray}
@@ -39,16 +41,16 @@
 \bibliographystyle{IEEEtran}
 %\usepackage{hyperref}
 %\theoremstyle{plain}
-\newtheorem{theorem}{Theorem}[section]
-\newtheorem{lemma}{Lemma}[section]
-\newtheorem{proposition}{Proposition}[section]
-\newtheorem{corollary}{Corollary}[section]
+\newtheorem{theorem}{Theorem}[subsection]
+\newtheorem{lemma}{Lemma}[subsection]
+\newtheorem{proposition}{Proposition}[subsection]
+\newtheorem{corollary}{Corollary}[subsection]
 %\newtheorem{remark}{Remark}[subsection][section]
 
 %\theoremstyle{definition}
-\newtheorem{definition}{Definition}[section]
-\newtheorem{conjecture}{Conjecture}[section]
-\newtheorem{example}{Example}[section]
+\newtheorem{definition}{Definition}[subsection]
+\newtheorem{conjecture}{Conjecture}[subsection]
+\newtheorem{example}{Example}[subsection]
 
 %\theoremstyle{remark}
 \newtheorem{remark}{Remark}
@@ -61,8 +63,8 @@
   {\begin{quote}\kaishu\zihao\emph{{-5}}}    
   {\end{quote}}
 %公式序号与章节关联
-\renewcommand{\theequation}{\arabic{section}.\arabic{equation}}
-\makeatletter\@addtoreset{equation}{section}\makeatother
+\renewcommand{\theequation}{\arabic{section}.\arabic{subsection}.\arabic{equation}}
+\makeatletter\@addtoreset{equation}{subsection}\makeatother
 %
 \newcommand{\upcite}[1]{\textsuperscript{\textsuperscript{\cite{#1}}}}
 %\renewcommand\thesection{\arabic{section}}
@@ -72,6 +74,9 @@
 %Roman 大写的罗马数字
 %alph 小写字母
 %Alph 大写字母
+\setlist[enumerate,1]{leftmargin=1.5cm}
+
+
 
 \begin{document}
 \maketitle
