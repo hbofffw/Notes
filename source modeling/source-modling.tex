@@ -1,0 +1,108 @@
+%-*- coding: UTF-8 -*-
+% gougu.tex
+% 勾股定理
+%9 essential packages everyone should use
+\RequirePackage[l2tabu, orthodox]{nag}
+\documentclass[UTF8]{ctexart}
+\setcounter{secnumdepth}{5}
+\setcounter{tocdepth}{5}
+
+\title{\heiti 关于如何建立模型的思考}
+\author{\kaishu 黄冬勃}
+\date{\today}
+
+%\usepackage{paralist}
+\usepackage{geometry}
+\geometry{a4paper,centering,scale=0.88}
+\usepackage[format=hang,font=footnotesize,textfont=it]{caption}
+\usepackage{float}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsfonts}    
+\usepackage{pgfplots}
+\usepackage[nottoc]{tocbibind}
+\usepackage{cite}
+\usepackage{cancel}
+%9 essential packages everyone should use
+\usepackage{microtype}
+\usepackage{siunitx}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[bookmarks=true]{hyperref}
+\usepackage{cleveref}
+%
+%\usepackage{enumerate,letltxmacro}
+\usepackage[shortlabels]{enumitem}
+\usepackage{bm}
+\usepackage{xy}
+\usepackage{eqnarray}
+
+%math font setting 
+%\usepackage{unicode-math}
+%\setmathfont{STIXGeneral}
+%\setmathfont[range=\mathit/{latin,Latin}]{Sorts Mill Goudy}
+%\setmathfont[range=\mathit/{greek,Greek}]{Linux Libertine O}
+
+
+
+\bibliographystyle{IEEEtran}
+%\usepackage{hyperref}
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[subsection]
+\newtheorem{lemma}{Lemma}[subsection]
+\newtheorem{proposition}{Proposition}[subsection]
+\newtheorem{corollary}{Corollary}[subsection]
+%\newtheorem{remark}{Remark}[subsection][section]
+
+%\theoremstyle{definition}
+\newtheorem{definition}{Definition}[subsection]
+\newtheorem{conjecture}{Conjecture}[subsection]
+\newtheorem{example}{Example}[subsection]
+
+%\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\newtheorem{note}{Note}
+
+%\newtheorem{thm}{定理}
+%\newcommand\degree{^\circ}
+
+\newenvironment{myquote}
+  {\begin{quote}\kaishu\zihao\emph{{-5}}}    
+  {\end{quote}}
+%公式序号与章节关联
+\renewcommand{\theequation}{\arabic{section}.\arabic{subsection}.\arabic{equation}}
+\makeatletter\@addtoreset{equation}{subsection}\makeatother
+%
+\newcommand{\upcite}[1]{\textsuperscript{\textsuperscript{\cite{#1}}}}
+
+
+%\LetLtxMacro\itemold\item
+%\renewcommand{\item}{\itemindent1cm\itemold}
+%\renewcommand{\item}{\itemindent10cm\itemold}
+%\renewcommand\thesection{\arabic{section}}
+%\renewcommand\thesubsection{\thesection.\arabic{subsection}}
+%\renewcommand\thesubsubsection{\thesection.\thesubsection.\arabic{subsubsection}}
+%arabic 阿拉伯数字
+%roman 小写的罗马数字
+%Roman 大写的罗马数字
+%alph 小写字母
+%Alph 大写字母
+%\setdefaultleftmargin{1.5cm}{}{}{}{}{}
+\setlist[enumerate,1]{leftmargin=1.5cm}
+
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+%\mainmatter
+
+SW编码主要利用信源的空间相关性，要研究一种较为通用是要对信源进行建模，需要知道信源模型所涉及参数相关性，这样，就需要先对这些参数变量的相关性进行建模。
+
+
+
+
+\bibliography{sourcemodeling.bib}
+\end{document}
+
