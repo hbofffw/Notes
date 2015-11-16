@@ -106,8 +106,28 @@ SW编码主要利用信源的空间相关性，要研究一种较为通用是要
 时间关系也许可以这样使用，假设簇头节点$t_i$时刻观测值变化幅度比上一时刻$t_{i-1}$测量值较大，根据空间相关性，簇内其他节点$t_i$时刻测量值，比其各自$t_{i-1}$两时刻变化幅度也会比较大。找出这个规律，则可以在编码阶段，相比仅利用空间相关性时，保证相同的可靠性的同时，可以获得更大的压缩率。
 利用时间相关性，前后参数变化大小来选择簇头，变化最大的节点，首先组播作为簇头？
 
+关于变量的具体分布，在信息采集和编码角度来考虑，也许仅需要把握住其变化特点，即不需要知道它到底变成多少，而是知道两个采集点之间的相关性，其中一个点作为边信息采集后，另一点采集的数据已经是变化后的相关的量了，然后利用相关性进行编码即可。这样我将其分析为``可知与不可知问题''，可知代表我们需要知道相关性，不可知代表我们不需要去``推测''具体数值是多少。
+
+\section{关于运移形式分析的学习}
+根据傅里叶1822年建立的导热方程，建立定量公式，在$\triangle t$时间内，沿$x$方向通过$x$处截面所迁移的物质的量$\triangle m$与$x$处的浓度\textcolor[rgb]{1,0,0}{成正比}
+\begin{equation*}
+    \triangle m \propto \dfrac{\triangle C}{\triangle x} A \triangle t
+\end{equation*}
+转化为微分形式
+\begin{equation*}
+    \dfrac{dm}{Adt} = - D_m\left(\dfrac{\partial C}{\partial x}\right)
+\end{equation*}
+根据扩散通量的概念有：
+\begin{equation}
+    J = -D_m\dfrac{\partial C}{ \partial x}
+    \label{eq2.7}
+\end{equation}
+\cref{eq2.7}就是\textcolor[rgb]{1,0,0}{菲克第一扩散定律}，J代表扩散通量，单位是$mol/(cm^2)\cdot s$，$D_m$代表扩散质的分子扩散系数，其单位是$cm^2/s$或$m^2/s$；$\dfrac{\partial C}{\partial x}$为扩散质的浓度梯度；负号代表扩散质的浓度梯度方向与扩散方向相反。
+
+\textcolor[rgb]{1,0,0}{菲克第二定律}：
 
 
-\bibliography{sourcemodeling.bib}
+
+\bibliography{sourcemodeling}
 \end{document}
 
