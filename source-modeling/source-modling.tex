@@ -151,10 +151,32 @@ SW编码主要利用信源的空间相关性，要研究一种较为通用是要
     \dfrac{\partial C}{\partial t} = -\dfrac{\partial J}{\partial x}
 \end{equation*}
 将\cref{eq2.7}带入上式：
-\begin{equation*}
+\begin{equation}
     \dfrac{\partial C}{\partial t} = \dfrac{\partial}{\partial x}\left(D_m \dfrac{\partial C}{\partial x}\right)
-\end{equation*}
+    \label{eq2.8}
+\end{equation}
+若扩散系数$D_m$与浓度无关，则式\cref{eq2.8}可写为：
+\begin{equation}
+    \dfrac{\partial C}{\partial t} = D_m \dfrac{\partial^2C}{\partial x^2}
+    \label{eq2.9}
+\end{equation}
+一般称\cref{eq2.8,eq2.9}为菲克第二定律，其积分解为：
+\begin{equation}
+    C(x,t) = \dfrac{\mathcal{Q}}{2\sqrt{\pi D_m t}} e^{-\frac{x^2}{4D_m}}
+    \label{eq2.10}
+\end{equation}
+式中$\mathcal{Q}$为$t=0$时在$x=0$处的扩散质的数量，这些扩散质沿$x$的方向扩散。该式表示扩散质的浓度$C$沿$x$的分布规律，该浓度按指数规律急剧衰减。
 
+同时考虑风流运移和分子扩散因素，参考菲克扩散第二定律，可出瓦斯瞬时源在一维湍流扩散作用下巷道瓦斯浓度分布为：
+\begin{equation}
+    C(x,t) = \dfrac{M}{2\sqrt{\pi D_t t}}exp(-\dfrac{(x-ut)^2}{4D_t t})
+    \label{eq2.22}
+\end{equation}
+其中，$C(x,t)$为瓦斯浓度，是时间$t$内沿$x$方向瓦斯的浓度值，$D_t$是瓦斯的湍流扩散系数，$M$为$t=0,x=0$时，$x$方向扩散质的总量。
+
+\begin{note}
+    已知了扩散质函数，那么考虑参数在各个采集点得分布特征。根据\cref{2.10}和\cref{eq2.22}可知扩散过程与时间空间均有关系，接下来是否需要考虑，若使用SW编码，如何综合利用该函数。
+\end{note}
 
 \bibliography{sourcemodeling}
 \end{document}
