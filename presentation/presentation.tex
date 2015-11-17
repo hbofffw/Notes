@@ -134,9 +134,9 @@ Copula $C(F(x),G(y))$可以将多变量各自边缘分布$F(x),G(y)$与联合分
 
 \section{相关性}
 对于线性关系的双变量，可以用相关系数\[
-    \rho(x,y) = \dfrac{cov(x,y)}{\sqrt{(\mathbf{D})x \times \mathbf{D}y}}
+    \rho(x,y) = \dfrac{cov(x,y)}{\sqrt{\mathbf{D}x \times \mathbf{D}y}}
 \]
-来测量，但当两个变量是非线性相关关系时，如$y=x^2$，协方差$cov(x,y)=\mathbf{E}(x-\mathbf{E}x)(x^2-\mathbf{E}x^2) = 0$，$\rho=0$，则无法测量其相关性。
+来测量，但当两个变量是非线性相关关系时，如$y=x^2$，协方差$cov(x,y)=\mathbf{E}[(x-\mathbf{E}x)(x^2-\mathbf{E}x^2)] = \mathbf{E}(xy)-\mathbf{E}(x)\mathbf{E}(y)= 0$，$\rho=0$，则无法测量其相关性。
 
 
 
