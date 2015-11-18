@@ -192,15 +192,86 @@ SW编码主要利用信源的空间相关性，要研究一种较为通用是要
 
 
 \section{空间统计学一些原理}
-
 空间统计学是以空间连续性理论和区域化变量理论为基础，以半变异函数为基本工具的一种数学方法。
 
+
+\subsection{区域化变量}
 区域化变量是指以空间点$X$的直角坐标值$(x_u,x_v,x_w)$为自变量的随机场$Z(x_u,x_v,x_w) = X(X)$，是空间统计学的基本概念。区域化变量具有随机性(变异性)和结构性两个特征。结构性是指某些地址参数在点$X$与$X+h$处的数值$Z(X)$与$Z(X+h)$具有某种程度的自相关性\footnote{空间相关性}。
 \begin{note}
-    个人理解：区域化变量使得协方差的使用没有了障碍，即分段线性化，否则变量之间的非线性关系将制约协方差的使用。区域化变量的``结构性''则说明了以上理解。
+    个人理解：区域化变量使得协方差的使用没有了障碍，即分段线性化，否则变量之间的非线性关系将制约协方差的使用，这种分段线性化体现在区域化变量的``结构性''中。
 \end{note}
 
+
+
+
+\subsection{二阶平稳假设(Stationary Assumption)}
+设空间随机场$Z(s)$的空间分布律与站点位置无关，即满足
+\begin{equation}
+    F(s_1,\dots,s_K;z_1,\dots,z_K) = F(s_1+h,\dots,s_K+h;z_1,\dots,z_K)
+    \label{eq-staionary1}
+\end{equation}
+对于单变量而言，满足：
+\begin{equation}
+    F(s;z) = F(s+h;z)
+    \label{eq-staionary2}
+\end{equation}
+如果空间随机场$Z(s)$在任一向量$h$均满足时称为严格平稳。\textcolor[rgb]{1,0,0}{概率分布函数可以通过研究区域内所有数据的累积直方图推断获得}。严格平稳性假设要求$Z(s)$的各阶矩均存在且平稳，过于严格，在实际中很难满足。一般情况下，满足1，2阶矩存在且平稳即可，因而提出二阶平稳性假设，也称之为\textcolor[rgb]{1,0,0}{弱平稳}。
+二阶平稳要求区域化变量$Z(s)$同时满足一下两个条件：
+\begin{enumerate}
+    \item 在整个待研空间区域内变量$Z(s)$的数学期望存在，且等于常数，即满足：
+        \begin{equation}
+            E[Z(s)] = E[Z(s+h)] = m \qquad \forall h, \forall s
+            \label{eq-stationarycondition1}
+        \end{equation}
+    \item 在这个待研空间区域内变量$Z(s)$的协方差函数存在且平稳，即只依赖于滞后向量$h$，而与位置$s$无关，满足：
+        \begin{eqnarray}
+            &&Cov\left\{ Z(s),Z(s+h) \right\} \notag \\
+            &=& E[Z(s)Z(s+h)] - E[Z(s)]E[Z(s+h)] \notag \\
+            &=& E[Z(s)Z(s+h)]-m^2 \qquad \forall h,\forall s \\
+            &=& C(h) \notag
+            \label{eq-stationarycondition2}
+        \end{eqnarray}
+\end{enumerate}
+
+\textcolor[rgb]{1,0,0}{协方差不依赖于空间的绝对位置，而依赖于相对位置，即具有空间的平稳不变性}。特殊的：
+\begin{equation}
+    Cov\{ Z(s),Z(s+0) \} = Var[Z(s)] = C(0)
+    \label{eq-h0cov}
+\end{equation}
+即方差存在且为常数。
+
+
+\subsection{本征假设(Intrinsic Assumption)}
+\emph{\textcolor[rgb]{1,0,0}{本征假设是比二阶平稳假设更弱的假设}}，因为在实际研究中协方差函数也有不存在的可能，但变异函数却存在。考虑到该情况，本征假设在二阶平稳假设的基础上进一步放宽了对区域化随机变量的要求(线性)。
+
+当区域化变量$Z(s)$的增量$Z(s)-Z(s+h)$满足以下两个条件时，称其为满足本征假设(也称为内蕴假设)：
+\begin{enumerate}
+    \item 在整个研究区域内满足：
+        \begin{equation}
+            E[Z(s)-Z(s+h)] = 0 \qquad \forall h, \forall s
+            \label{eq-intrinsiccondition1}
+        \end{equation}
+    \item 增量$Z(s)-Z(s+h)$的方差函数存在且平稳(即不依赖于位置$s$)，即满足：
+        \begin{eqnarray}
+            && Var[Z(s)-Z(s+h)] \notag \\
+            &=& E[Z(s)-Z(s+h)]^2 - \{ E[Z(s)-Z(s+h)] \}^2 \notag \\
+            &=& E[Z(s)-Z(s+h)]^2 \qquad \forall h, \forall s \\
+            &=& 2 \gamma (h) \notag
+            \label{eq-intrinsiccondition2}
+        \end{eqnarray}
+\end{enumerate}
+
+从上述定义中可看出本征假设的几个特点：
+\begin{enumerate}
+    \item 当满足二阶平稳假设时，一定满足本征假设；
+    \item 二阶平稳假设本质上是\textcolor[rgb]{1,0,0}{对空间域内的所有区域化变量做要求，而本征假设是对区域化变量的增量做要求}，当满足增量的平均值是平稳的条件时，区域化变量不一定是二阶平稳的；
+    \item 本征假设可以用于\textcolor[rgb]{1,0,0}{协方差函数不存在但半变异函数存在的情况}。
+\end{enumerate}
+
+
 \subsection{空间协方差与半变异函数}
+
+\subsubsection{空间协方差函数}
 随机过程$Z(t)$在任意时刻$t_1,t_2$处的两个随机变量$Z(t_1),Z(t_2)$的二阶中心混合矩为此随机过程的协方差函数：
 \begin{equation}
     C(t_1,t_2) = Cov\left| Z(t_1),Z(t_2) \right| = E\left| Z(t_1)Z(t_2) \right| - E\left| Z(t_1) \right| E\left| Z(t_2) \right|
@@ -217,9 +288,29 @@ SW编码主要利用信源的空间相关性，要研究一种较为通用是要
     \label{eq-spatiocovsimplize}
 \end{equation}
 
+从定义看，空间协方差函数依赖于空间点$s$和空间向量$h$。为了使建模过程中具有统计意义，需要区域化变量$Z(s)$满足二阶平稳假设，本征假设。当满足二阶平稳假设时，空间均值与位置无关，即满足：
+\begin{equation}
+    E[Z(s+h)] = E[Z(s)] \qquad \forall h,\forall s
+    \label{eq-covcondition}
+\end{equation}
+由于此时协方差函数仅与空间向量$h$有关，而与位置$s$无关，通常将$C(s,h)$写为$C(h)$，\cref{eq-spatiocov}转化为：
+\begin{equation}
+    C(h)=C(s,h) = E[Z(s)]^2 - \{ E[Z(s)] \}^2
+    \label{eq-conditionalcov}
+\end{equation}
 
-
-
+\subsubsection{空间半变异函数}
+空间半变异函数是空间统计学建模的基本工具。上述\textcolor[rgb]{1,0,0}{空间协方差函数可以度量随机变量$Z(s)$和$Z(s+h)$之间的空间相关性，即结构性变化}；半变异函数不仅可以描述区域化变量的空间结构性变化，而且能够描述其随机变化，对区域变量之间的空间变异性进行量化。半变异函数记为$\gamma(s,h)$，定义：
+\begin{eqnarray}
+    \gamma(s,h) &=&\dfrac{1}{2}Var[Z(s)-Z(s+h)] \notag \\
+    &=& \dfrac{1}{2}E[Z(s)-Z(s+h)]^2 - \dfrac{1}{2}\{ E[Z(s)] - E[Z(s+h)] \}=^2 
+    \label{eq-gammapre}
+\end{eqnarray}
+当满足二阶平稳假设时，根据\cref{eq-covcondition}：
+\begin{equation}
+    \gamma(h) = \gamma(s,h) = \dfrac{1}{2}Var[Z(s) - Z(s+h)]
+    \label{eq-gamma}
+\end{equation}
 
 
 
