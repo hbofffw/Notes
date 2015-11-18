@@ -191,6 +191,41 @@ SW编码主要利用信源的空间相关性，要研究一种较为通用是要
 \end{note}
 
 
+\section{空间统计学一些原理}
+
+空间统计学是以空间连续性理论和区域化变量理论为基础，以半变异函数为基本工具的一种数学方法。
+
+区域化变量是指以空间点$X$的直角坐标值$(x_u,x_v,x_w)$为自变量的随机场$Z(x_u,x_v,x_w) = X(X)$，是空间统计学的基本概念。区域化变量具有随机性(变异性)和结构性两个特征。结构性是指某些地址参数在点$X$与$X+h$处的数值$Z(X)$与$Z(X+h)$具有某种程度的自相关性\footnote{空间相关性}。
+\begin{note}
+    个人理解：区域化变量使得协方差的使用没有了障碍，即分段线性化，否则变量之间的非线性关系将制约协方差的使用。区域化变量的``结构性''则说明了以上理解。
+\end{note}
+
+\subsection{空间协方差与半变异函数}
+随机过程$Z(t)$在任意时刻$t_1,t_2$处的两个随机变量$Z(t_1),Z(t_2)$的二阶中心混合矩为此随机过程的协方差函数：
+\begin{equation}
+    C(t_1,t_2) = Cov\left| Z(t_1),Z(t_2) \right| = E\left| Z(t_1)Z(t_2) \right| - E\left| Z(t_1) \right| E\left| Z(t_2) \right|
+    \label{eq-temporalcov}
+\end{equation}
+在二维空间域中，定义随机场在任意空间中的两个点$s$和$s+h$处的两个随机变量$Z(s)$和$Z(s+h)$的二阶中心混合矩为此随机场的自协方差函数：
+\begin{equation}
+    C(s,h) = Cov\left| Z(s),Z(s+h) \right| = E\left| Z(s)Z(s+h) \right|-E\left| Z(s) \right| E\left| Z(s+h) \right|
+    \label{eq-spatiocov}
+\end{equation}
+当\cref{eq-spatiocov}中的空间向量$h$取0时，协方差函数则变为：
+\begin{equation}
+    C(s,s) = Cov\left| Z(s), Z(s+0) \right| = E\left| Z(s) \right|^2 - \{ E\left| Z(s) \right| \}^2 = Var\left| Z(x) \right|
+    \label{eq-spatiocovsimplize}
+\end{equation}
+
+
+
+
+
+
+
+
+
+
 \section{温度场变化分析}
 
 \begin{note}
