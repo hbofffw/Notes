@@ -1,121 +1,4 @@
-%-*- coding: UTF-8 -*-
-% gougu.tex
-% 勾股定理
-%9 essential packages everyone should use
-\RequirePackage[l2tabu, orthodox]{nag}
-\documentclass[UTF8]{ctexart}
-\setcounter{secnumdepth}{5}
-\setcounter{tocdepth}{5}
-
-\title{\heiti 关于如何建立模型的思考}
-\author{\kaishu 黄冬勃}
-\date{\today}
-
-%\usepackage{paralist}
-\usepackage{geometry}
-\geometry{a4paper,centering,scale=0.88}
-\usepackage[format=hang,font=footnotesize,textfont=it]{caption}
-\usepackage{float}
-\usepackage{amsthm}
-\usepackage{amssymb}
-\usepackage{amsfonts}    
-\usepackage{pgfplots}
-\usepackage[nottoc]{tocbibind}
-\usepackage{cite}
-\usepackage{cancel}
-%9 essential packages everyone should use
-\usepackage{microtype}
-\usepackage{siunitx}
-\usepackage{booktabs}
-\usepackage{amsmath}
-\usepackage{graphicx}
-\usepackage[bookmarks=true]{hyperref}
-\usepackage{cleveref}
-%
-%\usepackage{enumerate,letltxmacro}
-\usepackage[shortlabels]{enumitem}
-\usepackage{bm}
-\usepackage{xy}
-\usepackage{eqnarray}
-
-%math font setting 
-%\usepackage{unicode-math}
-%\setmathfont{STIXGeneral}
-%\setmathfont[range=\mathit/{latin,Latin}]{Sorts Mill Goudy}
-%\setmathfont[range=\mathit/{greek,Greek}]{Linux Libertine O}
-
-
-
-\bibliographystyle{IEEEtran}
-%\usepackage{hyperref}
-\theoremstyle{plain}
-\newtheorem{theorem}{Theorem}[subsection]
-\newtheorem{lemma}{Lemma}[subsection]
-\newtheorem{proposition}{Proposition}[subsection]
-\newtheorem{corollary}{Corollary}[subsection]
-%\newtheorem{remark}{Remark}[subsection][section]
-
-%\theoremstyle{definition}
-\newtheorem{definition}{Definition}[subsection]
-\newtheorem{conjecture}{Conjecture}[subsection]
-\newtheorem{example}{Example}[subsection]
-
-%\theoremstyle{remark}
-\newtheorem{remark}{Remark}
-\newtheorem{note}{Note}
-
-%\newtheorem{thm}{定理}
-%\newcommand\degree{^\circ}
-
-\newenvironment{myquote}
-  {\begin{quote}\kaishu\zihao\emph{{-5}}}    
-  {\end{quote}}
-%公式序号与章节关联
-\renewcommand{\theequation}{\arabic{section}.\arabic{subsection}.\arabic{equation}}
-\makeatletter\@addtoreset{equation}{subsection}\makeatother
-%
-\newcommand{\upcite}[1]{\textsuperscript{\textsuperscript{\cite{#1}}}}
-
-
-%\LetLtxMacro\itemold\item
-%\renewcommand{\item}{\itemindent1cm\itemold}
-%\renewcommand{\item}{\itemindent10cm\itemold}
-%\renewcommand\thesection{\arabic{section}}
-%\renewcommand\thesubsection{\thesection.\arabic{subsection}}
-%\renewcommand\thesubsubsection{\thesection.\thesubsection.\arabic{subsubsection}}
-%arabic 阿拉伯数字
-%roman 小写的罗马数字
-%Roman 大写的罗马数字
-%alph 小写字母
-%Alph 大写字母
-%\setdefaultleftmargin{1.5cm}{}{}{}{}{}
-\setlist[enumerate,1]{leftmargin=1.5cm}
-
-
-\begin{document}
-\maketitle
-\tableofcontents
-
-%\mainmatter
-\cite{Ali2007}
-SW编码主要利用信源的空间相关性，要研究一种较为通用是要对信源进行建模，需要知道信源模型所涉及参数相关性，这样，就需要先对这些参数变量的相关性进行建模。
-
-关于时空相关性，要注意并理解清楚时间相关性的切入点，如何和空间相关性联合考虑，或者，它们可以相互独立影响信源参数变化？并且，如何使SW编码利用时间相关性？ 
-
-
-时间关系也许可以这样使用，假设簇头节点$t_i$时刻观测值变化幅度比上一时刻$t_{i-1}$测量值较大，根据空间相关性，簇内其他节点$t_i$时刻测量值，比其各自$t_{i-1}$两时刻变化幅度也会比较大。找出这个规律，则可以在编码阶段，相比仅利用空间相关性时，保证相同的可靠性的同时，可以获得更大的压缩率。
-利用时间相关性，前后参数变化大小来选择簇头，变化最大的节点，首先组播作为簇头？
-
-关于变量的具体分布，在信息采集和编码角度来考虑，也许仅需要把握住其变化特点，即不需要知道它到底变成多少，而是知道两个采集点之间的相关性，其中一个点作为边信息采集后，另一点采集的数据已经是变化后的相关的量了，然后利用相关性进行编码即可。这样我将其分析为``可知与不可知问题''，可知代表我们需要知道相关性，不可知代表我们不需要去``推测''具体数值是多少。
-
-还有一个考虑，若瓦斯或者温度涌出点参数值突然增大，扩撒出去各位置浓度是如何变化，需要推出一个公式。
-
-若参数为瓦斯，则其变化规律与涌出点涌出瓦斯浓度，瓦斯蔓延速度有关，涌出点扩散质的数量为$Q$，扩散系数为$D$，扩散速度为$v$，则点$(x,y,z)$点在$t$时刻的瓦斯浓度C应为：
-\begin{equation*}
-    C=\dfrac{Q}{2\sqrt{\pi D t}}e^{-\frac{x^2}{4D}}
-\end{equation*}
-
-\section{关于运移形式分析的学习}
+\chapter{关于运移形式分析的学习}
 根据傅里叶1822年建立的导热方程，建立定量公式，在$\triangle t$时间内，沿$x$方向通过$x$处截面所迁移的物质的量$\triangle m$与$x$处的浓度\textcolor[rgb]{1,0,0}{成正比}
 \begin{equation*}
     \triangle m \propto \dfrac{\triangle C}{\triangle x} A \triangle t
@@ -269,9 +152,8 @@ SW编码主要利用信源的空间相关性，要研究一种较为通用是要
 \end{enumerate}
 
 
-\subsection{空间协方差与半变异函数}
 
-\subsubsection{空间协方差函数}
+\subsection{空间协方差函数}
 随机过程$Z(t)$在任意时刻$t_1,t_2$处的两个随机变量$Z(t_1),Z(t_2)$的二阶中心混合矩为此随机过程的协方差函数：
 \begin{equation}
     C(t_1,t_2) = Cov\left| Z(t_1),Z(t_2) \right| = E\left| Z(t_1)Z(t_2) \right| - E\left| Z(t_1) \right| E\left| Z(t_2) \right|
@@ -299,7 +181,7 @@ SW编码主要利用信源的空间相关性，要研究一种较为通用是要
     \label{eq-conditionalcov}
 \end{equation}
 
-\subsubsection{空间半变异函数}
+\subsection{空间半变异函数}
 空间半变异函数是空间统计学建模的基本工具。上述\textcolor[rgb]{1,0,0}{空间协方差函数可以度量随机变量$Z(s)$和$Z(s+h)$之间的空间相关性，即结构性变化}；半变异函数不仅可以描述区域化变量的空间结构性变化，而且能够描述其随机变化，对区域变量之间的空间变异性进行量化。半变异函数记为$\gamma(s,h)$，定义：
 \begin{eqnarray}
     \gamma(s,h) &=&\dfrac{1}{2}Var[Z(s)-Z(s+h)] \notag \\
@@ -311,9 +193,19 @@ SW编码主要利用信源的空间相关性，要研究一种较为通用是要
     \gamma(h) = \gamma(s,h) = \dfrac{1}{2}Var[Z(s) - Z(s+h)]
     \label{eq-gamma}
 \end{equation}
+半变异函数和协方差函数的关系式为：
+\begin{equation}
+    \gamma(h) = sill-C(h)
+    \label{eq-gammacov}
+\end{equation}
 
+\subsection{实验半变异函数及模型}
 
-
+根据\cref{eq-gamma}，通过$n$对站点$Z(s_i)$和$Z(s_i+h)(i=1,2,\dots,n)$的数值，通过求平均值的方法来获得$\gamma(h)$的值。首先将$n$对站点$s_i$和$s_j$的距离为$h$的所有观测值$Z(s_i)$和$Z(s_i+h)(i=1,2,\dots,N^h)$看成是$Z(s)$和$Z(s+h)$的$N^h$对实现，其中$N^h$表示距离为$h$的站点对的数量。则计算实验变异函数：
+\begin{equation}
+    \gamma^*(h) = \dfrac{1}{2N^h}\sum\limits_{i=1}^{N^h}\| Z(s_i)-Z(s_i+h) \|^2
+    \label{eq-realisticgamma}
+\end{equation}
 
 
 
@@ -322,7 +214,4 @@ SW编码主要利用信源的空间相关性，要研究一种较为通用是要
 \begin{note}
     时间相关性也许可以用于自适应调节。
 \end{note}
-
-\bibliography{sourcemodeling}
-\end{document}
 
