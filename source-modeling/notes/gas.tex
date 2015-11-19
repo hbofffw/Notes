@@ -246,7 +246,7 @@
     
         最优估计条件是指估计值和样本实际值之间的偏差达到最小，一般采用方差来衡量。估计方差的计算公式为：
         \begin{eqnarray}
-            E\left\{ \left| Z^*(s_0) - Z(s_0)^2 \right|^2 \right\} &=& \sum\limits_{i=0}^{n}\sum\limits_{j=0}^{n}\lambda_i\lambda_jC(s_i,s_j) \notag \\
+        E\left\{ \left[ Z^*(s_0) - Z(s_0) \right]^2 \right\} &=& \sum\limits_{i=0}^{n}\sum\limits_{j=0}^{n}\lambda_i\lambda_jC(s_i,s_j) \notag \\
             &=& C(s_0,s_0) - 2\sum\limits_{i=1}^{n}\lambda_iC(s_0,s_i)+\sum\limits_{i=1}^{n}\sum\limits_{j=1}^{n}\lambda_i\lambda_jC(s_i,s_j)
             \label{eq-optivar}
         \end{eqnarray}
@@ -255,4 +255,79 @@
             F= E\left\{ \left| Z^*(s_0) - Z(s_0) \right|^2 \right\} - 2\mu\left( \sum\limits_{i=1}^{n} \lambda_i -1 \right)
             \label{eq-transfomredvar}
         \end{equation}
-\end{enumerate}<++>
+\end{enumerate}
+
+如果有$\lambda_i(i=1,2,\dots,n)$的一组数值满足这种要求，那么这组数值就能使下式成立：
+\begin{equation}
+    \begin{cases}
+        \dfrac{1}{2}\dfrac{\partial F}{\partial \lambda_i} = \sum\limits_{i=1}^{n}\lambda_i C(s_i,s_j) - \mu - C(s_0,s_j) = 0 \qquad \\
+        \dfrac{1}{2}\dfrac{\partial F}{\partial \mu}= \left( \sum\limits_{i=1}^{n}\lambda_i -1 \right) = 0
+    \end{cases}
+    \label{eq-transfomredvar2}
+\end{equation}
+整理得：
+\begin{equation}
+    \begin{cases}
+        \sum\limits_{i=1}^{n}\lambda_iC(s_{i},s_j) -\mu = C(s_0,s_j) \qquad j=1,2,\dots,n \\
+        \sum\limits_{i=1}^{n}\lambda_j = 1
+    \end{cases}
+    \label{eq-transfomredvar3}
+\end{equation}
+\cref{eq-transfomredvar3}为$n+1$个方程组成的方程组，其中未知变量为$n$个，此方程组称为\textcolor[rgb]{1,0,0}{普通克里金方程组}，其转化为矩阵形式：
+\begin{equation}
+    \left[ K \right]\left[ \lambda \right] = \left[ M \right]
+    \label{eq-kriginmatrix}
+\end{equation}
+根据\cref{eq-kriginmatrix}可以求得权重系数$\lambda$，进行普通克里金估计时所得的估计方差最小，计算公式：
+\begin{equation}
+    \sigma_E^2 = C(s_0,s_0) - \sum\limits_{i=1}^{n}\lambda_i C(s_0,s_i) + \mu
+    \label{eq-minimalvar}
+\end{equation}
+
+若$Z(s)$只满足本征假设，不满足二阶平稳假设时，可利用半变异函数代替协方差函数。根据协方差函数与半变异函数的关系：$C(h) = C(0) - \gamma(h)$，进而利用半变异函数表示的普通克里金方程组：
+\begin{equation}
+    \begin{cases}
+        \sum\limits_{i=1}^{n}\lambda_{i}\gamma(s_i,s_j) + \mu = \gamma(s_{0},s_j) \qquad j=1,2,\dots,n \\
+        \sum\limits_{i=1}^{n}\lambda_{i}=1
+    \end{cases}
+    \label{equ-krigingsemivariation}
+\end{equation}
+利用半变异函数标识的普通克里金方差为:
+\begin{equation}
+    \sigma_E^2 = \sum\limits_{i=1}^{n}\lambda_i\gamma(s_0,s_i) - \gamma(s_0,s_0) + \mu
+    \label{eq-semivariationvar}
+\end{equation}
+
+
+\section{时空半变异函数和协方差函数}
+上述空间统计学方法忽略了时间维度中的关联信息。同空间克里金建模方法一样，需要首先确定半变异函数和协方差的理论模型，称为时空半变异函数和时空协方差函数。
+
+时间半变异函数$\gamma_t(d)$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
