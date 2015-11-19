@@ -207,11 +207,52 @@
     \label{eq-realisticgamma}
 \end{equation}
 
+\section{克里金方法(Ordinrary Kriging)}
+它是一种求最优、线性、无偏值内插估计量的方法，通过对每个站点的采样值分别赋予一个权重系数，用加权平均法对待估站点进行估计的方法。几种克里金方法及应用：
+\begin{enumerate}
+    \item 在满足二阶平稳或者本征假设条件时可以采用\textcolor[rgb]{1,0,0}{普通克里金方法}；
+    \item 在非平稳或者有趋势存在的情况下采用\textcolor[rgb]{1,0,0}{泛克里金方法}；
+    \item 若进行非线性估计，可以采用\textcolor[rgb]{1,0,0}{析取克里金方法}；
+    \item 当区域化变量服从对数分布式，可用\textcolor[rgb]{1,0,0}{对数克里金方法}；
+    \item 对于系数不规则数据，可采用\textcolor[rgb]{1,0,0}{随机克里金方法}。
+\end{enumerate}
 
+普通克里金方法基本原理：设$Z(s)$是一个二阶平稳的随机函数，某待估几点$s_0$的变程内的$n$个站点的采样值为$Z(s_1),Z(s_2),\dots,Z(s_n)$，则$s_0$点得估计量为：
+\begin{equation}
+    Z^*(s_0) = \sum\limits_{i=1}^{n}\lambda_iZ(s_i)
+    \label{eq-kriging}
+\end{equation}
+其中，$\lambda_i$为$Z(s_i)$的权重系数，表示各站点对待估站点的影响大小。普通克里金方法的主要问题是\emph{\textcolor[rgb]{1,0,0}{通过确定各个权重系数$\lambda_i$，使估计值$Z^*(s_0)$成为真实值$Z(s_0)$的无偏最优估计}}。
 
-\section{温度场变化分析}
+\begin{enumerate}
+    \item 无偏估计条件
 
-\begin{note}
-    时间相关性也许可以用于自适应调节。
-\end{note}
-
+        要使$Z^*(s_0)$成为$Z(s_0)$的无偏估计量，需要满足：
+        \begin{equation}
+            E\left| Z^*(s_0)-Z(s_0) \right| = 0
+            \label{eq-unbiased1}
+        \end{equation}
+        由于二阶平稳条件下$E| Z^*(s_0) | = E | Z(s_0) | = m$，进而
+        \begin{equation}
+            E | Z^*(s_0) | = E \left\{  \sum\limits_{i=1}^{n}\lambda_iZ(s_i) \right\} = \sum\limits_{i=1}^{n}\lambda_i E | Z(s_i) | = m \sum\limits_{i=1}^{n} \lambda_i
+            \label{eq-unbiased2}
+        \end{equation}
+        若使$E\| Z^*(s_0) \| = E | Z(s_0) |$，需要满足$m\sum\limits_{i=1}^{n}\lambda_i = m$，即：
+        \begin{equation}
+            \sum\limits_{i=1}^{n}\lambda_i = 1
+            \label{eq-unbiased3}
+        \end{equation}
+    \item 最优估计条件
+    
+        最优估计条件是指估计值和样本实际值之间的偏差达到最小，一般采用方差来衡量。估计方差的计算公式为：
+        \begin{eqnarray}
+            E\left\{ \left| Z^*(s_0) - Z(s_0)^2 \right|^2 \right\} &=& \sum\limits_{i=0}^{n}\sum\limits_{j=0}^{n}\lambda_i\lambda_jC(s_i,s_j) \notag \\
+            &=& C(s_0,s_0) - 2\sum\limits_{i=1}^{n}\lambda_iC(s_0,s_i)+\sum\limits_{i=1}^{n}\sum\limits_{j=1}^{n}\lambda_i\lambda_jC(s_i,s_j)
+            \label{eq-optivar}
+        \end{eqnarray}
+        以上问题转换为带等式条件的寻优问题，在\cref{eq-unbiased3}的约束条件下，为了使估计的方差为最小值，通过变换方法，采用lagrange乘数法构建如下函数：
+        \begin{equation}
+            F= E\left\{ \left| Z^*(s_0) - Z(s_0) \right|^2 \right\} - 2\mu\left( \sum\limits_{i=1}^{n} \lambda_i -1 \right)
+            \label{eq-transfomredvar}
+        \end{equation}
+\end{enumerate}<++>
