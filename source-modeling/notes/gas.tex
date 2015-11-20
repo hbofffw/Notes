@@ -314,14 +314,96 @@
     \label{eq-tsemicov}
 \end{equation}
 
+时空半变异函数$\gamma_{st}(h,d)$是以空间滞后变量$h$和时间滞后变量$d$为自变量的函数，用来表征时空点的变异结构。时空半变异函数与时空协方差函数的关系为：
+\begin{equation}
+    \gamma_{st}(h,d) = C_{st}(0,0) - C_{st}(h,d)
+    \label{eq-stsemicov}
+\end{equation}
+
+时空协方差函数$C_{st}(h,d)$与空间协方差函数$C_s(h)$和时间协方差函数$C_t(d)$有关，采用积和模型表示两者的关系，具体表示为：
+\begin{equation}
+    C_{st}(h,d) = k_1C_s(h)C_t(d) + k_2C_s(h)+k_3C_t(d)
+    \label{eq-stcorrelation}
+\end{equation}
+其中引入系数$k_1,k_2,k_3$是为了确保时空协方差函数$C_{st}(h,d)$的正定性。根据\cref{eq-ssemicov}和\cref{eq-tsemicov}可以得到：
+\begin{equation}
+    C_{st}(hj,d) = k_1\left[ C_s(0) - \gamma_s(h) \right]\left[ C_t(0) - \gamma_t(d) \right] + k_2\left[ C_s(0) - \gamma_s(h) \right]+k_3\left[ C_t(0)-\gamma_t(d) \right]
+    \label{eq-stsemicov2}
+\end{equation}
+当$h=0$,$d=0$时，根据\cref{eq-stcorrelation}：
+\begin{equation}
+    C_{st}(0,0) = k_1C_s(0)C_t(0) + k_2C_s(0) + k_3C_t(0)
+    \label{eq-stsemicov3}
+\end{equation}
+
+将\cref{eq-stsemicov2,eq-stsemicov3}带入\cref{eq-stsemicov}得：
+\begin{equation}
+    \gamma_{st}(h,d) = \left[ k_2 +k_1 C_t(0) \right]\gamma_s(h)+ \left[ k_3+k_1C_s(0) \right]\gamma_t(d)-k_1\gamma_s(h)\gamma_t(d)
+    \label{eq-stsemicov4}
+\end{equation}
 
 
+若$\gamma_{st}(0,0) = \gamma_s(0) = \gamma_t(0)$，由\cref{eq-stsemicov4}可得：
+\begin{eqnarray}
+    \gamma_{st}(h,0) = \left[ k_2 + k_1 C_t(0) \right]\gamma_s(h) \\
+    \label{eq4.44}
+    \gamma_{st}(0,d) = \left[ k_3 + k_1 C_s(0) \right]\gamma_t(d)
+    \label{eq4.45}
+\end{eqnarray}
+假设：$k_2+k_1 C_t(0) = 1$；$k_3+k_1 C_s(0) = 1$，联合\cref{eq-stsemicov3}可得：
+\begin{equation}
+    \begin{split}
+        k_1&=\left[ C_s(0)+C_t(0)-C_{st}(0,0) \right]/C_s(0)C_t(0)  \\
+        k_2&=\left[ C_{st}(0,0)-C_t(0) \right]/C_s(0) \\
+        k_3&=\left[ C_{st}(0,0)-C_s(0) \right]/C_t(0)
+    \end{split}
+    \label{eq-computek}
+\end{equation}
 
+\section{时空普通克里金插值方法(Spatio-temporal Ordinary Kriging Interpolation Method)}
+时空普通克里金差值的预测公式：
+\begin{equation}
+    Z^*(s_0,t_0) = \sum\limits_{i=1}^{n}\sum\limits_{j=1}^{m}\lambda_{(i,j)}Z(s_i,t_j)
+    \label{eq-anticipateKriginInterpolation}
+\end{equation}
+其中，$Z^*(s_0,t_0)$是在时空点$(s_0,t_0)$插值的估计值，$Z(s_i,t_j)$实在时空点$(s_i,t_j)$的采样值，$i=1,2,\dots,n$为空间站点，$j=1,2,\dots,m$为时间采样点，预测过程中的总的样本个数为$n\times m$，$\lambda(i,j)$是各时空点的权重系数。
 
+通过与普通克里金相似的推导方法获得最终计算式：
+\begin{equation}
+    [K][\lambda]=[M]
+    \label{eq-finalKriginInterpolation}
+\end{equation}
+其中
+\begin{equation*}
+    [K] = \left[ 
+        \begin{array}{cccccccc}
+            \gamma_{11,11} & \cdots & \gamma_{1n,11} & \cdots & \gamma_{11,1m} & \cdots & \gamma_{1n,1n} & 1\\
+            \gamma_{21,11} & \cdots & \gamma_{2n,11} & \cdots & \gamma_{21,1m} & \cdots & \gamma_{2n,1m} & 1\\
+            \vdots & \cdots & \vdots & \cdots & \vdots & \cdots & \vdots & \vdots\\
+            \gamma_{n1,m1} & \cdots & \gamma_{n1,m1} & \cdots & \gamma_{n1,1m} & \cdots & \gamma_{nn,1m} & 1\\
+            \vdots & \cdots & \vdots & \cdots & \vdots & \cdots & \vdots & \vdots\\
+            \gamma_{nn,m1} & \cdots & \gamma_{nn,m1} & \cdots & \gamma_{nn,nm} & \cdots & \gamma_{nn,mm} & 1\\
+            1 & \cdots & 1 & \cdots & 1 & \cdots & 1 & 0
+        \end{array}
+    \right]
+\end{equation*}
 
+\begin{equation*}
+    [\lambda] = \left[ 
+        \begin{array}{cccccccc}
+            \lambda_{(1,1)} & \cdots & \lambda_{(n,1)} & \cdots & \lambda_{(1,m)} & \cdots & \lambda_{(n,m)} & \mu
+        \end{array}
+    \right]^T
+\end{equation*}
 
-
-
+\begin{equation*}
+    [M] = \left[ 
+        \begin{array}{cccccccc}
+            \gamma_{(01,01)} & \cdots & \gamma_{(0n,01)} & \cdots & \gamma_{(01,0m)} & \cdots & \gamma_{(0n,0m)} & 1
+        \end{array}
+    \right]^T
+\end{equation*}
+其中，$\gamma_{ab,xy} = \gamma(a-b,x-y)$是时空点对$(s_a-s_b,t_x-t_y)$的变异函数，$\mu$是拉格朗日乘数，将获取的值代入\cref{eq-anticipateKriginInterpolation}获得预测时空值$Z^*(s_0,t_0)$。
 
 
 
