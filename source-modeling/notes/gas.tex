@@ -16,7 +16,7 @@
 \end{equation}
 \cref{eq2.7}就是\textcolor[rgb]{1,0,0}{菲克第一扩散定律}，J代表扩散通量，单位是$mol/(cm^2)\cdot s$，$D_m$代表扩散质的分子扩散系数，其单位是$cm^2/s$或$m^2/s$；$\dfrac{\partial C}{\partial x}$为扩散质的浓度梯度；负号代表扩散质的浓度梯度方向与扩散方向相反。
 
-\textbf{\textcolor[rgb]{1,0,0}{扩散通量}}：单位是坚持只通过扩散方向的单位面积的物质的流量。
+\textbf{\textcolor[rgb]{1,0,0}{扩散通量}}：单位时间垂直通过扩散方向的单位面积的物质的流量。
 
 \textbf{\textcolor[rgb]{1,0,0}{扩散系数}}：当浓度为一个单位时，单位时间内，垂直通过扩散方向的物质流量。
 
@@ -50,21 +50,45 @@
 \end{equation}
 式中$\mathcal{Q}$为$t=0$时在$x=0$处的扩散质的数量，这些扩散质沿$x$的方向扩散。该式表示扩散质的浓度$C$沿$x$的分布规律，该浓度按指数规律急剧衰减。
 
-同时考虑风流运移和分子扩散因素，参考菲克扩散第二定律，可出瓦斯瞬时源在一维湍流扩散作用下巷道瓦斯浓度分布为：
+
+考虑到通风情况，瓦斯的对流运移通量可以表示为：
 \begin{equation}
-    C(x,t) = \dfrac{M}{2\sqrt{\pi D_t t}}exp(-\dfrac{(x-ut)^2}{4D_t t})
-    \label{eq2.22}
+    J = \dfrac{\mathcal{Q}_g}{S} = \dfrac{C\mathcal{Q}}{S}=\dfrac{C\cdot(S\cdot U)}{S} = C \cdot U
+    \label{eq-convectiveflux}
 \end{equation}
-其中，$C(x,t)$为扩散质浓度，是$t$时间内沿$x$方向扩散质的浓度值，$D_t$是瓦斯的湍流扩散系数，$M$为$t=0,x=0$时，$x$方向扩散质的总量。
+其中$U$表示风流的平均速度向量；$S$表示风流通过的表面积；$\mathcal{Q} = S \cdot U$表示通过$S$表面积的风流流量向量；$C$表示瓦斯浓度；$\mathcal{Q}_g= S \cdot \mathcal{Q}$表示对流运移通过的瓦斯流量向量。
+
 
 那么，对于一个测点，也可看做一个微元，其扩散质浓度如何计算？微元内扩散质的变化量可以描述为：
-
 \begin{eqnarray}
-    \sigma \mathcal{Q} &=& \sigma \mathcal{Q}_{in} - \sigma \mathcal{Q}_{out} \notag \\
-    &=& (Cudydzdt - D_m\dfrac{\partial C}{\partial x}dydzdt) - \left( (Cu+\dfrac{\partial Cu}{\partial x}dx)dydzdt-(D_m \dfrac{\partial C}{\partial x} + \dfrac{\partial}{\partial x}(D_m \dfrac{\partial C}{\partial x})dx)dydzdt \right) \notag \\
+    \delta_{\mathcal{Q}} &=& \delta_{\mathcal{Q}_{in}} - \delta_{\mathcal{Q}_{out}} \notag \\
+    &=& \left(Cudydzdt - D_m\dfrac{\partial C}{\partial x}dydzdt\right) - \left( \left(Cu+\dfrac{\partial Cu}{\partial x}dx\right)dydzdt-\left(D_m \dfrac{\partial C}{\partial x} + \dfrac{\partial}{\partial x}\left(D_m \dfrac{\partial C}{\partial x}\right)dx\right)dydzdt \right) \notag \\
     &=& \dfrac{\partial}{\partial x}(Cu- D_m \dfrac{\partial C}{\partial x})dxdydzdt
     \label{eq-diffuseness}
 \end{eqnarray}
+由于浓度$C$的变化，在$\triangle t$时间内，微元内扩散质的量的变化$\delta_{\mathcal{Q}_C}$表示为：
+\begin{equation}
+    \delta_{\mathcal{Q}_c} = \dfrac{\partial C}{\partial t}dtdxdydz
+    \label{eq-diffusenesschange}
+\end{equation}
+根据质量守恒定律可得：
+\begin{equation}
+    \delta_{\mathcal{Q}} + \delta_{\mathcal{Q}_c} = Jdxdydzdt
+    \label{eq-conservation}
+\end{equation}
+其中，$J$表示单位时间内由于化学、物理等变化导致的单位体积内扩散质的变化量。整理可得瓦斯在巷道内流动的运移扩散方程：
+\begin{equation}
+    \dfrac{\partial C}{\partial t}+\dfrac{\partial(Cu)}{\partial x} = D_m\dfrac{\partial^2C}{\partial x^2}+J
+    \label{eq-gasdiffuseness}
+\end{equation}
+
+
+同时考虑风流运移和分子扩散因素，参考菲克扩散第二定律，可出瓦斯瞬时源在一维湍流扩散作用下巷道瓦斯浓度分布为：
+\begin{equation}
+    C(x,t) = \dfrac{M}{2\sqrt{\pi D_t t}}exp\left(-\dfrac{(x-ut)^2}{4D_t t}\right)
+    \label{eq2.22}
+\end{equation}
+其中，$C(x,t)$为扩散质浓度，是$t$时间内沿$x$方向扩散质的浓度值，$D_t$是瓦斯的湍流扩散系数，$u$表示风流速度，$M$为$t=0,x=0$时，$x$方向扩散质的总量。
  
 
 \begin{note}
