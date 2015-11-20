@@ -203,7 +203,7 @@
 
 根据\cref{eq-gamma}，通过$n$对站点$Z(s_i)$和$Z(s_i+h)(i=1,2,\dots,n)$的数值，通过求平均值的方法来获得$\gamma(h)$的值。首先将$n$对站点$s_i$和$s_j$的距离为$h$的所有观测值$Z(s_i)$和$Z(s_i+h)(i=1,2,\dots,N^h)$看成是$Z(s)$和$Z(s+h)$的$N^h$对实现，其中$N^h$表示距离为$h$的站点对的数量。则计算实验变异函数：
 \begin{equation}
-    \gamma^*(h) = \dfrac{1}{2N^h}\sum\limits_{i=1}^{N^h}\| Z(s_i)-Z(s_i+h) \|^2
+    \gamma^*(h) = \dfrac{1}{2N^h}\sum\limits_{i=1}^{N^h}\left[ Z(s_i)-Z(s_i+h) \right]^2
     \label{eq-realisticgamma}
 \end{equation}
 
@@ -229,15 +229,15 @@
 
         要使$Z^*(s_0)$成为$Z(s_0)$的无偏估计量，需要满足：
         \begin{equation}
-            E\left| Z^*(s_0)-Z(s_0) \right| = 0
+            E\left[ Z^*(s_0)-Z(s_0) \right] = 0
             \label{eq-unbiased1}
         \end{equation}
-        由于二阶平稳条件下$E| Z^*(s_0) | = E | Z(s_0) | = m$，进而
+        由于二阶平稳条件下$E[ Z^*(s_0) ] = E [ Z(s_0) ] = m$，进而
         \begin{equation}
-            E | Z^*(s_0) | = E \left\{  \sum\limits_{i=1}^{n}\lambda_iZ(s_i) \right\} = \sum\limits_{i=1}^{n}\lambda_i E | Z(s_i) | = m \sum\limits_{i=1}^{n} \lambda_i
+            E [ Z^*(s_0) ] = E \left\{  \sum\limits_{i=1}^{n}\lambda_iZ(s_i) \right\} = \sum\limits_{i=1}^{n}\lambda_i E [ Z(s_i) ] = m \sum\limits_{i=1}^{n} \lambda_i
             \label{eq-unbiased2}
         \end{equation}
-        若使$E\| Z^*(s_0) \| = E | Z(s_0) |$，需要满足$m\sum\limits_{i=1}^{n}\lambda_i = m$，即：
+        若使$E\left[ Z^*(s_0) \right]  = E [ Z(s_0) ]$，需要满足$m\sum\limits_{i=1}^{n}\lambda_i = m$，即：
         \begin{equation}
             \sum\limits_{i=1}^{n}\lambda_i = 1
             \label{eq-unbiased3}
@@ -250,9 +250,9 @@
             &=& C(s_0,s_0) - 2\sum\limits_{i=1}^{n}\lambda_iC(s_0,s_i)+\sum\limits_{i=1}^{n}\sum\limits_{j=1}^{n}\lambda_i\lambda_jC(s_i,s_j)
             \label{eq-optivar}
         \end{eqnarray}
-        以上问题转换为带等式条件的寻优问题，在\cref{eq-unbiased3}的约束条件下，为了使估计的方差为最小值，通过变换方法，采用lagrange乘数法构建如下函数：
+        以上问题转换为带等式条件的寻优问题，在\cref{eq-unbiased3}的约束条件下，为了使估计的方差为最小值，通过变换方法，采用\textbf{\textcolor[rgb]{1,0,0}{拉格朗日(lagrange)乘数法}}构建如下函数：
         \begin{equation}
-            F= E\left\{ \left| Z^*(s_0) - Z(s_0) \right|^2 \right\} - 2\mu\left( \sum\limits_{i=1}^{n} \lambda_i -1 \right)
+            F= E\left\{ \left[ Z^*(s_0) - Z(s_0) \right]^2 \right\} - 2\mu\left( \sum\limits_{i=1}^{n} \lambda_i -1 \right)
             \label{eq-transfomredvar}
         \end{equation}
 \end{enumerate}
