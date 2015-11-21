@@ -180,17 +180,17 @@
 \subsection{空间协方差函数}
 随机过程$Z(t)$在任意时刻$t_1,t_2$处的两个随机变量$Z(t_1),Z(t_2)$的二阶中心混合矩为此随机过程的协方差函数：
 \begin{equation}
-    C(t_1,t_2) = Cov\left| Z(t_1),Z(t_2) \right| = E\left| Z(t_1)Z(t_2) \right| - E\left| Z(t_1) \right| E\left| Z(t_2) \right|
+    C(t_1,t_2) = Cov\left[ Z(t_1),Z(t_2) \right] = E\left[ Z(t_1)Z(t_2) \right] - E\left[ Z(t_1) \right] E\left[ Z(t_2) \right]
     \label{eq-temporalcov}
 \end{equation}
 在二维空间域中，定义随机场在任意空间中的两个点$s$和$s+h$处的两个随机变量$Z(s)$和$Z(s+h)$的二阶中心混合矩为此随机场的自协方差函数：
 \begin{equation}
-    C(s,h) = Cov\left| Z(s),Z(s+h) \right| = E\left| Z(s)Z(s+h) \right|-E\left| Z(s) \right| E\left| Z(s+h) \right|
+    C(s,h) = Cov\left[ Z(s),Z(s+h) \right] = E\left[ Z(s)Z(s+h) \right]-E\left[ Z(s) \right] E\left[ Z(s+h) \right]
     \label{eq-spatiocov}
 \end{equation}
 当\cref{eq-spatiocov}中的空间向量$h$取0时，协方差函数则变为：
 \begin{equation}
-    C(s,s) = Cov\left| Z(s), Z(s+0) \right| = E\left| Z(s) \right|^2 - \{ E\left| Z(s) \right| \}^2 = Var\left| Z(x) \right|
+    C(s,s) = Cov\left[ Z(s), Z(s+0) \right] = E\left[ Z(s) \right]^2 - \{ E\left[ Z(s) \right] \}^2 = Var\left[ Z(x) \right]
     \label{eq-spatiocovsimplize}
 \end{equation}
 
