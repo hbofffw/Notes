@@ -89,7 +89,24 @@
     \label{eq2.22}
 \end{equation}
 其中，$C(x,t)$为扩散质浓度，是$t$时间内沿$x$方向扩散质的浓度值，$D_t$是瓦斯的湍流扩散系数，$u$表示风流速度，$M$为$t=0,x=0$时，$x$方向扩散质的总量。
- 
+
+以轴对称的圆形巷道中瓦斯运移扩散模型为基础，利用质量传递和动量传递比拟原理。结合巷道湍流风速分布函数，可以得出巷道中瓦斯运移扩散系统$D_t$的表达式：
+\begin{equation}
+    D_t = 65.74r\sqrt{\alpha u}
+    \label{eq-diffusenesscoefficiency}
+\end{equation}
+其中，$r$为巷道的半径，$\alpha$为巷道的摩擦力系数，$u$为巷道断面的平均风速。
+
+如果给定的不是原点的浓度，而是连续加入的扩散质的量，而且是变化的，则可以看作无数不同强度的瞬时源产生的扩散瓦斯在时间上的叠加的结果，每个微时间段加入的扩散质所产生的浓度，即
+\begin{equation}
+    \delta_C = \dfrac{f(\tau)d\tau}{2\sqrt{\pi D_t(t-\tau)}} exp\left\{ \dfrac{\left| x_1 - u_1(t-\tau) \right|^2}{4D_t(t-\tau)} \right\}
+    \label{eq-variantconcentration}
+\end{equation}
+按瞬时源的关系考虑，然后进行从$0$到$t$得时间积分，得：
+\begin{equation}
+    C(x,t) = \int_{0}^{t}\dfrac{f(\tau)}{2\sqrt{\pi D_t (t-\tau)}}exp\left\{ -\dfrac{\left| x-u_1(t-\tau) \right|^2}{4D_t(t-\tau)} \right\}dt
+    \label{eq-concentrationvariant}
+\end{equation}
 
 \begin{note}
     已知了扩散质函数，那么考虑参数在各个采集点得分布特征。根据\cref{eq2.10}和\cref{eq2.22}可知扩散过程与时间空间均有关系，接下来是否需要考虑，若使用SW编码，如何综合利用该函数。还需要确定的一个是，公式中的$t$究竟是什么概念，是在$t$时刻还是$t$时间段以内。
