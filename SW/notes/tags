@@ -4,17 +4,12 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
-$ tau$ $ rho$	mathbasis.tex	/^\\subsection{$\\tau$和$\\rho$的关系}$/;"	b
-Archimedean Copula	mathbasis.tex	/^\\subsection{Archimedean Copula}$/;"	b
+$ tau$ $ rho$	mathbasis.tex	/^\\subsubsection{$\\tau$和$\\rho$的关系}$/;"	b
 Basis	mathbasis.tex	/^\\section{Basis}$/;"	s
 CF	mathbasis.tex	/^\\subsection{CF基本概念}\\cite{Bill2000An}$/;"	b
 Copulas Function CF	mathbasis.tex	/^\\section{Copulas Function (CF)}$/;"	s
 Correlation Modeling	mathbasis.tex	/^\\chapter{信源相关性建模Correlation Modeling}$/;"	c
 Distributed Compressive Sensing DCS	General.tex	/^\\section{分布式压缩感知(Distributed Compressive Sensing(DCS))}$/;"	s
-Farlie Gumbel Morgenstern Copula	mathbasis.tex	/^\\subsection{Farlie-Gumbel-Morgenstern  Copula}$/;"	b
-Frank Copula	mathbasis.tex	/^\\subsection{Frank Copula}$/;"	b
-Gaussian Copula	mathbasis.tex	/^\\subsection{Gaussian Copula}$/;"	b
-Gumbel Copula	mathbasis.tex	/^\\subsection{Gumbel Copula}$/;"	b
-Independent Copula	mathbasis.tex	/^\\subsection{Independent Copula}$/;"	b
-Kendall s $ tau$	mathbasis.tex	/^\\subsection{Kendall's $(\\tau)$}$/;"	b
+Kendall s $ tau$	mathbasis.tex	/^\\subsubsection{Kendall's $(\\tau)$}$/;"	b
+Practical Coding Methods	practicalCoding.tex	/^\\chapter{Practical Coding Methods}$/;"	c
 distributed source coding DSC	General.tex	/^\\section{分布式信源编码(distributed source coding (DSC))}$/;"	s

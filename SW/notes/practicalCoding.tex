@@ -1,0 +1,19 @@
+\chapter{Practical Coding Methods}
+
+\section{Enhanced Correlation Estimators for Distributed Source Coding in Large Wireless Sensor Networks}
+In paper \cite{Enric2012}, a detailed coding scheme was introduced, including side information generation, encoding method in sensor nodes and so on. The coding scheme in this paper includes two parts: 
+\begin{enumerate}
+    \item \textbf{\textcolor[rgb]{1,0,0}{The training phase}} of length $N$: a sensing node maps its $l$-bit reading $x_s(n)$ according to the alphabet $\mathcal{A} = \{ a_i \}_{i=1,2,\dots,2^l}$, with a quantization step of $\left| a_{i+1} - a_i \right| = \triangle$, and sends an uncompressed version of its data coded in $l$-bits. After collecting the $N$ snapshots of the training phase, the fusion center estimates the correlation parameters for each sensor.
+    \item \textbf{\textcolor[rgb]{1,0,0}{The coding phase}}: A given side-information $y(n)$ is available at the fusion center and the sensing node can encode its reading using only $b(n) \leq l$ bits. Hence, the sensor transmits only the index $B$ of a sub-codebook $\mathcal{A}_B \subseteq \mathcal{A}$ ($B$ is codified in $b(n)$ bits) that contains the mapped reading $x_s(n)$. The fusion center receives the sub-codebook identifier $B$, and selects the symbol in $\mathcal{A}_B$ closer to the side-information $y(n)$,
+        \begin{equation}
+            x_s(n) = \arg\ \min_{a_i \in \mathcal{A}_B} \left| y(n)-a_i \right|
+            \label{eq-subcode}
+        \end{equation}
+\end{enumerate}
+
+\subsection{Compute the Side-information $y(n)$}:
+Observation vector $\mathbf{x}(n) \in \mathbb{R}^{M\times M}$ as the information available at the fusion center and $\mathbf{r}_x$ is the cross-correlation vector, $\mathbf{r}_x = \mathbb{E}[\mathbf{x}(n)x_s(n)]$. The vector $\mathbf{x}(n)$ collects: 
+\begin{enumerate}
+    \item the $K$ past readings of the sensors;
+    \item the readings of the set $\mathcal{S}'$ of already-decoded sensors in time slot $n$ (where $\mathcal{S}' \subset \mathcal{S}$ with cardinality $S'$), hence $M = K+S'$. 
+\end{enumerate}<++>
