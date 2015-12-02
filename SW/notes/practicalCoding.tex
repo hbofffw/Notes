@@ -36,13 +36,20 @@ In paper \cite{Enric2012}, a detailed coding scheme was introduced, including si
 \end{equation}
 \subsection{Properties of the Correlation Matrix}
 \begin{enumerate}
-    \item
-    \item 
+    \item The correlation matrix of a stationary discrete-time stochastic process is Hermitian;
+    \item The correlation matrix of a stationary discrete-time stochastic process is \emph{\textcolor[rgb]{1,0,0}{Toplitz}};
+    \item The correlation matrix of a discrete-time stochastic process is always nonnegative definite and almost always positive definite;
+    \item The correlation matrix of a wide-sense stationary process is nonsingular due to the unavoidable presence of additive noise;
+    \item When the elements that constitute the observation vector of a stationary discrete-time stochastic process are rearranged backward, the effect is equivalent to the transposition of the correlation matrix of the process;
+    \item The correlation matrices $\mathbf{R}_M$ and $\mathbf{R}_{M+1}$ of a stationary discrete-time stochastic process, pertaining to $M$ and $M+1$ observations of the process, respectively, are related by 
+        \begin{equation*}
+            \mathbf{R}_{M+1} = 
+        \end{equation*}<++>
 \end{enumerate}<++>
 
 \section{Stieltjes transform}
 In mathematics, the the \textbf{\textcolor[rgb]{1,0,0}{Stieltjes transformation}} $S_{\rho}(z)$ of a measure of density $\rho$ on a real interval $\mathcal{I}$ is the function of the complex variable $z$ defined outside $\mathcal{I}$ by the formula
-\begin{equation}
+\begin{equation}C!!H(neocomplcache_start_auto_complete)
     S_{\rho} = \int_I \dfrac{\rho(t) dt}{z-t}, \qquad t \in I \subset \mathbb{R}, z\in \mathbb{C} \backslash \mathbb{R}
     \label{eq-Stieltjes}
 \end{equation}
