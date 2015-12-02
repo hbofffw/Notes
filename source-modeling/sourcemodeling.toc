@@ -1,0 +1,14 @@
+\contentsline {chapter}{\numberline {1}Introduction}{2}{chapter.1}
+\contentsline {chapter}{\numberline {2}关于运移形式分析的学习}{3}{chapter.2}
+\contentsline {section}{\numberline {2.1}空间统计学一些原理}{5}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}区域化变量}{5}{subsection.2.1.1}
+\contentsline {subsection}{\numberline {2.1.2}二阶平稳假设(Stationary Assumption)}{5}{subsection.2.1.2}
+\contentsline {subsection}{\numberline {2.1.3}本征假设(Intrinsic Assumption)}{5}{subsection.2.1.3}
+\contentsline {subsection}{\numberline {2.1.4}空间协方差函数}{6}{subsection.2.1.4}
+\contentsline {subsection}{\numberline {2.1.5}空间半变异函数}{6}{subsection.2.1.5}
+\contentsline {subsection}{\numberline {2.1.6}实验半变异函数及模型}{7}{subsection.2.1.6}
+\contentsline {section}{\numberline {2.2}克里金方法(Ordinrary Kriging)}{7}{section.2.2}
+\contentsline {section}{\numberline {2.3}时空半变异函数和协方差函数}{8}{section.2.3}
+\contentsline {section}{\numberline {2.4}时空普通克里金插值方法(Spatio-temporal Ordinary Kriging Interpolation Method)}{9}{section.2.4}
+\contentsline {chapter}{\numberline {3}temperature}{11}{chapter.3}
+\contentsline {chapter}{参考文献}{12}{chapter*.2}

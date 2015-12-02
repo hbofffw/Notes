@@ -1,0 +1,37 @@
+\contentsline {chapter}{\numberline {1}信源压缩方法学习}{3}{chapter.1}
+\contentsline {section}{\numberline {1.1}基于字典的信源编码方法}{3}{section.1.1}
+\contentsline {section}{\numberline {1.2}分布式信源编码(distributed source coding (DSC))}{3}{section.1.2}
+\contentsline {section}{\numberline {1.3}相关性模型}{4}{section.1.3}
+\contentsline {section}{\numberline {1.4}分布式压缩感知(Distributed Compressive Sensing(DCS))}{4}{section.1.4}
+\contentsline {section}{\numberline {1.5}问题总结和思考}{4}{section.1.5}
+\contentsline {chapter}{\numberline {2}信源相关性建模Correlation Modeling}{6}{chapter.2}
+\contentsline {section}{\numberline {2.1}Basis}{6}{section.2.1}
+\contentsline {section}{\numberline {2.2}Copulas Function (CF)}{7}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}CF基本概念}{7}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.2}Sklar's Theorem}{8}{subsection.2.2.2}
+\contentsline {subsection}{\numberline {2.2.3}Copula的重要性质}{10}{subsection.2.2.3}
+\contentsline {subsection}{\numberline {2.2.4}Fr$\mathaccentV {acute}913{e}$chet-Hoeffding Bounds for Joint Distribution Functions}{11}{subsection.2.2.4}
+\contentsline {subsection}{\numberline {2.2.5}Survival Copulas}{12}{subsection.2.2.5}
+\contentsline {subsection}{\numberline {2.2.6}Symmetric and Ordering}{13}{subsection.2.2.6}
+\contentsline {subsection}{\numberline {2.2.7}随机变量的生成}{13}{subsection.2.2.7}
+\contentsline {subsection}{\numberline {2.2.8}多变量copula}{14}{subsection.2.2.8}
+\contentsline {subsection}{\numberline {2.2.9}边缘统计(Marginal Statistics)}{14}{subsection.2.2.9}
+\contentsline {subsection}{\numberline {2.2.10}Copula模型估计}{14}{subsection.2.2.10}
+\contentsline {section}{\numberline {2.3}Dependence(相关性)}{15}{section.2.3}
+\contentsline {subsection}{\numberline {2.3.1}基本概念}{15}{subsection.2.3.1}
+\contentsline {subsection}{\numberline {2.3.2}Concordance(调和性)}{15}{subsection.2.3.2}
+\contentsline {subsubsection}{\numberline {2.3.2.1}Kendall's $(\tau )$}{16}{subsubsection.2.3.2.1}
+\contentsline {subsubsection}{\numberline {2.3.2.2}Pearson's $\varrho $}{17}{subsubsection.2.3.2.2}
+\contentsline {subsubsection}{\numberline {2.3.2.3}Spearman's rho $(\rho )$}{17}{subsubsection.2.3.2.3}
+\contentsline {subsubsection}{\numberline {2.3.2.4}$\tau $和$\rho $的关系}{18}{subsubsection.2.3.2.4}
+\contentsline {subsubsection}{\numberline {2.3.2.5}其他的一致性测量方法}{18}{subsubsection.2.3.2.5}
+\contentsline {section}{\numberline {2.4}关于变换}{19}{section.2.4}
+\contentsline {section}{\numberline {2.5}几种实际建模的流程}{20}{section.2.5}
+\contentsline {subsection}{\numberline {2.5.1}Independent Copula}{20}{subsection.2.5.1}
+\contentsline {subsection}{\numberline {2.5.2}Gaussian Copula}{20}{subsection.2.5.2}
+\contentsline {subsection}{\numberline {2.5.3}Archimedean Copula}{20}{subsection.2.5.3}
+\contentsline {subsection}{\numberline {2.5.4}Frank Copula}{20}{subsection.2.5.4}
+\contentsline {subsection}{\numberline {2.5.5}Gumbel Copula}{20}{subsection.2.5.5}
+\contentsline {subsection}{\numberline {2.5.6}Farlie-Gumbel-Morgenstern Copula}{20}{subsection.2.5.6}
+\contentsline {subsection}{\numberline {2.5.7}Independent Copula}{20}{subsection.2.5.7}
+\contentsline {chapter}{参考文献}{21}{chapter*.2}

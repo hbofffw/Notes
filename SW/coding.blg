@@ -1,0 +1,68 @@
+This is BibTeX, Version 0.99d (TeX Live 2015)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: coding.aux
+The style file: IEEEtran.bst
+A level-1 auxiliary file: notes/General.aux
+A level-1 auxiliary file: notes/mathbasis.aux
+A level-1 auxiliary file: notes/practicalCoding.aux
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Database file #1: coding.bib
+"(" immediately follows a field name---line 198 of file coding.bib
+ :  Usage-Count-
+ :              (Last-180-days) = {{8}},
+I'm skipping whatever remains of this entry
+Repeated entry---line 225 of file coding.bib
+ : @article{Genest2007
+ :                    ,
+I'm skipping whatever remains of this entry
+-- IEEEtran.bst version 1.13 (2008/09/30) by Michael Shell.
+-- http://www.michaelshell.org/tex/ieeetran/bibtex/
+-- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
+
+Done.
+You've used 8 entries,
+            4039 wiz_defined-function locations,
+            887 strings with 9174 characters,
+and the built_in function-call counts, 7222 in all, are:
+= -- 627
+> -- 149
+< -- 76
++ -- 87
+- -- 22
+* -- 390
+:= -- 1131
+add.period$ -- 16
+call.type$ -- 8
+change.case$ -- 8
+chr.to.int$ -- 162
+cite$ -- 8
+duplicate$ -- 491
+empty$ -- 493
+format.name$ -- 29
+if$ -- 1643
+int.to.chr$ -- 0
+int.to.str$ -- 8
+missing$ -- 77
+newline$ -- 55
+num.names$ -- 8
+pop$ -- 136
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 2
+skip$ -- 558
+stack$ -- 0
+substring$ -- 387
+swap$ -- 456
+text.length$ -- 22
+text.prefix$ -- 0
+top$ -- 5
+type$ -- 8
+warning$ -- 0
+while$ -- 29
+width$ -- 9
+write$ -- 121
+(There were 2 error messages)

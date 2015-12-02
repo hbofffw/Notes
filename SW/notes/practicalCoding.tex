@@ -11,7 +11,24 @@ In paper \cite{Enric2012}, a detailed coding scheme was introduced, including si
         \end{equation}
 \end{enumerate}
 
-\subsection{Compute the Side-information $y(n)$}:
+\subsection{Math basis}
+\subsubsection{Stieltjes transform}
+In mathematics, the the \textbf{\textcolor[rgb]{1,0,0}{Stieltjes transformation}} $S_{\rho}(z)$ of a measure of density $\rho$ on a real interval $\mathcal{I}$ is the function of the complex variable $z$ defined outside $\mathcal{I}$ by the formula
+\begin{equation}
+    S_{\rho} = \int_I \dfrac{\rho(t) dt}{z-t}, \qquad t \in I \subset \mathbb{R}, z\in \mathbb{C} \backslash \mathbb{R}
+    \label{eq-Stieltjes}
+\end{equation}
+
+Under certain conditions we can reconstitute the density function $\rho$ starting from its Stieltjes transformation thanks to the inverse formula of Stieltjes-Perron. For example, if the density $\rho$ is continuous throughout $\mathcal{I}$, one will have inside this interval
+\begin{equation}
+    \rho(x) = \lim_{\varepsilon \rightarrow 0^{+}} \dfrac{S_{\rho}(x-i\varepsilon) - S_{\rho}(x+i\varepsilon)}{2i\pi}
+    \label{eq-Stieltjesinverse}
+\end{equation}
+
+
+
+
+\subsection{Compute the Side-information $y(n)$}
 Observation vector $\mathbf{x}(n) \in \mathbb{R}^{M\times M}$ as the information available at the fusion center and $\mathbf{r}_x$ is the cross-correlation vector, $\mathbf{r}_x = \mathbb{E}[\mathbf{x}(n)x_s(n)]$. The vector $\mathbf{x}(n)$ collects: 
 \begin{enumerate}
     \item the $K$ past readings of the sensors;
