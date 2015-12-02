@@ -7,3 +7,11 @@
 /Compressive sensing/WSNCS/notes/*.aux
 Compressive sensing/WSNCS/CSWSN.bbl
 Compressive sensing/WSNCS/CSWSN.blg
+*.pdf
+*.log
+/分析/Convex optimization theory/*.log
+/分析/Convex optimization theory/*.pdf
+/分析/泛函分析/*.log
+/分析/泛函分析/*.pdf
+.texpadtmp
+*
