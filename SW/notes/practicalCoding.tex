@@ -1,6 +1,6 @@
-\chapter{Practical Coding Methods}
+\part{具体文章分析}
 
-\section{Enhanced Correlation Estimators for Distributed Source Coding in Large Wireless Sensor Networks}
+\chapter{Enhanced Correlation Estimators for Distributed Source Coding in Large Wireless Sensor Networks}
 In paper \cite{Enric2012}, a detailed coding scheme was introduced, including side information generation, encoding method in sensor nodes and so on. The coding scheme in this paper includes two parts: 
 \begin{enumerate}
     \item \textbf{\textcolor[rgb]{1,0,0}{The training phase}} of length $N$: a sensing node maps its $l$-bit reading $x_s(n)$ according to the alphabet $\mathcal{A} = \{ a_i \}_{i=1,2,\dots,2^l}$, with a quantization step of $\left| a_{i+1} - a_i \right| = \triangle$, and sends an uncompressed version of its data coded in $l$-bits. After collecting the $N$ snapshots of the training phase, the fusion center estimates the correlation parameters for each sensor.
@@ -11,8 +11,33 @@ In paper \cite{Enric2012}, a detailed coding scheme was introduced, including si
         \end{equation}
 \end{enumerate}
 
-\subsection{Math basis}
-\subsubsection{Stieltjes transform}
+\section{Correlation Mtrix}
+使$M\times 1$的观测向量$\mathbf{u}$表示零均值时间序列$u(n),u(n-1),\dots,u(n-M+1)$的元素，即：
+\begin{equation}
+    \mathbf{u}(n) = \left[ u(n),u(n-1),\dots,u(n-M+1) \right]^T,
+    \label{eq-observationvector}
+\end{equation}
+定义一个时间离散平稳随机过程的\emph{\textcolor[rgb]{1,0,0}{相关矩阵(Correlation Matrix)}}为以上所述$\mathbf{u}(n)$和其自身外积的期望。$\mathbf{R}$表示$M\times M$的相关矩阵:
+\begin{equation}
+    \mathbf{R} = E[\mathbf{u}(n)\mathbf{u}^H(n)],
+    \label{eq-correlationmatrix}
+\end{equation}
+其中$H$表示\emph{\textcolor[rgb]{1,0,0}{艾尔米特转置(Hermitian transposition)}}(转置操作结合了复共轭)，将\cref{eq-observationvector}代入\cref{eq-correlationmatrix}中，展开得：
+\begin{equation}
+    \left[      
+        \begin{array}{cccc}
+        r(0) & r(1) & \cdots & r(M-1)\\
+        r(-1) & r(0) & \cdots & r(M-2)\\
+        \vdots & \vdots & \ddots & \vdots\\
+        r(-M+1) & r(-M+2) & \cdots & r(0)
+    \end{array}
+    \right]
+    \label{eq-correlationmatrixexpanded}
+\end{equation}
+
+
+
+\section{Stieltjes transform}
 In mathematics, the the \textbf{\textcolor[rgb]{1,0,0}{Stieltjes transformation}} $S_{\rho}(z)$ of a measure of density $\rho$ on a real interval $\mathcal{I}$ is the function of the complex variable $z$ defined outside $\mathcal{I}$ by the formula
 \begin{equation}
     S_{\rho} = \int_I \dfrac{\rho(t) dt}{z-t}, \qquad t \in I \subset \mathbb{R}, z\in \mathbb{C} \backslash \mathbb{R}
@@ -28,7 +53,7 @@ Under certain conditions we can reconstitute the density function $\rho$ startin
 
 
 
-\subsection{Compute the Side-information $y(n)$}
+\section{Compute the Side-information $y(n)$}
 Observation vector $\mathbf{x}(n) \in \mathbb{R}^{M\times M}$ as the information available at the fusion center and $\mathbf{r}_x$ is the cross-correlation vector, $\mathbf{r}_x = \mathbb{E}[\mathbf{x}(n)x_s(n)]$. The vector $\mathbf{x}(n)$ collects: 
 \begin{enumerate}
     \item the $K$ past readings of the sensors;

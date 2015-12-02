@@ -1,44 +1,45 @@
-\contentsline {chapter}{\numberline {1}信源压缩方法学习}{3}{chapter.1}
-\contentsline {section}{\numberline {1.1}基于字典的信源编码方法}{3}{section.1.1}
-\contentsline {section}{\numberline {1.2}分布式信源编码(distributed source coding (DSC))}{3}{section.1.2}
-\contentsline {section}{\numberline {1.3}相关性模型}{4}{section.1.3}
-\contentsline {section}{\numberline {1.4}分布式压缩感知(Distributed Compressive Sensing(DCS))}{4}{section.1.4}
-\contentsline {section}{\numberline {1.5}问题总结和思考}{4}{section.1.5}
-\contentsline {chapter}{\numberline {2}信源相关性建模Correlation Modeling}{6}{chapter.2}
-\contentsline {section}{\numberline {2.1}Basis}{6}{section.2.1}
-\contentsline {section}{\numberline {2.2}Copulas Function (CF)}{7}{section.2.2}
-\contentsline {subsection}{\numberline {2.2.1}CF基本概念}{7}{subsection.2.2.1}
-\contentsline {subsection}{\numberline {2.2.2}Sklar's Theorem}{8}{subsection.2.2.2}
-\contentsline {subsection}{\numberline {2.2.3}Copula的重要性质}{10}{subsection.2.2.3}
-\contentsline {subsection}{\numberline {2.2.4}Fr$\mathaccentV {acute}913{e}$chet-Hoeffding Bounds for Joint Distribution Functions}{11}{subsection.2.2.4}
-\contentsline {subsection}{\numberline {2.2.5}Survival Copulas}{12}{subsection.2.2.5}
-\contentsline {subsection}{\numberline {2.2.6}Symmetric and Ordering}{13}{subsection.2.2.6}
-\contentsline {subsection}{\numberline {2.2.7}随机变量的生成}{13}{subsection.2.2.7}
-\contentsline {subsection}{\numberline {2.2.8}多变量copula}{14}{subsection.2.2.8}
-\contentsline {subsection}{\numberline {2.2.9}边缘统计(Marginal Statistics)}{14}{subsection.2.2.9}
-\contentsline {subsection}{\numberline {2.2.10}Copula模型估计}{14}{subsection.2.2.10}
-\contentsline {section}{\numberline {2.3}Dependence(相关性)}{15}{section.2.3}
-\contentsline {subsection}{\numberline {2.3.1}基本概念}{15}{subsection.2.3.1}
-\contentsline {subsection}{\numberline {2.3.2}Concordance(调和性)}{15}{subsection.2.3.2}
-\contentsline {subsubsection}{\numberline {2.3.2.1}Kendall's $(\tau )$}{16}{subsubsection.2.3.2.1}
-\contentsline {subsubsection}{\numberline {2.3.2.2}Pearson's $\varrho $}{17}{subsubsection.2.3.2.2}
-\contentsline {subsubsection}{\numberline {2.3.2.3}Spearman's rho $(\rho )$}{17}{subsubsection.2.3.2.3}
-\contentsline {subsubsection}{\numberline {2.3.2.4}$\tau $和$\rho $的关系}{18}{subsubsection.2.3.2.4}
-\contentsline {subsubsection}{\numberline {2.3.2.5}其他的一致性测量方法}{19}{subsubsection.2.3.2.5}
-\contentsline {subsection}{\numberline {2.3.3}相关性的性质}{19}{subsection.2.3.3}
-\contentsline {subsubsection}{\numberline {2.3.3.1}象限相关(Quadrant Dependence)}{19}{subsubsection.2.3.3.1}
-\contentsline {subsubsection}{\numberline {2.3.3.2}(尾单调)Tail Monotonicity}{20}{subsubsection.2.3.3.2}
-\contentsline {section}{\numberline {2.4}关于变换}{20}{section.2.4}
-\contentsline {section}{\numberline {2.5}几种实际建模的流程}{21}{section.2.5}
-\contentsline {subsection}{\numberline {2.5.1}Independent Copula}{21}{subsection.2.5.1}
-\contentsline {subsection}{\numberline {2.5.2}Gaussian Copula}{21}{subsection.2.5.2}
-\contentsline {subsection}{\numberline {2.5.3}Archimedean Copula}{21}{subsection.2.5.3}
-\contentsline {subsection}{\numberline {2.5.4}Frank Copula}{21}{subsection.2.5.4}
-\contentsline {subsection}{\numberline {2.5.5}Gumbel Copula}{21}{subsection.2.5.5}
-\contentsline {subsection}{\numberline {2.5.6}Farlie-Gumbel-Morgenstern Copula}{21}{subsection.2.5.6}
-\contentsline {chapter}{\numberline {3}Practical Coding Methods}{22}{chapter.3}
-\contentsline {section}{\numberline {3.1}Enhanced Correlation Estimators for Distributed Source Coding in Large Wireless Sensor Networks}{22}{section.3.1}
-\contentsline {subsection}{\numberline {3.1.1}Math basis}{22}{subsection.3.1.1}
-\contentsline {subsubsection}{\numberline {3.1.1.1}Stieltjes transform}{22}{subsubsection.3.1.1.1}
-\contentsline {subsection}{\numberline {3.1.2}Compute the Side-information $y(n)$}{22}{subsection.3.1.2}
-\contentsline {chapter}{参考文献}{24}{chapter*.2}
+\contentsline {part}{I\hspace {1em}方法简介}{3}{part.1}
+\contentsline {chapter}{\numberline {1}信源压缩方法学习}{4}{chapter.1}
+\contentsline {section}{\numberline {1.1}基于字典的信源编码方法}{4}{section.1.1}
+\contentsline {section}{\numberline {1.2}分布式信源编码(distributed source coding (DSC))}{4}{section.1.2}
+\contentsline {section}{\numberline {1.3}相关性模型}{5}{section.1.3}
+\contentsline {section}{\numberline {1.4}分布式压缩感知(Distributed Compressive Sensing(DCS))}{5}{section.1.4}
+\contentsline {section}{\numberline {1.5}问题总结和思考}{5}{section.1.5}
+\contentsline {chapter}{\numberline {2}信源相关性建模Correlation Modeling}{7}{chapter.2}
+\contentsline {section}{\numberline {2.1}Basis}{7}{section.2.1}
+\contentsline {section}{\numberline {2.2}Copulas Function (CF)}{8}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}CF基本概念}{8}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.2}Sklar's Theorem}{9}{subsection.2.2.2}
+\contentsline {subsection}{\numberline {2.2.3}Copula的重要性质}{11}{subsection.2.2.3}
+\contentsline {subsection}{\numberline {2.2.4}Fr$\mathaccentV {acute}913{e}$chet-Hoeffding Bounds for Joint Distribution Functions}{12}{subsection.2.2.4}
+\contentsline {subsection}{\numberline {2.2.5}Survival Copulas}{13}{subsection.2.2.5}
+\contentsline {subsection}{\numberline {2.2.6}Symmetric and Ordering}{14}{subsection.2.2.6}
+\contentsline {subsection}{\numberline {2.2.7}随机变量的生成}{14}{subsection.2.2.7}
+\contentsline {subsection}{\numberline {2.2.8}多变量copula}{15}{subsection.2.2.8}
+\contentsline {subsection}{\numberline {2.2.9}边缘统计(Marginal Statistics)}{15}{subsection.2.2.9}
+\contentsline {subsection}{\numberline {2.2.10}Copula模型估计}{15}{subsection.2.2.10}
+\contentsline {section}{\numberline {2.3}Dependence(相关性)}{16}{section.2.3}
+\contentsline {subsection}{\numberline {2.3.1}基本概念}{16}{subsection.2.3.1}
+\contentsline {subsection}{\numberline {2.3.2}Concordance(调和性)}{16}{subsection.2.3.2}
+\contentsline {subsubsection}{\numberline {2.3.2.1}Kendall's $(\tau )$}{17}{subsubsection.2.3.2.1}
+\contentsline {subsubsection}{\numberline {2.3.2.2}Pearson's $\varrho $}{18}{subsubsection.2.3.2.2}
+\contentsline {subsubsection}{\numberline {2.3.2.3}Spearman's rho $(\rho )$}{18}{subsubsection.2.3.2.3}
+\contentsline {subsubsection}{\numberline {2.3.2.4}$\tau $和$\rho $的关系}{19}{subsubsection.2.3.2.4}
+\contentsline {subsubsection}{\numberline {2.3.2.5}其他的一致性测量方法}{20}{subsubsection.2.3.2.5}
+\contentsline {subsection}{\numberline {2.3.3}相关性的性质}{20}{subsection.2.3.3}
+\contentsline {subsubsection}{\numberline {2.3.3.1}象限相关(Quadrant Dependence)}{20}{subsubsection.2.3.3.1}
+\contentsline {subsubsection}{\numberline {2.3.3.2}(尾单调)Tail Monotonicity}{21}{subsubsection.2.3.3.2}
+\contentsline {section}{\numberline {2.4}关于变换}{21}{section.2.4}
+\contentsline {section}{\numberline {2.5}几种实际建模的流程}{22}{section.2.5}
+\contentsline {subsection}{\numberline {2.5.1}Independent Copula}{22}{subsection.2.5.1}
+\contentsline {subsection}{\numberline {2.5.2}Gaussian Copula}{22}{subsection.2.5.2}
+\contentsline {subsection}{\numberline {2.5.3}Archimedean Copula}{22}{subsection.2.5.3}
+\contentsline {subsection}{\numberline {2.5.4}Frank Copula}{22}{subsection.2.5.4}
+\contentsline {subsection}{\numberline {2.5.5}Gumbel Copula}{22}{subsection.2.5.5}
+\contentsline {subsection}{\numberline {2.5.6}Farlie-Gumbel-Morgenstern Copula}{22}{subsection.2.5.6}
+\contentsline {part}{II\hspace {1em}具体文章分析}{23}{part.2}
+\contentsline {chapter}{\numberline {3}Enhanced Correlation Estimators for Distributed Source Coding in Large Wireless Sensor Networks}{24}{chapter.3}
+\contentsline {section}{\numberline {3.1}Correlation Mtrix}{24}{section.3.1}
+\contentsline {section}{\numberline {3.2}Stieltjes transform}{25}{section.3.2}
+\contentsline {section}{\numberline {3.3}Compute the Side-information $y(n)$}{25}{section.3.3}
+\contentsline {chapter}{参考文献}{26}{chapter*.2}
